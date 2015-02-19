@@ -77,4 +77,48 @@
 			}
 		}
 	}
+	
+	"item_apply_modifiers"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                            "1124"  // unique ID number for this item.  Do not change this once 
+		"BaseClass"                     "item_datadriven"
+		"ItemBaseLevel"                 "1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"              "9999"
+		"AbilityCastPoint"        		"0.0"    
+
+			"Modifiers"
+		   {
+				 "modifier_enable_hero"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_DISABLED"
+							 "MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_DISABLED"
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_DISABLED"
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_DISABLED"
+							 "MODIFIER_STATE_ATTACK_IMMUNE" "MODIFIER_STATE_VALUE_DISABLED"
+					  }
+				 }
+				 "modifier_disable_hero"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_ATTACK_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+			}   
+	}
 }

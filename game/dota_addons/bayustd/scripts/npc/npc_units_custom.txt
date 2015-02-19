@@ -401,6 +401,13 @@
 		"BountyGoldMin"				"0.0"
 		"BountyGoldMax"				"0.0"
 		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"GoldCost"					"10"
+		"LumberCost"				"20"
+		"FoodCost"					"0"	//and 5 after theres more than 1 built
+		"BuildTime"					"7"
+		
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
@@ -461,7 +468,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
-		"MovementSpeed"				"300"
+		"MovementSpeed"				"500"
 		
 		// Status
 		//----------------------------------------------------------------
@@ -474,7 +481,5 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
-		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 	}
 }

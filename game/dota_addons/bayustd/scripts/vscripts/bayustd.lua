@@ -103,10 +103,14 @@ The hero parameter is the hero entity that just spawned in
 ]]
 function bayustd:OnHeroInGame(hero)
 	print("[BAYUSTD] Hero spawned in game for first time -- " .. hero:GetUnitName())
-
+	local pID = hero:GetPlayerID()
 
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(70, false)
+	
+	hero.lumber = 150
+	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+    FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
 
 	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
 	--with the "example_ability" ability
@@ -132,13 +136,73 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function bayustd:OnNPCSpawned(keys)
-	--print("[SAMPLERTS] NPC Spawned")
+	--print("[bayustd] NPC Spawned")
 	--PrintTable(keys)
 	local npc = EntIndexToHScript(keys.entindex)
 
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
 		bayustd:OnHeroInGame(npc)
+		Timers:CreateTimer(0.6, function()
+            giveUnitDataDrivenModifier(npc, npc, "modifier_disable_hero", -1)
+            return
+         end
+         )
+	end
+end
+
+mode = nil
+
+-- This function is called as the first player loads and sets up the bayustd parameters
+function bayustd:CaptureBayusTD()
+	if mode == nil then
+		-- Set bayustd parameters
+		mode = GameRules:GetGameModeEntity()
+		mode:SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )
+		mode:SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )
+		mode:SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )
+		mode:SetCustomBuybackCooldownEnabled( CUSTOM_BUYBACK_COOLDOWN_ENABLED )
+		mode:SetBuybackEnabled( BUYBACK_ENABLED )
+		mode:SetTopBarTeamValuesOverride ( USE_CUSTOM_TOP_BAR_VALUES )
+		mode:SetTopBarTeamValuesVisible( TOP_BAR_VISIBLE )
+		mode:SetUseCustomHeroLevels ( USE_CUSTOM_HERO_LEVELS )
+		mode:SetCustomHeroMaxLevel ( MAX_LEVEL )
+		mode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
+
+		--mode:SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
+		mode:SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )
+
+		mode:SetFogOfWarDisabled(DISABLE_FOG_OF_WAR_ENTIRELY)
+		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
+		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
+
+		self:OnFirstPlayerLoaded()
+	end
+end
+
+-- This function is called once when the player fully connects and becomes "Ready" during Loading
+function bayustd:OnConnectFull(keys)
+	--print ('[bayustd] OnConnectFull')
+	--PrintTable(keys)
+	bayustd:CaptureBayusTD()
+
+	local entIndex = keys.index+1
+	-- The Player entity of the joining user
+	local ply = EntIndexToHScript(entIndex)
+
+	-- The Player ID of the joining player
+	local playerID = ply:GetPlayerID()
+
+	-- Update the user ID table with this user
+	self.vUserIds[keys.userid] = ply
+
+	-- Update the Steam ID table
+	self.vSteamIds[PlayerResource:GetSteamAccountID(playerID)] = ply
+
+	-- If the player is a broadcaster flag it in the Broadcasters table
+	if PlayerResource:IsBroadcaster(playerID) then
+		self.vBroadcasters[keys.userid] = 1
+		return
 	end
 end
 
@@ -170,7 +234,7 @@ end
 
 -- Cleanup a player when they leave
 function bayustd:OnDisconnect(keys)
-	--print('[SAMPLERTS] Player Disconnected ' .. tostring(keys.userid))
+	--print('[bayustd] Player Disconnected ' .. tostring(keys.userid))
 	--PrintTable(keys)
 
 	local name = keys.name
@@ -189,7 +253,7 @@ function bayustd:OnGameRulesStateChange(keys)
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		--bayustd:EnsureCorrectBuilder(keys)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		bayustd:SpawnCreeps()
+		bayustd:SpawnCreeps(1)
 	end
 end
 
@@ -206,10 +270,53 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = math.random(1,4)
-	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder1", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	
+end
+
+creepsCount = 0
+
+-- An entity died
+function bayustd:OnEntityKilled( keys )
+	--print( '[bayustd] OnEntityKilled Called' )
+	--PrintTable( keys )
+	print("Player killed Unit")
+
+	-- The Unit that was Killed
+	local killedUnit = EntIndexToHScript( keys.entindex_killed )
+	-- The Killing entity
+	local killerEntity = nil
+
+	if keys.entindex_attacker ~= nil then
+		killerEntity = EntIndexToHScript( keys.entindex_attacker )
+	end
+
+	if killedUnit:GetTeam() == DOTA_TEAM_NEUTRALS then
+		print ("KILLEDKILLER: " .. killedUnit:GetName() .. " -- " .. killerEntity:GetName())
+		creepsCount = creepsCount - 1
+		print(creepsCount .. " creeps left")
+		if creepsCount == 0 then
+			print("All creeps are dead")
+			local point = Entities:FindByName( nil, "hero_spawn" ):GetAbsOrigin()
+			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				print("Moving hero to base")
+				if PlayerResource:HasSelectedHero(nPlayerID) then
+					print("still doing ...")
+					local hero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
+					FindClearSpaceForUnit(hero, point, false)
+					giveUnitDataDrivenModifier(hero, hero, "modifier_disable_hero", -1)
+				end
+			end
+		end
+		--if SHOW_KILLS_ON_TOPBAR then
+		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_BADGUYS, self.nDireKills )
+		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
+		--end
+	end
+
+	-- Put code here to handle when an entity gets killed
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -245,7 +352,38 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(bayustd, 'OnPlayerPickHero'), self)
 	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
-
+	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
+	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
+	
+	--[[ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(bayustd, 'OnPlayerLevelUp'), self)
+	ListenToGameEvent('dota_ability_channel_finished', Dynamic_Wrap(bayustd, 'OnAbilityChannelFinished'), self)
+	ListenToGameEvent('dota_player_learned_ability', Dynamic_Wrap(bayustd, 'OnPlayerLearnedAbility'), self)
+	
+	
+	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
+	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
+	ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
+	ListenToGameEvent('last_hit', Dynamic_Wrap(bayustd, 'OnLastHit'), self)
+	ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(bayustd, 'OnNonPlayerUsedAbility'), self)
+	ListenToGameEvent('player_changename', Dynamic_Wrap(bayustd, 'OnPlayerChangedName'), self)
+	ListenToGameEvent('dota_rune_activated_server', Dynamic_Wrap(bayustd, 'OnRuneActivated'), self)
+	ListenToGameEvent('dota_player_take_tower_damage', Dynamic_Wrap(bayustd, 'OnPlayerTakeTowerDamage'), self)
+	ListenToGameEvent('tree_cut', Dynamic_Wrap(bayustd, 'OnTreeCut'), self)
+	ListenToGameEvent('entity_hurt', Dynamic_Wrap(bayustd, 'OnEntityHurt'), self)
+	ListenToGameEvent('player_connect', Dynamic_Wrap(bayustd, 'PlayerConnect'), self)
+	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
+	ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(bayustd, 'OnGameRulesStateChange'), self)
+	ListenToGameEvent('dota_team_kill_credit', Dynamic_Wrap(bayustd, 'OnTeamKillCredit'), self)
+	ListenToGameEvent("player_reconnected", Dynamic_Wrap(bayustd, 'OnPlayerReconnect'), self)
+	--ListenToGameEvent('player_spawn', Dynamic_Wrap(bayustd, 'OnPlayerSpawn'), self)
+	--ListenToGameEvent('dota_unit_event', Dynamic_Wrap(bayustd, 'OnDotaUnitEvent'), self)
+	--ListenToGameEvent('nommed_tree', Dynamic_Wrap(bayustd, 'OnPlayerAteTree'), self)
+	--ListenToGameEvent('player_completed_game', Dynamic_Wrap(bayustd, 'OnPlayerCompletedGame'), self)
+	--ListenToGameEvent('dota_match_done', Dynamic_Wrap(bayustd, 'OnDotaMatchDone'), self)
+	--ListenToGameEvent('dota_combatlog', Dynamic_Wrap(bayustd, 'OnCombatLogEvent'), self)
+	--ListenToGameEvent('dota_player_killed', Dynamic_Wrap(bayustd, 'OnPlayerKilled'), self)
+	--ListenToGameEvent('player_team', Dynamic_Wrap(bayustd, 'OnPlayerTeam'), self)
+]]--
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
 
 	-- Event Hooks
@@ -256,9 +394,38 @@ function bayustd:Initbayustd()
 	-- Full units file to get the custom values
   	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
+	-- Initialized tables for tracking state
+	self.vUserIds = {}
+	self.vSteamIds = {}
+	self.vBots = {}
+	self.vBroadcasters = {}
+
+	self.vPlayers = {}
+	self.vRadiant = {}
+	self.vDire = {}
+
+	self.nRadiantKills = 0
+	self.nDireKills = 0
+
+	self.bSeenWaitForPlayers = false
+	
   	-- Building Helper by Myll
   	BuildingHelper:Init(8192) -- nHalfMapLength
-
+	-- Prevent Builder from building on lanes
+	BuildingHelper:BlockRectangularArea(Vector(-704,-6784,0), Vector(448,1792,192))
+	BuildingHelper:BlockRectangularArea(Vector(-8192,-8192,128), Vector(8192,-6784,192))
+	BuildingHelper:BlockRectangularArea(Vector(-7360,-6784,128), Vector(-6720,-64,192))
+	BuildingHelper:BlockRectangularArea(Vector(-6720,-960,128), Vector(7104,-64,192))
+	BuildingHelper:BlockRectangularArea(Vector(6464,-6784,128), Vector(7104,-960,192))
+	BuildingHelper:BlockRectangularArea(Vector(1856,-3264,128), Vector(6464,-2624,192))
+	BuildingHelper:BlockRectangularArea(Vector(4160,-6784,128), Vector(4800,-3264,192))
+	BuildingHelper:BlockRectangularArea(Vector(1856,-6784,128), Vector(2496,-3264,192))
+	BuildingHelper:BlockRectangularArea(Vector(-6720,-3264,128), Vector(-2112,-2624,192))
+	BuildingHelper:BlockRectangularArea(Vector(-5056,-6784,128), Vector(-4416,-3264,192))
+	BuildingHelper:BlockRectangularArea(Vector(-2752,-6784,128), Vector(-2112,-3264,192))
+	BuildingHelper:BlockRectangularArea(Vector(-1216,1088,0), Vector(1088,1856,192))
+	
+	
 	print('[BAYUSTD] Done loading bayusTD gamemode!\n\n')
 end
 
@@ -272,6 +439,12 @@ function bayustd:OnThink()
 	return 1
 end
 
+function giveUnitDataDrivenModifier(source, target, modifier, dur)
+    --source and target should be hscript-units. The same unit can be in both source and target
+    local item = CreateItem( "item_apply_modifiers", source, source)
+    item:ApplyDataDrivenModifier( source, target, modifier, {duration=dur} )
+end
+
 ---------------------------------------------------------------------------
 -- Get correct Builder for every Hero
 ---------------------------------------------------------------------------
@@ -282,38 +455,40 @@ end
 ---------------------------------------------------------------------------
 -- Spawn Creepwaves
 ---------------------------------------------------------------------------
-function bayustd:SpawnCreeps()
+function bayustd:SpawnCreeps(wave)
 	print( "Spawning creeps ..." )
 	for i = 0, 6, 1 do
+		local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
 		local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
 		--self:GetCorrectWave(spawnLocation, "npc_dota_wave1)
-		if i == 0 then
-			
-			for d = 0, 20, 1 do
-				local moveLocation0 = Entities:FindByName( nil, "path_corner_0"):GetAbsOrigin()
-				local mL0 = moveLocation0
-				print(moveLocation0)
-				round1Creep = CreateUnitByName("npc_dota_wave1", spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
-				print("spawned creep ...")
-				Timers:CreateTimer( 2, function()
-					round1Creep:MoveToPosition(moveLocation0)
-					return nil
+			for d = 1, 20, 1 do
+				local round1Creep = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
+				creepsCount = creepsCount + 1
+				Timers:CreateTimer(1.0, function()
+					round1Creep:SetInitialGoalEntity(moveLocation)
+					round1Creep:SetBaseMoveSpeed(500)
+					return
 				end
 				)
-				moveLocation0 = mL0
-				print("creep moves to location " .. moveLocation0)
-			--	round1Creep:MoveToPosition(moveLocation0)
-				--round1Creep:SetThink(function() round1Creep:MoveToPosition(moveLocation0) end, self)
-				--round1Creep:MoveToPosition(moveLocation0)
 			end
-		end		
 	end
+	print(creepsCount .. " creeps on the way")
 	return 1 -- Check again later in case more players spawn
 end
 
 ---------------------------------------------------------------------------
--- Create correct Unit and set correct waypoints
+-- Needed for trigger, so we disable modifiers for our heroes
 ---------------------------------------------------------------------------
-function bayustd:GetCorrectWave(i, wave) 
-	
+countTeleportedCreeps = 0
+
+function bayustd:getCreeps()
+	return creepsCount
+end
+
+function bayustd:getTeleportedCreeps()
+	return countTeleportedCreeps
+end
+
+function bayustd:incrementTeleportedCreeps()
+	countTeleportedCreeps = countTeleportedCreeps + 1
 end

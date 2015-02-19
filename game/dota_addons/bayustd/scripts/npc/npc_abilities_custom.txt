@@ -25,9 +25,9 @@
 
 		"UnitName"						"npc_barracks"
 		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"10"
+		"AbilityLumberCost"				"10"
 		// End of BuildingHelper info
-		
+
 		"OnSpellStart"
 		{
 			"RunScript"
