@@ -2,23 +2,24 @@
 -- Teleport creeps to the battlefield
 ---------------------------------------------------------------------------
 function OnStartTouch(trigger)
-	local ent = Entities:FindByName( nil, "point_teleport_spot" )
-	local point = ent:GetAbsOrigin()
+	if bayustd:getWave() % 10 ~= 0 then
+		ent = Entities:FindByName( nil, "point_teleport_spot" )
+	else
+		ent = Entities:FindByName( nil, "point_teleport_spot_boss" )
+	end
+	local unit = trigger.activator
+	local name = unit:GetUnitName()
 	
-	FindClearSpaceForUnit(trigger.activator, point, false)
-	trigger.activator:SetInitialGoalEntity(ent)
-	trigger.activator:Stop()
-	bayustd:incrementTeleportedCreeps()
+	unit:RemoveSelf()
+	bayustd:incrementRemovedCreeps()
 	
-	if bayustd:getTeleportedCreeps() == bayustd:getCreeps() then
+	if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 		print("all creeps teleproted")
-		for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-			if PlayerResource:HasSelectedHero(nPlayerID) then
-				local hero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
-				giveUnitDataDrivenModifier(hero, hero, "modifier_enable_hero", -1)
-				GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getTeleportedCreeps() .. "</font> creeps entered the city!", 0, 0)
-			end
-	   end
+		for d = 1, bayustd:getRemovedCreeps(), 1 do
+			local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 500))
+			CreateUnitByName(name, point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		end
+		GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)
 	end
 end
 

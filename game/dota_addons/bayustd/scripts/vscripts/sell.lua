@@ -15,8 +15,8 @@ function SellBuilding( keys )
 	local sellBounty = unit_table.SellBounty
 
 	caster:RemoveBuilding(false)
-	caster:RemoveSelf()
+	
 	hero.lumber = hero.lumber + sellBounty
-	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+	--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
 	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
 end

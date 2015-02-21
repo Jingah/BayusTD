@@ -326,9 +326,9 @@ function BuildingHelper:AddBuilding(keys)
 	end
 
 	--setup the dummy for model ghost
-	if player.modelGhostDummy ~= nil then
-		player.modelGhostDummy:RemoveSelf()
-	end
+	--if player.modelGhostDummy ~= nil then
+	--	player.modelGhostDummy:RemoveSelf()
+--	end
 
 	local fMaxScale = buildingTable:GetVal("MaxScale", "float")
 	if fMaxScale == nil then
@@ -601,17 +601,18 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
 		player.currentlyBuilding = true
 	else
-		--if player.currentlyBuilding then
-		--	FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Still building another tower." } )
-		--	return
-		--end
+		if player.currentlyBuilding then
+			FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Currently building/upgrading a tower" } )
+			return
+		end
 		-- Upgrade building
 		local position = caster:GetAbsOrigin()
 		caster:RemoveSelf()
 		unit = CreateUnitByName(building, position, false, hero, nil, hero:GetTeamNumber())
 		unit:SetOwner(hero)
 		unit:SetControllableByPlayer(pID, true)
-		unit:SetAbsOrigin(position)	
+		unit:SetAbsOrigin(position)
+		player.currentlyBuilding = true
 	end
 	--Timers:CreateTimer(0.6, function()
 		bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_disable_building", -1)
@@ -628,7 +629,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	BuildingHelper:CloseSquares(squaresToClose, "vector")
 	-- store the squares in the unit for later.
 	unit.squaresOccupied = shallowcopy(squaresToClose)
-	print(unit.squaresOccupied)
 	unit.building = true
 
 	-- Remove the sticky particles
@@ -708,7 +708,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 							bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
 							keys2.onConstructionCompleted(unit)
 							if player.currentlyBuilding then
-								print("Deleting DUmmy")
 								player.currentlyBuilding = false
 							end
 						end
@@ -732,7 +731,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 					bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
 					keys2.onConstructionCompleted(unit)
 					if player.currentlyBuilding then
-						print("Deleting DUmmy")
 						player.currentlyBuilding = false
 					end
 				end
@@ -775,7 +773,11 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	end)
 
 	function unit:RemoveBuilding(bForceKill)
-		print(unit.squaresOccupied)
+		if player.currentlyBuilding then
+			FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Currently building/upgrading a tower" } )
+			return
+		end
+		unit:RemoveSelf()
 		BuildingHelper:OpenSquares(unit.squaresOccupied, "vector")
  		if bForceKill then
  			unit:ForceKill(true)
@@ -1109,7 +1111,6 @@ function shallowcopy(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
-		print("ITS A TABLE")
         copy = {}
         for orig_key, orig_value in pairs(orig) do
             copy[orig_key] = orig_value

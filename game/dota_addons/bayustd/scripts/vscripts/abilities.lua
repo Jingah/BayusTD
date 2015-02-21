@@ -63,6 +63,8 @@ function build( keys )
 end
 
 function create_building_entity( keys )
+	
 	BuildingHelper:InitializeBuildingEntity(keys)
+	
 end
 

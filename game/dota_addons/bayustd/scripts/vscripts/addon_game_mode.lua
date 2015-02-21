@@ -17,7 +17,8 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_barracks3", context)
 	PrecacheUnitByNameSync("npc_dota_wave1", context)
 	PrecacheUnitByNameSync("npc_dota_wave2", context)
-	PrecacheUnitByNameSync("npc_dota_wave3", context)
+	PrecacheUnitByNameSync("npc_dota_wave4", context)
+	PrecacheUnitByNameSync("npc_dota_wave5", context)
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
 end
 

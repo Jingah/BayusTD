@@ -143,11 +143,6 @@ function bayustd:OnNPCSpawned(keys)
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
 		bayustd:OnHeroInGame(npc)
-		Timers:CreateTimer(0.6, function()
-            bayustd:giveUnitDataDrivenModifier(npc, npc, "modifier_disable_hero", -1)
-            return
-         end
-         )
 	end
 end
 
@@ -251,6 +246,11 @@ function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
 	print("[BAYUSTD] GameRules State Changed to " .. newState)
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+		local messageinfo = {
+			message = "Map created by Jingah\nIdea from WC3 Map",
+			duration = 4
+		}
+		FireGameEvent("show_center_message", messageinfo)  
 		--bayustd:EnsureCorrectBuilder(keys)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		bayustd:SpawnCreeps()
@@ -310,16 +310,7 @@ function bayustd:OnEntityKilled( keys )
 			
 		if creepsCount == 0 then
 			print("All creeps are dead")
-			bayustd:setTeleportedCreeps(0)
-			local point = Entities:FindByName( nil, "hero_spawn" ):GetAbsOrigin()
-			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				if PlayerResource:HasSelectedHero(nPlayerID) then
-					local hero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
-					hero:RemoveModifierByName("modifier_enable_hero")
-					bayustd:giveUnitDataDrivenModifier(hero, hero, "modifier_disable_hero", -1)
-					FindClearSpaceForUnit(hero, point, false)					
-				end
-			end
+			bayustd:setRemovedCreeps(0)
 			local a = 20
 			Timers:CreateTimer(function()
 				GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " in " .. a .. "</font> seconds!", 0, 0)
@@ -506,6 +497,12 @@ function bayustd:SpawnCreeps()
 		end
 		)
 	end
+	local messageinfo = {
+		message = "Round " .. wave .. " coming",
+		duration = 2
+	}
+	FireGameEvent("show_center_message", messageinfo)  
+	--GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " coming!", 0, 0)
 	print(creepsCount .. " creeps on the way")
 	wave = wave + 1
 	return 1 -- Check again later in case more players spawn
@@ -514,7 +511,7 @@ end
 ---------------------------------------------------------------------------
 -- Needed for trigger, so we disable modifiers for our heroes
 ---------------------------------------------------------------------------
-countTeleportedCreeps = 0
+countRemovedCreeps = 0
 
 function bayustd:getWave()
 	return wave
@@ -524,14 +521,14 @@ function bayustd:getCreeps()
 	return creepsCount
 end
 
-function bayustd:getTeleportedCreeps()
-	return countTeleportedCreeps
+function bayustd:getRemovedCreeps()
+	return countRemovedCreeps
 end
 
-function bayustd:incrementTeleportedCreeps()
-	countTeleportedCreeps = countTeleportedCreeps + 1
+function bayustd:incrementRemovedCreeps()
+	countRemovedCreeps = countRemovedCreeps + 1
 end
 
-function bayustd:setTeleportedCreeps(val)
-	countTeleportedCreeps = val
+function bayustd:setRemovedCreeps(val)
+	countRemovedCreeps = val
 end
