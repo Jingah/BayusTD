@@ -96,20 +96,6 @@ function BuildingHelper:Init(...)
 	--PrintTable(BuildingAbilities)
 end
 
---[[function BuildingHelper:BlockRectangularArea(leftBorderX, rightBorderX, topBorderY, bottomBorderY)
-	if leftBorderX%64 ~= 0 or rightBorderX%64 ~= 0 or topBorderY%64 ~= 0 or bottomBorderY%64 ~= 0 then
-		print("[BuildingHelper] Error in BlockRectangularArea. One of the values does not divide evenly into 64.")
-		return
-	end
-	local blockedCount = 0
-	for x=leftBorderX+32, rightBorderX-32, 64 do
-		for y=topBorderY-32, bottomBorderY+32,-64 do
-			GRIDNAV_SQUARES[VectorString(Vector(x,y,0))] = true
-			blockedCount=blockedCount+1
-		end
-	end
-end]]
-
 function BuildingHelper:BlockRectangularArea(vPoint1, vPoint2)
 	local leftBorderX = vPoint2.x
 	local rightBorderX = vPoint1.x
@@ -255,7 +241,7 @@ function BuildingHelper:AddBuilding(keys)
 	buildingTable["abil"] = hAbility
 	buildingTable["player"] = player
 	buildingTable["playersHero"] = playersHero
-
+	
 	local size = buildingTable:GetVal("BuildingSize", "number")
 	--local size = buildingTable["BuildingSize"]
 	if size == nil then
@@ -298,10 +284,6 @@ function BuildingHelper:AddBuilding(keys)
 	-- same thing with the gold cost.
 	if playersHero ~= nil then
 		playersHero:SetGold(playersHero:GetGold()+goldCost, false)
-	--	print(lumberCost)
-		--playersHero.lumber = playersHero.lumber + lumberCost
-    	--print("Lumber Spend. " .. playersHero:GetUnitName() .. " is currently at " .. playersHero.lumber)
-    	--FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = playersHero.lumber })
 	end
 
 	local resources = {}
@@ -336,6 +318,11 @@ function BuildingHelper:AddBuilding(keys)
 
 	if TableLength(notEnoughResources) > 0 then
 		return {["error"] = "not_enough_resources", ["resourceTable"] = notEnoughResources}
+	end
+	
+	if player.currentlyBuilding then
+		FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Still building another tower." } )
+		return
 	end
 
 	--setup the dummy for model ghost
@@ -563,58 +550,85 @@ end
 
 function BuildingHelper:InitializeBuildingEntity(keys)
 	local caster = keys.caster
+	local hero = caster:GetPlayerOwner():GetAssignedHero()
+	local pID = hero:GetPlayerID()
+	local player = PlayerResource:GetPlayer(pID)
+	
+	local building = keys.Building
+	
 	local builder = caster -- alias
 	local orders = builder.orders
-	local pos = keys.target_points[1]
-	local player = builder:GetPlayerOwner()
-	local pID = player:GetPlayerID()
-	keys.ability.succeeded = true
-
-	-- search and get the correct order
-	local order = nil
-	local key = ""
-	for k,v in pairs(orders) do
-		if v["pos"] == pos then
-			order = v
-			key = k
+	if building == nil then
+		local pos = keys.target_points[1]
+		keys.ability.succeeded = true
+	
+	
+		-- search and get the correct order
+		local order = nil
+		local key = ""
+		for k,v in pairs(orders) do
+			if v["pos"] == pos then
+				order = v
+				key = k
+			end
 		end
+
+		if not order then
+			print('[BuildingHelper] Error: Caster has no currBuildingOrder.')
+			return
+		end
+
+		-- delete order
+		orders[key] = nil
+
+		squaresToClose = order["squares_to_close"]
+
+		-- let's still make sure we can build here. Someone else may have built a building here
+		-- during the time walking to the spot.
+		if BuildingHelper:IsAreaBlocked(squaresToClose) then
+			return
+		end
+
+		-- get our very useful buildingTable
+		buildingTable = order["buildingTable"]
+		-- keys from the "build" func in abilities.lua
+		keys2 = order["keys"]
+
+		playersHero = buildingTable["playersHero"]
+		player = buildingTable["player"]
+		
+		-- create building entity
+		unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+		player.currentlyBuilding = true
+	else
+		--if player.currentlyBuilding then
+		--	FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Still building another tower." } )
+		--	return
+		--end
+		-- Upgrade building
+		local position = caster:GetAbsOrigin()
+		caster:RemoveSelf()
+		unit = CreateUnitByName(building, position, false, hero, nil, hero:GetTeamNumber())
+		unit:SetOwner(hero)
+		unit:SetControllableByPlayer(pID, true)
+		unit:SetAbsOrigin(position)	
 	end
-
-	if not order then
-		print('[BuildingHelper] Error: Caster has no currBuildingOrder.')
-		return
-	end
-
-	-- delete order
-	orders[key] = nil
-
-	local squaresToClose = order["squares_to_close"]
-
-	-- let's still make sure we can build here. Someone else may have built a building here
-	-- during the time walking to the spot.
-	if BuildingHelper:IsAreaBlocked(squaresToClose) then
-		return
-	end
-
-	-- get our very useful buildingTable
-	local buildingTable = order["buildingTable"]
-	-- keys from the "build" func in abilities.lua
-	local keys2 = order["keys"]
-
-	local playersHero = buildingTable["playersHero"]
-	local player = buildingTable["player"]
-
-	-- create building entity
-	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+	--Timers:CreateTimer(0.6, function()
+		bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_disable_building", -1)
+		--return
+	--end
+	--)
+	
 	local building = unit --alias
 	building.isBuilding = true
 	-- store reference to the buildingTable in the unit.
 	unit.buildingTable = buildingTable
-
+	
 	-- Close the squares
 	BuildingHelper:CloseSquares(squaresToClose, "vector")
 	-- store the squares in the unit for later.
 	unit.squaresOccupied = shallowcopy(squaresToClose)
+	print(unit.squaresOccupied)
 	unit.building = true
 
 	-- Remove the sticky particles
@@ -663,6 +677,8 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	if bPlayerCanControl then
 		unit:SetControllableByPlayer(playersHero:GetPlayerID(), true)
 		unit:SetOwner(playersHero)
+		--local owner = unit:GetOwner()
+		--print("Unit is controllable by player " .. owner)
 	end
 
 	if bUpdateHealth then
@@ -688,7 +704,13 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 						unit:SetHealth(unit:GetHealth()+nHealthInterval)
 					else
 						if keys2.onConstructionCompleted ~= nil then
+							unit:RemoveModifierByName("modifier_disable_hero")
+							bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
 							keys2.onConstructionCompleted(unit)
+							if player.currentlyBuilding then
+								print("Deleting DUmmy")
+								player.currentlyBuilding = false
+							end
 						end
 						unit.bUpdatingHealth = false
 					end
@@ -706,7 +728,13 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 				-- two cases of completion: 1. the unit reaches full health,
 				-- 2. timesUp is true
 				if keys2.onConstructionCompleted ~= nil then
+					unit:RemoveModifierByName("modifier_disable_hero")
+					bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
 					keys2.onConstructionCompleted(unit)
+					if player.currentlyBuilding then
+						print("Deleting DUmmy")
+						player.currentlyBuilding = false
+					end
 				end
 				unit.bUpdatingHealth = false
 			end
@@ -746,16 +774,20 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		return .2
 	end)
 
-	function unit:Remove(bForceKill)
-		BuildingHelper:OpenSquares(unit.squaresOccupied "string")
-		if bForceKill then
-			unit:ForceKill(true)
-		end
-	end
+	function unit:RemoveBuilding(bForceKill)
+		print(unit.squaresOccupied)
+		BuildingHelper:OpenSquares(unit.squaresOccupied, "vector")
+ 		if bForceKill then
+ 			unit:ForceKill(true)
+ 		end
+ 	end
 
 	-- Remove gold, start cooldown ,etc
 	local goldCost = buildingTable.goldCost
-	local lumberCost = buildingTable.lumberCost
+	local lumberCost = keys.LumberCost
+	if lumberCost == nil then
+		lumberCost = buildingTable.lumberCost
+	end
 	local cooldown = buildingTable:GetVal("AbilityCooldown", "number")
 	if cooldown == nil then
 		cooldown = 0
@@ -763,9 +795,11 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	-- remove gold and lumber from playersHero.
 	if playersHero ~= nil then
 		playersHero:SetGold(playersHero:GetGold()-goldCost, false)
-		playersHero.lumber = playersHero.lumber - lumberCost
-		print("Lumber Spend. " .. playersHero:GetUnitName() .. " is currently at " .. playersHero.lumber)
-    	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = lumberCost })
+		if lumberCost ~= 0 then
+			playersHero.lumber = playersHero.lumber - lumberCost
+			--print("Lumber Spend. " .. playersHero:GetUnitName() .. " is currently at " .. playersHero.lumber)
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = playersHero.lumber })
+		end
 	end
 	buildingTable["abil"]:StartCooldown(cooldown)
 
@@ -1075,6 +1109,7 @@ function shallowcopy(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
+		print("ITS A TABLE")
         copy = {}
         for orig_key, orig_value in pairs(orig) do
             copy[orig_key] = orig_value

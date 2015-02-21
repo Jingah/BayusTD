@@ -119,6 +119,53 @@
 							 "MODIFIER_STATE_ATTACK_IMMUNE" "MODIFIER_STATE_VALUE_ENABLED"
 					  }
 				 }
+				  "modifier_protect_builder"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_disable_builder"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_disable_builder"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_enable_building"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_DISABLED"
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_DISABLED"
+					  }
+				 }
+				 "modifier_disable_building"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
 			}   
 	}
 }

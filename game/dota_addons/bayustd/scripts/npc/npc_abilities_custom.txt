@@ -14,17 +14,18 @@
 
 		// BuildingHelper info
 		"Building"						"1" //bool
-		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
 		"BuildTime"						"7.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool
 		"Scale"							"1" //bool
 		"MaxScale"						"0.8"
-		"CasterCanControl"				"1" //bool
+		"PlayerCanControl"				"1"
 		//"CancelsBuildingGhost"		"0" //bool
 
 		"UnitName"						"npc_barracks"
-		"AbilityCooldown"				"0"
+		"AbilityCooldown"				"5"
+		"AbilityGoldCost"				"0"
 		"AbilityLumberCost"				"10"
 		// End of BuildingHelper info
 
@@ -54,12 +55,13 @@
 		"UpdateHealth"					"1" //bool
 		"Scale"							"1" //bool
 		"MaxScale"						"0.8"
-		"CasterCanControl"				"1" //bool
+		"PlayerCanControl"				"1"
 		//"CancelsBuildingGhost"		"0" //bool
 
 		"UnitName"						"npc_barracks2"
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
+		"AbilityLumberCost"				"0"
 		// End of BuildingHelper info
 		
 		"OnSpellStart"
@@ -72,6 +74,54 @@
 		}
 	}
 	
+	"upgrade_barracks"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityCastPoint"				"0"
+		"MaxLevel" 						"1"		
+
+		// BuildingHelper info
+		"Building"						"1" //bool
+		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildTime"						"10.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1" //bool
+		"Scale"							"1" //bool
+		"MaxScale"						"0.8"
+		"PlayerCanControl"				"1"
+		//"CancelsBuildingGhost"		"0" //bool
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"create_building_entity"
+				"LumberCost"			"20"
+				"Building"				"npc_barracks3"
+			}
+		}
+	}
+	
+	"sell_builing"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"			"return_resources"
+		"AbilityCastPoint"				"0"
+		"MaxLevel" 						"1"	
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"sell.lua"
+				"Function"		"SellBuilding"
+			}
+		}
+	}
 	
 	// move_to_point abilities are for BuildingHelper.
 	"move_to_point_70"
@@ -210,5 +260,71 @@
 				"Function"		"create_building_entity"
 			}
 		}
+	}
+	
+	"samplerts_empty1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"samplerts_empty2"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"samplerts_empty3"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"samplerts_empty4"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"samplerts_empty5"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
+	
+	"samplerts_empty6"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"0"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
 	}
 }

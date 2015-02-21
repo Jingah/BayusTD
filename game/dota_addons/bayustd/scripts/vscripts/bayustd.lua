@@ -144,7 +144,7 @@ function bayustd:OnNPCSpawned(keys)
 		npc.bFirstSpawned = true
 		bayustd:OnHeroInGame(npc)
 		Timers:CreateTimer(0.6, function()
-            giveUnitDataDrivenModifier(npc, npc, "modifier_disable_hero", -1)
+            bayustd:giveUnitDataDrivenModifier(npc, npc, "modifier_disable_hero", -1)
             return
          end
          )
@@ -253,7 +253,7 @@ function bayustd:OnGameRulesStateChange(keys)
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		--bayustd:EnsureCorrectBuilder(keys)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		bayustd:SpawnCreeps(1)
+		bayustd:SpawnCreeps()
 	end
 end
 
@@ -273,10 +273,12 @@ function bayustd:OnPlayerPickHero(keys)
 	local builder = CreateUnitByName("npc_dota_builder1", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
+	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
 	
 end
 
 creepsCount = 0
+wave = 1
 
 -- An entity died
 function bayustd:OnEntityKilled( keys )
@@ -288,28 +290,48 @@ function bayustd:OnEntityKilled( keys )
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	-- The Killing entity
 	local killerEntity = nil
+	
 
 	if keys.entindex_attacker ~= nil then
 		killerEntity = EntIndexToHScript( keys.entindex_attacker )
 	end
 
 	if killedUnit:GetTeam() == DOTA_TEAM_NEUTRALS then
-		print ("KILLEDKILLER: " .. killedUnit:GetName() .. " -- " .. killerEntity:GetName())
+		local name = killedUnit:GetUnitName()
+		local pID = killerEntity:GetPlayerOwnerID()
+		local hero = PlayerResource:GetSelectedHeroEntity(pID)
+		local unit_table = GameRules.UnitKV[name]
+		local bountyLumber = unit_table.BountyLumber
+		
 		creepsCount = creepsCount - 1
-		print(creepsCount .. " creeps left")
+		hero.lumber = hero.lumber + bountyLumber
+		print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
+			
 		if creepsCount == 0 then
 			print("All creeps are dead")
+			bayustd:setTeleportedCreeps(0)
 			local point = Entities:FindByName( nil, "hero_spawn" ):GetAbsOrigin()
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				print("Moving hero to base")
 				if PlayerResource:HasSelectedHero(nPlayerID) then
-					print("still doing ...")
 					local hero = PlayerResource:GetSelectedHeroEntity(nPlayerID)
-					FindClearSpaceForUnit(hero, point, false)
-					giveUnitDataDrivenModifier(hero, hero, "modifier_disable_hero", -1)
+					hero:RemoveModifierByName("modifier_enable_hero")
+					bayustd:giveUnitDataDrivenModifier(hero, hero, "modifier_disable_hero", -1)
+					FindClearSpaceForUnit(hero, point, false)					
 				end
 			end
-		end
+			local a = 20
+			Timers:CreateTimer(function()
+				GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " in " .. a .. "</font> seconds!", 0, 0)
+				a = a - 1
+				if a == 0 then
+					bayustd:SpawnCreeps()
+					return
+				end
+				return 1
+			 end
+			 )
+			end
 		--if SHOW_KILLS_ON_TOPBAR then
 		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_BADGUYS, self.nDireKills )
 		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
@@ -439,7 +461,7 @@ function bayustd:OnThink()
 	return 1
 end
 
-function giveUnitDataDrivenModifier(source, target, modifier, dur)
+function bayustd:giveUnitDataDrivenModifier(source, target, modifier, dur)
     --source and target should be hscript-units. The same unit can be in both source and target
     local item = CreateItem( "item_apply_modifiers", source, source)
     item:ApplyDataDrivenModifier( source, target, modifier, {duration=dur} )
@@ -455,24 +477,37 @@ end
 ---------------------------------------------------------------------------
 -- Spawn Creepwaves
 ---------------------------------------------------------------------------
-function bayustd:SpawnCreeps(wave)
+function bayustd:SpawnCreeps()
 	print( "Spawning creeps ..." )
-	for i = 0, 6, 1 do
-		local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
-		local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
-		--self:GetCorrectWave(spawnLocation, "npc_dota_wave1)
-			for d = 1, 20, 1 do
-				local round1Creep = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
-				creepsCount = creepsCount + 1
-				Timers:CreateTimer(1.0, function()
-					round1Creep:SetInitialGoalEntity(moveLocation)
-					round1Creep:SetBaseMoveSpeed(500)
-					return
+	if wave % 10 ~= 0 then
+		for i = 0, 7, 1 do
+			local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
+			local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
+				for d = 1, 10, 1 do
+					local unit = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
+					creepsCount = creepsCount + 1
+					Timers:CreateTimer(1.0, function()
+						unit:SetInitialGoalEntity(moveLocation)
+						unit:SetBaseMoveSpeed(500)
+						return
+					end
+					)
 				end
-				)
-			end
+		end
+	else
+		local moveLocation = Entities:FindByName( nil, "path_corner_0")
+		local spawnLocation = Entities:FindByName( nil, "creep_spawner0"):GetAbsOrigin()
+		local unit = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		creepsCount = creepsCount + 1
+		Timers:CreateTimer(1.0, function()
+			unit:SetInitialGoalEntity(moveLocation)
+			unit:SetBaseMoveSpeed(500)
+			return
+		end
+		)
 	end
 	print(creepsCount .. " creeps on the way")
+	wave = wave + 1
 	return 1 -- Check again later in case more players spawn
 end
 
@@ -480,6 +515,10 @@ end
 -- Needed for trigger, so we disable modifiers for our heroes
 ---------------------------------------------------------------------------
 countTeleportedCreeps = 0
+
+function bayustd:getWave()
+	return wave
+end
 
 function bayustd:getCreeps()
 	return creepsCount
@@ -491,4 +530,8 @@ end
 
 function bayustd:incrementTeleportedCreeps()
 	countTeleportedCreeps = countTeleportedCreeps + 1
+end
+
+function bayustd:setTeleportedCreeps(val)
+	countTeleportedCreeps = val
 end

@@ -14,7 +14,10 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_dota_hero_ancient_apparition", context)
 	PrecacheUnitByNameSync("npc_barracks", context)
 	PrecacheUnitByNameSync("npc_barracks2", context)
+	PrecacheUnitByNameSync("npc_barracks3", context)
 	PrecacheUnitByNameSync("npc_dota_wave1", context)
+	PrecacheUnitByNameSync("npc_dota_wave2", context)
+	PrecacheUnitByNameSync("npc_dota_wave3", context)
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
 end
 
