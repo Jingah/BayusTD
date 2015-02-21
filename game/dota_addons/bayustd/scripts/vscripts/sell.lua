@@ -1,7 +1,7 @@
 --[[
-	Author: Noya
-	Date: 19.02.2015.
-	Replaces the building to the upgraded unit name
+	Author: Jingah
+	Date: 20.02.2015.
+	Sells the unit by removing entity and opening squares in BH
 ]]
 function SellBuilding( keys )
 	local caster = keys.caster
