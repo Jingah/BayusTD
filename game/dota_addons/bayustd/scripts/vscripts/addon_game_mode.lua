@@ -7,6 +7,12 @@ require('buildinghelper')
 require('abilities')
 
 function Precache( context )
+	
+
+
+	PrecacheUnitByNameSync("npc_dota_ghost", context)
+	PrecacheUnitByNameSync("npc_dota_gold", context)
+	PrecacheUnitByNameSync("npc_dota_lumber", context)
     PrecacheUnitByNameSync("npc_dota_builder1", context)
 	PrecacheUnitByNameSync("npc_dota_builder2", context)
 	PrecacheUnitByNameSync("npc_dota_builder3", context)

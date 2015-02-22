@@ -3,6 +3,180 @@
 {
 	"Version"	"1"
 	//=================================================================================
+	// Graveyard ghost
+	//=================================================================================
+	"npc_dota_ghost"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/heroes/death_prophet/death_prophet_ghost.vmdl"
+		"ModelScale"				"1.7"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"6"
+		"Ability1"					""
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
+		"Ability6"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"12"
+		"AttackDamageMax"			"15"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"				"40"
+		"CollisionSize"				"16"
+		"FormationRank"				"4"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"290"
+		"MovementTurnRate"			"0.6"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"220"
+		"StatusHealthRegen"			"0.25"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"
+		"VisionNighttimeRange"		"1500"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+		}
+	}
+	
+	//=================================================================================
+	// Graveyard gold
+	//=================================================================================
+	"npc_dota_gold"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/props_gameplay/gold_bag.vmdl"
+		"ModelScale"				"1.7"
+		"Level"						"1"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"				"40"
+		"CollisionSize"				"16"
+		"FormationRank"				"4"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"10"
+		"BountyGoldMax"				"10"
+		"BountyLumber"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"
+		"VisionNighttimeRange"		"1500"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+	}
+	
+	//=================================================================================
+	// Graveyard lumber
+	//=================================================================================
+	"npc_dota_lumber"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/props_gameplay/tango.vmdl"
+		"ModelScale"				"1.7"
+		"Level"						"1"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"				"40"
+		"CollisionSize"				"16"
+		"FormationRank"				"4"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+		"BountyLumber"				"10"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1500"
+		"VisionNighttimeRange"		"1500"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+	}
+	
+	//=================================================================================
 	// Builder: 1 - IMP Courier
 	//=================================================================================
 	"npc_dota_builder1"
@@ -74,7 +248,7 @@
 	}
 	
 	//=================================================================================
-	// Builder: 2 - IMP Courier
+	// Builder: 2 - Octopus
 	//=================================================================================
 	"npc_dota_builder2"
 	{

@@ -16,7 +16,7 @@ function OnStartTouch(trigger)
 	if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 		print("all creeps teleproted")
 		for d = 1, bayustd:getRemovedCreeps(), 1 do
-			local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 500))
+			local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 1500))
 			CreateUnitByName(name, point, true, nil, nil, DOTA_TEAM_NEUTRALS)
 		end
 		GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)

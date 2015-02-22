@@ -3,7 +3,7 @@ print ('[BAYUSTD] bayustd.lua' )
 
 ----------------
 
-ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
+ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret Shop items as well as regular items
 ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same hero as each other
 
@@ -111,6 +111,9 @@ function bayustd:OnHeroInGame(hero)
 	hero.lumber = 150
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
+	
+	local gold = CreateUnitByName("npc_dota_gold", Vector(-6015,5015,0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	local lumber = CreateUnitByName("npc_dota_lumber", Vector(-6000,5000,0), true, nil, nil, DOTA_TEAM_NEUTRALS)
 
 	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
 	--with the "example_ability" ability
@@ -238,6 +241,28 @@ function bayustd:OnDisconnect(keys)
 	local userid = keys.userid
 end
 
+-- An item was picked up off the ground
+function bayustd:OnItemPickedUp(keys)
+	print ( '[DOTACRAFT] OnItemPurchased' )
+	--DeepPrintTable(keys)
+
+	local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
+	local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
+	local player = PlayerResource:GetPlayer(keys.PlayerID)
+	local hero = player:GetAssignedHero()
+	local itemname = keys.itemname
+	
+	if itemname == "npc_dota_gold" then
+		PlayerResource:SetGold(keys.PlayerID, 10, true)
+		itemEntity:RemoveSelf()
+	elseif itemname == "npc_dota_lumber" then
+		hero.lumber = hero.lumber + 10
+		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
+		itemEntity:RemoveSelf()
+	end
+end
+
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
 	
@@ -279,6 +304,7 @@ end
 
 creepsCount = 0
 wave = 1
+firstGhost = false
 
 -- An entity died
 function bayustd:OnEntityKilled( keys )
@@ -289,31 +315,72 @@ function bayustd:OnEntityKilled( keys )
 	-- The Unit that was Killed
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	-- The Killing entity
+	
 	local killerEntity = nil
 	
-
 	if keys.entindex_attacker ~= nil then
 		killerEntity = EntIndexToHScript( keys.entindex_attacker )
 	end
 
+	if killedUnit:IsRealHero() then
+		pID = killedUnit:GetPlayerOwnerID()
+	else
+		pID = killerEntity:GetPlayerOwnerID()
+	end
+	print(pID)
+	local player = PlayerResource:GetPlayer(pID)
+	local hero = PlayerResource:GetSelectedHeroEntity(pID)
+	if hero == nil then
+		hero = player:GetAssignedHero()
+	end
+	
+	if killedUnit:IsRealHero() then
+		firstGhost = true
+		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
+		PlayerResource:SetGold(pID, lostGold, true)
+		player.isDead = 0
+		local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
+		player.ghost = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+		player.ghost:SetOwner(hero)
+		player.ghost:SetControllableByPlayer(pID, true)
+		bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
+	end
+	
 	if killedUnit:GetTeam() == DOTA_TEAM_NEUTRALS then
 		local name = killedUnit:GetUnitName()
-		local pID = killerEntity:GetPlayerOwnerID()
-		local hero = PlayerResource:GetSelectedHeroEntity(pID)
 		local unit_table = GameRules.UnitKV[name]
 		local bountyLumber = unit_table.BountyLumber
+		local playerKills = PlayerResource:GetKills(pID)
+
+		hero.lumber = hero.lumber + bountyLumber
+		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
+		
+		if name == "npc_dota_lumber" or name == "npc_dota_gold" then
+			return
+		end
+			
+		PlayerResource:IncrementKills(pID, playerKills + 1)
 		
 		creepsCount = creepsCount - 1
-		hero.lumber = hero.lumber + bountyLumber
-		print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
-			
+		
 		if creepsCount == 0 then
+			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				if PlayerResource:HasSelectedHero(nPlayerID) then
+					local nPlayer = PlayerResource:GetPlayer(nPlayerID)
+					if nPlayer.isDead == 2 then
+						nPlayer.ghost:RemoveSelf()
+						nPlayer:GetAssignedHero():RespawnHero(false, false, false)
+						nPlayer.isDead = 0
+					end
+					nPlayer.isDead = nPlayer.isDead + 1
+				end
+			end
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
 			local a = 20
 			Timers:CreateTimer(function()
-				GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " in " .. a .. "</font> seconds!", 0, 0)
+				GameRules:SendCustomMessage("Round " .. wave .. " in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
 				a = a - 1
 				if a == 0 then
 					bayustd:SpawnCreeps()
@@ -367,6 +434,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
+	--ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
 	
 	--[[ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(bayustd, 'OnPlayerLevelUp'), self)
 	ListenToGameEvent('dota_ability_channel_finished', Dynamic_Wrap(bayustd, 'OnAbilityChannelFinished'), self)
@@ -375,7 +443,7 @@ function bayustd:Initbayustd()
 	
 	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
-	ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
+	
 	ListenToGameEvent('last_hit', Dynamic_Wrap(bayustd, 'OnLastHit'), self)
 	ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(bayustd, 'OnNonPlayerUsedAbility'), self)
 	ListenToGameEvent('player_changename', Dynamic_Wrap(bayustd, 'OnPlayerChangedName'), self)
@@ -398,7 +466,9 @@ function bayustd:Initbayustd()
 	--ListenToGameEvent('player_team', Dynamic_Wrap(bayustd, 'OnPlayerTeam'), self)
 ]]--
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
-
+	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self, 10 )
+	
+	
 	-- Event Hooks
 	-- All of these events can potentially be fired by the game, though only the uncommented ones have had
 	-- Functions supplied for them.  If you are interested in the other events, you can uncomment the
@@ -440,6 +510,25 @@ function bayustd:Initbayustd()
 	
 	
 	print('[BAYUSTD] Done loading bayusTD gamemode!\n\n')
+end
+
+-- Spawn gold and lumber on the graveyard (every 10 sec)
+function bayustd:OnGraveyardThink()
+	if firstGhost then
+		--math.randomseed(os.time())
+		--print( math.random(0,4))
+		--print( math.random(0,4))
+		local point_gold = Entities:FindByName( nil, "graveyard_pos1"):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		local point_lumber = Entities:FindByName( nil, "graveyard_pos3"):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		--local gold = CreateItem("item_graveyard_gold", nil, nil)
+		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
+		local gold = CreateUnitByName("npc_dota_gold", point_gold, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		local lumber = CreateUnitByName("npc_dota_lumber", point_lumber, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		--CreateItemOnPositionSync(point_lumber, lumber)
+		--CreateItemOnPositionSync(point_lumber, gold)
+		return 30
+	end
+	return 10
 end
 
 -- Evaluate the state of the game

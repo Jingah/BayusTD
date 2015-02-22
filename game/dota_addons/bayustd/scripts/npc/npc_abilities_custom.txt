@@ -97,8 +97,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"create_building_entity"
+				"ScriptFile"			"buildingAbilities.lua"
+				"Function"				"UpgradeBuilding"
 				"LumberCost"			"20"
 				"Building"				"npc_barracks3"
 			}
@@ -117,7 +117,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"sell.lua"
+				"ScriptFile"	"buildingAbilities.lua"
 				"Function"		"SellBuilding"
 			}
 		}

@@ -554,66 +554,50 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local pID = hero:GetPlayerID()
 	local player = PlayerResource:GetPlayer(pID)
 	
-	local building = keys.Building
-	
 	local builder = caster -- alias
 	local orders = builder.orders
-	if building == nil then
-		local pos = keys.target_points[1]
-		keys.ability.succeeded = true
 	
-	
-		-- search and get the correct order
-		local order = nil
-		local key = ""
-		for k,v in pairs(orders) do
-			if v["pos"] == pos then
-				order = v
-				key = k
-			end
+	local pos = keys.target_points[1]
+	keys.ability.succeeded = true
+
+
+	-- search and get the correct order
+	local order = nil
+	local key = ""
+	for k,v in pairs(orders) do
+		if v["pos"] == pos then
+			order = v
+			key = k
 		end
-
-		if not order then
-			print('[BuildingHelper] Error: Caster has no currBuildingOrder.')
-			return
-		end
-
-		-- delete order
-		orders[key] = nil
-
-		squaresToClose = order["squares_to_close"]
-
-		-- let's still make sure we can build here. Someone else may have built a building here
-		-- during the time walking to the spot.
-		if BuildingHelper:IsAreaBlocked(squaresToClose) then
-			return
-		end
-
-		-- get our very useful buildingTable
-		buildingTable = order["buildingTable"]
-		-- keys from the "build" func in abilities.lua
-		keys2 = order["keys"]
-
-		playersHero = buildingTable["playersHero"]
-		player = buildingTable["player"]
-		
-		-- create building entity
-		unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
-		player.currentlyBuilding = true
-	else
-		if player.currentlyBuilding then
-			FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Currently building/upgrading a tower" } )
-			return
-		end
-		-- Upgrade building
-		local position = caster:GetAbsOrigin()
-		caster:RemoveSelf()
-		unit = CreateUnitByName(building, position, false, hero, nil, hero:GetTeamNumber())
-		unit:SetOwner(hero)
-		unit:SetControllableByPlayer(pID, true)
-		unit:SetAbsOrigin(position)
-		player.currentlyBuilding = true
 	end
+
+	if not order then
+		print('[BuildingHelper] Error: Caster has no currBuildingOrder.')
+		return
+	end
+
+	-- delete order
+	orders[key] = nil
+
+	squaresToClose = order["squares_to_close"]
+		
+	-- let's still make sure we can build here. Someone else may have built a building here
+	-- during the time walking to the spot.
+	if BuildingHelper:IsAreaBlocked(squaresToClose) then
+		return
+	end
+
+	-- get our very useful buildingTable
+	buildingTable = order["buildingTable"]
+	-- keys from the "build" func in abilities.lua
+	keys2 = order["keys"]
+		
+	playersHero = buildingTable["playersHero"]
+	player = buildingTable["player"]
+		
+	-- create building entity
+	unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+	player.currentlyBuilding = true
 	--Timers:CreateTimer(0.6, function()
 		bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_disable_building", -1)
 		--return

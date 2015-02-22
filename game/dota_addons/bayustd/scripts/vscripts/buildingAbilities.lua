@@ -20,3 +20,22 @@ function SellBuilding( keys )
 	--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
 	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
 end
+
+function UpgradeBuilding( keys )
+	local caster = keys.caster
+	local pID = caster:GetPlayerOwnerID()
+	local player = PlayerResource:GetPlayer(pID)
+	local pos = caster:GetAbsOrigin()
+	local hero = PlayerResource:GetSelectedHeroEntity(pID)
+	
+	
+	caster:RemoveSelf()
+	unit = CreateUnitByName(keys.building, pos, false, hero, nil, hero:GetTeamNumber())
+	unit:SetOwner(hero)
+	unit:SetControllableByPlayer(pID, true)
+	unit:SetAbsOrigin(pos)
+	
+	player.lumber = player.lumber - keys.LumberCost
+	--print("Lumber Spend. " .. player:GetUnitName() .. " is currently at " .. player.lumber)
+	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+end
