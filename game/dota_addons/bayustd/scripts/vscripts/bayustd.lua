@@ -1,3 +1,11 @@
+--[[
+	Author: Jingah
+	Date: 16.02.2015
+	
+	Credits to MNoya for Lumber UI
+	Credits to Myll & MNoya for BuildingHelper
+]]
+
 print ('[BAYUSTD] bayustd.lua' )
 
 
@@ -32,8 +40,8 @@ DISABLE_FOG_OF_WAR_ENTIRELY = false      -- Should we disable fog of war entirel
 USE_STANDARD_HERO_GOLD_BOUNTY = true    -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
 
 USE_CUSTOM_TOP_BAR_VALUES = true        -- Should we do customized top bar values or use the default kill count per team?
-TOP_BAR_VISIBLE = false                  -- Should we display the top bar score/count at all?
-SHOW_KILLS_ON_TOPBAR = false             -- Should we display kills only on the top bar? (No denies, suicides, kills by neutrals)  Requires USE_CUSTOM_TOP_BAR_VALUES
+TOP_BAR_VISIBLE = true                  -- Should we display the top bar score/count at all?
+SHOW_KILLS_ON_TOPBAR = true             -- Should we display kills only on the top bar? (No denies, suicides, kills by neutrals)  Requires USE_CUSTOM_TOP_BAR_VALUES
 
 ENABLE_TOWER_BACKDOOR_PROTECTION = false-- Should we enable backdoor protection for our towers?
 REMOVE_ILLUSIONS_ON_DEATH = false       -- Should we remove all illusions if the main hero dies?
@@ -93,6 +101,12 @@ It can be used to initialize non-hero player state or adjust the hero selection 
 ]]
 function bayustd:OnAllPlayersLoaded()
 	print("[BAYUSTD] All Players have loaded into the game")
+	-- Reassign all the players to the Radiant Team
+	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
+		if PlayerResource:IsValidPlayer(nPlayerID) and not PlayerResource:IsBroadcaster(nPlayerID) then 
+			PlayerResource:SetCustomTeamAssignment(nPlayerID, DOTA_TEAM_GOODGUYS )
+		end
+	end
 end
 
 --[[
@@ -284,11 +298,12 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	
 	--TODO: Ensure correct Builder
-	local number = math.random(1,4)
-	local builder = CreateUnitByName("npc_dota_builder1", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local number = RandomInt(1, 4)
+	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
+	player.isDead = 0
 	
 end
 
@@ -324,6 +339,7 @@ function bayustd:OnEntityKilled( keys )
 	end
 	
 	if killedUnit:IsRealHero() then
+		self.nDireKills = self.nDireKills + 1
 		firstGhost = true
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
 		PlayerResource:SetGold(pID, lostGold, true)
@@ -351,6 +367,7 @@ function bayustd:OnEntityKilled( keys )
 		end
 			
 		PlayerResource:IncrementKills(pID, playerKills + 1)
+		self.nRadiantKills = self.nRadiantKills + 1
 		
 		creepsCount = creepsCount - 1
 		
@@ -386,6 +403,8 @@ function bayustd:OnEntityKilled( keys )
 		--end
 	end
 
+	GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_BADGUYS, self.nDireKills )
+    GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
 	-- Put code here to handle when an entity gets killed
 end
 
@@ -456,7 +475,7 @@ function bayustd:Initbayustd()
 	--ListenToGameEvent('player_team', Dynamic_Wrap(bayustd, 'OnPlayerTeam'), self)
 ]]--
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
-	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self, 10 )
+	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self)
 	
 	
 	-- Event Hooks
@@ -505,18 +524,17 @@ end
 -- Spawn gold and lumber on the graveyard (every 10 sec)
 function bayustd:OnGraveyardThink()
 	if firstGhost then
-		--math.randomseed(os.time())
-		--print( math.random(0,4))
-		--print( math.random(0,4))
-		local point_gold = Entities:FindByName( nil, "graveyard_pos1"):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		local point_lumber = Entities:FindByName( nil, "graveyard_pos3"):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		pos_gold = RandomInt(1, 2)
+		pos_lumber = RandomInt(3, 4)
+		local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
 		--local gold = CreateItem("item_graveyard_gold", nil, nil)
 		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		local gold = CreateUnitByName("npc_dota_gold", point_gold, true, nil, nil, DOTA_TEAM_NEUTRALS)
 		local lumber = CreateUnitByName("npc_dota_lumber", point_lumber, true, nil, nil, DOTA_TEAM_NEUTRALS)
 		--CreateItemOnPositionSync(point_lumber, lumber)
 		--CreateItemOnPositionSync(point_lumber, gold)
-		return 30
+		return 60
 	end
 	return 10
 end
