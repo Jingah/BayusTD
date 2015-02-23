@@ -54,6 +54,8 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 40                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+BAYUSTD_VERSION = "1.0"
+
 OutOfWorldVector = Vector(9000,9000,-100)
 
 -- Fill this table up with the required XP per level if you want to change it
@@ -127,7 +129,8 @@ function bayustd:OnHeroInGame(hero)
 	player.lumber = 150
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
-
+	
+	
 	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
 	--with the "example_ability" ability
 	local abil = hero:GetAbilityByIndex(1)
@@ -196,6 +199,8 @@ function bayustd:OnConnectFull(keys)
 	--print ('[bayustd] OnConnectFull')
 	--PrintTable(keys)
 	bayustd:CaptureBayusTD()
+	
+	GameRules.TOTAL_PLAYERS = GameRules.TOTAL_PLAYERS + 1
 
 	local entIndex = keys.index+1
 	-- The Player entity of the joining user
@@ -256,7 +261,7 @@ end
 
 -- An item was picked up off the ground
 function bayustd:OnItemPickedUp(keys)
-	print ( '[DOTACRAFT] OnItemPurchased' )
+	print ( '[DOTACRAFT] OnItemPickedUp' )
 	--DeepPrintTable(keys)
 
 	local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
@@ -264,7 +269,18 @@ function bayustd:OnItemPickedUp(keys)
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local hero = player:GetAssignedHero()
 	local itemname = keys.itemname
-
+	
+	
+	--[[Currently not possible with units other than heroes
+	if itemname == "item_graveyard_gold" then
+		PlayerResource:SetGold(keys.PlayerID, 10, true)
+		player:RemoveItem(itemEntity)
+	elseif itemname == "npc_dota_lumber" then
+		hero.lumber = hero.lumber + 10
+		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
+		player:RemoveItem(itemEntity)
+	end--]]
 end
 
 -- The overall game state has changed
@@ -275,12 +291,7 @@ function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
 	print("[BAYUSTD] GameRules State Changed to " .. newState)
 	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
-		local messageinfo = {
-			message = "Map created by Jingah\nIdea from WC3 Map",
-			duration = 4
-		}
-		FireGameEvent("show_center_message", messageinfo)  
-		--bayustd:EnsureCorrectBuilder(keys)
+		
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		bayustd:SpawnCreeps()
 	end
@@ -290,12 +301,17 @@ end
 function bayustd:OnPlayerPickHero(keys)
 	print("Player picked hero")
 	--DeepPrintTable(keys)
-
+	
 	local hero = EntIndexToHScript(keys.heroindex)
 	local player = EntIndexToHScript(keys.player)
 	local playerID = hero:GetPlayerID()
 	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
 	
+	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
+
+	if GameRules.PLAYERS_PICKED == GameRules.TOTAL_PLAYERS then 
+		self:OnEveryonePicked()
+	end
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(1, 4)
@@ -307,6 +323,14 @@ function bayustd:OnPlayerPickHero(keys)
 	
 end
 
+function bayustd:OnEveryonePicked()
+    GameRules:SendCustomMessage("Welcome to <font color='#2EFE2E'>Bayus TD!</font>", 0, 0) -- ##9A2EFE
+    GameRules:SendCustomMessage("Created by <font color='#2EFE2E'>Jingah</font>", 0, 0)
+	GameRules:SendCustomMessage("Idea from original Warcraft 3 Map",0,0)
+    GameRules:SendCustomMessage("Version: " .. BAYUSTD_VERSION, 0, 0)
+    GameRules:SendCustomMessage("Please report bugs and leave feedback in our workshop page", 0, 0)
+end
+
 creepsCount = 0
 wave = 1
 firstGhost = false
@@ -315,7 +339,6 @@ firstGhost = false
 function bayustd:OnEntityKilled( keys )
 	--print( '[bayustd] OnEntityKilled Called' )
 	--PrintTable( keys )
-	print("Player killed Unit")
 
 	-- The Unit that was Killed
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
@@ -397,15 +420,10 @@ function bayustd:OnEntityKilled( keys )
 			 end
 			 )
 			end
-		--if SHOW_KILLS_ON_TOPBAR then
-		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_BADGUYS, self.nDireKills )
-		--	GameRules:GetGameModeEntity():SetTopBarTeamValue ( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
-		--end
 	end
 
 	GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_BADGUYS, self.nDireKills )
     GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
-	-- Put code here to handle when an entity gets killed
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -431,6 +449,9 @@ function bayustd:Initbayustd()
 	GameRules:SetCreepMinimapIconScale( MINIMAP_CREEP_ICON_SIZE )
 	GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
 	print('[BAYUSTD] GameRules set')
+	
+	GameRules.PLAYERS_PICKED = 0
+	GameRules.TOTAL_PLAYERS = 0
 
 	InitLogFile( "log/bayustd.txt","")
 
@@ -524,14 +545,17 @@ end
 -- Spawn gold and lumber on the graveyard (every 10 sec)
 function bayustd:OnGraveyardThink()
 	if firstGhost then
+		
 		pos_gold = RandomInt(1, 2)
 		pos_lumber = RandomInt(3, 4)
 		local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
 		local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		--local gold = CreateItem("item_graveyard_gold", nil, nil)
-		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		local gold = CreateUnitByName("npc_dota_gold", point_gold, true, nil, nil, DOTA_TEAM_NEUTRALS)
 		local lumber = CreateUnitByName("npc_dota_lumber", point_lumber, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		
+		--TODO: Set gold and lumber as an item 
+		--local gold = CreateItem("item_graveyard_gold", nil, nil)
+		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		--CreateItemOnPositionSync(point_lumber, lumber)
 		--CreateItemOnPositionSync(point_lumber, gold)
 		return 60
