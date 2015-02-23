@@ -104,16 +104,15 @@ The hero parameter is the hero entity that just spawned in
 function bayustd:OnHeroInGame(hero)
 	print("[BAYUSTD] Hero spawned in game for first time -- " .. hero:GetUnitName())
 	local pID = hero:GetPlayerID()
+	
+	local player = PlayerResource:GetPlayer(pID)
 
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(70, false)
 	
-	hero.lumber = 150
-	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
-    FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
-	
-	local gold = CreateUnitByName("npc_dota_gold", Vector(-6015,5015,0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	local lumber = CreateUnitByName("npc_dota_lumber", Vector(-6000,5000,0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	player.lumber = 150
+	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+    FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
 
 	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
 	--with the "example_ability" ability
@@ -251,16 +250,7 @@ function bayustd:OnItemPickedUp(keys)
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local hero = player:GetAssignedHero()
 	local itemname = keys.itemname
-	
-	if itemname == "npc_dota_gold" then
-		PlayerResource:SetGold(keys.PlayerID, 10, true)
-		itemEntity:RemoveSelf()
-	elseif itemname == "npc_dota_lumber" then
-		hero.lumber = hero.lumber + 10
-		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
-		itemEntity:RemoveSelf()
-	end
+
 end
 
 -- The overall game state has changed
@@ -327,7 +317,6 @@ function bayustd:OnEntityKilled( keys )
 	else
 		pID = killerEntity:GetPlayerOwnerID()
 	end
-	print(pID)
 	local player = PlayerResource:GetPlayer(pID)
 	local hero = PlayerResource:GetSelectedHeroEntity(pID)
 	if hero == nil then
@@ -352,9 +341,10 @@ function bayustd:OnEntityKilled( keys )
 		local bountyLumber = unit_table.BountyLumber
 		local playerKills = PlayerResource:GetKills(pID)
 
-		hero.lumber = hero.lumber + bountyLumber
-		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = hero.lumber })
+		player.lumber = player.lumber + bountyLumber
+		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+		PopupLumber(killedUnit, bountyLumber)
 		
 		if name == "npc_dota_lumber" or name == "npc_dota_gold" then
 			return

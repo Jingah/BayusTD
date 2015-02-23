@@ -22,11 +22,3 @@ function OnStartTouch(trigger)
 		GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)
 	end
 end
-
----------------------------------------------------------------------------
--- Teleport creeps to the battlefield
----------------------------------------------------------------------------
---function OnPass(trigger)
---	print("Unit passed path_corner ...")
---	trigger.activator:SetBaseMoveSpeed(500)
---end

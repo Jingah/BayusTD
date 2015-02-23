@@ -1,7 +1,11 @@
+-- The following three functions are necessary for building helper.
+
 function build( keys )
 	local player = keys.caster:GetPlayerOwner()
 	local pID = player:GetPlayerID()
 	local returnTable = BuildingHelper:AddBuilding(keys)
+	--print("Lumber: " .. player.lumber)
+	--print("Stone: " .. player.stone)
 
 	-- handle errors if any
 	if TableLength(returnTable) > 0 then
@@ -17,7 +21,9 @@ function build( keys )
 				if not firstResource then
 					firstResource = k
 				end
-				print("P:" .. pID .. " needs " .. v .. " more " .. k .. ".")
+				if Debug_BH then
+					print("P" .. pID .. " needs " .. v .. " more " .. k .. ".")
+				end
 			end
 			local capitalLetter = firstResource:sub(1,1):upper()
 			firstResource = capitalLetter .. firstResource:sub(2)
@@ -25,6 +31,11 @@ function build( keys )
 			return
 		end
 	end
+
+	keys:OnBuildingPosChosen(function(vPos)
+		--print("OnBuildingPosChosen")
+		-- in WC3 some build sound was played here.
+	end)
 
 	keys:OnConstructionStarted(function(unit)
 		--print("Started construction of " .. unit:GetUnitName())
@@ -36,7 +47,7 @@ function build( keys )
 		unit:SetMana(0)
 	end)
 	keys:OnConstructionCompleted(function(unit)
-		--print("Completed construction of " .. unit:GetUnitName())
+		print("Completed construction of " .. unit:GetUnitName())
 		-- Play construction complete sound.
 		-- Give building its abilities
 		-- add the mana
@@ -46,11 +57,15 @@ function build( keys )
 	-- These callbacks will only fire when the state between below half health/above half health changes.
 	-- i.e. it won't unnecessarily fire multiple times.
 	keys:OnBelowHalfHealth(function(unit)
-		print(unit:GetUnitName() .. " is below half health.")
+		if Debug_BH then
+			print(unit:GetUnitName() .. " is below half health.")
+		end
 	end)
 
 	keys:OnAboveHalfHealth(function(unit)
-		print(unit:GetUnitName() .. " is above half health.")
+		if Debug_BH then
+			print(unit:GetUnitName() .. " is above half health.")
+		end
 	end)
 
 	--[[keys:OnCanceled(function()
@@ -62,9 +77,11 @@ function build( keys )
 	keys:EnableFireEffect("modifier_jakiro_liquid_fire_burn")
 end
 
+function building_canceled( keys )
+	BuildingHelper:CancelBuilding(keys)
+end
+
 function create_building_entity( keys )
-	
 	BuildingHelper:InitializeBuildingEntity(keys)
-	
 end
 
