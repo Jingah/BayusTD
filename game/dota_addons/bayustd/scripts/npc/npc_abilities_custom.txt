@@ -4,11 +4,11 @@
 	"Version"		"1"
 
 	// Building that creates units, with a queue
-	"build_barracks"
+	"build_npc_tower_racks"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"human_barracks"
 		"AbilityCastPoint"				"0"
 		"MaxLevel" 						"1"		
 
@@ -23,7 +23,7 @@
 		"PlayerCanControl"				"1"
 		//"CancelsBuildingGhost"		"0" //bool
 
-		"UnitName"						"npc_barracks"
+		"UnitName"						"npc_tower_racks"
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
 		// End of BuildingHelper info
@@ -51,18 +51,18 @@
 		}
 	}
 	// Building that creates units, with a queue
-	"build_barracks2"
+	"build_npc_tower_idol"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"undying_tombstone_zombie_deathstrike"
 		"AbilityCastPoint"				"0"
 		"MaxLevel" 						"1"		
 
 		// BuildingHelper info
 		"Building"						"1" //bool
-		"BuildingSize"					"5" // this is (3x64) by (3x64) units, so 9 squares.
-		"BuildTime"						"10.0"
+		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildTime"						"5.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool
 		"Scale"							"1" //bool
@@ -70,10 +70,103 @@
 		"PlayerCanControl"				"1"
 		//"CancelsBuildingGhost"		"0" //bool
 
-		"UnitName"						"npc_barracks2"
+		"UnitName"						"npc_tower_idol"
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
-		"AbilityLumberCost"				"0"
+		// End of BuildingHelper info
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"			"10"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities.lua"
+				"Function"		"build"
+			}
+		}
+	}
+	// Building that creates units, with a queue
+	"build_npc_tower_dragon"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"			"dragon_lvl2"
+		"AbilityCastPoint"				"0"
+		"MaxLevel" 						"1"		
+
+		// BuildingHelper info
+		"Building"						"1" //bool
+		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildTime"						"5.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1" //bool
+		"Scale"							"1" //bool
+		"MaxScale"						"0.8"
+		"PlayerCanControl"				"1"
+		//"CancelsBuildingGhost"		"0" //bool
+
+		"UnitName"						"npc_tower_dragon"
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		// End of BuildingHelper info
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"			"10"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities.lua"
+				"Function"		"build"
+			}
+		}
+	}
+	// Building that creates units, with a queue
+	"build_npc_tower_wooden"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"			"human_guard_tower"
+		"AbilityCastPoint"				"0"
+		"MaxLevel" 						"1"		
+
+		// BuildingHelper info
+		"Building"						"1" //bool
+		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildTime"						"5.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1" //bool
+		"Scale"							"1" //bool
+		"MaxScale"						"0.8"
+		"PlayerCanControl"				"1"
+		//"CancelsBuildingGhost"		"0" //bool
+
+		"UnitName"						"npc_tower_wooden"
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
 		// End of BuildingHelper info
 		
 		// Item Info
@@ -148,406 +241,575 @@
 		}
 	}
 	
-	// Start of Barracks Abilities
-	"building_queue"
+	//Start of neutral skills
+	"neutral_bash"
 	{
-		"BaseClass"             		"ability_datadriven"
-		"MaxLevel" 						"1"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-
-		// Only do this once
-		"OnUpgrade"
+		"AbilitySpecial"
 		{
-			"RunScript"
+			"01"
 			{
-				"ScriptFile"    "buildings/rally_point.lua"
-				"Function"      "SetRallyPoint"
+				"var_type"				"FIELD_INTEGER"
+				"chance"				"15"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_dmg"				"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_duration"			"2"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_bash"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%chance"
+						"OnSuccess"
+						{
+							"Stun"
+							{
+								"Target"	"TARGET"
+								"Duration"	"%stun_duration"
+							}
+							"Damage"
+							{
+								"Target"	"TARGET"
+								"Damage"	"%bonus_dmg"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	"neutral_heal"
+	{
+		"MaxLevel"						"1"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityCooldown" 				"10"
+		"AbilityManacost" 				"75"
+
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_omniknight/omniknight_purification_d_glow.vpcf"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+		}
+			
+		"OnSpellStart"
+		{
+			"Heal"
+			{
+				"HealAmount" 			"100"
+				"Target" 				"TARGET"
+			}
+			"FireEffect"
+			{
+				"Target" 				"TARGET"
+				"EffectName"			"particles/units/heroes/hero_omniknight/omniknight_purification_d_glow.vpcf"
+				"EffectAttachType"		"follow_origin"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Hero_Omniknight.Purification"
+				"Target"				"TARGET"
+			}
+		}
+	}
+	"neutral_evasion"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"    		"axe_battle_hunger"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"dodge_chance"	"15"
 			}
 		}
 
 		"Modifiers"
 		{
-			"modifier_building_queue"
+			"modifier_evasion"
 			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-		
-				"ThinkInterval"  "0.03"
-				"OnIntervalThink"
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Properties"
 				{
-					"RunScript"
+					"MODIFIER_PROPERTY_EVASION_CONSTANT"  "%dodge_chance"
+				}
+			}
+		}
+	}
+	"neutral_frost_attack"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		"OnAttackLanded"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName" 			"modifier_frost"
+				"Target"	   			"TARGET"
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attackspeed_slow"		"-25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed_slow"		"-50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"		"5"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_frost"
+			{
+				"Passive"				"1"
+				"IsDebuff" 				"1"
+				"IsPurgable"			"0"
+				"Duration"				"%duration"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%attackspeed_slow"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movespeed_slow"
+				}
+				"EffectName" "particles\neutral_fx\ghost_frost_attack_explosion_d.vpcf_c"
+				"EffectAttachType" "follow_origin"
+			}
+		}
+	}
+	"neutral_burn_attack"
+  	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		
+		"OnAttackLanded"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName" 			"modifier_burn"
+				"Target"	   			"TARGET"
+			}
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"burn_dur"				"5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"burn_dps"				"10"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_burn"
+			{
+				"Passive"				"1"
+				"IsDebuff" 				"1"
+				"IsPurgable"			"0"
+				"Duration"				"%burn_dur"
+				
+				"ThinkInterval"	"1"
+	            "OnIntervalThink"
+	         	{
+					"Damage"
 					{
-						"ScriptFile"	"buildings/queue.lua"
-						"Function"		"AdvanceQueue"
+						"Type" 			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%burn_dps" 
+						"Target"		"TARGET"
+					}
+				}
+				"EffectName" "particles/units/heroes/hero_huskar/huskar_burning_spear_flame.vpcf"
+				"EffectAttachType" "follow_origin"
+			}
+		}
+  	}
+	"neutral_crit"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"			"200"
+			}
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chance"				"20"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+			
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
 					}
 				}
 			}
-
-			"modifier_grounded_passive"
+			"modifier_apply_crit"
 			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-		
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+			}
+		}
+	}
+	"neutral_magic_immune"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE	| DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass" 					"ability_datadriven"
+
+		"Modifiers"
+		{
+			"immunity_modifier"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
 				"States"
 				{
-					"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_MAGIC_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
-		}
+		}       
 	}
-
-	"train_footman"
+	"neutral_armor_reduction"
 	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"train_footman"
-		"MaxLevel" 						"1"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-
-		"AbilityGoldCost"				"135" // From "GoldCost"
-		"AbilityUpgradeGoldCost"		"0"
-		"AbilityChannelTime"			"2" // From "BuildTime"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"buildings/queue.lua"
-				"Function"		"EnqueueUnit"
-			}
-		}
-
-		"OnChannelSucceeded"
-		{
-			// Consume the first item in the queue
-			"RunScript"
-			{
-				"ScriptFile"   	"buildings/queue.lua"
-				"Function"      "NextQueue"
-			}
-
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_footman"
-				"Target"
-				{
-					"Center"		    "CASTER"
-					"ScriptSelectPoints"
-					{
-						"ScriptFile"    "buildings/rally_point.lua"
-						"Function"      "GetInitialRallyPoint"
-						"Target"		"CASTER"
-						"Count"			"1"
-					}
-				}
-				"UnitCount"		"1"
-				"UnitLimit"		"0"
-				"GrantsGold"	"1"
-				"GrantsXP"		"1"
-				"SpawnRadius"	"10"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-
-					"RunScript"
-					{
-						"ScriptFile"    "buildings/rally_point.lua"
-						"Function"      "MoveToRallyPoint"
-					}
-				}
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_building_autocast"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
-			
-				"ThinkInterval"  	"0.03"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"    "buildings/autocast.lua"
-						"Function"      "BuildingAutocast"
-					}
-				}
-			}
-		}
-	}
-
-	"train_knight"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"train_knight"
-		"MaxLevel" 						"1"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-
-		"AbilityGoldCost"				"245" // From "GoldCost"
-		"AbilityChannelTime"			"4" // From "BuildTime"
-		"AbilityUpgradeGoldCost"		"0"
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"buildings/queue.lua"
-				"Function"		"EnqueueUnit"
-			}
-		}
-
-		"OnChannelSucceeded"
-		{
-			// Consume the first item in the queue
-			"RunScript"
-			{
-				"ScriptFile"   	"buildings/queue.lua"
-				"Function"      "NextQueue"
-			}
-
-			"SpawnUnit"
-			{
-				"UnitName"		"npc_knight"
-				"Target"
-				{
-					"Center"		    "CASTER"
-					"ScriptSelectPoints"
-					{
-						"ScriptFile"    "buildings/rally_point.lua"
-						"Function"      "GetInitialRallyPoint"
-						"Target"		"CASTER"
-						"Count"			"1"
-					}
-				}
-				"UnitCount"		"1"
-				"UnitLimit"		"0"
-				"GrantsGold"	"1"
-				"GrantsXP"		"1"
-				"SpawnRadius"	"10"
-				"OnSpawn"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_phased"
-						"Target"		"TARGET"
-						"Duration"		"0.03"
-					}
-
-					"RunScript"
-					{
-						"ScriptFile"    "buildings/rally_point.lua"
-						"Function"      "MoveToRallyPoint"
-					}
-				}
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_building_autocast"
-			{
-				"Passive"			"1"
-				"IsHidden"			"1"
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
-			
-				"ThinkInterval"  	"0.03"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"    "buildings/autocast.lua"
-						"Function"      "BuildingAutocast"
-					}
-				}
-			}
-		}
-	}
-	// End Barracks Abilities
-
-
-	// Start of Peasant Gather Abilities
-	"gather_lumber"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"gather_lumber"
-		"MaxLevel" 						"1"
-
+		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityCooldown" 				"20"
+		"AbilityManacost" 				"50"
 
-		"AbilityCastPoint"				"0.1"
-
-		"OnAbilityPhaseStart"
+		"precache"
 		{
-			"RunScript"
+			"particle"					"particles/items2_fx/medallion_of_courage_d.vpcf"
+			"soundfile"					"sounds/items/medallion_of_courage.vsnd"
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
 			{
-				"ScriptFile"	"units/peasant.lua"
-				"Function"		"Gather"
+				"var_type" 				"FIELD_INTEGER"
+				"duration" 				"5"
+			}
+			"02"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"armor_bonus" 			"-5"
+			}
+			"03"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"dmg_reduction" 		"-10"
 			}
 		}
-
-		"Modifiers"
-		{
-			"modifier_gathering_lumber"
-			{
-				"IsHidden"				"1"
-					
-				"ThinkInterval"  "0.03"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"CheckTreePosition"
-					}
-				}
-
-				"OnOrder"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_gathering_lumber"
-						"Target" 		"CASTER"
-					}
-
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"ToggleOffGather"
-					}
-				}
-				
-			}
-
-			"modifier_chopping_wood"
-			{
-				"IsHidden"				"1"
 			
-				"OverrideAnimation" 	"ACT_DOTA_ATTACK"
-
-				"OnOrder"
-				{			
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_chopping_wood"
-						"Target" 		"CASTER"
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"ToggleOffGather"
-					}
-				}
-
-				"ThinkInterval"  "1.0"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"Gather1Lumber"
-					}
-
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_chopping_wood_animation"
-						"Target" 		"CASTER"
-						"Duration"		"0.9"
-					}
-				}		
-			}
-
-			"modifier_chopping_wood_animation"
-			{
-				"OverrideAnimation"     "ACT_DOTA_ATTACK"
-				"IsHidden"				"1"
-				"OnOrder"
-				{
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_chopping_wood_animation"
-						"Target" 		"CASTER"
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"ToggleOffGather"
-					}
-				}
-			}
-		}
-	}
-
-	"return_resources"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"return_resources"
-		"MaxLevel" 						"1"
-
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_HIDDEN" //Fake Toggle
-
-		// When the ability is active, it means there are resources left to return (else it will be hidden)
 		"OnSpellStart"
 		{
 			"ApplyModifier"
 			{
-				"ModifierName"	"modifier_returning_resources"
-				"Target" 		"CASTER"
+				"ModifierName" 			"modifier_armor_reduction"
+				"Target" 				"TARGET"
 			}
-
-			"RunScript"
+			"FireSound"
 			{
-				"ScriptFile"	"units/peasant.lua"
-				"Function"		"ReturnResources"
+				"EffectName"			"DOTA_Item.Buckler.Activat"
+				"Target"				"TARGET"
 			}
 		}
+		
+		"Modifiers"
+		{
+			"modifier_armor_reduction"
+			{
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/items_fx/buckler.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+						"EffectLifeDurationScale" "1"
+					}
+				}
+				"IsHidden"	"0"
+				"IsPurgeable" "0"
+				"IsDebuff"	"1"
+				"Duration"	"%duration"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"			"%armor_bonus"
+					"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%dmg_reduction"
+				}
+			}
+		}
+	}
+	"neutral_cannot_miss"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE	| DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"BaseClass" 					"ability_datadriven"
 
 		"Modifiers"
 		{
-			"modifier_returning_resources"
+			"immunity_modifier"
 			{
-				"IsHidden"				"0"
-				"TextureName"			"furion_sprout"
-
-				"ThinkInterval"  "0.03"
-				"OnIntervalThink"
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"States"
 				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"CheckBuildingPosition"
-					}
+					"MODIFIER_STATE_CANNOT_MISS"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
+			}
+		}       
+	}
+	"boss2_bloodlust"
+	{
+		"BaseClass"						"ogre_magi_bloodlust"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityCooldown" 				"8"
+		"AbilityManacost" 				"250"
 
-				"OnOrder"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"ToggleOffGather"
-					}
+		"precache"
+		{
+			"particle_folder"				"particles/units/heroes/hero_ogre_magi"
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"40"
+			}
 
-					"RunScript"
-					{
-						"ScriptFile"	"units/peasant.lua"
-						"Function"		"ToggleOffReturn"
-					}
-				}		
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"modelscale"			"30"
+			}	
+
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movement_speed"	"25"
+			}
+
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"40"
 			}
 		}
-	}	
-	// End of Peasant Gather Abilities
+	}
+	"boss1_summon_adds"
+	{
+		"BaseClass" 				"ability_datadriven"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"					"1"
+		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityCooldown" 			"45"
+		"AbilityManacost" 			"75"
+		"AbilityCastPoint"			"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"60"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"			"npc_boss1_add"
+				"UnitCount"			"4"
+				"SpawnRadius"		"100"
+				"Duration"			"%duration"
+				"Target"			"CASTER"
+				"OnSpawn"
+				{
+					"FireSound"
+					{
+						"EffectName" "Hero_Spectre.Haunt"
+						"Target"	 "CASTER"
+					}
+				}
+			}
+		}
+	}
+	"boss2_summon_adds"
+	{
+		"BaseClass" 				"ability_datadriven"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"					"1"
+		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityCooldown" 			"30"
+		"AbilityManacost" 			"75"
+		"AbilityCastPoint"			"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"60"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"			"npc_boss2_add"
+				"UnitCount"			"6"
+				"SpawnRadius"		"100"
+				"Duration"			"%duration"
+				"Target"			"CASTER"
+				"OnSpawn"
+				{
+					"FireSound"
+					{
+						"EffectName" "Hero_Spectre.Haunt"
+						"Target"	 "CASTER"
+					}
+				}
+			}
+		}
+	}
+	"neutral_bonus_atk_speed"
+	{
+		"BaseClass" 				"ability_datadriven"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"					"1"
+		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityCooldown" 			"30"
+		"AbilityManacost" 			"100"
+		"AbilityCastPoint"			"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attackspeed_bonus"		"300"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"10"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"Action"
+			{
+				"ApplyModifier"
+				{
+					"Target"		"CASTER"
+					"ModifierName"	"modifier_atkspeed"
+				}
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_atkspeed"
+			{
+				"Duration"	"%duration"
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%attackspeed_bonus"
+				}
+			}
+		}
+	}
+
+	
+	//End of neutral skills
 
 
   	// START OF BUILDING HELPER ABILITIES

@@ -54,7 +54,7 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 40                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.0"
+BAYUSTD_VERSION = "1.1"
 
 OutOfWorldVector = Vector(9000,9000,-100)
 
@@ -124,9 +124,9 @@ function bayustd:OnHeroInGame(hero)
 	local player = PlayerResource:GetPlayer(pID)
 
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
-	hero:SetGold(70, false)
+	hero:SetGold(300, false)
 	
-	player.lumber = 150
+	player.lumber = 50
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
 	
@@ -319,7 +319,7 @@ function bayustd:OnPlayerPickHero(keys)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
-	player.isDead = 0
+	player.isDead = nil
 	
 end
 
@@ -363,6 +363,13 @@ function bayustd:OnEntityKilled( keys )
 	
 	if killedUnit:IsRealHero() then
 		self.nDireKills = self.nDireKills + 1
+		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
+		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
+			local messageinfo = { message = "YOU SUCKED", duration = 5}
+			FireGameEvent("show_center_message",messageinfo)
+			Warchasers:PrintEndgameMessage()
+			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)	
+		end
 		firstGhost = true
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
 		PlayerResource:SetGold(pID, lostGold, true)
@@ -372,6 +379,17 @@ function bayustd:OnEntityKilled( keys )
 		player.ghost:SetOwner(hero)
 		player.ghost:SetControllableByPlayer(pID, true)
 		bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
+	end
+	
+	if killedUnit:GetUnitName() == "npc_dota_wave20" then
+		ScreenShake(killerEntity:GetAbsOrigin(), 50.0, 50.0, 5.0, 9000, 0, true)
+		PlayerResource:SetCameraTarget(killerEntity:GetPlayerOwnerID(), killedUnit)
+		EmitGlobalSound("diretide_roshdeath_Stinger")
+		GameRules:SendCustomMessage("<br>BEHOLD HEROES!!<br>You defeated your town.",0,0)
+		local messageinfo = { message = "YOU DEFEATED", duration = 5}
+		FireGameEvent("show_center_message",messageinfo)
+		bayustd:PrintEndgameMessage()
+		Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_BADGUYS) end)
 	end
 	
 	if killedUnit:GetTeam() == DOTA_TEAM_NEUTRALS then
@@ -388,6 +406,25 @@ function bayustd:OnEntityKilled( keys )
 		if name == "npc_dota_lumber" or name == "npc_dota_gold" then
 			return
 		end
+		if name == "npc_dota_wave10" then
+			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				if PlayerResource:HasSelectedHero(nPlayerID) then					
+					PlayerResource:SetGold(nPlayerID, 2500, true)
+				end
+			end
+		elseif name == "npc_dota_wave20" then
+			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				if PlayerResource:HasSelectedHero(nPlayerID) then					
+					PlayerResource:SetGold(nPlayerID, 4500, true)
+				end
+			end
+		elseif name == "npc_dota_wave30" then
+			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				if PlayerResource:HasSelectedHero(nPlayerID) then					
+					PlayerResource:SetGold(nPlayerID, 6500, true)
+				end
+			end
+		end
 			
 		PlayerResource:IncrementKills(pID, playerKills + 1)
 		self.nRadiantKills = self.nRadiantKills + 1
@@ -398,12 +435,20 @@ function bayustd:OnEntityKilled( keys )
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:HasSelectedHero(nPlayerID) then
 					local nPlayer = PlayerResource:GetPlayer(nPlayerID)
-					if nPlayer.isDead == 2 then
-						nPlayer.ghost:RemoveSelf()
-						nPlayer:GetAssignedHero():RespawnHero(false, false, false)
-						nPlayer.isDead = 0
+					if nPlayer.isDead ~= nil then
+						if nPlayer.isDead == 2 then
+							nPlayer.ghost:RemoveSelf()
+							nPlayer:GetAssignedHero():RespawnHero(false, false, false)
+							nPlayer.isDead = nil
+							GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT - 1
+						end
+						nPlayer.isDead = nPlayer.isDead + 1
 					end
-					nPlayer.isDead = nPlayer.isDead + 1
+					
+					nPlayer.lumber = nPlayer.lumber + 100
+					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = nPlayer.lumber })
+					
+					PlayerResource:SetGold(nPlayerID, 100, true)
 				end
 			end
 			print("All creeps are dead")
@@ -452,6 +497,7 @@ function bayustd:Initbayustd()
 	
 	GameRules.PLAYERS_PICKED = 0
 	GameRules.TOTAL_PLAYERS = 0
+	GameRules.DEAD_PLAYER_COUNT = 0
 
 	InitLogFile( "log/bayustd.txt","")
 
@@ -652,4 +698,14 @@ end
 
 function bayustd:setRemovedCreeps(val)
 	countRemovedCreeps = val
+end
+
+function bayustd:PrintEndgameMessage()
+
+	Timers:CreateTimer(5, function() GameRules:SendCustomMessage("<font color='#DBA901'><br>Game will end in 10 seconds</font>",0,0) end)
+	Timers:CreateTimer(10, function() GameRules:SendCustomMessage("<font color='#DBA901'>Please leave your feedback at our workshop page</font>",0,0) end)
+
+	Timers:CreateTimer(12, function() GameRules:SendCustomMessage("<font color='#DBA901'>3</font>",0,0) end)
+	Timers:CreateTimer(13, function() GameRules:SendCustomMessage("<font color='#DBA901'>2</font>",0,0) end)
+	Timers:CreateTimer(14, function() GameRules:SendCustomMessage("<font color='#DBA901'>1...</font>",0,0) end)
 end
