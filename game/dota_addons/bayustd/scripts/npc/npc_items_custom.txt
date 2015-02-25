@@ -225,6 +225,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
+				"Attributes" 			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_EVASION_CONSTANT"  			"%dodge_chance"
@@ -235,6 +236,7 @@
 				"IsHidden"	"1"
 				"Passive"	"1"
 				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 			
 				"OnAttackLanded"
 				{
@@ -257,7 +259,7 @@
 				"IsHidden"	"1"
 				"Passive"	"1"
 				"StatusEffectPriority"	"1"
-				
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
@@ -321,6 +323,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
@@ -332,6 +335,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 
 				"OnAttackLanded"
 				{
@@ -384,6 +388,7 @@
 			{
 				"Passive"               "1"
 				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" 	    "%bonus_armor"
@@ -393,6 +398,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
@@ -404,7 +410,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
-				
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"	"%movementspeed"
@@ -462,7 +468,7 @@
 				"IsHidden"	"1"
 				"Passive"	"1"
 				"StatusEffectPriority"	"1"
-
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"OnAttackLanded"
 				{
 					"Random"
@@ -495,6 +501,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_ultimate_scepter"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"Aura_Flags" 					"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 		"ItemCost"                      "7500"
 		"ItemShopTags"					"support"
 		"ItemQuality"					"support"
@@ -514,7 +522,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"mana_regen"				"2.2"
+				"mana_regen"			"3"
 			}
 			"03"
 			{
@@ -526,6 +534,11 @@
 				"var_type"				"FIELD_INTEGER"
 				"atkspeed_slow_dur"		"10"
 			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aura_radius"			"600"
+			}
 		}
 		"Modifiers"
 		{
@@ -533,6 +546,7 @@
 			{
 				"Passive"               "1"
 				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
@@ -540,13 +554,23 @@
 					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
 				}
 			}
+			"modifier_atkspeed"
+			{
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName" 			"modifier_atkspeed_slow"
+						"Target"	   			"TARGET"
+					}
+				}
+			}
 			"modifier_atkspeed_slow"
 			{
-				"Passive"				"1"
 				"IsDebuff" 				"1"
 				"IsPurgable"			"1"
 				"Duration"				"%atkspeed_slow_dur"
-				
+				"Teams"					"DOTA_UNIT_TARGET_TEAM_NEUTRALS"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%atkspeed_slow"
@@ -555,27 +579,26 @@
 			"modifier_aura_mana_regen"
 			{
 				"IsHidden"				"1"
-				"Passive"				"1"
+				"Passive" 				"1"
+				"IsBuff"				"1"
+				//"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				
 				"Aura"					"modifier_mana_regen"
-				"Aura_Radius"			"400"
+				"Aura_Radius"			"%aura_radius"
 				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
-				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
-				"Aura_ApplyToCaster"	"1"
+				"Aura_Types" 			"DOTA_UNIT_TARGET_ALL"
 				
 			}
 			
 			"modifier_mana_regen"
 			{
 				"IsBuff" 				"1"
-				"Passive" 				"1"
-				"IsHidden" 				"0"
+				"IsHidden"				"0"
 				"EffectName"			"particles/items_fx/healing_clarity.vpcf"
 				"EffectAttachType"		"follow_origin"
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE"		"%mana_regen"
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"		"%mana_regen"
 				}
 			}
 		}
@@ -599,6 +622,10 @@
 		"ItemPurchasable"				"1"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+		}
 		"AbilitySpecial"
 		{
 			"01"
@@ -623,6 +650,7 @@
 			{
 				"Passive"               "1"
 				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
@@ -630,8 +658,9 @@
 			}
 			"true_strike_modifier"
 			{
-				"IsHidden"	"1"
-				"Passive"	"1"
+				"IsHidden"				"1"
+				"Passive"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"States"
 				{
 					"MODIFIER_STATE_CANNOT_MISS"	"MODIFIER_STATE_VALUE_ENABLED"
@@ -642,7 +671,7 @@
 				"IsHidden"	"1"
 				"Passive"	"1"
 				"StatusEffectPriority"	"1"
-			
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"OnAttackLanded"
 				{
 					"Random"
@@ -662,12 +691,308 @@
 			"modifier_apply_crit"
 			{
 				"IsHidden"	"1"
-				"Passive"	"1"
-				"StatusEffectPriority"	"1"
-				
+				"IsBuff"	"1"
+				"EffectName"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+				"OnAttackLanded"
+				{
+					"FireSound"
+					{
+						"EffectName"		"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"			"TARGET"
+					}
+					"RemoveModifier"
+					{
+						"ModifierName"		"modifier_apply_crit"
+						"Target"			"ATTACKER"
+					}
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// The Agile Blade
+	//===============================================
+    "item_agile_blade"
+	{
+		"ID"                            "1061"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ethereal_blade"
+		"ItemCost"                      "7500"
+		"ItemShopTags"					"weapons"
+		"ItemQuality"					"weapons"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"76"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"agi_inc"				"26"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atk_speed"				"100"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_atk_speed"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" 	    "%atk_speed"
+				}
+			}
+			"modifier_agility"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" 	    "%agi_inc"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Mana potion
+	//===============================================
+    "item_mana_potion"
+	{
+		"ID"                            "1062"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_greater_clarity"
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_FLOAT"
+				"mana_amount" 			"300"
+			}
+		}
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"mana_potion"
+			}
+			"FireSound"
+			{
+				"Target" 		"UNIT"
+				"EffectName" 	"DOTA_Item.Clarity.Activate"
+			}
+		}
+	}
+	//===============================================
+	// Heal potion
+	//===============================================
+    "item_heal_potion"
+	{
+		"ID"                            "1063"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_salve"
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_FLOAT"
+				"heal_amount" 			"500"
+			}
+		}
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"Heal"
+			{
+				"HealAmount"			"%heal_amount"
+				"Target"				"CASTER"
+			}
+			"FireSound"
+			{
+				"Target" 		"UNIT"
+				"EffectName" 	"DOTA_Item.HealingSalve.Activate"
+			}
+		}
+	}
+	
+	//===============================================
+	// Enchanted Spear
+	//===============================================
+    "item_ench_spear"
+	{
+		"ID"                            "1064"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_javelin"
+		"ItemCost"                      "10000"
+		"ItemShopTags"					"weapons"
+		"ItemQuality"					"weapons"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"162"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"			"300"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"IsBuff"	"1"
+				"EffectName"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+				"OnAttackLanded"
+				{
+					"FireSound"
+					{
+						"EffectName"		"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"			"TARGET"
+					}
+					"RemoveModifier"
+					{
+						"ModifierName"		"modifier_apply_crit"
+						"Target"			"ATTACKER"
+					}
 				}
 			}
 		}

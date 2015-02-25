@@ -794,4 +794,24 @@
 		"ItemPurchasable"				"1"
 		"ItemDroppable"					"1"
 	}
+	"item_agile_blade"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_mana_potion"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_heal_potion"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_ench_spear"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
 }
