@@ -626,7 +626,7 @@
 
 		"Modifiers"
 		{
-			"immunity_modifier"
+			"cannot_miss_modifier"
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"

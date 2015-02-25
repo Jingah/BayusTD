@@ -283,6 +283,51 @@ function bayustd:OnItemPickedUp(keys)
 	end--]]
 end
 
+-- An item was purchased by a player
+function bayustd:OnItemPurchased( keys )
+	print ( '[DOTACRAFT] OnItemPurchased' )
+	--DeepPrintTable(keys)
+
+	-- The playerID of the hero who is buying something
+	local plyID = keys.PlayerID
+	if not plyID then return end
+
+	local player = PlayerResource:GetPlayer(plyID)
+	
+	-- The name of the item purchased
+	local itemName = keys.itemname 
+
+	-- The cost of the item purchased
+	local itemcost = keys.itemcost
+	
+	local hero = player:GetAssignedHero()
+	local baseInt = hero:GetBaseIntellect()
+	local baseStr = hero:GetBaseStrength()
+	local baseAgi = hero:GetBaseAgility()
+	
+	if itemName == "item_tome_of_intelligence" then
+		hero:ModifyIntellect(1)
+	elseif itemName == "item_tome_of_strength" then
+		hero:ModifyStrength(1)
+	elseif itemName == "item_tome_of_agility" then
+		hero:ModifyAgility(1)
+	elseif itemName == "item_tome_of_experience" then
+		hero:HeroLevelUp(true)
+	else
+		return
+	end
+	
+    for i=0,5 do
+		local item = hero:GetItemInSlot(i)
+		if item ~= nil and (item:GetName() == "item_tome_of_intelligence" or item:GetName() == "item_tome_of_strength" or item:GetName() == "item_tome_of_agility" or item:GetName() == "item_tome_of_experience") then
+			hero:RemoveItem(item)
+			break
+		end
+    end
+
+end
+
+
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
 	
@@ -510,6 +555,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
+	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
 	--ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
 	
 	--[[ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(bayustd, 'OnPlayerLevelUp'), self)

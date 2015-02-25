@@ -88,4 +88,589 @@
 				 }
 			}   
 	}
+	
+	//Start shop items
+	//===============================================
+	// Tome of Intelligence
+	//===============================================
+    "item_tome_of_intelligence"
+	{
+		"ID"                            "1051"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_necronomicon"
+		"ItemCost"                      "150"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+	}
+	//===============================================
+	// Tome of Strength
+	//===============================================
+	 "item_tome_of_strength"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1052"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_necronomicon_2"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+	}
+	//===============================================
+	// Tome of Agility
+	//===============================================
+    "item_tome_of_agility"
+	{
+		"ID"                            "1053"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_necronomicon_3"
+		"ItemCost"                      "250"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+	}
+	//===============================================
+	// Tome of Experience
+	//===============================================
+    "item_tome_of_experience"
+	{
+		"ID"                            "1054"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_hand_of_midas"
+		"ItemCost"                      "475"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+	}
+	//===============================================
+	// Sword of slaying
+	//===============================================
+    "item_sword_of_slaying"
+	{
+		"ID"                            "1055"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_sange"
+		"ItemCost"                      "7500"
+		"ItemShopTags"					"weapons"
+		"ItemQuality"					"weapons"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_damage" 			"76"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dodge_chance"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"15"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"			"50"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_damage"
+				}
+			}
+			"modifier_evasion"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_EVASION_CONSTANT"  			"%dodge_chance"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+			
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Axe of Maiming
+	//===============================================
+    "item_axe_of_maiming"
+	{
+		"ID"                            "1056"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_reaver"
+		"ItemCost"                      "7500"
+		"ItemShopTags"					"weapons"
+		"ItemQuality"					"weapons"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_damage" 			"94"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stats_bonus"			"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"lifesteal"				"12.5"
+			}
+		}
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_life_stealer/life_stealer_feast.vpcf"
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_damage"
+				}
+			}
+			"modifier_stats"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_lifesteal"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+
+				"OnAttackLanded"
+				{
+					"Lifesteal"
+					{	
+						"Target" 				"ATTACKER"
+						"LifestealPercent"		"%lifesteal"
+					}
+					"FireEffect"
+					{
+						"EffectName"			"particles/units/heroes/hero_life_stealer/life_stealer_feast.vpcf"
+						"EffectAttachType"		"attach_hitloc"
+						"Target"				"TARGET"
+					}
+				}
+			}
+		}
+	}
+	//===============================================
+	// Coat of the Ironclad
+	//===============================================
+    "item_coat_of_the_ironclad"
+	{
+		"ID"                            "1057"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_hood_of_defiance"
+		"ItemCost"                      "7500"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_armor" 			"81"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stats_bonus"			"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"60"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" 	    "%bonus_armor"
+				}
+			}
+			"modifier_stats"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Maul of Thunderous Power
+	//===============================================
+    "item_maul_of_thun_p"
+	{
+		"ID"                            "1058"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_basher"
+		"ItemCost"                      "7500"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"94"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bash_chance"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bash_dmg"				"25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_duration"			"2"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_bash"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%bash_chance"
+						"OnSuccess"
+						{
+							"Stun"
+							{
+								"Target"	"TARGET"
+								"Duration"	"%stun_duration"
+							}
+							"Damage"
+							{
+								"Target"	"TARGET"
+								"Damage"	"%bash_dmg"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//===============================================
+	// Staff of regeneration
+	//===============================================
+    "item_staff_of_reg"
+	{
+		"ID"                            "1059"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ultimate_scepter"
+		"ItemCost"                      "7500"
+		"ItemShopTags"					"support"
+		"ItemQuality"					"support"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"stats_bonus" 			"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"mana_regen"				"2.2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atkspeed_slow"			"-25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atkspeed_slow_dur"		"10"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_stats_bonus"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_atkspeed_slow"
+			{
+				"Passive"				"1"
+				"IsDebuff" 				"1"
+				"IsPurgable"			"1"
+				"Duration"				"%atkspeed_slow_dur"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%atkspeed_slow"
+				}
+			}
+			"modifier_aura_mana_regen"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				
+				"Aura"					"modifier_mana_regen"
+				"Aura_Radius"			"400"
+				"Aura_Teams"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+				"Aura_Flags" 			"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+				"Aura_ApplyToCaster"	"1"
+				
+			}
+			
+			"modifier_mana_regen"
+			{
+				"IsBuff" 				"1"
+				"Passive" 				"1"
+				"IsHidden" 				"0"
+				"EffectName"			"particles/items_fx/healing_clarity.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_TOTAL_PERCENTAGE"		"%mana_regen"
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// Arrow of Pure Evil
+	//===============================================
+    "item_arrow_of_pure_evil"
+	{
+		"ID"                            "1060"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_claymore"
+		"ItemCost"                      "7500"
+		"ItemShopTags"					"weapons"
+		"ItemQuality"					"weapons"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"				"200"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"true_strike_modifier"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"States"
+				{
+					"MODIFIER_STATE_CANNOT_MISS"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+			
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+			}
+		}
+	}
+	//End shop items
 }
