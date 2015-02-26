@@ -2,7 +2,46 @@
 "DOTAAbilities"
 {
 	"Version"		"1"
+	
+	"fountain_aura_heal"
+	{
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityTextureName"    		"axe_battle_hunger"
 
+		"Modifiers"
+		{
+			"modifier_enable_hero"
+			{
+				"Passive"               "1"
+				"IsHidden"              "1"
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			"affix_heal_aura"
+			{
+				"Passive"				"1"
+				"IsHidden"				"1"
+				"Aura"        			"modifier_heal_aura"
+        		"Aura_Radius" 			"900"
+        		"Aura_Teams"  			"DOTA_UNIT_TARGET_TEAM_BOTH"
+        		"Aura_Types" 			"DOTA_UNIT_TARGET_ALL"
+			}
+			"modifier_heal_aura"
+			{
+				"IsBuff"				"1"
+				"EffectName"			"particles/items_fx/healing_tango.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"			"40"
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"				"20"
+				}
+			}
+		}
+	}
 	// Building that creates units, with a queue
 	"build_npc_tower_racks"
 	{
@@ -61,7 +100,7 @@
 
 		// BuildingHelper info
 		"Building"						"1" //bool
-		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
 		"BuildTime"						"5.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool
@@ -108,7 +147,7 @@
 
 		// BuildingHelper info
 		"Building"						"1" //bool
-		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
 		"BuildTime"						"5.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool
@@ -155,7 +194,7 @@
 
 		// BuildingHelper info
 		"Building"						"1" //bool
-		"BuildingSize"					"2" // this is (3x64) by (3x64) units, so 9 squares.
+		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
 		"BuildTime"						"5.0"
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool

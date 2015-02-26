@@ -95,6 +95,7 @@ It can be used to initialize state that isn't initializeable in Initbayustd() bu
 ]]
 function bayustd:OnFirstPlayerLoaded()
 	print("[BAYUSTD] First Player has loaded")
+	CreateUnitByName("npc_dota_fountain", Vector(-6784,3904,128), false, nil, nil, DOTA_TEAM_GOODGUYS)
 end
 
 --[[
@@ -335,8 +336,8 @@ function bayustd:OnGameRulesStateChange(keys)
 
 	local newState = GameRules:State_Get()
 	print("[BAYUSTD] GameRules State Changed to " .. newState)
-	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
-		
+	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION  then
+		bayustd:OnAllPlayersLoaded()
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		bayustd:SpawnCreeps()
 	end
@@ -556,6 +557,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
+
 	--ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
 	
 	--[[ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(bayustd, 'OnPlayerLevelUp'), self)
@@ -564,7 +566,6 @@ function bayustd:Initbayustd()
 	
 	
 	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
-	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
 	
 	ListenToGameEvent('last_hit', Dynamic_Wrap(bayustd, 'OnLastHit'), self)
 	ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(bayustd, 'OnNonPlayerUsedAbility'), self)
