@@ -257,6 +257,340 @@
 			}
 		}
 	}
+	"nyx_assassin_vendetta"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"nyx_assassin_vendetta"
+		"LevelsBetweenUpgrades"    		"3"
+		"RequiredLevel"         		"1"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/nyx_assassin/nyx_assassin_vendetta.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_nyx_assassin.vsndevts"
+		}
+		
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"25"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"75 97 126 164 214 278 362 470 611"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"25.0 30.0 35.0 40.0 45.0 50.0 55.0 60.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"fade_time"				"0.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed"		"25 50 75 100 125 150 175 200 225"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"250 375 562 844 1265 1899 2848 4271 6407"
+			}
+		}
+	}
+	"naga_siren_mirror_image"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"naga_siren_mirror_image"
+		"LevelsBetweenUpgrades"    		"0"
+		"RequiredLevel"         		"1"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/naga_siren/naga_siren_mirror_image.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_naga_siren.vsndevts"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.50"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"3"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"150"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"illusion_duration"			"60.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage"			"0"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage_tooltip"	"0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"incoming_damage"			"200 200 200 190 180 150 120 100 80"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_incoming_damage_total_pct"			"200 200 200 190 180 150 120 100 80"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"images_count"				"1 2 3 4 4 5 5 6 6"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"invuln_duration"			"0.5"
+			}			
+		}
+	}
+	"antimage_mana_break"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"antimage_mana_break"
+		"LevelsBetweenUpgrades"    		"0"
+		"RequiredLevel"         		"1"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/anti_mage/antimage_mana_break.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_anti_mage.vsndevts"
+		}
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_per_burn"		"1"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_hit"			"24 48 72 96 120 144 168 192 216"
+			}
+		}
+	}
+	"viper_poison_attack"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"3"
+		"AbilityTextureName"			"viper_poison_attack"
+		"LevelsBetweenUpgrades"    		"6"
+		"RequiredLevel"         		"6"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/viper/viper_poison_attack.vpcf"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"0 0 0 0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40 70 110"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"1.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage"						"300 600 900"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_movement_speed"			"-50"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_speed"			"-20"
+			}
+		}
+	}
+	"drow_ranger_marksmanship"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"drow_ranger_marksmanship"
+		"LevelsBetweenUpgrades"    		"3"
+		"RequiredLevel"         		"0"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/drow_ranger/drow_ranger_marksmanship.vpcf"
+		}
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"marksmanship_agility_bonus"	"10 20 30 40 50 60 70 80 90"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"0"
+			}
+		}
+	}
+	"skeleton_king_reincarnation"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"3"
+		"AbilityTextureName"			"skeleton_king_reincarnation"
+		"LevelsBetweenUpgrades"    		"6"
+		"RequiredLevel"         		"6"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/skeleton_king/skeleton_king_reincarnation.vpcf"
+		}
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"240 160 60"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.2"	// Slow isn't the main function of this ability.
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"reincarnate_time"		"3.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_radius"			"900"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed"				"-50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attackslow_tooltip"	"-50"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"3.0"
+			}
+		}
+	}
+	"omniknight_purification"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"omniknight_purification"
+		"LevelsBetweenUpgrades"    		"1"
+		"RequiredLevel"         		"0"
+		
+		"precache"
+		{
+			"particle"	"particles/units/heroes/omniknight/omniknight_purification.vpcf"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"650"
+		"AbilityCastPoint"				"0.2"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50 60 70 80 90 100 110 120 130"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"105 210 315 420 525 630 735 84 945"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"0"
+			}
+		}
+	}
 	//Courier
 	"item_courier"
 	{
