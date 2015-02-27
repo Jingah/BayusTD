@@ -2649,4 +2649,845 @@
 			}
 		}
 	}
+	
+	//=================================================================================
+	// Lava spawn lvl1
+	//=================================================================================
+	"npc_lava_spawn_lvl1"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/invoker/forge_spirit.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+		"ModelScale" 				"0.8"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"lava_passive"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"33"
+		"AttackDamageMax"			"34"
+		"AttackRate"				"2"
+		"AttackRange"				"300"
+		"AttackAcquisitionRange"	"500"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"425"
+		"StatusHealthRegen"			"0.25"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Lava spawn lvl2
+	//=================================================================================
+	"npc_lava_spawn_lvl2"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"2"
+		"ModelScale" 				"1.0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"lava_passive"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"66"
+		"AttackDamageMax"			"67"
+		"AttackRate"				"2"
+		"AttackRange"				"300"
+		"AttackAcquisitionRange"	"500"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"625"
+		"StatusHealthRegen"			"0.25"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Lava spawn lvl3
+	//=================================================================================
+	"npc_lava_spawn_lvl3"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/invoker/forge_spirit/grievous_ingots/grievous_ingots.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"3"
+		"ModelScale" 				"1.2"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					""
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"99"
+		"AttackDamageMax"			"100"
+		"AttackRate"				"2"
+		"AttackRange"				"300"
+		"AttackAcquisitionRange"	"500"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"825"
+		"StatusHealthRegen"			"0.25"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl1"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"1"
+		"ModelScale" 				"0.7"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"10"
+		"AttackDamageMax"			"14"
+		"AttackRate"				"1.5"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"75"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl2"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"2"
+		"ModelScale" 				"0.8"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"22"
+		"AttackDamageMax"			"27"
+		"AttackRate"				"1.5"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl3"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"3"
+		"ModelScale" 				"0.9"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"30"
+		"AttackDamageMax"			"35"
+		"AttackRate"				"1.5"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl4"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"4"
+		"ModelScale" 				"1.0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"40"
+		"AttackDamageMax"			"45"
+		"AttackRate"				"1.5"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl5"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"5"
+		"ModelScale" 				"1.1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"50"
+		"AttackDamageMax"			"55"
+		"AttackRate"				"1.5"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl6"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"6"
+		"ModelScale" 				"1.2"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"60"
+		"AttackDamageMax"			"65"
+		"AttackRate"				"1.4"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"75"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl7"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"6"
+		"ModelScale" 				"1.3"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"70"
+		"AttackDamageMax"			"75"
+		"AttackRate"				"1.3"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl8"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"8"
+		"ModelScale" 				"1.4"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"80"
+		"AttackDamageMax"			"85"
+		"AttackRate"				"1.2"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
+	//=================================================================================
+	// Summon Serpent ward
+	//=================================================================================
+	"npc_serpent_ward_lvl9"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/items/shadowshaman/serpent_ward/tangki_serpent_ward/tangki_serpent_ward.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"Level"						"9"
+		"ModelScale" 				"1.5"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"100"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AttackDamageMin"			"90"
+		"AttackDamageMax"			"95"
+		"AttackRate"				"1.1"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				""
+		"BountyGoldMax"				""
+		"BountyLumber"				""
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"135"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1200"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+	}
 }

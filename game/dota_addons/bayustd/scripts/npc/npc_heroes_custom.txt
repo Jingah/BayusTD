@@ -6,58 +6,52 @@
 	
 	//=================================================================================================================
 	// HERO: Axe   -    TANK
-	// Abilities: TODO
 	//=================================================================================================================
 	"npc_dota_hero_axe_bayus"
 	{
-		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_axe"
-		"SoundSet"				"0"	
-		"Ability1"				"" 
-		"Ability2"				"" 
-		"Ability3"				"" 
-		"Ability4"				""
-		"Ability5"				""
-		"Ability6"				""
-		"Ability7"				""
-		"Ability8"				""
-		"Ability9"				""
-		"Ability10"				""
-		"Ability11"				""
-		"Ability12"				""
-		"Ability13"				""
-		"Ability14"				""
-		"Ability15"				""
-		"Ability16"				""
+		"AbilityLayout" 			"6"
+		"override_hero"				"npc_dota_hero_axe"
+		
+		"AbilityLayout" 			"6"
+		"Ability1"					"summon_serpent_ward" 
+		"Ability2"					"blood_ragers_training" 
+		"Ability3"					"blood_crit" 
+		"Ability4"					"ogre_magi_bloodlust"
+		"Ability5"					""
+		"Ability6"					"juggernaut_blade_fury"
 
-		"ArmorPhysical"				"0"									// Physical protection.
-		"MagicalResistance"				"0"									// Magical protection (percentage).
+		"ArmorPhysical"				"2"									// Physical protection.
+		"MagicalResistance"			"25"									// Magical protection (percentage).
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"15"										// Damage range min.
-		"AttackDamageMax"			"20"										// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"10"
+		"AttackRate"				"1.5"
+		"AttackRange"				"100"
+		"AttackAcquisitionRange"	"500"
 
-		//"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"20"										// Base strength
-		"AttributeStrengthGain"		"2"										// Strength bonus per level.
-		"AttributeBaseIntelligence"	"10"										// Base intelligence
-		"AttributeIntelligenceGain"	"1"										// Intelligence bonus per level.
-		"AttributeBaseAgility"		"14"										// Base agility
-		"AttributeAgilityGain"		"1"										// Agility bonus per level.
+		"AttributeBaseStrength"		"30"										// Base strength
+		"AttributeStrengthGain"		"5"										// Strength bonus per level.
+		"AttributeBaseIntelligence"	"15"										// Base intelligence
+		"AttributeIntelligenceGain"	"3"										// Intelligence bonus per level.
+		"AttributeBaseAgility"		"5"										// Base agility
+		"AttributeAgilityGain"		"4"										// Agility bonus per level.
 
 		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"360"									// Speed.
-		"MovementTurnRate"			"1.0"									// Turning rate.
+		"MovementSpeed"				"350"									// Speed.
+		"MovementTurnRate"			"0.6"									// Turning rate.
 
-		"StatusHealth"				"540"									// Base health.
-		"StatusHealthRegen"			"2.0"									// Health regeneration rate.
-		"StatusMana"				"387"										// Base mana.
-		"StatusManaRegen"			"1.0"									// Mana regeneration rate.
+		"StatusHealth"				"100"									// Base health.
+		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
+		"StatusMana"				"100"										// Base mana.
+		"StatusManaRegen"			"1.5"									// Mana regeneration rate.
 
-		"VisionNighttimeRange"		"900"									// Range of vision at night time.
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+		"VisionDaytimeRange"		"1800"									// Range of vision at day time.
 	}
 	
 	//=================================================================================================================
@@ -230,58 +224,53 @@
 	
 	//=================================================================================================================
 	// HERO: Lina   -    Ranged Magician
-	// Abilities: TODO
+	// 
 	//=================================================================================================================
 	"npc_dota_hero_lina_bayus"
 	{
-		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_lina"
-		"SoundSet"				"0"	
-		"Ability1"				"" 
-		"Ability2"				"" 
-		"Ability3"				"" 
-		"Ability4"				""
-		"Ability5"				""
-		"Ability6"				""
-		"Ability7"				""
-		"Ability8"				""
-		"Ability9"				""
-		"Ability10"				""
-		"Ability11"				""
-		"Ability12"				""
-		"Ability13"				""
-		"Ability14"				""
-		"Ability15"				""
-		"Ability16"				""
+		"AbilityLayout" 			"6"
+		"override_hero"				"npc_dota_hero_lina"
+		"SoundSet"					"0"	
+		"Ability1"					"jakiro_macropyre" 
+		"Ability2"					"summon_laval_spawn" 
+		"Ability3"					"clinkz_searing_arrows" 
+		"Ability4"					"Warmth"
+		"Ability5"					"lina_dragon_slave"
+		"Ability6"					""
 
 		"ArmorPhysical"				"1"									// Physical protection.
 		"MagicalResistance"			"25"									// Magical protection (percentage).
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"10"										// Damage range min.
-		"AttackDamageMax"			"15"										// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"10"
+		"AttackRate"				"2"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
 
 		//"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLIGENCE"
 		"AttributeBaseStrength"		"15"										// Base strength
-		"AttributeStrengthGain"		"1"										// Strength bonus per level.
+		"AttributeStrengthGain"		"4"										// Strength bonus per level.
 		"AttributeBaseIntelligence"	"25"										// Base intelligence
-		"AttributeIntelligenceGain"	"3"										// Intelligence bonus per level.
+		"AttributeIntelligenceGain"	"4"										// Intelligence bonus per level.
 		"AttributeBaseAgility"		"10"										// Base agility
-		"AttributeAgilityGain"		"1"										// Agility bonus per level.
+		"AttributeAgilityGain"		"4"										// Agility bonus per level.
 
 		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"320"									// Speed.
+		"MovementSpeed"				"300"									// Speed.
 		"MovementTurnRate"			"0.7"									// Turning rate.
 
-		"StatusHealth"				"325"									// Base health.
+		"StatusHealth"				"100"									// Base health.
 		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
-		"StatusMana"				"480"										// Base mana.
-		"StatusManaRegen"			"1.8"									// Mana regeneration rate.
+		"StatusMana"				"100"										// Base mana.
+		"StatusManaRegen"			"1.5"									// Mana regeneration rate.
 
-		"VisionNighttimeRange"		"900"									// Range of vision at night time.
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+		"VisionDaytimeRange"		"1800"									// Range of vision at day time.
 	}
 	
 	//=================================================================================================================

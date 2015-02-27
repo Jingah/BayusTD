@@ -23,7 +23,7 @@ TREE_REGROW_TIME = 1.0                 -- How long should it take individual tre
 GOLD_PER_TICK = 0                   	-- How much gold should players get per tick?
 GOLD_TICK_TIME = 5                      -- How long should we wait in seconds between gold ticks?
 
-RECOMMENDED_BUILDS_DISABLED = false     -- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
+RECOMMENDED_BUILDS_DISABLED = true     -- Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
 CAMERA_DISTANCE_OVERRIDE = 1600       -- How far out should we allow the camera to go?  1134 is the default in Dota
 
 MINIMAP_ICON_SIZE = 1                   -- What icon size should we use for our heroes?
@@ -190,6 +190,8 @@ function bayustd:CaptureBayusTD()
 		mode:SetFogOfWarDisabled(DISABLE_FOG_OF_WAR_ENTIRELY)
 		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
 		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
+		
+		mode:SetHUDVisible(9, false)  -- Disable courier hud. Is replaced by lumber count
 
 		self:OnFirstPlayerLoaded()
 	end
