@@ -213,50 +213,6 @@
 			}
 		}
 	}
-	"juggernaut_blade_fury"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"MaxLevel"						"3"
-		"AbilityTextureName"			"juggernaut_blade_fury"
-		"LevelsBetweenUpgrades"    		"10"
-		"RequiredLevel"         		"6"
-		
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_juggernaut/juggernaut_blade_fury.vpcf"
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_ogre_magi.vsndevts"
-		}
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"180 240 240"
-		"AbilityDuration"				"5.0 10.0 15.0"
-
-		// Damage.
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityDamage"					"110 250 300"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"200 400 800"		
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"blade_fury_damage_tick"	"1.0"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"blade_fury_radius"			"200 300 450"
-			}
-		}
-	}
 	"nyx_assassin_vendetta"
 	{
 		// General
@@ -268,7 +224,6 @@
 		
 		"precache"
 		{
-			"particle"	"particles/units/heroes/nyx_assassin/nyx_assassin_vendetta.vpcf"
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_nyx_assassin.vsndevts"
 		}
 		
@@ -307,74 +262,6 @@
 			}
 		}
 	}
-	"naga_siren_mirror_image"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"MaxLevel"						"9"
-		"AbilityTextureName"			"naga_siren_mirror_image"
-		"LevelsBetweenUpgrades"    		"0"
-		"RequiredLevel"         		"1"
-		
-		"precache"
-		{
-			"particle"	"particles/units/heroes/naga_siren/naga_siren_mirror_image.vpcf"
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_naga_siren.vsndevts"
-		}
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.50"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"3"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"150"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"illusion_duration"			"60.0"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"outgoing_damage"			"0"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"outgoing_damage_tooltip"	"0"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"incoming_damage"			"200 200 200 190 180 150 120 100 80"
-			}
-			"05"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"tooltip_incoming_damage_total_pct"			"200 200 200 190 180 150 120 100 80"
-			}
-			"06"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"images_count"				"1 2 3 4 4 5 5 6 6"
-			}
-			"07"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"invuln_duration"			"0.5"
-			}			
-		}
-	}
 	"antimage_mana_break"
 	{
 		// General
@@ -386,8 +273,7 @@
 		
 		"precache"
 		{
-			"particle"	"particles/units/heroes/anti_mage/antimage_mana_break.vpcf"
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_anti_mage.vsndevts"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_antimage.vsndevts"
 		}
 		
 		// Special	
@@ -414,11 +300,6 @@
 		"AbilityTextureName"			"viper_poison_attack"
 		"LevelsBetweenUpgrades"    		"6"
 		"RequiredLevel"         		"6"
-		
-		"precache"
-		{
-			"particle"	"particles/units/heroes/viper/viper_poison_attack.vpcf"
-		}
 		
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -474,7 +355,7 @@
 		
 		"precache"
 		{
-			"particle"	"particles/units/heroes/drow_ranger/drow_ranger_marksmanship.vpcf"
+			"particle"	"particles/units/heroes/hero_drow/drow_marksmanship.vpcf"
 		}
 		
 		// Special
@@ -504,7 +385,7 @@
 		
 		"precache"
 		{
-			"particle"	"particles/units/heroes/skeleton_king/skeleton_king_reincarnation.vpcf"
+			"particle"	"particles/units/heroes/hero_skeletonking/skeletonking_reincarnation.vpcf"
 		}
 		
 		// Time		
@@ -559,7 +440,7 @@
 		
 		"precache"
 		{
-			"particle"	"particles/units/heroes/omniknight/omniknight_purification.vpcf"
+			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
 		}
 		
 		// Casting

@@ -1340,6 +1340,7 @@
 				"IsBuff"				"1"
 				"EffectName"			"particles/units/heroes/hero_troll_warlord/troll_warlord_battletrance_buff_b.vpcf"
 				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"				"%ms_bonus"
@@ -1380,12 +1381,12 @@
 			"FireSound"
 			{	
 				"EffectName"		"Hero_Medusa.ManaShield.On"
-				"Target"			"CASTER"
+				"Target"			"TARGET"
 			}
 			"ApplyModifier"
 			{
 				"ModifierName" 		"modifier_shielding"
-				"Target"			"CASTER"
+				"Target"			"TARGET"
 			}
 		}		
 
@@ -1396,6 +1397,7 @@
 				"Duration"			"%duration"
 				"EffectName"		"particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
 				"EffectAttachType"	"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 
 				"States"
 				{
@@ -1428,6 +1430,7 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_EVASION_CONSTANT"  "%dodge_chance"
@@ -1517,6 +1520,8 @@
 				
 				"EffectName" 		"particles/units/heroes/hero_lone_druid/lone_druid_true_form.vpcf"
 				"EffectAttachType"  "follow_origin"
+				
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 	
 				"AllowsIllusionDuplicate"	"1"
 	
@@ -1564,6 +1569,261 @@
 				}
 			}
 		}
+	}
+	"mirror_image"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"naga_siren_mirror_image"
+		"LevelsBetweenUpgrades"    		"0"
+		"RequiredLevel"         		"1"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.50"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"3"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"150"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"illusion_duration"			"60.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage"			"0"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"outgoing_damage_tooltip"	"0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"incoming_damage"			"200 200 200 190 180 150 120 100 80"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_incoming_damage_total_pct"			"200 200 200 190 180 150 120 100 80"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"images_count"				"1 2 3 4 4 5 5 6 6"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"invuln_duration"			"0.5"
+			}			
+		}
+		
+		// Data driven
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_naga_siren.vsndevts"
+			"particle"					"particles/units/heroes/hero_siren/naga_siren_mirror_image.vpcf"
+		}
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_mirror_image"
+				"Target"		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_mirror_image"
+			{	
+				"Duration"			"%invuln_duration"
+				"IsHidden"			"1"
+	
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE" 			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/units/heroes/hero_siren/naga_siren_mirror_image.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_NagaSiren.MirrorImage"
+						"Target"		"CASTER"
+					}
+			    }
+	
+			    "OnDestroy"
+			    {
+			    	"RunScript"
+				    {
+				        "ScriptFile"    "heroes/hero_antimage/mirror_image.lua"
+				        "Function"      "MirrorImage"
+				    }
+			    }
+			}
+		}
+	}
+	
+	"bladestorm"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"juggernaut_blade_fury"
+		"MaxLevel"						"3"
+		"LevelsBetweenUpgrades"    		"10"
+		"RequiredLevel"         		"6"
+	
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+	
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"180 240 240"
+	
+		"AbilityManaCost"				"200 400 800"
+		"AbilityDamage"					"300 650 1050"
+	
+		"precache"
+		{
+			"soundfile" "soundevents/game_sounds_heroes/game_sounds_juggernaut.vsndevts"
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"bladestorm_damage_tick"	"0.2"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bladestorm_radius"			"200 300 450"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"5.0 10.0 15.0"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_bladestorm"
+				"Target" 		"CASTER"
+				"Duration"		"%duration"
+			}	
+		}
+	
+		"Modifiers"
+		{
+			"modifier_bladestorm"
+			{	
+				"OverrideAnimation"     	"ACT_DOTA_OVERRIDE_ABILITY_1"
+				"States"
+				{
+					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_SILENCED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_juggernaut/juggernaut_blade_fury.vpcf"
+						"EffectAttachType"  "follow_origin"
+						"Target"            "CASTER"
+						"ControlPoints"
+						{
+							"05"	"%bladestorm_radius 0 0"
+						}					
+					}
+					"FireSound"
+					{
+						"EffectName"	"Hero_Juggernaut.BladeFuryStart"
+						"Target" 		"CASTER"
+					}			
+				}
+				
+				"ThinkInterval"  "%bladestorm_damage_tick"
+				"OnIntervalThink"
+				{
+					"ActOnTargets"
+					{
+						"Target"
+						{
+							"Center"  	"CASTER"
+							"Radius" 	"%bladestorm_radius"
+							"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						}
+					
+						"Action"    
+						{
+							"Damage"
+							{
+								"Target"		"TARGET"
+								"Type"			"DAMAGE_TYPE_MAGICAL"
+								"Damage"		"%AbilityDamage * %bladestorm_damage_tick"
+							}
+	
+							"FireSound"
+							{
+								"EffectName"	"Hero_Juggernaut.BladeFury.Impact"
+								"Target" 		"TARGET"
+							}
+						}
+					}		
+				}
+	
+				"OnDestroy"
+				{
+					"FireSound"
+					{
+						"EffectName"	"Hero_Juggernaut.BladeFuryStop"
+						"Target" 		"CASTER"
+					}
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/bladestorm.lua"
+						"Function"		"BladeFuryStop"
+					}
+				}
+			}
+		}	
 	}
 	//End of hero skills
 

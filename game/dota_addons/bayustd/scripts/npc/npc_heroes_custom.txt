@@ -17,7 +17,7 @@
 		"Ability3"					"blood_crit" 
 		"Ability4"					"ogre_magi_bloodlust"
 		"Ability5"					""
-		"Ability6"					"juggernaut_blade_fury"
+		"Ability6"					"bladestorm"
 
 		"ArmorPhysical"				"2"									// Physical protection.
 		"MagicalResistance"			"25"									// Magical protection (percentage).
@@ -64,9 +64,9 @@
 		"Ability1"				"endurance_aura" 
 		"Ability2"				"nyx_assassin_vendetta" 
 		"Ability3"				"blood_crit" 
-		"Ability4"				"naga_siren_mirror_image"
+		"Ability4"				"mirror_image"
 		"Ability5"				""
-		"Ability6"				"juggernaut_blade_fury"
+		"Ability6"				"bladestorm"
 
 		"ArmorPhysical"				"2"									// Physical protection.
 		"MagicalResistance"			"25"									// Magical protection (percentage).

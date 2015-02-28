@@ -95,7 +95,7 @@ It can be used to initialize state that isn't initializeable in Initbayustd() bu
 ]]
 function bayustd:OnFirstPlayerLoaded()
 	print("[BAYUSTD] First Player has loaded")
-	CreateUnitByName("npc_dota_fountain", Vector(-6784,3904,128), false, nil, nil, DOTA_TEAM_GOODGUYS)
+	CreateUnitByName("npc_dota_fountain", Vector(-6784,4352,128), false, nil, nil, DOTA_TEAM_GOODGUYS)
 end
 
 --[[
@@ -123,14 +123,6 @@ function bayustd:OnHeroInGame(hero)
 	local pID = hero:GetPlayerID()
 	
 	local player = PlayerResource:GetPlayer(pID)
-
-	-- This line for example will set the starting gold of every hero to 500 unreliable gold
-	hero:SetGold(300, false)
-	
-	player.lumber = 50
-	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-    FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
-	
 	
 	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
 	--with the "example_ability" ability
@@ -162,8 +154,48 @@ function bayustd:OnNPCSpawned(keys)
 
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
-		bayustd:OnHeroInGame(npc)
 	end
+end
+
+-- The overall game state has changed
+function bayustd:OnPlayerPickHero(keys)
+	print("Player picked hero")
+	--DeepPrintTable(keys)
+	
+	local hero = EntIndexToHScript(keys.heroindex)
+	local player = EntIndexToHScript(keys.player)
+	local playerID = hero:GetPlayerID()
+	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
+	
+	-- This line for example will set the starting gold of every hero to 500 unreliable gold
+	hero:SetGold(300, false)
+	
+	player.lumber = 50
+	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+	
+	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
+
+	if GameRules.PLAYERS_PICKED == GameRules.TOTAL_PLAYERS then 
+		self:OnEveryonePicked()
+	end
+	
+	--TODO: Ensure correct Builder
+	local number = RandomInt(1, 4)
+	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	builder:SetOwner(hero)
+	builder:SetControllableByPlayer(playerID, true)
+	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
+	player.isDead = nil
+	
+end
+
+function bayustd:OnEveryonePicked()
+    GameRules:SendCustomMessage("Welcome to <font color='#2EFE2E'>Bayus TD!</font>", 0, 0)
+    GameRules:SendCustomMessage("Created by <font color='#2EFE2E'>Jingah</font>", 0, 0)
+	GameRules:SendCustomMessage("Idea from original Warcraft 3 Map",0,0)
+    GameRules:SendCustomMessage("Version: " .. BAYUSTD_VERSION, 0, 0)
+    GameRules:SendCustomMessage("Please report bugs and leave feedback in our workshop page", 0, 0)
 end
 
 mode = nil
@@ -345,39 +377,7 @@ function bayustd:OnGameRulesStateChange(keys)
 	end
 end
 
--- The overall game state has changed
-function bayustd:OnPlayerPickHero(keys)
-	print("Player picked hero")
-	--DeepPrintTable(keys)
-	
-	local hero = EntIndexToHScript(keys.heroindex)
-	local player = EntIndexToHScript(keys.player)
-	local playerID = hero:GetPlayerID()
-	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
-	
-	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
-	if GameRules.PLAYERS_PICKED == GameRules.TOTAL_PLAYERS then 
-		self:OnEveryonePicked()
-	end
-	
-	--TODO: Ensure correct Builder
-	local number = RandomInt(1, 4)
-	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
-	builder:SetOwner(hero)
-	builder:SetControllableByPlayer(playerID, true)
-	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
-	player.isDead = nil
-	
-end
-
-function bayustd:OnEveryonePicked()
-    GameRules:SendCustomMessage("Welcome to <font color='#2EFE2E'>Bayus TD!</font>", 0, 0) -- ##9A2EFE
-    GameRules:SendCustomMessage("Created by <font color='#2EFE2E'>Jingah</font>", 0, 0)
-	GameRules:SendCustomMessage("Idea from original Warcraft 3 Map",0,0)
-    GameRules:SendCustomMessage("Version: " .. BAYUSTD_VERSION, 0, 0)
-    GameRules:SendCustomMessage("Please report bugs and leave feedback in our workshop page", 0, 0)
-end
 
 creepsCount = 0
 wave = 1
@@ -398,7 +398,7 @@ function bayustd:OnEntityKilled( keys )
 		killerEntity = EntIndexToHScript( keys.entindex_attacker )
 	end
 
-	if killedUnit:IsRealHero() then
+	if killedUnit:IsOwnedByAnyPlayer() then
 		pID = killedUnit:GetPlayerOwnerID()
 	else
 		pID = killerEntity:GetPlayerOwnerID()
@@ -411,13 +411,13 @@ function bayustd:OnEntityKilled( keys )
 	
 	if killedUnit:IsRealHero() then
 		self.nDireKills = self.nDireKills + 1
-		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
+		--[[GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
 		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
 			local messageinfo = { message = "YOU SUCKED", duration = 5}
 			FireGameEvent("show_center_message",messageinfo)
-			Warchasers:PrintEndgameMessage()
+			bayustd:PrintEndgameMessage()
 			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)	
-		end
+		end--]]
 		firstGhost = true
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
 		PlayerResource:SetGold(pID, lostGold, true)
@@ -555,7 +555,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
 	ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(bayustd, 'OnPlayerPickHero'), self)
 	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
-	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
+	--ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
@@ -620,7 +620,7 @@ function bayustd:Initbayustd()
   	-- Building Helper by Myll
   	BuildingHelper:Init(8192) -- nHalfMapLength
 	-- Prevent Builder from building on lanes
-	BuildingHelper:BlockRectangularArea(Vector(-704,-6784,0), Vector(448,1792,192))
+	BuildingHelper:BlockRectangularArea(Vector(-704,-6784,0), Vector(448,3008,192))
 	BuildingHelper:BlockRectangularArea(Vector(-8192,-8192,128), Vector(8192,-6784,192))
 	BuildingHelper:BlockRectangularArea(Vector(-7360,-6784,128), Vector(-6720,-64,192))
 	BuildingHelper:BlockRectangularArea(Vector(-6720,-960,128), Vector(7104,-64,192))

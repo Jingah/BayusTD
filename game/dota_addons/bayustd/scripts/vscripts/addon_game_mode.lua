@@ -66,6 +66,9 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_dota_wave20", context)
 	--Loading Buildinghelper stuff
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_juggernaut", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_nyx_assassin", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_viper", context)
 end
 
 -- Create the game mode when we activate
