@@ -463,7 +463,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"heal"					"105 210 315 420 525 630 735 84 945"
+				"heal"					"105 210 315 420 525 630 735 840 945"
 			}
 			"02"
 			{
@@ -1282,5 +1282,15 @@
 	{
 		"ItemPurchasable"				"1"
 		"ItemDroppable"					"1"
+	}
+	"item_build_blade_totem"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_voodoo_spirit"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
 	}
 }

@@ -534,6 +534,7 @@
 	
 	//=================================================================================
 	// Builder: 4 - Scuttling Scotty Penguin
+	// As Peon
 	//=================================================================================
 	"npc_dota_builder4"
 	{
@@ -543,16 +544,18 @@
 		"Model"						"models/items/courier/scuttling_scotty_penguin/scuttling_scotty_penguin.vmdl"
 		"ModelScale"				"2.5"
 		"Level"						"1"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"build_npc_tower_idol"
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
+		"Ability1"					"build_poison_tower"
+		"Ability2"					"build_ember_slinger"
+		"Ability3"					"build_war_drill"
+		"Ability4"					"build_stormbringer"
+		"Ability5"					"build_blade_totem"
+		"Ability6"					"build_voodoo_lounge"
+		
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -600,44 +603,72 @@
 		"Creature"
 		{
 			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"BladeExplorer"
+				{
+					"Item"					"item_build_blade_explorer"
+				}
+				"BladeBouncer"
+				{
+					"Item"					"item_build_blade_bouncer"
+				}
+				"VoodooSpirit"
+				{
+					"Item"					"item_build_voodoo_spirit"
+				}
+				"VoodooOverseer"
+				{
+					"Item"					"item_build_voodoo_overseer"
+				}
+				"PowerTower"
+				{
+					"Item"					"item_build_power_tower"
+				}
+			}
 		}
 	}
 	
 	//=================================================================================
-	// Building: Idol tower
+	// Building: Blade Explorer
 	// For Builder: 4 - Scuttling Scotty Penguin
 	//=================================================================================
-	"npc_tower_idol"
+	"npc_tower_blade_explorer"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_building"
-		"Model"						"models/items/undying/idol_of_ruination/idol_tower.vmdl"
-		"ModelScale"				"1"
+		"Model"						"models/props_structures/good_barracks_melee002.vmdl"
+		"ModelScale"				"0.5"
 		"Level"						"1"
 		"HealthBarOffset"			"140"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"" // Core of the unit building system
-		"Ability2"					"sell_builing"
+		"Ability1"					"tower_splash_damage" // Core of the unit building system
+		"Ability2"					""
 		"Ability3"					""
-		"Ability4"					""
+		"Ability4"					"sell_builing"
 		
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"
+		"ArmorPhysical"				"5"
 		"MagicalResistance"			"0"
 		
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"20"
-		"AttackDamageMax"			"30"
-		"ProjectileModel"			"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow.vpcf"
-		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		"AttackDamageMin"			"609"
+		"AttackDamageMax"			"610"
+		"AttackRate"				"0.1"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_dragon_knight/dragon_knight_elder_dragon_fire.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1250"		// Speed of projectile.
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -647,9 +678,10 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"GoldCost"					"0"
-		"LumberCost"				"10"
-		"BuildTime"					"7"
-		"SellBounty"				"10"		//Gained Lumber when selling tower
+		"LumberCost"				"4500"
+		"FoodCost"					"0"	//and 5 after theres more than 1 built
+		"BuildTime"					"10"
+		"SellBounty"				"4500"		//Gained Lumber when selling tower
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -671,8 +703,8 @@
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
 		
 		// Team
 		//----------------------------------------------------------------
@@ -682,6 +714,772 @@
 		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 	}
 	
+	//=================================================================================
+	// Building: Blade Bouncer (model AA)
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_blade_bouncer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/heroes/ancient_apparition/ancient_apparition.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"blade_bouncer_moon_glaive" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"980"
+		"AttackDamageMax"			"1980"
+		"AttackRate"				"0.25"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_luna/luna_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1200"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"GoldCost"					"0"
+		"LumberCost"				"5150"
+		"FoodCost"					"0"	//and 5 after theres more than 1 built
+		"BuildTime"					"10"
+		"SellBounty"				"5150"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		"precache"
+		{
+			"particle_folder"	"particles/units/heroes/hero_luna"
+		}
+	}
+	
+	//=================================================================================
+	// Building: Poison Tower
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_poison_tower"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/props_structures/wooden_sentry_tower001.vmdl"
+		"SoundSet"					"Tower.Water"
+		"ModelScale"				"0.7"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"poison_tower_poison_sting" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"18"
+		"AttackDamageMax"			"26"
+		"AttackRate"				"0.9"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_venomancer/venomancer_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1800"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"75"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	
+	//=================================================================================
+	// Building: Voodoo Spirit
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_voodoo_spirit"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/heroes/brewmaster/brewmaster_windspirit.vmdl"
+		"ModelScale"				"1"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"voodoo_spirit_magic_attack" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"20"
+		"AttackRate"				"0.05"
+		"AttackRange"				"900"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"3000"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"5450"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	
+	//=================================================================================
+	// Building: StormBringer
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_stormbringer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/creeps/item_creeps/i_creep_necro_archer/necro_archer.vmdl"
+		"ModelScale"				"1"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"stormbringer_magic_attack" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"1"
+		"AttackRate"				"0.15"
+		"AttackRange"				"900"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1600"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"825"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	
+	//=================================================================================
+	// Building: War Drill
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_war_drill"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/furion/treant/primeval_treant/primeval_treant.vmdl"
+		"ModelScale"				"1.5"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"tower_splash_damage" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"280"
+		"AttackRate"				"0.35"
+		"AttackRange"				"900"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"750"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"410"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	
+	//=================================================================================
+	// Building: Blade Totem
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_blade_totem"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/pugna/ward/nether_heart/nether_heart.vmdl"
+		"ModelScale"				"1.5"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"blade_totem_magic_attack" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"5"
+		"AttackRate"				"0.5"
+		"AttackRange"				"700"
+		"AttackAcquisitionRange"	"700"
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"900"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	
+	//=================================================================================
+	// Building: Ember Slinger
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_ember_slinger"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/batrider/burning_iron_mount/burning_iron_mount.vmdl"
+		"ModelScale"				"1"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"ember_slinger_magic_attack" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"1"
+		"AttackRate"				"1.0"
+		"AttackRange"				"700"
+		"AttackAcquisitionRange"	"700"
+		"ProjectileModel"			"particles/units/heroes/hero_batrider/batrider_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"900"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"125"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	//=================================================================================
+	// Building: Power Tower
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_power_tower"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/enigma/eidolon/geodesic/geodesic.vmdl"
+		"ModelScale"				"1.5"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"10000"
+		"AttackRate"				"0.1"
+		"AttackRange"				"900"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/econ/items/enigma/enigma_geodesic/enigma_base_attack_eidolon_geodesic.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"900"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"0"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	//=================================================================================
+	// Building: Voodoo Overseer
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_voodoo_overseer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/heroes/dragon_knight/dragon_knight_dragon.vmdl"
+		"ModelScale"				"1"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"voodoo_overseer_hex"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"100"
+		"AttackDamageMax"			"101"
+		"AttackRate"				"3.0"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/econ/items/enigma/enigma_geodesic/enigma_base_attack_eidolon_geodesic.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"3000"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"5700"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
+	//=================================================================================
+	// Building: Voodoo Lounge
+	// For Builder: 4 - Scuttling Scotty Penguin
+	//=================================================================================
+	"npc_tower_voodoo_lounge"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/props_structures/good_statue010.vmdl"
+		"ModelScale"				"1.2"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"HasInventory"				"0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"voodoo_lounge_magic_attack"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1"
+		"AttackDamageMax"			"8"
+		"AttackRate"				"0.25"
+		"AttackRange"				"720"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1500"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"220"
+		"CollisionSize"				"144"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+	}
 	//=================================================================================
 	// Building: Racks Melee
 	// For Builder: 3

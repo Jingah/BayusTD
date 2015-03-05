@@ -426,5 +426,4 @@
 		"VisionNighttimeRange"		"900"									// Range of vision at night time.
 	}
 	
-	
 }

@@ -170,7 +170,7 @@ function bayustd:OnPlayerPickHero(keys)
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(300, false)
 	
-	player.lumber = 50
+	player.lumber = 20000
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 	
@@ -182,7 +182,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(1, 4)
-	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder4", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -381,7 +381,6 @@ end
 
 creepsCount = 0
 wave = 1
-firstGhost = false
 
 -- An entity died
 function bayustd:OnEntityKilled( keys )
@@ -411,14 +410,14 @@ function bayustd:OnEntityKilled( keys )
 	
 	if killedUnit:IsRealHero() then
 		self.nDireKills = self.nDireKills + 1
-		--[[GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
-		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
+		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
+		--[[if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
 			local messageinfo = { message = "YOU SUCKED", duration = 5}
 			FireGameEvent("show_center_message",messageinfo)
 			bayustd:PrintEndgameMessage()
 			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)	
-		end--]]
-		firstGhost = true
+		end]]--
+		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
 		PlayerResource:SetGold(pID, lostGold, true)
 		player.isDead = 0
@@ -639,10 +638,10 @@ end
 
 -- Spawn gold and lumber on the graveyard (every 10 sec)
 function bayustd:OnGraveyardThink()
-	if firstGhost then
-		
+	if GameRules.DEAD_PLAYER_COUNT > 0 then
 		pos_gold = RandomInt(1, 2)
 		pos_lumber = RandomInt(3, 4)
+		
 		local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
 		local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
 		local gold = CreateUnitByName("npc_dota_gold", point_gold, true, nil, nil, DOTA_TEAM_NEUTRALS)

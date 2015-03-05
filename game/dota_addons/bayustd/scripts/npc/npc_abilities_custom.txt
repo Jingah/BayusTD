@@ -34,6 +34,7 @@
 				"IsBuff"				"1"
 				"EffectName"			"particles/items_fx/healing_tango.vpcf"
 				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"			"40"
@@ -90,7 +91,7 @@
 		}
 	}
 	// Building that creates units, with a queue
-	"build_npc_tower_idol"
+	"build_blade_explorer"
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
@@ -105,11 +106,11 @@
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1" //bool
 		"Scale"							"1" //bool
-		"MaxScale"						"0.8"
+		"MaxScale"						"0.6"
 		"PlayerCanControl"				"1"
 		//"CancelsBuildingGhost"		"0" //bool
 
-		"UnitName"						"npc_tower_idol"
+		"UnitName"						"npc_tower_blade_explorer"
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
 		// End of BuildingHelper info
@@ -123,7 +124,7 @@
 			"01"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"			"10"
+				"resource_lumber"	"4500"
 			}
 		}
 		
@@ -133,6 +134,314 @@
 			{
 				"ScriptFile"	"abilities.lua"
 				"Function"		"build"
+			}
+		}
+	}
+	"build_blade_totem"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"pugna_nether_ward"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_blade_totem"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_voodoo_lounge"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_voodoo_lounge"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_voodoo_lounge"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_poison_tower"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"human_guard_tower"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"0.7"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_poison_tower"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"75"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_stormbringer"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"necronomicon_archer_aoe"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_stormbringer"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"825"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_war_drill"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"furion_force_of_nature"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_war_drill"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"410"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_ember_slinger"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"necronomicon_warrior_sight"
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_ember_slinger"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"125"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
 			}
 		}
 	}
@@ -1826,7 +2135,466 @@
 		}	
 	}
 	//End of hero skills
+	
+	//Start tower abilities
+	"tower_splash_damage"
+	{
+		"AbilityBehavior"           	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"sven_great_cleave"
+		"MaxLevel"                      "1"
 
+		"AbilitySpecial"
+	    {
+	        "01"
+	        {
+	        	"var_type"					"FIELD_INTEGER"
+	        	"radius"					"300"
+	        }
+	    }
+
+	    "Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "ProjectileName"    "particles/units/heroes/hero_sven/sven_spell_storm_bolt.vpcf"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	            	"RunScript"
+					{
+						"ScriptFile"		"towers/splashdamage.lua"
+						"Function"			"SplashDamage"
+						"radius"			"%radius"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }
+	}
+	"blade_bouncer_moon_glaive"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"luna_moon_glaive"
+		"AbilityTextureName"			"luna_moon_glaive"
+		"MaxLevel"                      "1"
+
+		// General
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"range"						"500"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bounces"					"3"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_reduction_percent"	"34"
+			}
+		}
+	}
+	"poison_tower_poison_sting"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"venomancer_poison_sting"
+		"AbilityTextureName"			"venomancer_poison_sting"
+		"MaxLevel"                      "1"
+		
+		"precache"
+		{
+			"particle" "particles/units/heroes/hero_venomancer/venomancer_poison_debuff.vpcf"
+		}
+
+		// General
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"5.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"4"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movement_speed"			"-50"
+			}	
+		}
+	}
+	"voodoo_spirit_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"2800"
+			}
+		}
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	"stormbringer_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"102"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"103"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	"blade_totem_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"350"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"400"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	
+	"ember_slinger_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"76"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"80"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	"voodoo_lounge_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"249"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"250"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	"voodoo_overseer_hex"
+	{
+		"MaxLevel"						"1"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"holdout_voodoo"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lion.vsndevts"
+			"particle"			"particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf"
+			"model"				"models/props_gameplay/frog.vmdl"
+		}
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"15.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movespeed"					"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"chance"					"50"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_hex"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+			
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%chance"
+						"OnSuccess"
+						{
+							"FireSound"
+							{
+								"EffectName"	"Hero_Lion.Voodoo"
+								"Target"		"TARGET"
+							}
+
+							"FireSound"
+							{
+								"EffectName"	"Hero_Lion.Hex.Target"
+								"Target"		"TARGET"
+							}
+
+							"FireEffect"
+							{
+								"EffectName"	"particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf"
+								"EffectAttachType"	"follow_origin"
+								"Target"		"TARGET"
+							}
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_hex"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"%duration"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"Function"		"voodoo_start"
+						"model"			"models/props_gameplay/frog.vmdl"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"		"scripts\vscripts\towers/voodoo.lua"
+						"Function"			"HideWearables"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"Function"		"voodoo_end"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"Function"		"ShowWearables"
+					}
+				}
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"		"%movespeed"
+				}
+
+				"States"
+				{
+					"MODIFIER_STATE_DISARMED"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_MUTED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_HEXED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_EVADE_DISABLED"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_BLOCK_DISABLED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	//End tower abilities
 
   	// START OF BUILDING HELPER ABILITIES
 	"move_to_point_70"
