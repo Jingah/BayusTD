@@ -1283,12 +1283,52 @@
 		"ItemPurchasable"				"1"
 		"ItemDroppable"					"1"
 	}
-	"item_build_blade_totem"
+	"item_build_voodoo_spirit_disabled"
 	{
 		"ItemPurchasable"				"0"
 		"ItemDroppable"					"0"
 	}
 	"item_build_voodoo_spirit"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_power_tower_disabled"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_power_tower"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_voodoo_overseer_disabled"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_voodoo_overseer"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_blade_explorer_disabled"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_blade_explorer"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_blade_bouncer_disabled"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_build_blade_bouncer"
 	{
 		"ItemPurchasable"				"0"
 		"ItemDroppable"					"0"

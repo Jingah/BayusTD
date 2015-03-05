@@ -170,9 +170,12 @@ function bayustd:OnPlayerPickHero(keys)
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(300, false)
 	
-	player.lumber = 20000
+	player.lumber = 999999
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+	
+	player.buildings = {}
+	player.builders = {}
 	
 	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
@@ -186,6 +189,8 @@ function bayustd:OnPlayerPickHero(keys)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
+	table.insert(player.builders, builder)
+	CheckAbilityRequirements( builder, player )
 	player.isDead = nil
 	
 end
@@ -600,6 +605,7 @@ function bayustd:Initbayustd()
 
 	-- Full units file to get the custom values
   	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
+	GameRules.Requirements = LoadKeyValues("scripts/kv/tech_tree.kv")
 
 	-- Initialized tables for tracking state
 	self.vUserIds = {}
@@ -721,6 +727,102 @@ function bayustd:SpawnCreeps()
 	print(creepsCount .. " creeps on the way")
 	wave = wave + 1
 	return 1 -- Check again later in case more players spawn
+end
+
+-- Go through every ability and check if the requirements are met
+function CheckAbilityRequirements( unit, player )
+
+	local requirements = GameRules.Requirements
+	local buildings = player.buildings
+	local requirement_failed = false
+
+	-- The disabled abilities end with this affix
+	local len = string.len("_disabled")
+
+	for abilitySlot=0,15 do
+		local ability = unit:GetAbilityByIndex(abilitySlot)
+
+		-- If the ability exists, check its requirements
+		if ability then
+			local disabled_ability_name = ability:GetAbilityName()
+
+			-- Check the table of requirements in the KV file
+			if requirements[disabled_ability_name] then
+				local requirement_count = #requirements[disabled_ability_name]
+				print(disabled_ability_name.. "has "..requirement_count.." Requirements")
+						
+				-- Go through each requirement line and check if the player has that building on its list
+				for k,v in pairs(requirements[disabled_ability_name]) do
+					print("Building Name","Need","Have")
+					print(k,v,buildings[k])
+
+					-- Look for the building and update counter
+					if buildings[k] and buildings[k] > 0 then
+						print("Found at least one "..k)
+					else
+						print("Failed one of the requirements for "..disabled_ability_name..", no "..k.." found")
+						requirement_failed = true
+						break
+					end
+				end
+
+				if not requirement_failed then
+					-- Cut the _disabled to learn the new ability 
+					local ability_len = string.len(disabled_ability_name)
+					local ability_name = string.sub(disabled_ability_name, 1 , ability_len - len)
+
+					print("Requirement is met, swapping "..disabled_ability_name.." for "..ability_name)
+					unit:AddAbility(ability_name)
+					unit:SwapAbilities(disabled_ability_name, ability_name, false, true)
+					unit:RemoveAbility(disabled_ability_name)
+
+					-- Set the new ability level
+					local ability = unit:FindAbilityByName(ability_name)
+					ability:SetLevel(ability:GetMaxLevel())
+				end				
+			end
+		end	
+	end
+	for itemSlot=0,5 do
+		local item = unit:GetItemInSlot(itemSlot)
+		
+		-- If the ability exists, check its requirements
+		if item ~= nil then
+			local disabled_item_name = item:GetName()
+			print("++++++++++++++++++++++++++++++ITEM: " .. disabled_item_name)
+			-- Check the table of requirements in the KV file
+			if requirements[disabled_item_name] then
+				local requirement_count = #requirements[disabled_item_name]
+				print(disabled_item_name.. "has "..requirement_count.." Requirements")
+						
+				-- Go through each requirement line and check if the player has that building on its list
+				for k,v in pairs(requirements[disabled_item_name]) do
+					print("Building Name","Need","Have")
+					print(k,v,buildings[k])
+
+					-- Look for the building and update counter
+					if buildings[k] and buildings[k] > 0 then
+						print("Found at least one "..k)
+					else
+						print("Failed one of the requirements for "..disabled_item_name..", no "..k.." found")
+						requirement_failed = true
+						break
+					end
+				end
+
+				if not requirement_failed then
+					-- Cut the _disabled to learn the new ability 
+					local item_len = string.len(disabled_item_name)
+					local item_name = string.sub(disabled_item_name, 1 , item_len - len)
+
+					print("Requirement is met, swapping "..disabled_item_name.." for "..item_name)
+					unit:RemoveItem(item)
+					local newItem = CreateItem(item_name, player, player)
+					unit:AddItem(newItem)
+				end				
+			end
+		end	
+	end
 end
 
 ---------------------------------------------------------------------------

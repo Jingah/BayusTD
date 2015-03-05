@@ -553,8 +553,8 @@
 		"Ability2"					"build_ember_slinger"
 		"Ability3"					"build_war_drill"
 		"Ability4"					"build_stormbringer"
-		"Ability5"					"build_blade_totem"
-		"Ability6"					"build_voodoo_lounge"
+		"Ability5"					"build_blade_totem_disabled"
+		"Ability6"					"build_voodoo_lounge_disabled"
 		
 		
 		// Armor
@@ -608,23 +608,23 @@
 			{
 				"BladeExplorer"
 				{
-					"Item"					"item_build_blade_explorer"
+					"Item"					"item_build_blade_explorer_disabled"
 				}
 				"BladeBouncer"
 				{
-					"Item"					"item_build_blade_bouncer"
+					"Item"					"item_build_blade_bouncer_disabled"
 				}
 				"VoodooSpirit"
 				{
-					"Item"					"item_build_voodoo_spirit"
+					"Item"					"item_build_voodoo_spirit_disabled"
 				}
 				"VoodooOverseer"
 				{
-					"Item"					"item_build_voodoo_overseer"
+					"Item"					"item_build_voodoo_overseer_disabled"
 				}
 				"PowerTower"
 				{
-					"Item"					"item_build_power_tower"
+					"Item"					"item_build_power_tower_disabled"
 				}
 			}
 		}

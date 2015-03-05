@@ -52,6 +52,25 @@ function build( keys )
 		-- Give building its abilities
 		-- add the mana
 		unit:SetMana(unit:GetMaxMana())
+		
+		local caster = keys.caster
+		local hero = caster:GetPlayerOwner():GetAssignedHero()
+		local playerID = hero:GetPlayerID()
+		local player = PlayerResource:GetPlayer(playerID)
+		local building_name = unit:GetUnitName()
+		
+		-- Add 1 to the player building tracking table for that name
+		if not player.buildings[building_name] then
+			player.buildings[building_name] = 1
+		else
+			player.buildings[building_name] = player.buildings[building_name] + 1
+		end
+		
+		-- Update the abilities of the builders
+    	for k,builder in pairs(player.builders) do
+    		print("=Checking Requirements on "..builder:GetUnitName()..k)
+    		CheckAbilityRequirements( builder, player )
+    	end
 	end)
 
 	-- These callbacks will only fire when the state between below half health/above half health changes.

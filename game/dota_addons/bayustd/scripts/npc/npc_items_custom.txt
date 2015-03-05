@@ -957,6 +957,34 @@
 	//End shop items
 	//Start builder items (extra buildings)
 	
+	"item_build_voodoo_spirit_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_spirit"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"resource_lumber"		"5450"
+			}
+		}
+
+	}
+	
 	"item_build_voodoo_spirit"
 	{
 		"ID"                            "1065"
@@ -967,7 +995,7 @@
 		"ItemKillable"					"0"
 		"ItemSellable"                  "0"
 		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
@@ -1014,6 +1042,36 @@
 			}
 		}
 	}
+	
+	"item_build_power_tower_disabled"
+	{
+		"ID"                            "1066"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_power_tower"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"resource_lumber"		"17500"
+			}
+		}
+
+	}
+	
 	"item_build_power_tower"
 	{
 		"ID"                            "1066"
@@ -1024,7 +1082,7 @@
 		"ItemKillable"					"0"
 		"ItemSellable"                  "0"
 		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
@@ -1071,6 +1129,34 @@
 			}
 		}
 	}
+	
+	"item_build_voodoo_overseer_disabled"
+	{
+		"ID"                            "1067"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_overseer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"resource_lumber"		"5700"
+			}
+		}
+
+	}
 	"item_build_voodoo_overseer"
 	{
 		"ID"                            "1067"
@@ -1081,7 +1167,7 @@
 		"ItemKillable"					"0"
 		"ItemSellable"                  "0"
 		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
@@ -1128,6 +1214,34 @@
 			}
 		}
 	}
+	"item_build_blade_explorer_disabled"
+	{
+		"ID"                            "1068"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_explorer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"4500"
+			}
+		}
+
+	}
 	"item_build_blade_explorer"
 	{
 		"ID"                            "1068"
@@ -1138,7 +1252,7 @@
 		"ItemKillable"					"0"
 		"ItemSellable"                  "0"
 		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
@@ -1148,7 +1262,7 @@
 		"AbilityCastRange"				"200"
 		"UpdateHealth"					"1"
 		"Scale"							"1"
-		"MaxScale"						"1.5"
+		"MaxScale"						"0.5"
 		"PlayerCanControl"				"1"
 
 		"AbilityCooldown"				"0"
@@ -1185,6 +1299,34 @@
 			}
 		}
 	}
+	"item_build_blade_bouncer_disabled"
+	{
+		"ID"                            "1069"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_bouncer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"5150"
+			}
+		}
+
+	}
 	"item_build_blade_bouncer"
 	{
 		"ID"                            "1069"
@@ -1195,7 +1337,7 @@
 		"ItemKillable"					"0"
 		"ItemSellable"                  "0"
 		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		
 		// BuildingHelper info

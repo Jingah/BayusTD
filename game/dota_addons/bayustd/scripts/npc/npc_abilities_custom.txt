@@ -91,51 +91,11 @@
 		}
 	}
 	// Building that creates units, with a queue
-	"build_blade_explorer"
+	"build_blade_totem_disabled"
 	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"undying_tombstone_zombie_deathstrike"
-		"AbilityCastPoint"				"0"
-		"MaxLevel" 						"1"		
-
-		// BuildingHelper info
-		"Building"						"1" //bool
-		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
-		"BuildTime"						"5.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1" //bool
-		"Scale"							"1" //bool
-		"MaxScale"						"0.6"
-		"PlayerCanControl"				"1"
-		//"CancelsBuildingGhost"		"0" //bool
-
-		"UnitName"						"npc_tower_blade_explorer"
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		// End of BuildingHelper info
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4500"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"abilities.lua"
-				"Function"		"build"
-			}
-		}
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"pugna_nether_ward"
+		"MaxLevel"						"0"
 	}
 	"build_blade_totem"
 	{
@@ -193,17 +153,17 @@
 			}
 		}
 	}
+	"build_voodoo_lounge_disabled"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_voodoo_lounge"
+		"MaxLevel"						"0"
+	}
 	"build_voodoo_lounge"
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_voodoo_lounge"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
 		"Building"						"1"
