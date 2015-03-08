@@ -68,7 +68,6 @@ function build( keys )
 		
 		-- Update the abilities of the builders
     	for k,builder in pairs(player.builders) do
-    		print("=Checking Requirements on "..builder:GetUnitName()..k)
     		CheckAbilityRequirements( builder, player )
     	end
 	end)

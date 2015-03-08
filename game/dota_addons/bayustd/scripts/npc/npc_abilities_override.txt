@@ -1283,6 +1283,9 @@
 		"ItemPurchasable"				"1"
 		"ItemDroppable"					"1"
 	}
+	
+	
+	//Buildings
 	"item_build_voodoo_spirit_disabled"
 	{
 		"ItemPurchasable"				"0"

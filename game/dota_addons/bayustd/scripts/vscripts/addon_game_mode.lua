@@ -16,6 +16,14 @@ require('FlashUtil')
 require('buildinghelper')
 require('abilities')
 
+
+-- Load Stat collection (statcollection should be available from any script scope)
+require('lib.statcollection')
+    statcollection.addStats({
+        modID = 'ee0861abca4ad04ca3f273586e0f453b' --GET THIS FROM http://getdotastats.com/#d2mods__my_mods
+    })
+
+
 function Precache( context )
 	--Loading general stuff
 	PrecacheUnitByNameSync("npc_dota_ghost", context)
@@ -48,13 +56,24 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_tower_voodoo_overseer", context)
 	PrecacheUnitByNameSync("npc_tower_power_tower", context)
 	PrecacheUnitByNameSync("npc_tower_voodoo_lounge", context)
-	PrecacheUnitByNameSync("npc_tower_idol", context)
-	PrecacheUnitByNameSync("npc_tower_racks", context)
-	PrecacheUnitByNameSync("npc_tower_dragon", context)
+	
+	PrecacheUnitByNameSync("npc_tower_holy_root", context)
+	PrecacheUnitByNameSync("npc_tower_ent", context)
+	PrecacheUnitByNameSync("npc_tower_obliterator", context)
+	PrecacheUnitByNameSync("npc_tower_fury_maiden", context)
+	PrecacheUnitByNameSync("npc_tower_lord_of_the_woods", context)
+	PrecacheUnitByNameSync("npc_tower_wind_archer", context)
+	PrecacheUnitByNameSync("npc_tower_thunders_hall", context)
+	PrecacheUnitByNameSync("npc_tower_air_ripper", context)
+	PrecacheUnitByNameSync("npc_tower_life_sapper", context)
+	PrecacheUnitByNameSync("npc_tower_ancient_protector", context)
 	--Loading Creep waves
 	PrecacheUnitByNameSync("npc_boss1_add", context)
 	PrecacheUnitByNameSync("npc_boss2_add", context)
-	PrecacheUnitByNameSync("npc_dota_wave1", context)
+	for i = 1, 20, 1 do
+		PrecacheUnitByNameSync("npc_dota_wave" .. i, context)
+	end
+	--[[PrecacheUnitByNameSync("npc_dota_wave1", context)
 	PrecacheUnitByNameSync("npc_dota_wave2", context)
 	PrecacheUnitByNameSync("npc_dota_wave3", context)
 	PrecacheUnitByNameSync("npc_dota_wave4", context)
@@ -73,7 +92,7 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_dota_wave17", context)
 	PrecacheUnitByNameSync("npc_dota_wave18", context)
 	PrecacheUnitByNameSync("npc_dota_wave19", context)
-	PrecacheUnitByNameSync("npc_dota_wave20", context)
+	PrecacheUnitByNameSync("npc_dota_wave20", context)--]]
 	--Loading Buildinghelper stuff
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_juggernaut", context)

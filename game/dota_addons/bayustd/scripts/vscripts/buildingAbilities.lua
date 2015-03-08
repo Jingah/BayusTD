@@ -15,11 +15,12 @@ function SellBuilding( keys )
 	local sellBounty = unit_table.SellBounty
 
 	caster:RemoveBuilding(true)
-	
-	player.lumber = player.lumber + sellBounty
-	--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
-	PopupLumber(caster, sellBounty)
+	if sellBounty ~= 0 then
+		player.lumber = player.lumber + sellBounty
+		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+		PopupLumber(caster, sellBounty)
+	end
 end
 
 function UpgradeBuilding( keys )

@@ -43,31 +43,36 @@
 			}
 		}
 	}
-	// Building that creates units, with a queue
-	"build_npc_tower_racks"
+	//Buildings for Builder 1
+	//Buildings for Builder 2
+	"build_wind_archer"
 	{
-		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"human_barracks"
-		"AbilityCastPoint"				"0"
-		"MaxLevel" 						"1"		
-
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_wind_archer"
+		
 		// BuildingHelper info
-		"Building"						"1" //bool
-		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
-		"BuildTime"						"7.0"
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1" //bool
-		"Scale"							"1" //bool
-		"MaxScale"						"0.8"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"0.9"
 		"PlayerCanControl"				"1"
-		//"CancelsBuildingGhost"		"0" //bool
 
-		"UnitName"						"npc_tower_racks"
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
-		// End of BuildingHelper info
 		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_wind_archer"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
@@ -77,20 +82,283 @@
 			"01"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"			"10"
+				"resource_lumber"	"140"
 			}
 		}
-
+		
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"abilities.lua"
-				"Function"		"build"
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
 			}
 		}
 	}
-	// Building that creates units, with a queue
+	"build_thunders_hall"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"zuus_static_field"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"0.6"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_thunders_hall"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"265"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_ancient_protector"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"furion_force_of_nature"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.4"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_ancient_protector"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"625"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_the_morphling"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_the_morphling"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_the_morphling"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"800"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_life_sapper_disabled"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_life_sapper"
+		"MaxLevel"						"0"
+	}
+	"build_life_sapper"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_life_sapper"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"0.9"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_life_sapper"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_air_ripper_disabled"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_life_sapper"
+		"MaxLevel"						"0"
+	}
+	"build_air_ripper"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_life_sapper"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.4"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_air_ripper"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1200"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	//Buildings for Builder 3
+	//Buildings for Builder 4
 	"build_blade_totem_disabled"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -102,12 +370,6 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"pugna_nether_ward"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -402,100 +664,6 @@
 			{
 				"ScriptFile"			"abilities.lua"
 				"Function"				"build"
-			}
-		}
-	}
-	// Building that creates units, with a queue
-	"build_npc_tower_dragon"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"dragon_lvl2"
-		"AbilityCastPoint"				"0"
-		"MaxLevel" 						"1"		
-
-		// BuildingHelper info
-		"Building"						"1" //bool
-		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
-		"BuildTime"						"5.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1" //bool
-		"Scale"							"1" //bool
-		"MaxScale"						"0.8"
-		"PlayerCanControl"				"1"
-		//"CancelsBuildingGhost"		"0" //bool
-
-		"UnitName"						"npc_tower_dragon"
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		// End of BuildingHelper info
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"			"10"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"abilities.lua"
-				"Function"		"build"
-			}
-		}
-	}
-	// Building that creates units, with a queue
-	"build_npc_tower_wooden"
-	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"AbilityTextureName"			"human_guard_tower"
-		"AbilityCastPoint"				"0"
-		"MaxLevel" 						"1"		
-
-		// BuildingHelper info
-		"Building"						"1" //bool
-		"BuildingSize"					"3" // this is (3x64) by (3x64) units, so 9 squares.
-		"BuildTime"						"5.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1" //bool
-		"Scale"							"1" //bool
-		"MaxScale"						"0.8"
-		"PlayerCanControl"				"1"
-		//"CancelsBuildingGhost"		"0" //bool
-
-		"UnitName"						"npc_tower_wooden"
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		// End of BuildingHelper info
-		
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"			"10"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"abilities.lua"
-				"Function"		"build"
 			}
 		}
 	}
@@ -2553,6 +2721,134 @@
 				}
 			}
 		}
+	}
+	"ent_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"100"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
+	}
+	"ent_root"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"BaseClass" 					"lone_druid_spirit_bear_entangle"
+		"AbilityTextureName"			"lone_druid_spirit_bear_entangle"
+		"MaxLevel"                      "1"
+		
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"500"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1.0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"entangle_chance"		"75"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hero_duration"			"5.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"creep_duration"		"10.0"
+			}
+		}
+	}
+	"the_morphling_magic_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"razor_unstable_current"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Min_dmg"				"419"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"Max_dmg"				"420"
+			}
+		}
+		
+		"Modifiers"
+	    {
+	        "Orb_modifier"
+	        {
+	            "Passive"     "1"
+	            "IsHidden"    "1"
+	            "Orb"
+	            {
+	                "Priority"          "DOTA_ORB_PRIORITY_ABILITY"
+	                "CastAttack"        "1"
+	            }
+	            "OnAttackLanded"
+	            {
+	                "RunScript"
+					{
+						"ScriptFile"		"towers/magicdamage.lua"
+						"Function"			"MagicDamage"
+						"Target"			"TARGET"
+					}
+	            }
+	        }
+	    }   
 	}
 	//End tower abilities
 

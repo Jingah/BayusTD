@@ -151,9 +151,17 @@ function bayustd:OnNPCSpawned(keys)
 	--print("[bayustd] NPC Spawned")
 	--PrintTable(keys)
 	local npc = EntIndexToHScript(keys.entindex)
-
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
+		return
+	end
+	
+	local name = npc:GetUnitName()
+	local unit_table = GameRules.UnitKV[name]
+	local isHeroBuilding = unit_table.isHeroBuilding
+
+	if isHeroBuilding ~= nil and isHeroBuilding == 1 then
+		bayustd:giveUnitDataDrivenModifier(npc, npc, "modifier_hero_building", -1)
 	end
 end
 
@@ -185,7 +193,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(1, 4)
-	local builder = CreateUnitByName("npc_dota_builder4", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder2", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -382,8 +390,6 @@ function bayustd:OnGameRulesStateChange(keys)
 	end
 end
 
-
-
 creepsCount = 0
 wave = 1
 
@@ -442,6 +448,7 @@ function bayustd:OnEntityKilled( keys )
 		FireGameEvent("show_center_message",messageinfo)
 		bayustd:PrintEndgameMessage()
 		Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_BADGUYS) end)
+		return
 	end
 	
 	if killedUnit:GetTeam() == DOTA_TEAM_NEUTRALS then
@@ -483,6 +490,21 @@ function bayustd:OnEntityKilled( keys )
 		
 		creepsCount = creepsCount - 1
 		
+		
+		if bayustd:getWave() % 10 ~= 0 then
+			ent = Entities:FindByName( nil, "point_teleport_spot" )
+		else
+			ent = Entities:FindByName( nil, "point_teleport_spot_boss" )
+		end
+		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
+			print("all creeps teleproted")
+			for d = 1, bayustd:getRemovedCreeps(), 1 do
+				local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 1400))
+				CreateUnitByName(name, point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+			end
+			GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)
+		end
+		
 		if creepsCount == 0 then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:HasSelectedHero(nPlayerID) then
@@ -507,7 +529,7 @@ function bayustd:OnEntityKilled( keys )
 			bayustd:setRemovedCreeps(0)
 			local a = 20
 			Timers:CreateTimer(function()
-				GameRules:SendCustomMessage("Round " .. wave .. " in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
+				GameRules:SendCustomMessage("Round " .. wave .. " starts in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
 				a = a - 1
 				if a == 0 then
 					bayustd:SpawnCreeps()
@@ -551,7 +573,6 @@ function bayustd:Initbayustd()
 	GameRules.TOTAL_PLAYERS = 0
 	GameRules.DEAD_PLAYER_COUNT = 0
 
-	InitLogFile( "log/bayustd.txt","")
 
 	---------------------------------------------------------------------------
 	
@@ -559,10 +580,17 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
 	ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(bayustd, 'OnPlayerPickHero'), self)
 	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
-	--ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
+	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
+	
+	-- Register Console Commands
+    Convars:RegisterCommand('test_endgame', function()
+        GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+        GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+        GameRules:Defeated()
+    end, 'Ends the game.', FCVAR_CHEAT)
 
 	--ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
 	
