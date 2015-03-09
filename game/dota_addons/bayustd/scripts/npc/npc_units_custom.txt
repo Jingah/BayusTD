@@ -330,6 +330,7 @@
 		"Model"						"models/courier/imp/imp.vmdl"
 		"ModelScale"				"2"
 		"Level"						"1"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -393,7 +394,7 @@
 	//=================================================================================
 	// Builder: 2 - Frog (Wisp)
 	//=================================================================================
-	"npc_dota_builder2"
+	"npc_dota_builder3"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -489,7 +490,7 @@
 	//=================================================================================
 	// Builder: 3 - Arneyb Rabbit
 	//=================================================================================
-	"npc_dota_builder3"
+	"npc_dota_builder2"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -653,6 +654,164 @@
 				}
 			}
 		}
+	}
+	
+	//=================================================================================
+	// Building: Spirit Destroyer
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_spirit_destroyer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/props_structures/tower_dragon_black.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"tower_splash_damage" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"240"
+		"AttackDamageMax"			"252"
+		"AttackRate"				"1.8"
+		"AttackRange"				"900"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_rocks.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1500"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"190"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Ice Fiend
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_ice_fiend"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/heroes/broodmother/spiderling.vmdl"
+		"ModelScale"				"2.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"ice_fiend_frost_attack" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"245"
+		"AttackDamageMax"			"160"
+		"AttackRate"				"1.7"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/econ/items/tuskarr/tusk_frost_touched_cleaver/tusk_frost_touched_cleaver_ambient.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1200"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"210"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
 	}
 	
 	//=================================================================================
@@ -2691,7 +2850,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"0"
+		"BountyXP"					"25"
 		"BountyGoldMin"				"26"
 		"BountyGoldMax"				"26"
 		"BountyLumber"				"6"
@@ -2755,6 +2914,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"27"
 		"BountyGoldMin"				"27"
 		"BountyGoldMax"				"27"
 		"BountyLumber"				"7"
@@ -2819,6 +2979,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"29"
 		"BountyGoldMin"				"28"
 		"BountyGoldMax"				"28"
 		"BountyLumber"				"8"
@@ -2890,6 +3051,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"30"
 		"BountyGoldMin"				"29"
 		"BountyGoldMax"				"29"
 		"BountyLumber"				"9"
@@ -2953,6 +3115,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"31"
 		"BountyGoldMin"				"30"
 		"BountyGoldMax"				"30"
 		"BountyLumber"				"10"
@@ -3025,6 +3188,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"32"
 		"BountyGoldMin"				"31"
 		"BountyGoldMax"				"31"
 		"BountyLumber"				"11"
@@ -3088,6 +3252,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"33"
 		"BountyGoldMin"				"32"
 		"BountyGoldMax"				"32"
 		"BountyLumber"				"12"
@@ -3159,6 +3324,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"34"
 		"BountyGoldMin"				"33"
 		"BountyGoldMax"				"33"
 		"BountyLumber"				"13"
@@ -3231,6 +3397,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"35"
 		"BountyGoldMin"				"34"
 		"BountyGoldMax"				"34"
 		"BountyLumber"				"14"
@@ -3310,6 +3477,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"600"
 		"BountyGoldMin"				"0"
 		"BountyGoldMax"				"0"
 		"BountyLumber"				"0"
@@ -3477,6 +3645,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"37"
 		"BountyGoldMin"				"36"
 		"BountyGoldMax"				"36"
 		"BountyLumber"				"16"
@@ -3550,6 +3719,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"38"
 		"BountyGoldMin"				"37"
 		"BountyGoldMax"				"37"
 		"BountyLumber"				"17"
@@ -3636,6 +3806,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"39"
 		"BountyGoldMin"				"38"
 		"BountyGoldMax"				"38"
 		"BountyLumber"				"18"
@@ -3720,6 +3891,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"40"
 		"BountyGoldMin"				"39"
 		"BountyGoldMax"				"39"
 		"BountyLumber"				"19"
@@ -3817,6 +3989,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"41"
 		"BountyGoldMin"				"40"
 		"BountyGoldMax"				"40"
 		"BountyLumber"				"20"
@@ -3888,6 +4061,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"42"
 		"BountyGoldMin"				"41"
 		"BountyGoldMax"				"41"
 		"BountyLumber"				"21"
@@ -3984,6 +4158,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"42"
 		"BountyGoldMin"				"41"
 		"BountyGoldMax"				"41"
 		"BountyLumber"				"21"
@@ -4054,6 +4229,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"43"
 		"BountyGoldMin"				"42"
 		"BountyGoldMax"				"42"
 		"BountyLumber"				"22"
@@ -4127,6 +4303,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"44"
 		"BountyGoldMin"				"43"
 		"BountyGoldMax"				"43"
 		"BountyLumber"				"23"
@@ -4204,6 +4381,7 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
+		"BountyXP"					"1000"
 		"BountyGoldMin"				"0"
 		"BountyGoldMax"				"0"
 		"BountyLumber"				"0"

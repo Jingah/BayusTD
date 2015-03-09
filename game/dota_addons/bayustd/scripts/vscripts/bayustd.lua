@@ -51,7 +51,7 @@ END_GAME_ON_KILLS = false                -- Should the game end after a certain 
 KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should signify an end of game?
 
 USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom levels?
-MAX_LEVEL = 40                          -- What level should we let heroes get to?
+MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
 BAYUSTD_VERSION = "1.1"
@@ -61,7 +61,7 @@ OutOfWorldVector = Vector(9000,9000,-100)
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 for i=1,MAX_LEVEL do
-	XP_PER_LEVEL_TABLE[i] = i * 100
+	XP_PER_LEVEL_TABLE[i] = i * 1000
 end
 
 -- Generated from template
@@ -106,8 +106,10 @@ function bayustd:OnAllPlayersLoaded()
 	print("[BAYUSTD] All Players have loaded into the game")
 	-- Reassign all the players to the Radiant Team
 	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
-		if PlayerResource:IsValidPlayer(nPlayerID) and not PlayerResource:IsBroadcaster(nPlayerID) then 
-			PlayerResource:SetCustomTeamAssignment(nPlayerID, DOTA_TEAM_GOODGUYS )
+		if PlayerResource:IsValidPlayer(nPlayerID) and not PlayerResource:IsBroadcaster(nPlayerID) then
+			if PlayerResource:GetTeam(nPlayerID) ~= DOTA_TEAM_GOODGUYS then
+				PlayerResource:SetCustomTeamAssignment(nPlayerID, DOTA_TEAM_GOODGUYS )
+			end
 		end
 	end
 end
@@ -175,10 +177,12 @@ function bayustd:OnPlayerPickHero(keys)
 	local playerID = hero:GetPlayerID()
 	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
 	
+	ShowGenericPopup( "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
+	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(300, false)
 	
-	player.lumber = 999999
+	player.lumber = 300
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 	
@@ -192,8 +196,8 @@ function bayustd:OnPlayerPickHero(keys)
 	end
 	
 	--TODO: Ensure correct Builder
-	local number = RandomInt(1, 4)
-	local builder = CreateUnitByName("npc_dota_builder2", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local number = RandomInt(3, 4)
+	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -422,12 +426,13 @@ function bayustd:OnEntityKilled( keys )
 	if killedUnit:IsRealHero() then
 		self.nDireKills = self.nDireKills + 1
 		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
-		--[[if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
+		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
 			local messageinfo = { message = "YOU SUCKED", duration = 5}
 			FireGameEvent("show_center_message",messageinfo)
+			mode:SetHUDVisible(1, false)  -- Remove lumber HUD
 			bayustd:PrintEndgameMessage()
-			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)	
-		end]]--
+			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)
+		end
 		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
 		PlayerResource:SetGold(pID, lostGold, true)
@@ -728,7 +733,6 @@ function bayustd:SpawnCreeps()
 					creepsCount = creepsCount + 1
 					Timers:CreateTimer(1.0, function()
 						unit:SetInitialGoalEntity(moveLocation)
-						unit:SetBaseMoveSpeed(500)
 						return
 					end
 					)
@@ -741,7 +745,6 @@ function bayustd:SpawnCreeps()
 		creepsCount = creepsCount + 1
 		Timers:CreateTimer(1.0, function()
 			unit:SetInitialGoalEntity(moveLocation)
-			unit:SetBaseMoveSpeed(500)
 			return
 		end
 		)
@@ -752,7 +755,6 @@ function bayustd:SpawnCreeps()
 	}
 	FireGameEvent("show_center_message", messageinfo)  
 	--GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " coming!", 0, 0)
-	print(creepsCount .. " creeps on the way")
 	wave = wave + 1
 	return 1 -- Check again later in case more players spawn
 end
@@ -879,7 +881,6 @@ function bayustd:setRemovedCreeps(val)
 end
 
 function bayustd:PrintEndgameMessage()
-
 	Timers:CreateTimer(5, function() GameRules:SendCustomMessage("<font color='#DBA901'><br>Game will end in 10 seconds</font>",0,0) end)
 	Timers:CreateTimer(10, function() GameRules:SendCustomMessage("<font color='#DBA901'>Please leave your feedback at our workshop page</font>",0,0) end)
 

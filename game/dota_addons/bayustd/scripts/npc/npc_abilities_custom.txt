@@ -44,6 +44,106 @@
 		}
 	}
 	//Buildings for Builder 1
+	"build_spirit_destroyer"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"undying_tombstone"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_spirit_destroyer"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"190"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_ice_fiend"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"weaver_shukuchi"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_ice_fiend"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"210"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
 	//Buildings for Builder 2
 	"build_wind_archer"
 	{
@@ -250,6 +350,14 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_life_sapper"
 		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
 	}
 	"build_life_sapper"
 	{
@@ -306,6 +414,14 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_life_sapper"
 		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1200"
+			}
+		}
 	}
 	"build_air_ripper"
 	{
@@ -364,6 +480,14 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"pugna_nether_ward"
 		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
 	}
 	"build_blade_totem"
 	{
@@ -420,6 +544,14 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_voodoo_lounge"
 		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1150"
+			}
+		}
 	}
 	"build_voodoo_lounge"
 	{
