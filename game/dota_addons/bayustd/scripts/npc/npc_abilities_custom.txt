@@ -144,6 +144,235 @@
 			}
 		}
 	}
+	"build_graveyard"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_graveyard"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_graveyard"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"475"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_obsidian_destroyer"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_obisidian_destroyer"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_obsidian_destroyer"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"825"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_unholy_pit_disabled"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"rattletrap_power_cogs"
+		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1200"
+			}
+		}
+	}
+	"build_unholy_pit"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"rattletrap_power_cogs"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"2"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_unholy_pit"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1200"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"build_necromancer_disabled"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_nercomancer"
+		"MaxLevel"						"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1300"
+			}
+		}
+	}
+	"build_necromancer"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"npc_tower_nercomancer"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_necromancer"	//blade totem
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"resource_lumber"	"1300"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	
 	//Buildings for Builder 2
 	"build_wind_archer"
 	{
@@ -1001,25 +1230,39 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"		"5"
+				"dur"		"5"
 			}
 		}
 		
 		"Modifiers"	
 		{
-			"modifier_frost"
+			"modifier_frost_attack_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_frost_attack_debuff_datadriven"
+						"Target"		"TARGET"
+					}
+				}
+			}
+			"modifier_frost_attack_debuff_datadriven"
 			{
 				"Passive"				"1"
 				"IsDebuff" 				"1"
 				"IsPurgable"			"0"
-				"Duration"				"%duration"
+				"Duration"				"%dur"
 				
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%attackspeed_slow"
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movespeed_slow"
 				}
-				"EffectName" "particles\neutral_fx\ghost_frost_attack_explosion_d.vpcf_c"
+				"EffectName" "particles/neutral_fx/ghost_frost_attack_explosion.vpcf"
 				"EffectAttachType" "follow_origin"
 			}
 		}
@@ -2409,7 +2652,7 @@
 	        "01"
 	        {
 	        	"var_type"					"FIELD_INTEGER"
-	        	"radius"					"300"
+	        	"radius"					"150"
 	        }
 	    }
 
@@ -2796,7 +3039,7 @@
 							"ApplyModifier"
 							{
 								"Target" 			"CASTER"
-								"ModifierName"		"modifier_apply_crit"
+								"ModifierName"		"modifier_apply_hex"
 							}
 						}
 					}
@@ -2981,6 +3224,87 @@
 	            }
 	        }
 	    }   
+	}
+	"ice_fiend_frost_attack"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"			"frost_attack"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"-75"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dur"					"5"
+			}
+		}
+		
+		"Modifiers"	
+		{
+			"modifier_frost_attack_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+	
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_frost_attack_debuff_datadriven"
+						"Target"		"TARGET"
+					}
+				}
+			}
+			"modifier_frost_attack_debuff_datadriven"
+			{
+				"Passive"				"1"
+				"IsDebuff" 				"1"
+				"IsPurgable"			"0"
+				"Duration"				"%dur"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%slow"
+				}
+				"EffectName" "particles/neutral_fx/ghost_frost_attack_explosion.vpcf"
+				"EffectAttachType" "follow_origin"
+			}
+		}
+	}
+	"temple_of_the_damned_psi_blades"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"templar_assassin_psi_blades"
+		"AbilityTextureName"			"templar_assassin_psi_blades"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_range"		"300"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_spill_range"		"400"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_spill_width"		"80"
+			}
+		}
 	}
 	//End tower abilities
 

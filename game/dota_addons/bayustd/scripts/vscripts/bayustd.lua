@@ -55,6 +55,8 @@ MAX_LEVEL = 100                          -- What level should we let heroes get 
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
 BAYUSTD_VERSION = "1.1"
+DEBUG = true
+
 
 OutOfWorldVector = Vector(9000,9000,-100)
 
@@ -182,7 +184,7 @@ function bayustd:OnPlayerPickHero(keys)
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(300, false)
 	
-	player.lumber = 300
+	player.lumber = 50000
 	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 	
@@ -197,7 +199,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(3, 4)
-	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder1", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -432,6 +434,7 @@ function bayustd:OnEntityKilled( keys )
 			mode:SetHUDVisible(1, false)  -- Remove lumber HUD
 			bayustd:PrintEndgameMessage()
 			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)
+			return
 		end
 		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
@@ -572,6 +575,7 @@ function bayustd:Initbayustd()
 	GameRules:SetHeroMinimapIconScale( MINIMAP_ICON_SIZE )
 	GameRules:SetCreepMinimapIconScale( MINIMAP_CREEP_ICON_SIZE )
 	GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
+	GameRules:GetGameModeEntity():SetStashPurchasingDisabled(true)
 	print('[BAYUSTD] GameRules set')
 	
 	GameRules.PLAYERS_PICKED = 0
@@ -589,6 +593,34 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
+	
+	Convars:RegisterCommand('player_say', function(...)
+		local arg = {...}
+		table.remove(arg,1)
+		local sayType = arg[1]
+		table.remove(arg,1)
+
+		local cmdPlayer = Convars:GetCommandClient()
+		keys = {}
+		keys.ply = cmdPlayer
+		keys.teamOnly = false
+		keys.text = table.concat(arg, " ")
+
+		if (sayType == 4) then
+			-- Student messages
+		elseif (sayType == 3) then
+			-- Coach messages
+		elseif (sayType == 2) then
+			-- Team only
+			keys.teamOnly = true
+			-- Call your player_say function here like
+			self:PlayerSay(keys)
+		else
+			-- All chat
+			-- Call your player_say function here like
+			self:PlayerSay(keys)
+		end
+	end, 'player say', 0)
 	
 	-- Register Console Commands
     Convars:RegisterCommand('test_endgame', function()
@@ -769,7 +801,7 @@ function CheckAbilityRequirements( unit, player )
 	-- The disabled abilities end with this affix
 	local len = string.len("_disabled")
 
-	for abilitySlot=0,15 do
+	for abilitySlot=0,6 do
 		local ability = unit:GetAbilityByIndex(abilitySlot)
 
 		-- If the ability exists, check its requirements
@@ -852,6 +884,36 @@ function CheckAbilityRequirements( unit, player )
 				end				
 			end
 		end	
+	end
+end
+
+
+function bayustd:PlayerSay(keys)
+	--print ('[SNS] PlayerSay')
+	--PrintTable(keys)
+
+	local ply = keys.ply
+	local plyID = ply:GetPlayerID()
+	local hero = ply:GetAssignedHero()
+	local txt = keys.text
+
+	print(plyID)
+
+	if keys.teamOnly then
+		-- This text was team-only
+	end
+
+	if txt == nil or txt == "" then
+		return
+	end
+
+	if DEBUG and string.find(keys.text, "^-gold") then
+		print("Giving gold to player")
+		hero:SetGold(50000, false)
+	end
+	
+	if DEBUG and string.find(keys.text, "^-lvl") then
+		hero:HeroLevelUp(true)
 	end
 end
 

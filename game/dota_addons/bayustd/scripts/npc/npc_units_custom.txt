@@ -335,12 +335,12 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					""
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
+		"Ability1"					"build_spirit_destroyer"
+		"Ability2"					"build_ice_fiend"
+		"Ability3"					"build_graveyard"
+		"Ability4"					"build_obsidian_destroyer"
+		"Ability5"					"build_unholy_pit_disabled"
+		"Ability6"					"build_necromancer_disabled"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -388,13 +388,33 @@
 		"Creature"
 		{
 			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"HauntedHouse"
+				{
+					"Item"					"item_build_haunted_house_disabled"
+				}
+				"Crypt"
+				{
+					"Item"					"item_build_crypt_disabled"
+				}
+				"AltarOfTheDarkness"
+				{
+					"Item"					"item_build_altar_of_the_darkness_disabled"
+				}
+				"TempleOfTheDamned"
+				{
+					"Item"					"item_build_temple_of_the_damned_disabled"
+				}
+			}
 		}
 	}
 	
 	//=================================================================================
 	// Builder: 2 - Frog (Wisp)
 	//=================================================================================
-	"npc_dota_builder3"
+	"npc_dota_builder2"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -490,7 +510,7 @@
 	//=================================================================================
 	// Builder: 3 - Arneyb Rabbit
 	//=================================================================================
-	"npc_dota_builder2"
+	"npc_dota_builder3"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -688,7 +708,7 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"240"
-		"AttackDamageMax"			"252"
+		"AttackDamageMax"			"246"
 		"AttackRate"				"1.8"
 		"AttackRange"				"900"
 		"AttackAcquisitionRange"	"900"
@@ -767,11 +787,11 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"245"
-		"AttackDamageMax"			"160"
-		"AttackRate"				"1.7"
+		"AttackDamageMax"			"260"
+		"AttackRate"				"1.2"
 		"AttackRange"				"800"
 		"AttackAcquisitionRange"	"900"
-		"ProjectileModel"			"particles/econ/items/tuskarr/tusk_frost_touched_cleaver/tusk_frost_touched_cleaver_ambient.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/neutral_fx/ghost_frost_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
 		
 		// Bounty
@@ -782,6 +802,666 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"210"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Graveyard
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_graveyard"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/buildings/building_racks_melee_reference.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"475"
+		"AttackDamageMax"			"575"
+		"AttackRate"				"0.9"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/neutral_fx/ghost_frost_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"600"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"475"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Obsidian Destroyer
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_obsidian_destroyer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/heroes/obsidian_destroyer/obsidian_destroyer.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"isHeroBuilding"			"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"580"
+		"AttackDamageMax"			"600"
+		"AttackRate"				"1"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1800"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"825"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Creature Data
+		//----------------------------------------------------------------------------------------------------------------------
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"	{ "ItemDef" "187" } 
+				"Wearable2"	{ "ItemDef"	"188" } 
+				"Wearable3" { "ItemDef"	"189" }
+				"Wearable4" { "ItemDef"	"190" }
+			}
+		}
+	}
+	
+	//=================================================================================
+	// Building: Unholy Pit
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_unholy_pit"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/rattletrap/cog_tesla/cog_tesla.vmdl"
+		"ModelScale"				"2.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1000"
+		"AttackDamageMax"			"1200"
+		"AttackRate"				"0.8"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_rattletrap/rattletrap_cog_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"800"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"1200"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Necromancer
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_necromancer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/heroes/necrolyte/necrolyte.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		"isHeroBuilding"			"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"664"
+		"AttackDamageMax"			"820"
+		"AttackRate"				"0.8"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_necrolyte/necrolyte_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1000"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"1300"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Creature Data
+		//----------------------------------------------------------------------------------------------------------------------
+		"Creature"
+		{
+			"AttachWearables"
+			{
+				"Wearable1"	{ "ItemDef" "211" } 
+				"Wearable2"	{ "ItemDef"	"212" } 
+				"Wearable3" { "ItemDef"	"213" }
+				"Wearable4" { "ItemDef"	"214" }
+			}
+		}
+	}
+	
+	//=================================================================================
+	// Building: Haunted House
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_haunted_house"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/props_structures/tent_dk_small.vmdl"
+		"ModelScale"				"2.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"786"
+		"AttackDamageMax"			"790"
+		"AttackRate"				"0.05"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_puck/puck_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"900"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"4750"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Crypt
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_crypt"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/undying/idol_of_ruination/ruin_wight_minion.vmdl"
+		"ModelScale"				"2.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1200"
+		"AttackDamageMax"			"5200"
+		"AttackRate"				"0.2"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/base_attacks/ranged_tower_good_launch.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1250"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"5050"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Crypt
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_altar_of_the_darkness"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/undying/idol_of_ruination/idol_tower_gold.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"tower_splash_damage" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"786"
+		"AttackDamageMax"			"790"
+		"AttackRate"				"0.05"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/base_attacks/ranged_tower_good_launch.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"3000"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"5600"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Temple of the damned
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_temple_of_the_damned"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/heroes/witchdoctor/witchdoctor_ward.vmdl"
+		"ModelScale"				"1.2"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"temple_of_the_damned_psi_blades" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"1000"
+		"AttackDamageMax"			"1000"
+		"AttackRate"				"3.0"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"1250"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"5700"		//Gained Lumber when selling tower
 		
 		// Bounds
 		//----------------------------------------------------------------
