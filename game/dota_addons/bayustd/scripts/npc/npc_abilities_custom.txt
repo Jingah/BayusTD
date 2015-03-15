@@ -3306,6 +3306,28 @@
 			}
 		}
 	}
+	"unholy_warlock_permanent_immolation"
+	{
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+		"BaseClass" 					"warlock_golem_permanent_immolation"
+		"AbilityTextureName"			"warlock_golem_permanent_immolation"
+		"MaxLevel"                      "1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aura_radius"			"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aura_damage"			"250"
+			}
+		}
+	}
 	//End tower abilities
 
   	// START OF BUILDING HELPER ABILITIES

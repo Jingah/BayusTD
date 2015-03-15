@@ -54,11 +54,18 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.1"
-DEBUG = true
+BAYUSTD_VERSION = "1.0"
+DEBUG = false
 
 
 OutOfWorldVector = Vector(9000,9000,-100)
+
+-- Load Stat collection (statcollection should be available from any script scope)
+if not DEBUG then
+  statcollection.addStats({
+	modID = 'ee0861abca4ad04ca3f273586e0f453b' --GET THIS FROM http://getdotastats.com/#d2mods__my_mods
+  })
+end
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
@@ -182,10 +189,10 @@ function bayustd:OnPlayerPickHero(keys)
 	ShowGenericPopup( "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
 	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
-	hero:SetGold(300, false)
+	hero:SetGold(500, false)
 	
-	player.lumber = 50000
-	print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+	player.lumber = 300
+	--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 	
 	player.buildings = {}
@@ -198,8 +205,8 @@ function bayustd:OnPlayerPickHero(keys)
 	end
 	
 	--TODO: Ensure correct Builder
-	local number = RandomInt(3, 4)
-	local builder = CreateUnitByName("npc_dota_builder1", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local number = RandomInt(1, 3)
+	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -851,7 +858,6 @@ function CheckAbilityRequirements( unit, player )
 		-- If the ability exists, check its requirements
 		if item ~= nil then
 			local disabled_item_name = item:GetName()
-			print("++++++++++++++++++++++++++++++ITEM: " .. disabled_item_name)
 			-- Check the table of requirements in the KV file
 			if requirements[disabled_item_name] then
 				local requirement_count = #requirements[disabled_item_name]
@@ -897,8 +903,6 @@ function bayustd:PlayerSay(keys)
 	local hero = ply:GetAssignedHero()
 	local txt = keys.text
 
-	print(plyID)
-
 	if keys.teamOnly then
 		-- This text was team-only
 	end
@@ -912,8 +916,19 @@ function bayustd:PlayerSay(keys)
 		hero:SetGold(50000, false)
 	end
 	
+	if DEBUG and string.find(keys.text, "^-lumber") then
+		print("Giving lumber to player")
+		ply.lumber = ply.lumber + 5000
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = ply.lumber })
+	end
+	
 	if DEBUG and string.find(keys.text, "^-lvl") then
 		hero:HeroLevelUp(true)
+	end
+	
+	if DEBUG and string.find(keys.text, "^-team") then
+		print("TEAMNUMBER IS: " .. ply:GetTeam())
+		print("Teamname is: " .. GetTeamName(ply:GetTeam()))
 	end
 end
 

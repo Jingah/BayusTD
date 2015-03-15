@@ -265,8 +265,6 @@ function BuildingHelper:AddBuilding(keys)
 		return
 	end
 
-	--print("UnitName: " .. unitName)
-
 	local castRange = buildingTable:GetVal("AbilityCastRange", "number")
 	if castRange == nil then
 		castRange = 200
@@ -303,7 +301,7 @@ function BuildingHelper:AddBuilding(keys)
 					local resourceName = string.sub(k3, 10):lower()
 					resources[resourceName] = cost
 					--print("Detected resource: " .. resourceName)
-					print(player[resourceName])
+					--print(player[resourceName])
 					if player[resourceName] == nil then
 						player[resourceName] = 0
 					end
@@ -337,7 +335,6 @@ function BuildingHelper:AddBuilding(keys)
 			fMaxScale = 1
 		end
 	end
-
 	player.modelGhostDummy = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
 	local mgd = player.modelGhostDummy -- alias
 	--mgd:SetModelScale(.2) -- this won't reduce the model particle size atm...

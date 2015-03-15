@@ -6,7 +6,6 @@ function build( keys )
 	local returnTable = BuildingHelper:AddBuilding(keys)
 	--print("Lumber: " .. player.lumber)
 	--print("Stone: " .. player.stone)
-
 	-- handle errors if any
 	if TableLength(returnTable) > 0 then
 		--PrintTable(returnTable)
@@ -47,7 +46,7 @@ function build( keys )
 		unit:SetMana(0)
 	end)
 	keys:OnConstructionCompleted(function(unit)
-		print("Completed construction of " .. unit:GetUnitName())
+		--print("Completed construction of " .. unit:GetUnitName())
 		-- Play construction complete sound.
 		-- Give building its abilities
 		-- add the mana

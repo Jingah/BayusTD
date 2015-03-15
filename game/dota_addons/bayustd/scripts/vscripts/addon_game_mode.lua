@@ -15,13 +15,7 @@ require('popups')
 require('FlashUtil')
 require('buildinghelper')
 require('abilities')
-
-
--- Load Stat collection (statcollection should be available from any script scope)
 require('lib.statcollection')
-    statcollection.addStats({
-        modID = 'ee0861abca4ad04ca3f273586e0f453b' --GET THIS FROM http://getdotastats.com/#d2mods__my_mods
-    })
 
 
 function Precache( context )
@@ -67,7 +61,7 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_tower_crypt", context)
 	PrecacheUnitByNameSync("npc_tower_altar_of_the_darkness", context)
 	PrecacheUnitByNameSync("npc_tower_temple_of_the_damned", context)
-	--PrecacheUnitByNameSync("npc_tower_voodoo_lounge", context)
+	PrecacheUnitByNameSync("npc_tower_unholy_warlock", context)
 	
 	PrecacheUnitByNameSync("npc_tower_holy_root", context)
 	PrecacheUnitByNameSync("npc_tower_ent", context)

@@ -407,6 +407,10 @@
 				{
 					"Item"					"item_build_temple_of_the_damned_disabled"
 				}
+				"UnholyWarlock"
+				{
+					"Item"					"item_build_unholy_warlock_disabled"
+				}
 			}
 		}
 	}
@@ -508,81 +512,10 @@
 	}
 	
 	//=================================================================================
-	// Builder: 3 - Arneyb Rabbit
-	//=================================================================================
-	"npc_dota_builder3"
-	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/items/courier/arneyb_rabbit/arneyb_rabbit.vmdl"
-		"ModelScale"				"2"
-		"Level"						"1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"6"
-		"Ability1"					"build_npc_tower_racks"
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
-		
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"0"
-		
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		
-		// Bounds
-		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
-		"RingRadius"				"40"
-		"CollisionSize"				"16"
-		"FormationRank"				"4"
-		
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"500"
-		"MovementTurnRate"			"0.6"
-		
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"220"
-		"StatusHealthRegen"			"0.25"
-		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"800"
-		"VisionNighttimeRange"		"600"
-		
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_GOODGUYS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
-		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
-		
-		// Creature Data
-		//----------------------------------------------------------------
-		"Creature"
-		{
-			"DisableClumpingBehavior"	"1"
-		}
-	}
-	
-	//=================================================================================
-	// Builder: 4 - Scuttling Scotty Penguin
+	// Builder: 3 - Scuttling Scotty Penguin
 	// As Peon
 	//=================================================================================
-	"npc_dota_builder4"
+	"npc_dota_builder3"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -673,6 +606,77 @@
 					"Item"					"item_build_power_tower_disabled"
 				}
 			}
+		}
+	}
+	
+	//=================================================================================
+	// Builder: 4 - Arneyb Rabbit
+	//=================================================================================
+	"npc_dota_builder4"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/items/courier/arneyb_rabbit/arneyb_rabbit.vmdl"
+		"ModelScale"				"2"
+		"Level"						"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"6"
+		"Ability1"					"build_npc_tower_racks"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
+		"Ability6"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"				"40"
+		"CollisionSize"				"16"
+		"FormationRank"				"4"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"500"
+		"MovementTurnRate"			"0.6"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"220"
+		"StatusHealthRegen"			"0.25"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"800"
+		"VisionNighttimeRange"		"600"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
 		}
 	}
 	
@@ -1492,6 +1496,85 @@
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
 		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"		
+	}
+	
+	//=================================================================================
+	// Building: Unholy Warlock
+	// For Builder: 1 - IMP
+	//=================================================================================
+	"npc_tower_unholy_warlock"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_building"
+		"Model"						"models/items/warlock/golem/ahmhedoq/ahmhedoq.vmdl"
+		"ModelScale"				"1.0"
+		"Level"						"1"
+		"HealthBarOffset"			"140"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"unholy_warlock_permanent_immolation" // Core of the unit building system
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					"sell_builing"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"5"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"2250"
+		"AttackDamageMax"			"2300"
+		"AttackRate"				"0.15"
+		"AttackRange"				"800"
+		"AttackAcquisitionRange"	"900"
+		"ProjectileModel"			"particles/units/heroes/hero_lina/lina_base_attack.vpcf"		// Particle system model for projectile.
+		"ProjectileSpeed"			"3000"		// Speed of projectile.
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0.0"
+		"BountyGoldMax"				"0.0"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"SellBounty"				"0"		//Gained Lumber when selling tower
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
+		"MovementSpeed"				"0"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1200"
+		"StatusHealthRegen"			"0"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
+		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 	}
 	
 	//=================================================================================
@@ -2402,7 +2485,7 @@
 	
 	//=================================================================================
 	// Building: Blade Explorer
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_blade_explorer"
 	{
@@ -2486,7 +2569,7 @@
 	
 	//=================================================================================
 	// Building: Blade Bouncer (model AA)
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_blade_bouncer"
 	{
@@ -2571,7 +2654,7 @@
 	
 	//=================================================================================
 	// Building: Poison Tower
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_poison_tower"
 	{
@@ -2648,7 +2731,7 @@
 	
 	//=================================================================================
 	// Building: Voodoo Spirit
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_voodoo_spirit"
 	{
@@ -2724,7 +2807,7 @@
 	
 	//=================================================================================
 	// Building: StormBringer
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_stormbringer"
 	{
@@ -2800,7 +2883,7 @@
 	
 	//=================================================================================
 	// Building: War Drill
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_war_drill"
 	{
@@ -2876,7 +2959,7 @@
 	
 	//=================================================================================
 	// Building: Blade Totem
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_blade_totem"
 	{
@@ -2952,7 +3035,7 @@
 	
 	//=================================================================================
 	// Building: Ember Slinger
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_ember_slinger"
 	{
@@ -3027,7 +3110,7 @@
 	}
 	//=================================================================================
 	// Building: Power Tower
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_power_tower"
 	{
@@ -3102,7 +3185,7 @@
 	}
 	//=================================================================================
 	// Building: Voodoo Overseer
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_voodoo_overseer"
 	{
@@ -3177,7 +3260,7 @@
 	}
 	//=================================================================================
 	// Building: Voodoo Lounge
-	// For Builder: 4 - Scuttling Scotty Penguin
+	// For Builder: 3 - Scuttling Scotty Penguin
 	//=================================================================================
 	"npc_tower_voodoo_lounge"
 	{
