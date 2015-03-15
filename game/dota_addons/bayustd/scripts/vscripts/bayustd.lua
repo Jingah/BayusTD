@@ -54,9 +54,8 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.0"
+BAYUSTD_VERSION = "1.1.2"
 DEBUG = false
-
 
 OutOfWorldVector = Vector(9000,9000,-100)
 
@@ -70,8 +69,9 @@ end
 
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
-for i=1,MAX_LEVEL do
-	XP_PER_LEVEL_TABLE[i] = i * 1000
+XP_PER_LEVEL_TABLE[1] = 0
+for i=2,MAX_LEVEL do
+	XP_PER_LEVEL_TABLE[i] = i * (i-1) * 500
 end
 
 -- Generated from template
@@ -374,7 +374,10 @@ function bayustd:OnItemPurchased( keys )
 	elseif itemName == "item_tome_of_agility" then
 		hero:ModifyAgility(1)
 	elseif itemName == "item_tome_of_experience" then
-		hero:HeroLevelUp(true)
+		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
+		print("LEVEL XP: " .. lvlxp)
+		hero:AddExperience(lvlxp, false, false)
+		--hero:HeroLevelUp(true)
 	else
 		return
 	end
@@ -505,7 +508,6 @@ function bayustd:OnEntityKilled( keys )
 		self.nRadiantKills = self.nRadiantKills + 1
 		
 		creepsCount = creepsCount - 1
-		
 		
 		if bayustd:getWave() % 10 ~= 0 then
 			ent = Entities:FindByName( nil, "point_teleport_spot" )
@@ -668,7 +670,7 @@ function bayustd:Initbayustd()
 	--ListenToGameEvent('player_team', Dynamic_Wrap(bayustd, 'OnPlayerTeam'), self)
 ]]--
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
-	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self)
+	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self, 60)
 	
 	
 	-- Event Hooks
@@ -731,7 +733,7 @@ function bayustd:OnGraveyardThink()
 		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		--CreateItemOnPositionSync(point_lumber, lumber)
 		--CreateItemOnPositionSync(point_lumber, gold)
-		return 60
+		return 35
 	end
 	return 10
 end

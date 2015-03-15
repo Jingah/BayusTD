@@ -756,6 +756,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	
 	local resources = buildingTable.resources
 	local lumberCost = resources["lumber"]
+	local pID = player:GetPlayerID()
 	print(lumberCost)
 	player.lumber = player.lumber - lumberCost
 	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
