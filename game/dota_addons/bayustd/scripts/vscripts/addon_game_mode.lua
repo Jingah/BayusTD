@@ -15,7 +15,6 @@ require('popups')
 require('FlashUtil')
 require('buildinghelper')
 require('abilities')
-require('lib.statcollection')
 
 
 function Precache( context )
