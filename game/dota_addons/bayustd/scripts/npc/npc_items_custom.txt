@@ -61,6 +61,24 @@
 							 "MODIFIER_STATE_NO_HEALTH_BAR" "MODIFIER_STATE_VALUE_ENABLED"
 					 }
 				 }
+				 "modifier_air_rounds"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+					 }
+				 }
+				 "modifier_non_air_rounds"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_DISABLED"
+					 }
+				 }
 			}   
 	}
 	
@@ -1015,6 +1033,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1097,6 +1116,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1179,6 +1199,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1261,6 +1282,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1343,6 +1365,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.0"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1426,6 +1449,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1508,6 +1532,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1590,6 +1615,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"1"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1672,6 +1698,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1754,6 +1781,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1789,7 +1817,6 @@
 		}
 	}
 	//Buildings for Builder 3
-	//Buildings for Builder 4
 	"item_build_voodoo_spirit_disabled"
 	{
 		"ID"                            "1065"
@@ -1840,6 +1867,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1927,6 +1955,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -2012,6 +2041,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -2097,6 +2127,7 @@
 		"Scale"							"1"
 		"MaxScale"						"0.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -2182,6 +2213,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -2217,435 +2249,6 @@
 			}
 		}
 	}
-	
-	"item_build_holy_root_disabled"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_holy_root_disabled"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4450"
-			}
-		}
-
-	}
-	"item_build_holy_root"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_holy_root"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-		"ItemPermanent"					"1"
-		
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						"1.5"
-		"PlayerCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_tower_holy_root"	//blade bouncer
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4450"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-	
-	"item_build_ent_disabled"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_ent_disabled"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4450"
-			}
-		}
-
-	}
-	"item_build_ent"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_ent"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-		"ItemPermanent"					"1"
-		
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						"1.5"
-		"PlayerCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_tower_holy_root"	//blade bouncer
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"5450"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-	
-	"item_build_obliterator_disabled"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_obliterator_disabled"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"5200"
-			}
-		}
-
-	}
-	"item_build_obliterator"
-	{
-		"ID"                            "1070"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_obliterator"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-		"ItemPermanent"					"1"
-		
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						"1.5"
-		"PlayerCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_tower_obliterator"	//blade bouncer
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"5200"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-	
-	"item_build_fury_maiden_disabled"
-	{
-		"ID"                            "1071"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_fury_maiden_disabled"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4600"
-			}
-		}
-
-	}
-	"item_build_fury_maiden"
-	{
-		"ID"                            "1071"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_fury_maiden"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-		"ItemPermanent"					"1"
-		
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						"1"
-		"PlayerCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_tower_fury_maiden"	//blade bouncer
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4600"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
-	
-	"item_build_lord_of_the_woods_disabled"
-	{
-		"ID"                            "1072"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_lord_of_the_woods_disabled"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
-		"ItemPermanent"					"1"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"14500"
-			}
-		}
-
-	}
-	"item_build_lord_of_the_woods"
-	{
-		"ID"                            "1072"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-		"BaseClass"						"item_datadriven"
-		"AbilityTextureName"			"item_build_lord_of_the_woods"
-		"ItemStackable"					"0"
-		"ItemKillable"					"0"
-		"ItemSellable"                  "0"
-		"ItemPurchasable"				"0"
-		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-		"ItemPermanent"					"1"
-		
-		// BuildingHelper info
-		"Building"						"1"
-		"BuildingSize"					"3"
-		"BuildTime"						"4.0"
-		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
-		"Scale"							"1"
-		"MaxScale"						"2"
-		"PlayerCanControl"				"1"
-
-		"AbilityCooldown"				"0"
-		"AbilityGoldCost"				"0"
-		
-		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
-		"UnitName"						"npc_tower_lord_of_the_woods"	//blade bouncer
-		// End of BuildingHelper info
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0"
-		"MaxLevel"						"1"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"14500"
-			}
-		}
-		
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
-			}
-		}
-	}
+	//Builder 4 towers
 	//End builder items
 }

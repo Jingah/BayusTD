@@ -58,6 +58,20 @@ function build( keys )
 		local player = PlayerResource:GetPlayer(playerID)
 		local building_name = unit:GetUnitName()
 		
+		table.insert(player.buildingEntities, unit)
+		
+		if bayustd:getWave() % 3 == 0 then 	--air levels. Stop ground towers from attacking
+			if unit.attackType ~= 0 then
+				unit:RemoveModifierByName("modifier_disable_building")
+				bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
+			end
+		else
+			if unit.attackType ~= 1 then
+				unit:RemoveModifierByName("modifier_disable_building")
+				bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
+			end
+		end
+		
 		-- Add 1 to the player building tracking table for that name
 		if not player.buildings[building_name] then
 			player.buildings[building_name] = 1

@@ -59,6 +59,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -109,6 +110,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"1"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -159,6 +161,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -209,6 +212,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -273,6 +277,7 @@
 		"Scale"							"1"
 		"MaxScale"						"2"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -337,6 +342,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -389,6 +395,7 @@
 		"Scale"							"1"
 		"MaxScale"						"0.9"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -439,6 +446,7 @@
 		"Scale"							"1"
 		"MaxScale"						"0.6"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -489,6 +497,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.4"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -539,6 +548,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -603,6 +613,7 @@
 		"Scale"							"1"
 		"MaxScale"						"0.9"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -667,6 +678,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.4"
 		"PlayerCanControl"				"1"
+		"AttackType"					"1"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -703,7 +715,6 @@
 		}
 	}
 	//Buildings for Builder 3
-	//Buildings for Builder 4
 	"build_blade_totem_disabled"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -733,6 +744,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -797,6 +809,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -846,6 +859,7 @@
 		"Scale"							"1"
 		"MaxScale"						"0.7"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -895,6 +909,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -944,6 +959,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -993,6 +1009,7 @@
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -1028,6 +1045,7 @@
 			}
 		}
 	}
+	//Builder 4 buildings
 	
 	"upgrade_barracks"
 	{

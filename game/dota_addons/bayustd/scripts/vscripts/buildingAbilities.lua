@@ -8,13 +8,20 @@ function SellBuilding( keys )
 	local hero = caster:GetPlayerOwner():GetAssignedHero()
 	local pID = hero:GetPlayerID()
 	local player = PlayerResource:GetPlayer(pID)
-	local pos = caster:GetAbsOrigin()
 	
 	local name = caster:GetUnitName()
 	local unit_table = GameRules.UnitKV[name]
 	local sellBounty = unit_table.SellBounty
+	
+	for i, v in ipairs(player.buildingEntities) do 
+		if v == caster then
+			table.remove(player.buildingEntities, i)
+		end
+		--PrintTable( player.buildingEntities )
+	end
 
 	caster:RemoveBuilding(true)
+
 	if sellBounty ~= 0 then
 		player.lumber = player.lumber + sellBounty
 		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)

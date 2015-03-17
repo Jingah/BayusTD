@@ -594,7 +594,11 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	-- create building entity
 	print("UnitName: " .. order.unitName)
 	local unit = CreateUnitByName(order.unitName, order.pos, false, playersHero, nil, order.team)
+	
+	--Custom stuff
 	bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_disable_building", -1)
+	unit.attackType = buildingTable:GetVal("AttackType", "number")
+	--Custom stuff
 	
 	local building = unit --alias
 	building.isBuilding = true
@@ -694,7 +698,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 				if keys2.onConstructionCompleted ~= nil then
 					keys2.onConstructionCompleted(unit)
 					unit.constructionCompleted = true
-					bayustd:giveUnitDataDrivenModifier(unit, unit, "modifier_enable_building", -1)
 				end
 				unit.bUpdatingHealth = false
 				-- clean up the timer if we don't need it.

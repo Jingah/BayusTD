@@ -54,7 +54,7 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.1.2"
+BAYUSTD_VERSION = "1.1.5"
 DEBUG = false
 
 OutOfWorldVector = Vector(9000,9000,-100)
@@ -124,40 +124,6 @@ function bayustd:OnAllPlayersLoaded()
 	end
 end
 
---[[
-This function is called once and only once for every player when they spawn into the game for the first time.  It is also called
-if the player's hero is replaced with a new hero for any reason.  This function is useful for initializing heroes, such as adding
-levels, changing the starting gold, removing/adding abilities, adding physics, etc.
-The hero parameter is the hero entity that just spawned in
-]]
-function bayustd:OnHeroInGame(hero)
-	print("[BAYUSTD] Hero spawned in game for first time -- " .. hero:GetUnitName())
-	local pID = hero:GetPlayerID()
-	
-	local player = PlayerResource:GetPlayer(pID)
-	
-	--[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
-	--with the "example_ability" ability
-	local abil = hero:GetAbilityByIndex(1)
-	hero:RemoveAbility(abil:GetAbilityName())
-	hero:AddAbility("example_ability")]]
-end
-
---[[
-This function is called once and only once when the game completely begins (about 0:00 on the clock).  At this point,
-gold will begin to go up in ticks if configured, creeps will spawn, towers will become damageable etc.  This function
-is useful for starting any game logic timers/thinkers, beginning the first round, etc.
-]]
-function bayustd:OnGameInProgress()
-	print("[BAYUSTD] The game has officially begun")
-
-	Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
-		function()
-			print("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
-			return 30.0 -- Rerun this timer every 30 game-time seconds 
-		end)
-end
-
 -- An NPC has spawned somewhere in game.  This includes heroes
 function bayustd:OnNPCSpawned(keys)
 	--print("[bayustd] NPC Spawned")
@@ -198,6 +164,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	player.buildings = {}
 	player.builders = {}
+	player.buildingEntities = {}
 	
 	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
@@ -322,7 +289,7 @@ function bayustd:OnDisconnect(keys)
 end
 
 -- An item was picked up off the ground
-function bayustd:OnItemPickedUp(keys)
+--[[function bayustd:OnItemPickedUp(keys)
 	print ( '[DOTACRAFT] OnItemPickedUp' )
 	--DeepPrintTable(keys)
 
@@ -343,7 +310,7 @@ function bayustd:OnItemPickedUp(keys)
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
 		player:RemoveItem(itemEntity)
 	end--]]
-end
+end]]
 
 -- An item was purchased by a player
 function bayustd:OnItemPurchased( keys )
@@ -543,6 +510,7 @@ function bayustd:OnEntityKilled( keys )
 					PlayerResource:SetGold(nPlayerID, 100, true)
 				end
 			end
+			wave = wave + 1
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
 			local a = 20
@@ -638,45 +606,65 @@ function bayustd:Initbayustd()
         GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
         GameRules:Defeated()
     end, 'Ends the game.', FCVAR_CHEAT)
+	
+	Convars:RegisterCommand( "ability_values_entity", function(name, entityIndex)
+		local cmdPlayer = Convars:GetCommandClient()
+		local pID = cmdPlayer:GetPlayerID()
 
-	--ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(bayustd, 'OnItemPickedUp'), self)
+		if cmdPlayer then
+			local unit = EntIndexToHScript(tonumber(entityIndex))
+	  		if unit:GetUnitName() == "npc_dota_builder1" or unit:GetUnitName() == "npc_dota_builder2" or unit:GetUnitName() == "npc_dota_builder3" or unit:GetUnitName() == "npc_dota_builder4" then
+		  		local abilityValues = {}
+				local itemValues = {}
+
+		  		-- Iterate over the abilities
+		  		for i=0,15 do
+		  			local ability = unit:GetAbilityByIndex(i)
+
+		  			-- If there's an ability in this slot and its not hidden, define the number to show
+		  			if ability and not ability:IsHidden() then
+		  				local lumberCost = ability:GetLevelSpecialValueFor("resource_lumber", ability:GetLevel() - 1)
+		  				if lumberCost then
+		  					table.insert(abilityValues,lumberCost)
+		  				else
+		  					table.insert(abilityValues,0)
+		  				end
+				  	end
+		  		end
+				-- Iterate over the items
+		  		--[[for i=0,5 do
+		  			local item = unit:GetItemInSlot(i)
+
+		  			-- If there's an ability in this slot and its not hidden, define the number to show
+		  			if item then
+		  				local lumberCost = ability:GetLevelSpecialValueFor("resource_lumber", ability:GetLevel() - 1)
+		  				if lumberCost then
+		  					table.insert(abilityValues,lumberCost)
+		  				else
+		  					table.insert(abilityValues,0)
+		  				end
+				  	end
+		  		end]]
+
+		  		--DeepPrintTable(abilityValues)
+
+		    	FireGameEvent( 'ability_values_send', { player_ID = pID, 
+		    										hue_1 = -10, val_1 = abilityValues[1], 
+		    										hue_2 = -10, val_2 = abilityValues[2], 
+		    										hue_3 = -10, val_3 = abilityValues[3], 
+		    										hue_4 = -10, val_4 = abilityValues[4], 
+		    										hue_5 = -10, val_5 = abilityValues[5],
+		    										hue_6 = -10, val_6 = abilityValues[6] } )
+		    else
+		    	-- Hide all the values if the unit is not supposed to show any.
+		    	FireGameEvent( 'ability_values_send', { player_ID = pID, val_1 = 0, val_2 = 0, val_3 = 0, val_4 = 0, val_5 = 0, val_6 = 0 } )
+		    end
+	  	end
+	end, "Change AbilityValues", 0 )
 	
-	--[[ListenToGameEvent('dota_player_gained_level', Dynamic_Wrap(bayustd, 'OnPlayerLevelUp'), self)
-	ListenToGameEvent('dota_ability_channel_finished', Dynamic_Wrap(bayustd, 'OnAbilityChannelFinished'), self)
-	ListenToGameEvent('dota_player_learned_ability', Dynamic_Wrap(bayustd, 'OnPlayerLearnedAbility'), self)
 	
-	
-	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
-	
-	ListenToGameEvent('last_hit', Dynamic_Wrap(bayustd, 'OnLastHit'), self)
-	ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(bayustd, 'OnNonPlayerUsedAbility'), self)
-	ListenToGameEvent('player_changename', Dynamic_Wrap(bayustd, 'OnPlayerChangedName'), self)
-	ListenToGameEvent('dota_rune_activated_server', Dynamic_Wrap(bayustd, 'OnRuneActivated'), self)
-	ListenToGameEvent('dota_player_take_tower_damage', Dynamic_Wrap(bayustd, 'OnPlayerTakeTowerDamage'), self)
-	ListenToGameEvent('tree_cut', Dynamic_Wrap(bayustd, 'OnTreeCut'), self)
-	ListenToGameEvent('entity_hurt', Dynamic_Wrap(bayustd, 'OnEntityHurt'), self)
-	ListenToGameEvent('player_connect', Dynamic_Wrap(bayustd, 'PlayerConnect'), self)
-	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
-	ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(bayustd, 'OnGameRulesStateChange'), self)
-	ListenToGameEvent('dota_team_kill_credit', Dynamic_Wrap(bayustd, 'OnTeamKillCredit'), self)
-	ListenToGameEvent("player_reconnected", Dynamic_Wrap(bayustd, 'OnPlayerReconnect'), self)
-	--ListenToGameEvent('player_spawn', Dynamic_Wrap(bayustd, 'OnPlayerSpawn'), self)
-	--ListenToGameEvent('dota_unit_event', Dynamic_Wrap(bayustd, 'OnDotaUnitEvent'), self)
-	--ListenToGameEvent('nommed_tree', Dynamic_Wrap(bayustd, 'OnPlayerAteTree'), self)
-	--ListenToGameEvent('player_completed_game', Dynamic_Wrap(bayustd, 'OnPlayerCompletedGame'), self)
-	--ListenToGameEvent('dota_match_done', Dynamic_Wrap(bayustd, 'OnDotaMatchDone'), self)
-	--ListenToGameEvent('dota_combatlog', Dynamic_Wrap(bayustd, 'OnCombatLogEvent'), self)
-	--ListenToGameEvent('dota_player_killed', Dynamic_Wrap(bayustd, 'OnPlayerKilled'), self)
-	--ListenToGameEvent('player_team', Dynamic_Wrap(bayustd, 'OnPlayerTeam'), self)
-]]--
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
 	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self, 60)
-	
-	
-	-- Event Hooks
-	-- All of these events can potentially be fired by the game, though only the uncommented ones have had
-	-- Functions supplied for them.  If you are interested in the other events, you can uncomment the
-	-- ListenToGameEvent line and add a function to handle the event
 
 	-- Full units file to get the custom values
   	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
@@ -688,14 +676,8 @@ function bayustd:Initbayustd()
 	self.vBots = {}
 	self.vBroadcasters = {}
 
-	self.vPlayers = {}
-	self.vRadiant = {}
-	self.vDire = {}
-
 	self.nRadiantKills = 0
 	self.nDireKills = 0
-
-	self.bSeenWaitForPlayers = false
 	
   	-- Building Helper by Myll
   	BuildingHelper:Init(8192) -- nHalfMapLength
@@ -749,7 +731,6 @@ function bayustd:OnThink()
 end
 
 function bayustd:giveUnitDataDrivenModifier(source, target, modifier, dur)
-    --source and target should be hscript-units. The same unit can be in both source and target
     local item = CreateItem( "item_apply_modifiers", source, source)
     item:ApplyDataDrivenModifier( source, target, modifier, {duration=dur} )
 end
@@ -795,16 +776,42 @@ function bayustd:SpawnCreeps()
 		message = "Round " .. wave .. " coming",
 		duration = 2
 	}
-	FireGameEvent("show_center_message", messageinfo)  
-	--GameRules:SendCustomMessage("Round <font color='#FF0000'>" .. wave .. " coming!", 0, 0)
-	wave = wave + 1
+	FireGameEvent("show_center_message", messageinfo)
+	
+	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+		if PlayerResource:HasSelectedHero(nPlayerID) then					
+			local player = PlayerResource:GetPlayer(nPlayerID)
+			PrintTable( player.buildingEntities )
+			for i, v in ipairs(player.buildingEntities) do
+				if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking
+					if v.attackType ~= 0 then
+						v:RemoveModifierByName("modifier_disable_building")
+						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
+					else
+						v:RemoveModifierByName("modifier_enable_building")
+						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
+					end
+				else
+					if v.attackType ~= 1 then
+						v:RemoveModifierByName("modifier_disable_building")
+						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
+					else
+						v:RemoveModifierByName("modifier_enable_building")
+						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
+					end
+				end
+			end
+		end
+	end
 	return 1 -- Check again later in case more players spawn
 end
 
--- Go through every ability and check if the requirements are met
+-- Go through every ability and item and check if the requirements are met
 function CheckAbilityRequirements( unit, player )
 
 	local requirements = GameRules.Requirements
+	local hero = unit:GetOwner()
+	local pID = hero:GetPlayerID()
 	local buildings = player.buildings
 	local requirement_failed = false
 
@@ -821,18 +828,18 @@ function CheckAbilityRequirements( unit, player )
 			-- Check the table of requirements in the KV file
 			if requirements[disabled_ability_name] then
 				local requirement_count = #requirements[disabled_ability_name]
-				print(disabled_ability_name.. "has "..requirement_count.." Requirements")
+				--print(disabled_ability_name.. "has "..requirement_count.." Requirements")
 						
 				-- Go through each requirement line and check if the player has that building on its list
 				for k,v in pairs(requirements[disabled_ability_name]) do
-					print("Building Name","Need","Have")
-					print(k,v,buildings[k])
+				--	print("Building Name","Need","Have")
+					--print(k,v,buildings[k])
 
 					-- Look for the building and update counter
 					if buildings[k] and buildings[k] > 0 then
-						print("Found at least one "..k)
+						--print("Found at least one "..k)
 					else
-						print("Failed one of the requirements for "..disabled_ability_name..", no "..k.." found")
+						--print("Failed one of the requirements for "..disabled_ability_name..", no "..k.." found")
 						requirement_failed = true
 						break
 					end
@@ -843,7 +850,7 @@ function CheckAbilityRequirements( unit, player )
 					local ability_len = string.len(disabled_ability_name)
 					local ability_name = string.sub(disabled_ability_name, 1 , ability_len - len)
 
-					print("Requirement is met, swapping "..disabled_ability_name.." for "..ability_name)
+					--print("Requirement is met, swapping "..disabled_ability_name.." for "..ability_name)
 					unit:AddAbility(ability_name)
 					unit:SwapAbilities(disabled_ability_name, ability_name, false, true)
 					unit:RemoveAbility(disabled_ability_name)
@@ -851,6 +858,7 @@ function CheckAbilityRequirements( unit, player )
 					-- Set the new ability level
 					local ability = unit:FindAbilityByName(ability_name)
 					ability:SetLevel(ability:GetMaxLevel())
+					FireGameEvent( 'ability_values_force_check', { player_ID = pID })
 				end				
 			end
 		end	
@@ -864,18 +872,18 @@ function CheckAbilityRequirements( unit, player )
 			-- Check the table of requirements in the KV file
 			if requirements[disabled_item_name] then
 				local requirement_count = #requirements[disabled_item_name]
-				print(disabled_item_name.. "has "..requirement_count.." Requirements")
+				--print(disabled_item_name.. "has "..requirement_count.." Requirements")
 						
 				-- Go through each requirement line and check if the player has that building on its list
 				for k,v in pairs(requirements[disabled_item_name]) do
-					print("Building Name","Need","Have")
-					print(k,v,buildings[k])
+					--print("Building Name","Need","Have")
+					--print(k,v,buildings[k])
 
 					-- Look for the building and update counter
 					if buildings[k] and buildings[k] > 0 then
-						print("Found at least one "..k)
+						--print("Found at least one "..k)
 					else
-						print("Failed one of the requirements for "..disabled_item_name..", no "..k.." found")
+						--print("Failed one of the requirements for "..disabled_item_name..", no "..k.." found")
 						requirement_failed = true
 						break
 					end
@@ -886,10 +894,11 @@ function CheckAbilityRequirements( unit, player )
 					local item_len = string.len(disabled_item_name)
 					local item_name = string.sub(disabled_item_name, 1 , item_len - len)
 
-					print("Requirement is met, swapping "..disabled_item_name.." for "..item_name)
+					--print("Requirement is met, swapping "..disabled_item_name.." for "..item_name)
 					unit:RemoveItem(item)
 					local newItem = CreateItem(item_name, player, player)
 					unit:AddItem(newItem)
+					FireGameEvent( 'ability_values_force_check', { player_ID = pID })
 				end				
 			end
 		end	
@@ -898,7 +907,6 @@ end
 
 
 function bayustd:PlayerSay(keys)
-	--print ('[SNS] PlayerSay')
 	--PrintTable(keys)
 
 	local ply = keys.ply
@@ -915,23 +923,25 @@ function bayustd:PlayerSay(keys)
 	end
 
 	if DEBUG and string.find(keys.text, "^-gold") then
-		print("Giving gold to player")
+		print("Giving gold to playerID " .. plyID)
 		hero:SetGold(50000, false)
 	end
 	
 	if DEBUG and string.find(keys.text, "^-lumber") then
-		print("Giving lumber to player")
+		print("Giving lumber to playerID " .. plyID)
 		ply.lumber = ply.lumber + 5000
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = ply.lumber })
 	end
 	
 	if DEBUG and string.find(keys.text, "^-lvl") then
-		hero:HeroLevelUp(true)
+		print("Adding level to playerID " .. plyID)
+		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
+		hero:AddExperience(lvlxp, false, false)
 	end
 	
-	if DEBUG and string.find(keys.text, "^-team") then
-		print("TEAMNUMBER IS: " .. ply:GetTeam())
-		print("Teamname is: " .. GetTeamName(ply:GetTeam()))
+	-- Player commands
+	if string.find(keys.text, "^-air") then
+		GameRules:SendCustomMessage("Air rounds: 3, 6, 9, 12, 15, 18", 0, 0)
 	end
 end
 
