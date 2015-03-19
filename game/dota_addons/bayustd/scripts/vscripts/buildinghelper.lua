@@ -19,6 +19,12 @@ BHGlobalDummySet = false
 PACK_ENABLED = false
 Debug_BH = true
 
+-- Ghost Building Preferences
+GRID_ALPHA = 60 -- Defines the transparency of the ghost squares
+MODEL_ALPHA = 100 -- Defines the transparency of the ghost model. BMD says it doesn't work currently.
+RECOLOR_GHOST_MODEL = true -- Whether to recolor the ghost model green/red or not
+USE_PROJECTED_GRID = false -- Enabling this will make the ghost squares follow terrain and be placed under the model. Works better with less than 100 alpha.
+
 -- Circle packing math.
 BH_A = math.pow(2,.5) --multi this by rad of building
 BH_cos45 = math.pow(.5,.5) -- cos(45)
@@ -55,7 +61,7 @@ function BuildingHelper:Init(...)
 	end, "", 0 )
 
 	AbilityKVs = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
-	ItemKVs = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+	ItemKVs = GameRules.ItemKV --LoadKeyValues("scripts/npc/npc_items_custom.txt")
 	UnitKVs = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 	-- abils and items can't have the same name or the item will override the ability.
 	--PrintTable(abilities)
@@ -95,7 +101,6 @@ function BuildingHelper:Init(...)
 
 	--Setup the BH dummy
 	BH_DUMMY = CreateUnitByName("npc_bh_dummy", OutOfWorldVector, false, nil, nil, DOTA_TEAM_GOODGUYS)
-	InitAbilities(BH_DUMMY)
 
 	--print("BuildingAbilities: ")
 	--PrintTable(BuildingAbilities)
@@ -185,11 +190,9 @@ function BuildingHelper:AddBuilding(keys)
 		keys.onBuildingPosChosen = callback
 	end	
 
-	-- TODO: since the ability phase funcs are screwed up, can't get when building was canceled
-	-- due to right click
-	function keys:OnCanceled( callback )
-		keys.onCanceledCallback = callback
-	end
+	--[[function keys:onBuildingCanceled( callback )
+		keys.onBuildingCanceled = callback
+	end]]
 
 	local hAbility = keys.ability
 	local abilName = hAbility:GetAbilityName()
@@ -265,6 +268,8 @@ function BuildingHelper:AddBuilding(keys)
 		return
 	end
 
+	--print("UnitName: " .. unitName)
+
 	local castRange = buildingTable:GetVal("AbilityCastRange", "number")
 	if castRange == nil then
 		castRange = 200
@@ -284,41 +289,6 @@ function BuildingHelper:AddBuilding(keys)
 		playersHero:SetGold(playersHero:GetGold()+goldCost, false)
 	end
 
-	local resources = {}
-	local notEnoughResources = {}
-	-- Check other resource costs.
-	local abilitySpecials = {}
-	if buildingTable["AbilitySpecial"] ~= nil then
-		abilitySpecials = buildingTable["AbilitySpecial"]
-	end
-
-	for k2,v2 in pairs(abilitySpecials) do
-		if abilitySpecials[k2] ~= nil then
-			local abilitySpecial = abilitySpecials[k2]
-			for k3,v3 in pairs(abilitySpecial) do
-				if string.starts(k3, "resource_") then
-					local cost = tonumber(abilitySpecial[k3])
-					local resourceName = string.sub(k3, 10):lower()
-					resources[resourceName] = cost
-					--print("Detected resource: " .. resourceName)
-					--print(player[resourceName])
-					if player[resourceName] == nil then
-						player[resourceName] = 0
-					end
-					if player[resourceName] < cost then
-						notEnoughResources[resourceName] = cost-player[resourceName]
-					end
-				end
-			end
-		end
-	end
-
-	buildingTable.resources = resources
-
-	if TableLength(notEnoughResources) > 0 then
-		return {["error"] = "not_enough_resources", ["resourceTable"] = notEnoughResources}
-	end
-
 	--setup the dummy for model ghost
 	if player.modelGhostDummy ~= nil then
 		player.modelGhostDummy:RemoveSelf()
@@ -335,6 +305,7 @@ function BuildingHelper:AddBuilding(keys)
 			fMaxScale = 1
 		end
 	end
+
 	player.modelGhostDummy = CreateUnitByName(unitName, OutOfWorldVector, false, nil, nil, caster:GetTeam())
 	local mgd = player.modelGhostDummy -- alias
 	--mgd:SetModelScale(.2) -- this won't reduce the model particle size atm...
@@ -352,6 +323,8 @@ function BuildingHelper:AddBuilding(keys)
 		if not player.cursorStream then
 			local delta = .03
 			local start = false
+			local generateParticles = true
+			local modelParticle = nil
 			player.cursorStream = FlashUtil:RequestDataStream( "cursor_position_world", delta, pID, function(playerID, cursorPos)
 				local validPos = true
 				-- Remember, our blocked squares are defined according to the square's center.
@@ -364,11 +337,7 @@ function BuildingHelper:AddBuilding(keys)
 					if validPos then
 						keys:AddToGrid(cursorPos)
 					end
-					FlashUtil:StopDataStream( player.cursorStream )
-					player.cursorStream = nil
-					player.buildingPosChosen = false
-					player.lastCursorCenter = OutOfWorldVector
-					ClearParticleTable(player.ghost_particles)
+					player:CancelGhost()
 					return
 				end
 
@@ -396,49 +365,79 @@ function BuildingHelper:AddBuilding(keys)
 						bottomBorderY = centerY-halfSide}
 
 					-- No need to redraw the particles if the cursor is at the same location. 
-					-- (bug) it will stay green if cursor stays at the same location and a building is built at the location.
 					local cursorSnap = nil
 					if player.lastCursorCenter ~= nil then
 						local cursorSnapX = SnapToGrid32(player.lastCursorCenter.x)
 						local cursorSnapY = SnapToGrid32(player.lastCursorCenter.y)
 						cursorSnap = Vector(cursorSnapX, cursorSnapY, vBuildingCenter.z)
 					end
-					if cursorSnap ~= nil and vBuildingCenter ~= cursorSnap then
-						ClearParticleTable(player.ghost_particles)
+					if cursorSnap ~= nil then
 						local areaBlocked = false
 						local squares = {}
+
+						-- Iterate thru the square locations
+						local ptr = 1
 						for x=boundingRect.leftBorderX+32,boundingRect.rightBorderX-32,64 do
 							for y=boundingRect.topBorderY-32,boundingRect.bottomBorderY+32,-64 do
+								if generateParticles then
+									if not modelParticle then
+										--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
+										modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
+										ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)						
+										ParticleManager:SetParticleControl(modelParticle, 3, Vector(MODEL_ALPHA,0,0))
+										ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
+									end
+
+									-- Particles haven't been generated yet. Generate them.
+									local ghost_grid_particle = "particles/buildinghelper/square_sprite.vpcf"
+									if USE_PROJECTED_GRID then
+										ghost_grid_particle = "particles/buildinghelper/square_projected.vpcf"
+									end
+									local id = ParticleManager:CreateParticleForPlayer(ghost_grid_particle, PATTACH_ABSORIGIN, caster, player)
+									ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
+									ParticleManager:SetParticleControl(id, 3, Vector(GRID_ALPHA,0,0))
+									table.insert(player.ghost_particles, id)
+
+								end
+
+								-- Move a particle to a correct location
+								local particle = player.ghost_particles[ptr]
+								ptr = ptr + 1
+
 								local groundZ = GetGroundPosition(Vector(x,y,z),caster).z
-								--table.insert(squares, Vector(x,y,z))
-								--print(VectorString(Vector(x,y,z)))
-								local id = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/square_sprite.vpcf", PATTACH_ABSORIGIN, caster, player)
-								ParticleManager:SetParticleControl(id, 0, Vector(x,y,groundZ))
-								ParticleManager:SetParticleControl(id, 1, Vector(32,0,0))
-								ParticleManager:SetParticleControl(id, 3, Vector(70,0,0))
+								ParticleManager:SetParticleControl(particle, 0, Vector(x,y,groundZ))
+								--print("Moving " .. particle .. " to " .. VectorString(Vector(x,y,groundZ)))
+
 								if IsSquareBlocked(Vector(x,y,z), true) then
-									ParticleManager:SetParticleControl(id, 2, Vector(255,0,0))
+									ParticleManager:SetParticleControl(particle, 2, Vector(255,0,0))
 									areaBlocked = true
 									--DebugDrawBox(Vector(x,y,z), Vector(-32,-32,0), Vector(32,32,1), 255, 0, 0, 40, delta)
 								else
-									ParticleManager:SetParticleControl(id, 2, Vector(0,255,0))
+									ParticleManager:SetParticleControl(particle, 2, Vector(0,255,0))
 								end
-								table.insert(player.ghost_particles, id)
 							end
 						end
-						--<BMD> position is 0, model attach is 1, color is CP2, and alpha is CP3.x
-						--ParticleManager:SetParticleControlEnt(particle, 1, unit, 1, "follow_origin", unit:GetAbsOrigin(), true)
-						local modelParticle = ParticleManager:CreateParticleForPlayer("particles/buildinghelper/ghost_model.vpcf", PATTACH_ABSORIGIN, mgd, player)
-						ParticleManager:SetParticleControlEnt(modelParticle, 1, mgd, 1, "follow_origin", mgd:GetAbsOrigin(), true)
-						ParticleManager:SetParticleControl(modelParticle, 3, Vector(100,0,0))
-						ParticleManager:SetParticleControl(modelParticle, 4, Vector(fMaxScale,0,0))
-						if areaBlocked then
-							ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))
-						else
-							ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
+
+						-- color + move model particle
+						if modelParticle ~= nil then
+							-- move model ghost particle
+							ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
+							if RECOLOR_GHOST_MODEL then
+								if areaBlocked then
+									ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,0,0))	
+								else
+									ParticleManager:SetParticleControl(modelParticle, 2, Vector(0,255,0))
+								end
+							else
+								ParticleManager:SetParticleControl(modelParticle, 2, Vector(255,255,255)) -- Draws the ghost with the original colors
+							end
 						end
-						ParticleManager:SetParticleControl(modelParticle, 0, vBuildingCenter)
-						table.insert(player.ghost_particles, modelParticle)
+
+						if generateParticles then
+							-- modelParticle is in the last index.
+							table.insert(player.ghost_particles, modelParticle)
+							generateParticles = false
+						end
 					end
 					player.lastCursorCenter = vBuildingCenter
 				end
@@ -520,7 +519,10 @@ function BuildingHelper:AddBuilding(keys)
 		caster.orders[DoUniqueString("order")] = {["unitName"] = unitName, ["pos"] = vBuildingCenter, ["team"] = caster:GetTeam(),
 			["buildingTable"] = buildingTable, ["squares_to_close"] = closed, ["keys"] = keys}
 		Timers:CreateTimer(.03, function()
-			caster:CastAbilityOnPosition(vBuildingCenter, abil, 0)
+			local casterIndex = caster:GetEntityIndex()
+			local order = DOTA_UNIT_ORDER_CAST_POSITION
+			local abilIndex = abil:GetEntityIndex()
+			ExecuteOrderFromTable({ UnitIndex = casterIndex, OrderType = DOTA_UNIT_ORDER_CAST_POSITION, AbilityIndex = abilIndex, Position = vBuildingCenter, Queue = false}) 
 			if keys.onBuildingPosChosen ~= nil then
 				keys.onBuildingPosChosen(vBuildingCenter)
 				keys.onBuildingPosChosen = nil
@@ -628,9 +630,16 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	local bUpdateHealth = buildingTable:GetVal("UpdateHealth", "bool")
 	local fMaxHealth = unit:GetMaxHealth()
 	-- health to add every tick until build time is completed.
-	local nHealthInterval = (fMaxHealth*BUILDINGHELPER_THINK)/buildTime
-	-- increase the health interval by 25%.
-	nHealthInterval = nHealthInterval + .25*nHealthInterval
+	-- First we estimate the real time we have to complete the building.
+	local nTickEstimate = buildTime * 0.1
+	local nBuildEstimate = buildTime - nTickEstimate
+	-- Now we calculate the health interval by the adjusted time to complete
+	local nHealthInterval = fMaxHealth / (nBuildEstimate / BUILDINGHELPER_THINK)
+	-- SetHealth only takes an int so we'll floor the interval and keep track of the difference
+	local nSmallHealthInterval = nHealthInterval - math.floor(nHealthInterval) -- just the floating point component
+	nHealthInterval = math.floor(nHealthInterval)
+	local nHPAdjustment = 0
+	local nAddedHealth = 0
 
 	if nHealthInterval < 1 then
 		--print("[BuildingHelper] nHealthInterval is below 1. Setting nHealthInterval to 1. The unit will gain full health before the build time ends.\n" ..
@@ -679,7 +688,16 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 			if not timesUp then
 				if unit.bUpdatingHealth then
 					if unit:GetHealth() < fMaxHealth then
-						unit:SetHealth(unit:GetHealth()+nHealthInterval)
+						-- add the float from nHealthInterval. if the floats > 1 then add an extra health this tick
+						nHPAdjustment = nHPAdjustment + nSmallHealthInterval
+						if nHPAdjustment > 1 then
+							unit:SetHealth(unit:GetHealth() + nHealthInterval + 1)
+							nHPAdjustment = nHPAdjustment - 1
+							nAddedHealth = nAddedHealth + nHealthInterval + 1
+						else
+							unit:SetHealth(unit:GetHealth() + nHealthInterval)
+							nAddedHealth = nAddedHealth + nHealthInterval
+						end
 					else
 						unit.bUpdatingHealth = false
 					end
@@ -694,9 +712,10 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 					end
 				end
 			else
-				-- completion: timesUp is true
+				-- completion: timesUp is true, add the final tick of hp
 				if keys2.onConstructionCompleted ~= nil then
 					keys2.onConstructionCompleted(unit)
+					unit:SetHealth(unit:GetHealth() + (fMaxHealth - nAddedHealth) )
 					unit.constructionCompleted = true
 				end
 				unit.bUpdatingHealth = false
@@ -753,32 +772,6 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 		playersHero:SetGold(playersHero:GetGold()-goldCost, false)
 	end
 	buildingTable["abil"]:StartCooldown(cooldown)
-
-	--print("Resource costs:")
-	PrintTable(buildingTable["resources"])
-	
-	local resources = buildingTable.resources
-	local lumberCost = resources["lumber"]
-	local pID = player:GetPlayerID()
-	print(lumberCost)
-	player.lumber = player.lumber - lumberCost
-	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
-
-	--[[ ensure player still has enough resources.
-	for k,v in pairs(buildingTable["resources"]) do
-		if player[resourceName] < cost then
-			notEnoughResources[resourceName] = cost-player[resourceName]
-		end
-	end]]
-
-	-- take out custom resources from player
-	--[[local resources = buildingTable.resources
-	for k,v in pairs(resources) do
-		player[k] = player[k] - v
-		if player[k] < 0 then
-			player[k] = 0
-		end
-	end]]
 
 	if keys2.onConstructionStarted ~= nil then
 		keys2.onConstructionStarted(unit)

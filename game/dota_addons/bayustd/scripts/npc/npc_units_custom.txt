@@ -727,6 +727,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"190"		//Gained Lumber when selling tower
+		"LumberCost"				"190"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -806,6 +807,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"210"		//Gained Lumber when selling tower
+		"LumberCost"				"210"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -885,6 +887,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"475"		//Gained Lumber when selling tower
+		"LumberCost"					"475"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -965,6 +968,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"825"		//Gained Lumber when selling tower
+		"LumberCost"					"825"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1057,6 +1061,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1200"		//Gained Lumber when selling tower
+		"LumberCost"					"1200"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1137,6 +1142,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1300"		//Gained Lumber when selling tower
+		"LumberCost"					"1300"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1229,6 +1235,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"4750"		//Gained Lumber when selling tower
+		"LumberCost"					"4750"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1308,6 +1315,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5050"		//Gained Lumber when selling tower
+		"LumberCost"					"5050"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1387,6 +1395,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5600"		//Gained Lumber when selling tower
+		"LumberCost"					"5600"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1466,6 +1475,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5700"		//Gained Lumber when selling tower
+		"LumberCost"					"5700"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1545,6 +1555,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"0"		//Gained Lumber when selling tower
+		"LumberCost"					"15500"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1625,6 +1636,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"4450"		//Gained Lumber when selling tower
+		"LumberCost"					"4450"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1705,6 +1717,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5450"		//Gained Lumber when selling tower
+		"LumberCost"				"5450"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1785,6 +1798,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5200"		//Gained Lumber when selling tower
+		"LumberCost"					"5200"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1865,6 +1879,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"4600"		//Gained Lumber when selling tower
+		"LumberCost"					"4600"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1945,6 +1960,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"0"		//Gained Lumber when selling tower
+		"LumberCost"					"14500"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2025,6 +2041,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"140"		//Gained Lumber when selling tower
+		"LumberCost"					"140"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2119,6 +2136,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"265"		//Gained Lumber when selling tower
+		"LumberCost"					"265"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2199,6 +2217,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"625"		//Gained Lumber when selling tower
+		"LumberCost"					"625"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2278,6 +2297,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"800"		//Gained Lumber when selling tower
+		"LumberCost"					"800"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2359,6 +2379,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"LumberCost"				"1150"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2451,6 +2472,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1200"		//Gained Lumber when selling tower
+		"LumberCost"				"1200"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2532,7 +2554,6 @@
 		//----------------------------------------------------------------
 		"GoldCost"					"0"
 		"LumberCost"				"4500"
-		"FoodCost"					"0"	//and 5 after theres more than 1 built
 		"BuildTime"					"10"
 		"SellBounty"				"4500"		//Gained Lumber when selling tower
 		
@@ -2697,6 +2718,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"75"		//Gained Lumber when selling tower
+		"LumberCost"				"75"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2773,6 +2795,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5450"		//Gained Lumber when selling tower
+		"LumberCost"					"5450"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2849,6 +2872,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"825"		//Gained Lumber when selling tower
+		"LumberCost"				"825"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2925,6 +2949,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"410"		//Gained Lumber when selling tower
+		"LumberCost"				"410"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3001,6 +3026,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"LumberCost"				"1150"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3077,6 +3103,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"125"		//Gained Lumber when selling tower
+		"LumberCost"				"125"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3152,6 +3179,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"0"		//Gained Lumber when selling tower
+		"LumberCost"					"17500"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3227,6 +3255,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"5700"		//Gained Lumber when selling tower
+		"LumberCost"					"5700"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3302,6 +3331,7 @@
 		// Building Cost Stats
 		//----------------------------------------------------------------
 		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"LumberCost"				"1150"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -3595,6 +3625,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_dragonspawn_b/n_creep_dragonspawn_b.vmdl"
 		"ModelScale"				"0.9"
 		"Level"						"1"
+		"HasInventory"				"1"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -3646,6 +3677,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3659,6 +3705,7 @@
 		"Model"						"models/courier/snowleopard/snowleopard_courier.vmdl"
 		"ModelScale"				"1.7"
 		"Level"						"1"
+		"HasInventory"				"1"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -3710,6 +3757,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3723,6 +3785,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_jungle_stalker/n_creep_jungle_stalker.vmdl"
 		"ModelScale"				"1.5"
 		"Level"						"2"
+		"HasInventory"				"1"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -3775,6 +3838,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3788,6 +3866,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_centaur_lrg/n_creep_centaur_lrg.vmdl"
 		"ModelScale"				"1.2"
 		"Level"						"2"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3822,7 +3901,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
-		"MovementSpeed"				"300"
+		"MovementSpeed"				"270"
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		
 		// Status
@@ -3847,6 +3926,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3860,6 +3954,7 @@
 		"Model"						"models/creeps/item_creeps/i_creep_necro_warrior/necro_warrior.vmdl"
 		"ModelScale"				"1.0"
 		"Level"						"3"
+		"HasInventory"				"1"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -3886,7 +3981,7 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
-		"MovementSpeed"				"300"
+		"MovementSpeed"				"270"
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		
 		// Status
@@ -3911,6 +4006,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3924,6 +4034,7 @@
 		"Model"						"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
 		"ModelScale"				"1"
 		"Level"						"3"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3984,6 +4095,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -3997,6 +4123,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"
 		"ModelScale"				"1.2"
 		"Level"						"4"
+		"HasInventory"				"1"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -4048,6 +4175,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
+				}
+			}
+		}
 	}
 	//TODO
 	//=================================================================================
@@ -4061,6 +4203,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl"
 		"ModelScale"				"1.7"
 		"Level"						"1"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4120,6 +4263,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_350"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -4133,6 +4291,7 @@
 		"Model"						"models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
 		"ModelScale"				"0.7"
 		"Level"						"4"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4193,6 +4352,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -4211,6 +4385,7 @@
 		"ModelScale" 				"1.7"
 		"ConsideredHero"			"1"
 		"CanBeDominated"			"0"
+		"HasInventory"				"1"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -4307,6 +4482,14 @@
 					"Name"			"boss1_summon_adds"
 				}
 			}
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
 		}
 	}
 	//=================================================================================
@@ -4382,6 +4565,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_worg_large/n_creep_worg_large.vmdl"
 		"ModelScale"				"1.3"
 		"Level"						"5"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4441,6 +4625,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -4456,6 +4655,7 @@
 		"SoundSet"                  "Hero_Weaver"					
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
 		"Level"						"5"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4527,6 +4727,14 @@
 				"Wearable3" { "ItemDef"	"279" }
 				"Wearable4" { "ItemDef"	"280" }
 			}
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_320"
+				}
+			}
 		}
 	}
 	//=================================================================================
@@ -4543,6 +4751,7 @@
 		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_batrider.vsndevts"
 		"ModelScale"				"0.8"
 		"Level"						"6"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4614,6 +4823,14 @@
 				"Wearable3" { "ItemDef"	"377" }
 				"Wearable4" { "ItemDef"	"378" }
 			}
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_320"
+				}
+			}
 		}
 	}
 	
@@ -4628,6 +4845,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_forest_trolls/n_creep_forest_troll_high_priest.vmdl"
 		"ModelScale"				"1.4"
 		"Level"						"6"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4699,7 +4917,7 @@
 					"Name"				"Invade"
 					"Aggression"		"100.0" //cast offensive spells whenever
 					"Avoidance"			"0.0" //dont flee
-					"Support"			"50.0" //start buffing
+					"Support"			"100.0" //start buffing
 				}
 			}
 		
@@ -4710,6 +4928,13 @@
 					"Name"				"neutral_heal"
 					"Heal"				"1"
 					
+				}
+			}
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_270"
 				}
 			}
 		}
@@ -4726,6 +4951,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
 		"ModelScale"				"1.2"
 		"Level"						"7"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4785,6 +5011,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -4798,6 +5039,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_vulture_b/n_creep_vulture_b.vmdl"
 		"ModelScale"				"1.2"
 		"Level"						"7"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4881,6 +5123,14 @@
 					"Debuff"			"1"
 				}
 			}
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_350"
+				}
+			}
 		}
 	}
 	
@@ -4895,6 +5145,7 @@
 		"Model"						"models/creeps/lane_creeps/creep_bad_melee_diretide/creep_bad_melee_diretide.vmdl"
 		"ModelScale"				"1.6"
 		"Level"						"8"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4954,6 +5205,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: 18 Black dragon
@@ -4966,6 +5232,7 @@
 		"Model"						"models/creeps/neutral_creeps/n_creep_black_dragon/n_creep_black_dragon.vmdl"
 		"ModelScale"				"1.6"
 		"Level"						"8"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5025,6 +5292,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
 	}
 	
 	//=================================================================================
@@ -5038,6 +5320,7 @@
 		"Model"						"models/heroes/beastmaster/beastmaster_bird.vmdl"
 		"ModelScale"				"1.9"
 		"Level"						"8"
+		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5099,6 +5382,21 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_350"
+				}
+			}
+		}
 	}
 	//=================================================================================
 	// Wave: 20 Magnus -BOSS-
@@ -5116,6 +5414,7 @@
 		"ModelScale" 				"1.7"
 		"ConsideredHero"			"1"
 		"CanBeDominated"			"0"
+		"HasInventory"				"1"
 
 		// Abilities
 		//----------------------------------------------------------------
@@ -5215,6 +5514,14 @@
 				"Ability3"                             
 				{
 					"Name"			"boss2_bloodlust"
+				}
+			}
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_400"
 				}
 			}
 		}

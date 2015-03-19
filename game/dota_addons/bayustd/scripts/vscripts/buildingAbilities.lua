@@ -15,7 +15,8 @@ function SellBuilding( keys )
 	
 	for i, v in ipairs(player.buildingEntities) do 
 		if v == caster then
-			table.remove(player.buildingEntities, i)
+			print("Deleted building from table")
+			--table.remove(player.buildingEntities, i)
 		end
 		--PrintTable( player.buildingEntities )
 	end

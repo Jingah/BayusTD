@@ -76,16 +76,7 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"190"
-			}
-		}
-		
+
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -127,15 +118,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"210"
-			}
-		}
 		
 		"OnSpellStart"
 		{
@@ -179,15 +161,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"475"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -213,6 +186,7 @@
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
 		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+		
 
 		"AbilityCooldown"				"0"
 		"AbilityGoldCost"				"0"
@@ -230,15 +204,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"825"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -253,14 +218,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"rattletrap_power_cogs"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1200"
-			}
-		}
+		"UnitName"						"npc_tower_unholy_pit"
 	}
 	"build_unholy_pit"
 	{
@@ -295,15 +253,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1200"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -318,14 +267,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_nercomancer"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1300"
-			}
-		}
+		"UnitName"						"npc_tower_necromancer"
 	}
 	"build_necromancer"
 	{
@@ -359,15 +301,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1300"
-			}
-		}
 		
 		"OnSpellStart"
 		{
@@ -413,15 +346,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"140"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -463,15 +387,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"265"
-			}
-		}
 		
 		"OnSpellStart"
 		{
@@ -515,15 +430,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"625"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -566,15 +472,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"800"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -589,14 +486,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_life_sapper"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
+		"UnitName"						"npc_tower_life_sapper"
 	}
 	"build_life_sapper"
 	{
@@ -631,15 +521,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -654,14 +535,8 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_life_sapper"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1200"
-			}
-		}
+		"UnitName"						"npc_tower_air_ripper"
+		
 	}
 	"build_air_ripper"
 	{
@@ -696,15 +571,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1200"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -720,14 +586,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"pugna_nether_ward"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
+		"UnitName"						"npc_tower_blade_totem"
 	}
 	"build_blade_totem"
 	{
@@ -762,15 +621,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -785,14 +635,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"npc_tower_voodoo_lounge"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
+		"UnitName"						"npc_tower_voodoo_lounge"
 	}
 	"build_voodoo_lounge"
 	{
@@ -826,15 +669,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"1150"
-			}
-		}
 		
 		"OnSpellStart"
 		{
@@ -877,15 +711,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"75"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -926,15 +751,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"825"
-			}
-		}
 		
 		"OnSpellStart"
 		{
@@ -977,15 +793,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"410"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1026,16 +833,7 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"125"
-			}
-		}
-		
+
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -3011,7 +2809,7 @@
 			"02"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"movespeed"					"100"
+				"movespeed"					"120"
 			}
 			"03"
 			{
@@ -3042,21 +2840,15 @@
 								"Target"		"TARGET"
 							}
 
-							"FireSound"
-							{
-								"EffectName"	"Hero_Lion.Hex.Target"
-								"Target"		"TARGET"
-							}
-
 							"FireEffect"
 							{
-								"EffectName"	"particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf"
+								"EffectName"		"particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf"
 								"EffectAttachType"	"follow_origin"
-								"Target"		"TARGET"
+								"Target"			"TARGET"
 							}
 							"ApplyModifier"
 							{
-								"Target" 			"CASTER"
+								"Target" 			"TARGET"
 								"ModifierName"		"modifier_apply_hex"
 							}
 						}
@@ -3072,14 +2864,14 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"ScriptFile"	"scripts/vscripts/towers/voodoo.lua"
 						"Function"		"voodoo_start"
 						"model"			"models/props_gameplay/frog.vmdl"
 					}
 
 					"RunScript"
 					{
-						"ScriptFile"		"scripts\vscripts\towers/voodoo.lua"
+						"ScriptFile"		"scripts/vscripts/towers/voodoo.lua"
 						"Function"			"HideWearables"
 					}
 				}
@@ -3088,13 +2880,13 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"ScriptFile"		"scripts/vscripts/towers/voodoo.lua"
 						"Function"		"voodoo_end"
 					}
 
 					"RunScript"
 					{
-						"ScriptFile"	"scripts\vscripts\towers/voodoo.lua"
+						"ScriptFile"		"scripts/vscripts/towers/voodoo.lua"
 						"Function"		"ShowWearables"
 					}
 				}

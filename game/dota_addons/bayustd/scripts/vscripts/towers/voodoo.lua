@@ -38,7 +38,7 @@ function HideWearables( event )
 	local hero = event.target
 	local ability = event.ability
 	local duration = ability:GetLevelSpecialValueFor( "duration", ability:GetLevel() - 1 )
-	print("Hiding Wearables")
+	--print("Hiding Wearables")
 	--hero:AddNoDraw() -- Doesn't work on classname dota_item_wearable
 
 	hero.wearableNames = {} -- In here we'll store the wearable names to revert the change
@@ -50,7 +50,7 @@ function HideWearables( event )
             if string.find(modelName, "invisiblebox") == nil then
             	-- Add the original model name to revert later
             	table.insert(hero.wearableNames,modelName)
-            	print("Hidden "..modelName.."")
+            --	print("Hidden "..modelName.."")
 
             	-- Set model invisible
             	model:SetModel("models/development/invisiblebox.vmdl")
@@ -59,7 +59,7 @@ function HideWearables( event )
         end
         model = model:NextMovePeer()
         if model ~= nil then
-        	print("Next Peer:" .. model:GetModelName())
+        	--print("Next Peer:" .. model:GetModelName())
         end
     end
 end
@@ -70,13 +70,13 @@ end
 ]]
 function ShowWearables( event )
 	local hero = event.target
-	print("Showing Wearables on ".. hero:GetModelName())
+--	print("Showing Wearables on ".. hero:GetModelName())
 
 	-- Iterate on both tables to set each item back to their original modelName
 	for i,v in ipairs(hero.hiddenWearables) do
 		for index,modelName in ipairs(hero.wearableNames) do
 			if i==index then
-				print("Changed "..v:GetModelName().. " back to "..modelName)
+				--print("Changed "..v:GetModelName().. " back to "..modelName)
 				v:SetModel(modelName)
 			end
 		end

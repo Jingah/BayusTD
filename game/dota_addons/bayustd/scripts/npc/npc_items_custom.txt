@@ -82,6 +82,163 @@
 			}   
 	}
 	
+	//===============================================
+	// Boots 270 ms
+	//===============================================
+    "item_phase_270"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"270"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 300 ms
+	//===============================================
+    "item_phase_300"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"300"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 320 ms
+	//===============================================
+    "item_phase_320"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"320"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 350 ms
+	//===============================================
+    "item_phase_350"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"350"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// Boots 400 ms
+	//===============================================
+    "item_phase_400"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"400"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
 	//Start shop items
 	//===============================================
 	// Tome of Intelligence
@@ -997,19 +1154,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_haunted_house"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4750"
-			}
-		}
 	}
 	"item_build_haunted_house"
 	{
@@ -1051,14 +1201,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4750"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1080,19 +1222,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_crypt"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5050"
-			}
-		}
 	}
 	"item_build_crypt"
 	{
@@ -1134,14 +1269,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5050"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1163,19 +1290,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_altar_of_the_darkness"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5600"
-			}
-		}
 	}
 	"item_build_altar_of_the_darkness"
 	{
@@ -1217,14 +1337,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5600"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1246,19 +1358,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_temple_of_the_damned"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5700"
-			}
-		}
 	}
 	"item_build_temple_of_the_damned"
 	{
@@ -1300,14 +1405,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5700"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1329,19 +1426,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_unholy_warlock"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"15500"
-			}
-		}
 	}
 	"item_build_unholy_warlock"
 	{
@@ -1383,14 +1473,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"15500"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1413,19 +1495,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_holy_root"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4450"
-			}
-		}
 	}
 	"item_build_holy_root"
 	{
@@ -1467,14 +1542,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4450"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1496,19 +1563,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_fury_maiden"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4600"
-			}
-		}
 	}
 	"item_build_fury_maiden"
 	{
@@ -1550,14 +1610,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"4600"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1579,19 +1631,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_obliterator"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5200"
-			}
-		}
 	}
 	"item_build_obliterator"
 	{
@@ -1633,14 +1678,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5200"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1662,19 +1699,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_ent"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5200"
-			}
-		}
 	}
 	"item_build_ent"
 	{
@@ -1716,14 +1746,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5200"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1745,19 +1767,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_lord_of_the_woods"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"14500"
-			}
-		}
 	}
 	"item_build_lord_of_the_woods"
 	{
@@ -1799,14 +1814,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"14500"
-			}
-		}
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1829,19 +1836,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_voodoo_spirit"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5450"
-			}
-		}
 
 	}
 	
@@ -1885,15 +1885,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5450"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -1916,21 +1907,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_power_tower"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"17500"
-			}
-		}
-
 	}
 	
 	"item_build_power_tower"
@@ -1973,15 +1955,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"17500"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -2004,20 +1977,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_voodoo_overseer"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5700"
-			}
-		}
-
 	}
 	"item_build_voodoo_overseer"
 	{
@@ -2059,15 +2024,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"resource_lumber"		"5700"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -2089,21 +2045,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_blade_explorer"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4500"
-			}
-		}
-
 	}
 	"item_build_blade_explorer"
 	{
@@ -2145,15 +2092,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
 		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"4500"
-			}
-		}
-		
 		"OnSpellStart"
 		{
 			"RunScript"
@@ -2175,21 +2113,12 @@
 		"ItemPurchasable"				"0"
 		"ItemShareability"				"ITEM_NOT_SHAREABLE"
 		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_blade_bouncer"
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
 		"MaxLevel"						"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"5150"
-			}
-		}
-
 	}
 	"item_build_blade_bouncer"
 	{
@@ -2230,15 +2159,6 @@
 		// Item Info
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-		
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"resource_lumber"	"5150"
-			}
-		}
 		
 		"OnSpellStart"
 		{

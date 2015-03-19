@@ -54,7 +54,7 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.1.5"
+BAYUSTD_VERSION = "1.1.6"
 DEBUG = false
 
 OutOfWorldVector = Vector(9000,9000,-100)
@@ -258,22 +258,18 @@ function bayustd:OnAbilityUsed(keys)
 
 	local player = EntIndexToHScript(keys.PlayerID)
 	local abilityname = keys.abilityname
-	local hero = player:GetAssignedHero()
 
 	-- Cancel the ghost if the player casts another active ability.
 	-- Start of BH Snippet:
-	if hero ~= nil then
-		local abil = hero:FindAbilityByName(abilityname)
-		if player.cursorStream ~= nil then
-			if not (string.len(abilityname) > 14 and string.sub(abilityname,1,14) == "move_to_point_") then
-				if not DontCancelBuildingGhostAbils[abilityname] then
-					player.cancelBuilding = true
-				else
-					print(abilityname .. " did not cancel building ghost.")
-				end
-			end
-		end
-	end
+	if player.cursorStream ~= nil then
+		if not (string.len(abilityname) > 14 and string.sub(abilityname,1,14) == "move_to_point_") then
+			if not DontCancelBuildingGhostAbils[abilityname] then
+				player:CancelGhost()
+			else
+				print(abilityname .. " did not cancel building ghost.")
+ 			end
+ 		end
+ 	end
 	-- End of BH Snippet
 end
 
@@ -300,7 +296,7 @@ end
 	local itemname = keys.itemname
 	
 	
-	--[[Currently not possible with units other than heroes
+	--Currently not possible with units other than heroes
 	if itemname == "item_graveyard_gold" then
 		PlayerResource:SetGold(keys.PlayerID, 10, true)
 		player:RemoveItem(itemEntity)
@@ -309,7 +305,7 @@ end
 		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
 		player:RemoveItem(itemEntity)
-	end--]]
+	end
 end]]
 
 -- An item was purchased by a player
@@ -475,17 +471,16 @@ function bayustd:OnEntityKilled( keys )
 		self.nRadiantKills = self.nRadiantKills + 1
 		
 		creepsCount = creepsCount - 1
-		
-		if bayustd:getWave() % 10 ~= 0 then
-			ent = Entities:FindByName( nil, "point_teleport_spot" )
-		else
-			ent = Entities:FindByName( nil, "point_teleport_spot_boss" )
-		end
+	
 		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 			print("all creeps teleproted")
 			for d = 1, bayustd:getRemovedCreeps(), 1 do
-				local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 1400))
-				CreateUnitByName(name, point, true, nil, nil, DOTA_TEAM_NEUTRALS)
+				--local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 1400))
+				if bayustd:getWave() % 10 ~= 0 then
+					CreateUnitByName(name, bayustd:RandomSpawnPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
+				else
+					CreateUnitByName(name, Entities:FindByName( nil, "point_teleport_spot_boss" ), true, nil, nil, DOTA_TEAM_NEUTRALS)
+				end
 			end
 			GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)
 		end
@@ -622,8 +617,12 @@ function bayustd:Initbayustd()
 		  			local ability = unit:GetAbilityByIndex(i)
 
 		  			-- If there's an ability in this slot and its not hidden, define the number to show
-		  			if ability and not ability:IsHidden() then
-		  				local lumberCost = ability:GetLevelSpecialValueFor("resource_lumber", ability:GetLevel() - 1)
+		  			if ability and not string.find(tostring(ability:GetAbilityName()), "move_to_point") then						
+						local name = ability:GetAbilityName()
+						local building_name = GameRules.AbilityKV[name].UnitName
+						local unit_table = GameRules.UnitKV[building_name]
+						local lumberCost = unit_table.LumberCost
+						
 		  				if lumberCost then
 		  					table.insert(abilityValues,lumberCost)
 		  				else
@@ -632,19 +631,23 @@ function bayustd:Initbayustd()
 				  	end
 		  		end
 				-- Iterate over the items
-		  		--[[for i=0,5 do
+		  		for i=0,5 do
 		  			local item = unit:GetItemInSlot(i)
 
 		  			-- If there's an ability in this slot and its not hidden, define the number to show
 		  			if item then
-		  				local lumberCost = ability:GetLevelSpecialValueFor("resource_lumber", ability:GetLevel() - 1)
+						local name = item:GetName()
+						local building_name = GameRules.ItemKV[name].UnitName
+						local unit_table = GameRules.UnitKV[building_name]
+						local lumberCost = unit_table.LumberCost
+						
 		  				if lumberCost then
-		  					table.insert(abilityValues,lumberCost)
+		  					table.insert(itemValues,lumberCost)
 		  				else
-		  					table.insert(abilityValues,0)
+		  					table.insert(itemValues,0)
 		  				end
 				  	end
-		  		end]]
+		  		end
 
 		  		--DeepPrintTable(abilityValues)
 
@@ -655,9 +658,19 @@ function bayustd:Initbayustd()
 		    										hue_4 = -10, val_4 = abilityValues[4], 
 		    										hue_5 = -10, val_5 = abilityValues[5],
 		    										hue_6 = -10, val_6 = abilityValues[6] } )
+													
+				FireGameEvent( 'ability_values_send_items', { player_ID = pID, 
+													hue_1 = -10, val_1 = itemValues[1], 
+		    										hue_2 = -10, val_2 = itemValues[2], 
+		    										hue_3 = -10, val_3 = itemValues[3], 
+		    										hue_4 = -10, val_4 = itemValues[4], 
+		    										hue_5 = -10, val_5 = itemValues[5],
+		    										hue_6 = -10, val_6 = itemValues[6] } )
+													
 		    else
 		    	-- Hide all the values if the unit is not supposed to show any.
 		    	FireGameEvent( 'ability_values_send', { player_ID = pID, val_1 = 0, val_2 = 0, val_3 = 0, val_4 = 0, val_5 = 0, val_6 = 0 } )
+				FireGameEvent( 'ability_values_send_items', { player_ID = pID, val_1 = 0, val_2 = 0, val_3 = 0, val_4 = 0, val_5 = 0, val_6 = 0 } )
 		    end
 	  	end
 	end, "Change AbilityValues", 0 )
@@ -669,6 +682,8 @@ function bayustd:Initbayustd()
 	-- Full units file to get the custom values
   	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 	GameRules.Requirements = LoadKeyValues("scripts/kv/tech_tree.kv")
+	GameRules.ItemKV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
+	GameRules.AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
 
 	-- Initialized tables for tracking state
 	self.vUserIds = {}
@@ -705,17 +720,17 @@ function bayustd:OnGraveyardThink()
 		pos_gold = RandomInt(1, 2)
 		pos_lumber = RandomInt(3, 4)
 		
-		local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		local gold = CreateUnitByName("npc_dota_gold", point_gold, true, nil, nil, DOTA_TEAM_NEUTRALS)
-		local lumber = CreateUnitByName("npc_dota_lumber", point_lumber, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		--local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		--local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
+		local gold = CreateUnitByName("npc_dota_gold", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
+		local lumber = CreateUnitByName("npc_dota_lumber", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
 		
 		--TODO: Set gold and lumber as an item 
 		--local gold = CreateItem("item_graveyard_gold", nil, nil)
 		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		--CreateItemOnPositionSync(point_lumber, lumber)
 		--CreateItemOnPositionSync(point_lumber, gold)
-		return 35
+		return 5
 	end
 	return 10
 end
@@ -756,6 +771,7 @@ function bayustd:SpawnCreeps()
 					creepsCount = creepsCount + 1
 					Timers:CreateTimer(1.0, function()
 						unit:SetInitialGoalEntity(moveLocation)
+						--ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION, Position = moveLocation, Queue = false})
 						return
 					end
 					)
@@ -778,26 +794,29 @@ function bayustd:SpawnCreeps()
 	}
 	FireGameEvent("show_center_message", messageinfo)
 	
+	-- Air system workaround
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		if PlayerResource:HasSelectedHero(nPlayerID) then					
 			local player = PlayerResource:GetPlayer(nPlayerID)
 			PrintTable( player.buildingEntities )
 			for i, v in ipairs(player.buildingEntities) do
-				if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking
-					if v.attackType ~= 0 then
-						v:RemoveModifierByName("modifier_disable_building")
-						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
+				if IsValidEntity(v) then
+					if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking
+						if v.attackType ~= 0 then
+							v:RemoveModifierByName("modifier_disable_building")
+							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
+						else
+							v:RemoveModifierByName("modifier_enable_building")
+							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
+						end
 					else
-						v:RemoveModifierByName("modifier_enable_building")
-						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
-					end
-				else
-					if v.attackType ~= 1 then
-						v:RemoveModifierByName("modifier_disable_building")
-						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
-					else
-						v:RemoveModifierByName("modifier_enable_building")
-						bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
+						if v.attackType ~= 1 then
+							v:RemoveModifierByName("modifier_disable_building")
+							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
+						else
+							v:RemoveModifierByName("modifier_enable_building")
+							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
+						end
 					end
 				end
 			end
@@ -943,6 +962,37 @@ function bayustd:PlayerSay(keys)
 	if string.find(keys.text, "^-air") then
 		GameRules:SendCustomMessage("Air rounds: 3, 6, 9, 12, 15, 18", 0, 0)
 	end
+	
+	if string.find(keys.text, "^-unstuck") then
+		--hero:SetAbsOrigin()
+	end
+	
+end
+
+-- Return a random position inside the graveyard zone
+function bayustd:RandomGraveyardPosition()
+	x1 = 5500
+	x2 = 7800
+	y1 = 2400
+	y2 = 7800
+	z  = 136
+
+	local randomPos = Vector( RandomInt(x1, x2), RandomInt(y1, y2), z)
+
+	return randomPos
+end
+
+-- Return a random position inside the creep spawn zone
+function bayustd:RandomSpawnPosition()
+	x1 = 1100
+	x2 = 3900
+	y1 = 4000
+	y2 = 7300
+	z  = 128
+
+	local randomPos = Vector( RandomInt(x1, x2), RandomInt(y1, y2), z)
+
+	return randomPos
 end
 
 ---------------------------------------------------------------------------

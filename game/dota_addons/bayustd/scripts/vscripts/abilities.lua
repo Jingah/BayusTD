@@ -1,35 +1,36 @@
 -- The following three functions are necessary for building helper.
 
 function build( keys )
+	local caster = keys.caster
+	local hero = caster:GetPlayerOwner():GetAssignedHero()
 	local player = keys.caster:GetPlayerOwner()
-	local pID = player:GetPlayerID()
-	local returnTable = BuildingHelper:AddBuilding(keys)
-	--print("Lumber: " .. player.lumber)
-	--print("Stone: " .. player.stone)
-	-- handle errors if any
-	if TableLength(returnTable) > 0 then
-		--PrintTable(returnTable)
-		if returnTable["error"] == "not_enough_resources" then
-			local resourceTable = returnTable["resourceTable"]
-			-- resourceTable is like this: {["lumber"] = 3, ["stone"] = 6}
-			-- so resourceName = cost-playersResourceAmount
-			-- the api searches for player[resourceName]. you need to keep this number updated
-			-- throughout your game
-			local firstResource = nil
-			for k,v in pairs(resourceTable) do
-				if not firstResource then
-					firstResource = k
-				end
-				if Debug_BH then
-					print("P" .. pID .. " needs " .. v .. " more " .. k .. ".")
-				end
-			end
-			local capitalLetter = firstResource:sub(1,1):upper()
-			firstResource = capitalLetter .. firstResource:sub(2)
-			FireGameEvent( 'custom_error_show', { player_ID = pID, _error = "Not enough " .. firstResource .. "." } )
-			return
-		end
+	local playerID = player:GetPlayerID()
+
+	-- Check if player has enough resources here. If he doesn't they just return this function.
+	local ability_name = keys.ability:GetAbilityName()
+	local UnitKV = GameRules.UnitKV
+	local AbilityKV = GameRules.AbilityKV
+	local ItemKV = GameRules.ItemKV
+	
+	local building_name
+	
+	if string.find(tostring(ability_name), "item_") then
+		--print("Ability is an item")
+		building_name = ItemKV[ability_name].UnitName
+	else
+		--print("Ability isn't an item")
+		building_name = AbilityKV[ability_name].UnitName
 	end
+	
+	local unit_table = UnitKV[building_name]
+	local lumber_cost = unit_table.LumberCost
+
+	if player.lumber < lumber_cost then
+		FireGameEvent( 'custom_error_show', { player_ID = playerID, _error = "Need more Lumber" } )		
+		return
+	end
+	
+	local returnTable = BuildingHelper:AddBuilding(keys)
 
 	keys:OnBuildingPosChosen(function(vPos)
 		--print("OnBuildingPosChosen")
@@ -37,27 +38,29 @@ function build( keys )
 	end)
 
 	keys:OnConstructionStarted(function(unit)
-		--print("Started construction of " .. unit:GetUnitName())
+		if Debug_BH then
+			print("Started construction of " .. unit:GetUnitName())
+		end
 		-- Unit is the building be built.
 		-- Play construction sound
 		-- FindClearSpace for the builder
 		FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
+		--Remove lumber from player
+		player.lumber = player.lumber - lumber_cost
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 		-- start the building with 0 mana.
 		unit:SetMana(0)
 	end)
 	keys:OnConstructionCompleted(function(unit)
-		--print("Completed construction of " .. unit:GetUnitName())
+		if Debug_BH then
+			print("Completed construction of " .. unit:GetUnitName())
+		end
 		-- Play construction complete sound.
 		-- Give building its abilities
 		-- add the mana
 		unit:SetMana(unit:GetMaxMana())
 		
-		local caster = keys.caster
-		local hero = caster:GetPlayerOwner():GetAssignedHero()
-		local playerID = hero:GetPlayerID()
-		local player = PlayerResource:GetPlayer(playerID)
-		local building_name = unit:GetUnitName()
-		
+		-- CUSTOM STUFF
 		table.insert(player.buildingEntities, unit)
 		
 		if bayustd:getWave() % 3 == 0 then 	--air levels. Stop ground towers from attacking
@@ -83,6 +86,7 @@ function build( keys )
     	for k,builder in pairs(player.builders) do
     		CheckAbilityRequirements( builder, player )
     	end
+		-- CUSTOM STUFF
 	end)
 
 	-- These callbacks will only fire when the state between below half health/above half health changes.

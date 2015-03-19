@@ -711,6 +711,77 @@
 	"item_winter_greevil_garbage"			"REMOVE"
 	"item_winter_greevil_chewy"			"REMOVE"
 	
+	//Custom items
+	"item_tome_of_intelligence"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_tome_of_strength"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_tome_of_agility"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_tome_of_experience"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_arrow_of_pure_evil"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_maul_of_thun_p"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_axe_of_maiming"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_sword_of_slaying"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_staff_of_reg"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_coat_of_the_ironclad"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_agile_blade"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_mana_potion"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_heal_potion"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
+	"item_ench_spear"
+	{
+		"ItemPurchasable"				"1"
+		"ItemDroppable"					"1"
+	}
 	
 	//Buildings
 	"item_build_voodoo_spirit_disabled"
