@@ -3641,6 +3641,7 @@
 		"AttackRate"				"1.6"
 		"AttackRange"				"500"
 		"AttackAcquisitionRange"	"600"
+		"ProjectileModel"			"particles/units/heroes/hero_lone_druid/lone_druid_base_attack.vpcf"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -4024,30 +4025,22 @@
 	}
 	
 	//=================================================================================
-	// Wave: 6 Siege Catapult -MAGIC IMMUNE-
+	// Wave: 6 Harpy -AIR-
 	//=================================================================================
 	"npc_dota_wave6"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
-		"ModelScale"				"1"
+		"Model"						"models/creeps/neutral_creeps/n_creep_harpy_a/n_creep_harpy_a.vmdl"
+		"ModelScale"				"1.5"
 		"Level"						"3"
 		"HasInventory"				"1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"neutral_magic_immune" 	
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
 		
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"6"
-		"MagicalResistance"			"100"
+		"MagicalResistance"			"0"
 		
 		// Attack
 		//----------------------------------------------------------------
@@ -4069,8 +4062,8 @@
 		
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
-		"MovementSpeed"				"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"	// Needed to cast Point abilities
+		"MovementSpeed"				"320"
 		"MovementTurnRate"			"0.1"		// Turning rate.
 		
 		// Status
@@ -4106,39 +4099,48 @@
 			{
 				"Phase"
 				{
-					"Item"					"item_phase_300"
+					"Item"					"item_phase_320"
 				}
 			}
 		}
 	}
 	
 	//=================================================================================
-	// Wave: 7 Creep troll dark
+	// Wave: 7 Siege Catapult -MAGIC IMMUNE-
 	//=================================================================================
 	"npc_dota_wave7"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/creeps/neutral_creeps/n_creep_troll_dark_a/n_creep_troll_dark_a.vmdl"
-		"ModelScale"				"1.2"
-		"Level"						"4"
+		"Model"						"models/creeps/lane_creeps/creep_good_siege/creep_good_siege.vmdl"
+		"ModelScale"				"1"
+		"Level"						"3"
 		"HasInventory"				"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune" 	
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
 		
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"7"
-		"MagicalResistance"			"0"
+		"ArmorPhysical"				"6"
+		"MagicalResistance"			"100"
 		
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"20"
-		"AttackDamageMax"			"25"
-		"AttackRate"				"1.6"
-		"AttackRange"				"100"
-		"AttackAcquisitionRange"	"600"
+		"AttackDamageMax"			"26"
+		"AttackRate"				"1.8"
+		"AttackRange"				"500"
+		"AttackAcquisitionRange"	"500"
+		"ProjectileSpeed"			"900"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -4150,12 +4152,12 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
-		"MovementSpeed"				"270"
-		"MovementTurnRate"			"0.5"		// Turning rate.
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.1"		// Turning rate.
 		
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1100"
+		"StatusHealth"				"100"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"0"
 		"StatusManaRegen"			"0"
@@ -4186,7 +4188,7 @@
 			{
 				"Phase"
 				{
-					"Item"					"item_phase_270"
+					"Item"					"item_phase_300"
 				}
 			}
 		}
@@ -4643,24 +4645,25 @@
 	}
 	
 	//=================================================================================
-	// Wave: 12 Weaver
+	// Wave: 12 Batrider -AIR-
 	//=================================================================================
 	"npc_dota_wave12"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/weaver/weaver.vmdl"
-		"ModelScale"				"1.0"
-		"SoundSet"                  "Hero_Weaver"					
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
-		"Level"						"5"
+		"Model"						"models/heroes/batrider/batrider.vmdl"
+		"SoundSet"					"Hero_Batrider"			
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts"
+		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_batrider.vsndevts"
+		"ModelScale"				"0.8"
+		"Level"						"6"
 		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"neutral_magic_immune"
+		"Ability1"					"neutral_burn_attack"
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
@@ -4689,7 +4692,7 @@
 		
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"	// Needed to cast Point abilities
 		"MovementSpeed"				"320"
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		
@@ -4722,10 +4725,10 @@
 		{
 			"AttachWearables"
 			{
-				"Wearable1"	{ "ItemDef" "277" } 
-				"Wearable2"	{ "ItemDef"	"278" } 
-				"Wearable3" { "ItemDef"	"279" }
-				"Wearable4" { "ItemDef"	"280" }
+				"Wearable1"	{ "ItemDef" "375" } 
+				"Wearable2"	{ "ItemDef"	"376" } 
+				"Wearable3" { "ItemDef"	"377" }
+				"Wearable4" { "ItemDef"	"378" }
 			}
 			
 			"EquippedItems"
@@ -4738,25 +4741,24 @@
 		}
 	}
 	//=================================================================================
-	// Wave: 13 Batrider
+	// Wave: 13 Weaver
 	//=================================================================================
 	"npc_dota_wave13"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/batrider/batrider.vmdl"
-		"SoundSet"					"Hero_Batrider"			
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts"
-		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_batrider.vsndevts"
-		"ModelScale"				"0.8"
-		"Level"						"6"
+		"Model"						"models/heroes/weaver/weaver.vmdl"
+		"ModelScale"				"1.0"
+		"SoundSet"                  "Hero_Weaver"					
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
+		"Level"						"5"
 		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"neutral_burn_attack"
+		"Ability1"					"neutral_magic_immune"
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
@@ -4785,7 +4787,7 @@
 		
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"	// Needed to cast Point abilities
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
 		"MovementSpeed"				"320"
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		
@@ -4815,13 +4817,13 @@
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
 		"Creature"
-		{
+		{			
 			"AttachWearables"
 			{
-				"Wearable1"	{ "ItemDef" "375" } 
-				"Wearable2"	{ "ItemDef"	"376" } 
-				"Wearable3" { "ItemDef"	"377" }
-				"Wearable4" { "ItemDef"	"378" }
+				"Wearable1"	{ "ItemDef" "277" } 
+				"Wearable2"	{ "ItemDef"	"278" } 
+				"Wearable3" { "ItemDef"	"279" }
+				"Wearable4" { "ItemDef"	"280" }
 			}
 			
 			"EquippedItems"
@@ -4941,23 +4943,25 @@
 	}
 	
 	//=================================================================================
-	// Wave: 15 Golem
+	// Wave: 15 Bird -AIR-
 	//=================================================================================
 	"npc_dota_wave15"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
-		"ModelScale"				"1.2"
+		
 		"Level"						"7"
 		"HasInventory"				"1"
+		
+		"Model"						"models/heroes/beastmaster/beastmaster_bird.vmdl"
+		"ModelScale"				"1.9"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"neutral_bash"
-		"Ability2"					"neutral_magic_immune"
+		"Ability1"					""
+		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
 		
@@ -4968,13 +4972,15 @@
 		
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"228"
 		"AttackDamageMax"			"235"
 		"AttackRate"				"1.35"
 		"AttackRange"				"100"
 		"AttackAcquisitionRange"	"600"
+		"ProjectileModel"			"particles/units/heroes/hero_clinkz/clinkz_base_attack.vpcf"				// Particle system model for projectile.
+		"ProjectileSpeed"			"900"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -4985,7 +4991,7 @@
 		
 		// Movement
 		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"	// Needed to cast Point abilities
 		"MovementSpeed"				"300"
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		
@@ -5299,6 +5305,25 @@
 		{
 			"DisableClumpingBehavior"	"1"
 			
+			"States"	
+			{
+				"Invade"
+				{
+					"Name"				"Invade"
+					"Aggression"		"100.0" //cast offensive spells whenever
+					"Avoidance"			"0.0" //dont flee
+					"Support"			"50.0" //start buffing
+				}
+			}
+			
+			"OffensiveAbilities"
+			{
+				"Ability1"                             
+				{
+					"Name"			"naga_siren_ensnare"
+				}
+			}
+			
 			"EquippedItems"
 			{
 				"Phase"
@@ -5310,23 +5335,23 @@
 	}
 	
 	//=================================================================================
-	// Wave: 19 Bird
+	// Wave: 19 Golem -MAGIC IMMUNE-
 	//=================================================================================
 	"npc_dota_wave19"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/beastmaster/beastmaster_bird.vmdl"
-		"ModelScale"				"1.9"
+		"Model"						"models/creeps/neutral_creeps/n_creep_golem_a/neutral_creep_golem_a.vmdl"
+		"ModelScale"				"1.2"
 		"Level"						"8"
 		"HasInventory"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					""
-		"Ability2"					""
+		"Ability1"					"neutral_bash"
+		"Ability2"					"neutral_magic_immune"
 		"Ability3"					""
 		"Ability4"					""
 		
@@ -5337,7 +5362,7 @@
 		
 		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"372"
 		"AttackDamageMax"			"384"

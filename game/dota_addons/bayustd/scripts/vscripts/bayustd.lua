@@ -438,11 +438,13 @@ function bayustd:OnEntityKilled( keys )
 		local unit_table = GameRules.UnitKV[name]
 		local bountyLumber = unit_table.BountyLumber
 		local playerKills = PlayerResource:GetKills(pID)
-
-		player.lumber = player.lumber + bountyLumber
-		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
-		PopupLumber(killedUnit, bountyLumber)
+		
+		if bountyLumber > 0 then
+			player.lumber = player.lumber + bountyLumber
+			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+			PopupLumber(killedUnit, bountyLumber)
+		end
 		
 		if name == "npc_dota_lumber" or name == "npc_dota_gold" then
 			return
