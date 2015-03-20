@@ -963,12 +963,15 @@ function bayustd:PlayerSay(keys)
 	-- Player commands
 	if string.find(keys.text, "^-air") then
 		GameRules:SendCustomMessage("Air rounds: 3, 6, 9, 12, 15, 18", 0, 0)
-	end
+	end	
 	
-	if string.find(keys.text, "^-unstuck") then
-		--hero:SetAbsOrigin()
-	end
+	if string.find(keys.text, "^-magic") then
+		GameRules:SendCustomMessage("Magic Immune rounds: 7, 10, 13, 18. 19, 20", 0, 0)
+	end	
 	
+	if string.find(keys.text, "^-boss") then
+		GameRules:SendCustomMessage("Boss rounds: 10, 20", 0, 0)
+	end	
 end
 
 -- Return a random position inside the graveyard zone
