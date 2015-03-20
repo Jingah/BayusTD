@@ -732,7 +732,7 @@ function bayustd:OnGraveyardThink()
 		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
 		--CreateItemOnPositionSync(point_lumber, lumber)
 		--CreateItemOnPositionSync(point_lumber, gold)
-		return 5
+		return 35
 	end
 	return 10
 end
