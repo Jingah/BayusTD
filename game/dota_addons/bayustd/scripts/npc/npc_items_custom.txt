@@ -332,7 +332,7 @@
 		"ItemKillable"					"1"
 		"ItemSellable"                  "1"
 		"ItemPurchasable"				"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		"AbilitySpecial"
 		{
@@ -427,11 +427,11 @@
 		"ItemCost"                      "7500"
 		"ItemShopTags"					"weapons"
 		"ItemQuality"					"weapons"
-		"ItemStackable"					"1"
+		"ItemStackable"					"0"
 		"ItemKillable"					"1"
 		"ItemSellable"                  "1"
 		"ItemPurchasable"				"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		"AbilitySpecial"
 		{
@@ -658,7 +658,7 @@
 		"ItemKillable"					"1"
 		"ItemSellable"                  "1"
 		"ItemPurchasable"				"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		"AbilitySpecial"
 		{
@@ -762,7 +762,7 @@
 		"ItemKillable"					"1"
 		"ItemSellable"                  "1"
 		"ItemPurchasable"				"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		"precache"
 		{
@@ -874,7 +874,7 @@
 		"ItemKillable"					"1"
 		"ItemSellable"                  "1"
 		"ItemPurchasable"				"1"
-		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
 		"ItemPermanent"					"1"
 		"AbilitySpecial"
 		{

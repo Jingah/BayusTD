@@ -2409,6 +2409,7 @@
 				"ThinkInterval"  "%bladestorm_damage_tick"
 				"OnIntervalThink"
 				{
+					"OverrideAnimation" "ACT_DOTA_FLAIL"
 					"ActOnTargets"
 					{
 						"Target"
@@ -2452,6 +2453,413 @@
 				}
 			}
 		}	
+	}
+	
+	"pudge_undead_strength"
+	{
+		"BaseClass" 				"ability_datadriven"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"					"9"
+		"AbilityTextureName"   		"pudge_unholy_strength"
+		"LevelsBetweenUpgrades"    	"0"
+		"RequiredLevel"         	"1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"str_bonus"	"20 40 60 80 100 120 140 160 180"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"strength_bonus"	"20"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_evasion"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  "%strength_bonus"
+				}
+			}
+		}
+	}
+	
+	"pudge_new_rot"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"LevelsBetweenUpgrades"    		"0"
+		"RequiredLevel"         		"1"
+		"MaxLevel"						"9"
+		"AbilityTextureName"			"pudge_rot"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			//"soundfile"			"soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts"
+			"particle"			"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+	
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"25 50 75 100 125 150 175 200 225"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"rot_radius"			"300 350 400 450 500 550 600 650 700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"rot_tick"				"1.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"rot_slow"				"0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"rot_tick_damage"		"25 50 75 100 125 150 175 200 225"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_rot_aura"
+			{
+				"Passive" 			"1"
+				"IsHidden" 			"0"
+				"IsBuff"			"1"
+	
+				"Aura" 				"modifier_rot_aura_debuff"
+				"Aura_Radius" 		"%rot_radius"
+				"Aura_Teams" 		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types" 		"DOTA_UNIT_TARGET_BASIC"
+				
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"CASTER"
+	
+						"ControlPoints"
+						{
+							"00"	"0 0 0"
+							"01"	"%rot_radius 0 0"
+						}
+					}
+				}
+			}
+			
+			"modifier_rot_aura_debuff"
+		    {
+		    	"IsHidden"		"1"
+		    	"ThinkInterval"	"%rot_tick"
+	
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"	"TARGET"
+						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Damage"	"%rot_tick_damage"
+					}
+				}
+			}
+		}
+	}
+	
+	"pudge_new_dismember"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityType"					"DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"pudge_dismember"
+		"MaxLevel"						"9"
+		"LevelsBetweenUpgrades"    		"0"
+		"RequiredLevel"         		"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts"
+			"particle"			"particles/units/heroes/hero_pudge/pudge_dismember.vpcf"
+		}
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"50"
+		"AbilityCastPoint"				"0.3"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityChannelTime"			"5 10 15 20 25 30 35 40 45"
+		"AbilityCooldown"				"60"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dismember_damage"		"20 40 80 120 160 200 250 300 350"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dismember_heal"		"100 200 300 400 500 600 700 800 900"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"Damage"
+			{
+				"Target"	"TARGET"
+				"Type"		"DAMAGE_TYPE_MAGICAL"
+				"Damage"	"%dismember_damage"
+			}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_dismember_datadriven"
+				"Target"		"TARGET"
+			}
+			
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_dismember_heal_datadriven"
+				"Target"		"CASTER"
+			}
+	
+			"FireEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_pudge/pudge_dismember.vpcf"
+				"EffectAttachType"	"attach_origin"
+				"Target"		"TARGET"
+			}
+	
+			"FireSound"
+			{
+				"EffectName"	"Hero_Pudge.Dismember"
+				"Target"		"TARGET"
+			}
+		}
+	
+		"OnChannelInterrupted"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_dismember_datadriven"
+				"Target"		"TARGET"
+			}
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_dismember_heal_datadriven"
+				"Target"		"CASTER"
+			}
+		}
+	
+		"OnChannelFinish"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_dismember_datadriven"
+				"Target"		"TARGET"
+			}
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_dismember_heal_datadriven"
+				"Target"		"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_dismember_datadriven"
+			{
+				"IsDebuff"	"1"
+				"ThinkInterval"	"1.0"
+	
+				"OverrideAnimation"	"ACT_DOTA_DISABLED"
+	
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"	"TARGET"
+						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Damage"	"%dismember_damage"
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_Pudge.Dismember"
+						"Target"		"TARGET"
+					}
+	
+					"FireEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_pudge/pudge_dismember.vpcf"
+						"EffectAttachType"	"attach_origin"
+						"Target"		"TARGET"
+					}
+				}
+	
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			"modifier_dismember_heal_datadriven"
+			{
+				"IsBuff"	"1"
+				"ThinkInterval"	"1.0"
+				
+				"OverrideAnimation"	"ACT_DOTA_CHANNEL_ABILITY_4"
+	
+				"OnIntervalThink"
+				{
+					"Heal"
+					{
+						"Target"	"CASTER"
+						"HealAmount"	"%dismember_heal"
+					}
+				}
+			}
+		}
+	}
+	
+	"pudge_fire_breath"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"				   
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"dragon_knight_breathe_fire"
+		"MaxLevel"						"3"
+		"LevelsBetweenUpgrades"    		"10"
+		"RequiredLevel"         		"8"
+	
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"120"
+		
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"3000 7000 15000"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"500 750 1000"
+		
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"start_radius"			"200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"350"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"750"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1050"
+			}
+					
+		}
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"Target" "POINT"
+				"EffectName" "particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf"
+				"MoveSpeed" "%speed"
+				"StartRadius" "%start_radius"
+				"StartPosition" "attach_origin"
+				"EndRadius" "%end_radius"
+				"FixedDistance" "%range"
+				"TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				"TargetFlags" "DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone" "1"
+				"ProvidesVision" "0"
+			}
+			"FireSound"
+			{
+				"EffectName" "Hero_DragonKnight.BreathFire"
+				"Target" "CASTER"
+			}
+		}
+			"OnProjectileHitUnit"
+			{
+				"DeleteOnHit" "0"
+				"Damage"
+				{
+					"Target" "TARGET"
+					"Type" "DAMAGE_TYPE_MAGICAL"
+					"Damage" "%AbilityDamage"
+				}
+			}
 	}
 	//End of hero skills
 	

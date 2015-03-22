@@ -175,7 +175,7 @@
 		"MagicalResistance"			"25"									// Magical protection (percentage).
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_MAGIC"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"0"
 		"AttackDamageMax"			"10"
 		"AttackRate"				"2.0"
@@ -196,6 +196,57 @@
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"				"270"									// Speed.
+		"MovementTurnRate"			"0.5"									// Turning rate.
+
+		"StatusHealth"				"100"									// Base health.
+		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
+		"StatusMana"				"100"										// Base mana.
+		"StatusManaRegen"			"0.01"									// Mana regeneration rate.
+
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+		"VisionDaytimeRange"		"1800"									// Range of vision at day time.
+	}
+	
+	//=================================================================================================================
+	// HERO: Zephyr the Hungry   -    Melee Tank
+	//=================================================================================================================
+	"npc_dota_hero_pudge_bayus"
+	{
+		
+		"override_hero"			"npc_dota_hero_pudge"
+		"ModelScale"			"1.2"
+		
+		"AbilityLayout" 		"6"
+		"Ability1"				"pudge_new_dismember" 
+		"Ability2"				"blood_crit" 
+		"Ability3"				"pudge_undead_strength" 
+		"Ability4"				"pudge_new_rot"
+		"Ability5"				""
+		"Ability6"				"pudge_fire_breath"
+
+		"ArmorPhysical"				"2"									// Physical protection.
+		"MagicalResistance"			"25"									// Magical protection (percentage).
+
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"10"
+		"AttackRate"				"1.5"
+		"AttackRange"				"128"
+
+		//"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"19"										// Base strength
+		"AttributeStrengthGain"		"8"										// Strength bonus per level.
+		"AttributeBaseIntelligence"	"15"										// Base intelligence
+		"AttributeIntelligenceGain"	"2"										// Intelligence bonus per level.
+		"AttributeBaseAgility"		"17"										// Base agility
+		"AttributeAgilityGain"		"2"										// Agility bonus per level.
+
+		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		//"RingRadius"				"70"
+
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"250"									// Speed.
 		"MovementTurnRate"			"0.5"									// Turning rate.
 
 		"StatusHealth"				"100"									// Base health.

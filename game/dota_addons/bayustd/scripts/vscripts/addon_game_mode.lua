@@ -37,6 +37,7 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_dota_hero_mirana", context)
 	PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
 	PrecacheUnitByNameSync("npc_dota_hero_morphling", context)
+	PrecacheUnitByNameSync("npc_dota_hero_pudge", context)
 	--Loading possible Buildings
 	PrecacheUnitByNameSync("npc_tower_blade_explorer", context)
 	PrecacheUnitByNameSync("npc_tower_blade_bouncer", context)
@@ -104,6 +105,9 @@ function Precache( context )
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_juggernaut", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_nyx_assassin", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_viper", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_spectre.vsndevts", context)
 end
 
 -- Create the game mode when we activate
