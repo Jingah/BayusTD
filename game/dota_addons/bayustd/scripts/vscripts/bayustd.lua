@@ -55,7 +55,7 @@ MAX_LEVEL = 100                          -- What level should we let heroes get 
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
 BAYUSTD_VERSION = "1.1.6"
-DEBUG = false
+DEBUG = true
 
 OutOfWorldVector = Vector(9000,9000,-100)
 

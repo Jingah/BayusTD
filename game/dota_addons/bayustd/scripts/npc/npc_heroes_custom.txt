@@ -413,62 +413,6 @@
 	}
 	
 	//=================================================================================================================
-	// HERO: Leshrac   -    Ranged Support
-	// Abilities: TODO
-	//=================================================================================================================
-	"npc_dota_hero_leshrac_bayus"
-	{
-		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_leshrac"
-		"SoundSet"				"0"	
-		"Ability1"				"" 
-		"Ability2"				"" 
-		"Ability3"				"" 
-		"Ability4"				""
-		"Ability5"				""
-		"Ability6"				""
-		"Ability7"				""
-		"Ability8"				""
-		"Ability9"				""
-		"Ability10"				""
-		"Ability11"				""
-		"Ability12"				""
-		"Ability13"				""
-		"Ability14"				""
-		"Ability15"				""
-		"Ability16"				""
-
-		"ArmorPhysical"				"0"									// Physical protection.
-		"MagicalResistance"			"25"									// Magical protection (percentage).
-
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"10"										// Damage range min.
-		"AttackDamageMax"			"15"										// Damage range max.
-
-		//"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLIGENCE"
-		"AttributeBaseStrength"		"12"										// Base strength
-		"AttributeStrengthGain"		"1"										// Strength bonus per level.
-		"AttributeBaseIntelligence"	"20"										// Base intelligence
-		"AttributeIntelligenceGain"	"3"										// Intelligence bonus per level.
-		"AttributeBaseAgility"		"10"										// Base agility
-		"AttributeAgilityGain"		"1"										// Agility bonus per level.
-
-		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
-		//"RingRadius"				"70"
-
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"									// Speed.
-		"MovementTurnRate"			"0.7"									// Turning rate.
-
-		"StatusHealth"				"300"									// Base health.
-		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
-		"StatusMana"				"480"										// Base mana.
-		"StatusManaRegen"			"1.8"									// Mana regeneration rate.
-
-		"VisionNighttimeRange"		"900"									// Range of vision at night time.
-	}
-	
-	//=================================================================================================================
 	// HERO: Lina   -    Ranged Magician
 	// 
 	//=================================================================================================================
@@ -488,7 +432,7 @@
 		"MagicalResistance"			"25"									// Magical protection (percentage).
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackDamageMin"			"0"
 		"AttackDamageMax"			"10"
 		"AttackRate"				"2"
@@ -520,115 +464,53 @@
 	}
 	
 	//=================================================================================================================
-	// HERO: Mirana   -    Ranged Support
-	// Abilities: TODO
+	// HERO: Scheme   -    Ranged Magician
+	// 
 	//=================================================================================================================
-	"npc_dota_hero_mirana_bayus"
+	"npc_dota_hero_furion_bayus"
 	{
-		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_mirana"
-		"SoundSet"				"0"	
-		"Ability1"				"" 
-		"Ability2"				"" 
-		"Ability3"				"" 
-		"Ability4"				""
-		"Ability5"				""
-		"Ability6"				""
-		"Ability7"				""
-		"Ability8"				""
-		"Ability9"				""
-		"Ability10"				""
-		"Ability11"				""
-		"Ability12"				""
-		"Ability13"				""
-		"Ability14"				""
-		"Ability15"				""
-		"Ability16"				""
+		"override_hero"				"npc_dota_hero_furion"
+		
+		"AbilityLayout" 			"6"
+		"Ability1"					"scheme_invis" 
+		"Ability2"					"scheme_thunder_storm" 
+		"Ability3"					"scheme_frost_armor" 
+		"Ability4"					""
+		"Ability5"					""
+		"Ability6"					"scheme_time_stop"
 
-		"ArmorPhysical"				"0"									// Physical protection.
-		"MagicalResistance"			"12"									// Magical protection (percentage).
-
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageMin"			"12"										// Damage range min.
-		"AttackDamageMax"			"18"										// Damage range max.
-
-		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
-		"AttributeBaseStrength"		"15"										// Base strength
-		"AttributeStrengthGain"		"1"										// Strength bonus per level.
-		"AttributeBaseIntelligence"	"22"										// Base intelligence
-		"AttributeIntelligenceGain"	"3"										// Intelligence bonus per level.
-		"AttributeBaseAgility"		"10"										// Base agility
-		"AttributeAgilityGain"		"1"										// Agility bonus per level.
-
-		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
-		//"RingRadius"				"70"
-
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"315"									// Speed.
-		"MovementTurnRate"			"1.0"									// Turning rate.
-
-		"StatusHealth"				"400"									// Base health.
-		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
-		"StatusMana"				"485"										// Base mana.
-		"StatusManaRegen"			"1.5"									// Mana regeneration rate.
-
-		"VisionNighttimeRange"		"900"									// Range of vision at night time.
-	}
-	
-	//=================================================================================================================
-	// HERO: Omniknight   -    Melee Damage Dealer
-	// Abilities: TODO
-	//=================================================================================================================
-	"npc_dota_hero_omniknight_bayus"
-	{
-		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_omniknight"
-		"SoundSet"				"0"	
-		"Ability1"				"" 
-		"Ability2"				"" 
-		"Ability3"				"" 
-		"Ability4"				""
-		"Ability5"				""
-		"Ability6"				""
-		"Ability7"				""
-		"Ability8"				""
-		"Ability9"				""
-		"Ability10"				""
-		"Ability11"				""
-		"Ability12"				""
-		"Ability13"				""
-		"Ability14"				""
-		"Ability15"				""
-		"Ability16"				""
-
-		"ArmorPhysical"				"2"									// Physical protection.
+		"ArmorPhysical"				"1"									// Physical protection.
 		"MagicalResistance"			"25"									// Magical protection (percentage).
 
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"18"										// Damage range min.
-		"AttackDamageMax"			"27"										// Damage range max.
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"0"
+		"AttackDamageMax"			"10"
+		"AttackRate"				"2"
+		"AttackRange"				"600"
+		"AttackAcquisitionRange"	"600"
 
-		//"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"25"										// Base strength
-		"AttributeStrengthGain"		"3"										// Strength bonus per level.
-		"AttributeBaseIntelligence"	"12"										// Base intelligence
-		"AttributeIntelligenceGain"	"1"										// Intelligence bonus per level.
-		"AttributeBaseAgility"		"18"										// Base agility
-		"AttributeAgilityGain"		"2"										// Agility bonus per level.
+		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+		"AttributeBaseStrength"		"14"										// Base strength
+		"AttributeStrengthGain"		"4"										// Strength bonus per level.
+		"AttributeBaseIntelligence"	"26"										// Base intelligence
+		"AttributeIntelligenceGain"	"5"										// Intelligence bonus per level.
+		"AttributeBaseAgility"		"10"										// Base agility
+		"AttributeAgilityGain"		"3"										// Agility bonus per level.
 
 		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"350"									// Speed.
-		"MovementTurnRate"			"1.0"									// Turning rate.
+		"MovementSpeed"				"270"									// Speed.
+		"MovementTurnRate"			"0.7"									// Turning rate.
 
-		"StatusHealth"				"500"									// Base health.
-		"StatusHealthRegen"			"1.5"									// Health regeneration rate.
-		"StatusMana"				"350"										// Base mana.
-		"StatusManaRegen"			"1.0"									// Mana regeneration rate.
+		"StatusHealth"				"100"									// Base health.
+		"StatusHealthRegen"			"1.0"									// Health regeneration rate.
+		"StatusMana"				"100"										// Base mana.
+		"StatusManaRegen"			"1.5"									// Mana regeneration rate.
 
-		"VisionNighttimeRange"		"900"									// Range of vision at night time.
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+		"VisionDaytimeRange"		"1800"									// Range of vision at day time.
 	}
-	
 }

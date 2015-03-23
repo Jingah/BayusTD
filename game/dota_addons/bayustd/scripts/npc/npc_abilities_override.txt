@@ -834,4 +834,29 @@
 		"ItemPurchasable"				"0"
 		"ItemDroppable"					"0"
 	}
+	"item_phase_270"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_phase_300"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_phase_320"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_phase_350"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
+	"item_apply_modifiers"
+	{
+		"ItemPurchasable"				"0"
+		"ItemDroppable"					"0"
+	}
 }
