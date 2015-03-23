@@ -38,6 +38,7 @@ function Precache( context )
 	PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
 	PrecacheUnitByNameSync("npc_dota_hero_morphling", context)
 	PrecacheUnitByNameSync("npc_dota_hero_pudge", context)
+	PrecacheUnitByNameSync("npc_dota_hero_zuus", context)
 	--Loading possible Buildings
 	PrecacheUnitByNameSync("npc_tower_blade_explorer", context)
 	PrecacheUnitByNameSync("npc_tower_blade_bouncer", context)
@@ -107,6 +108,7 @@ function Precache( context )
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_viper", context)
 	PrecacheResource("particle", "particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_sven.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_spectre.vsndevts", context)
 end
 
