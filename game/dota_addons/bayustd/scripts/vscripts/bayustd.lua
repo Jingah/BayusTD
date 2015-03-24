@@ -136,7 +136,11 @@ function bayustd:OnNPCSpawned(keys)
 	
 	local name = npc:GetUnitName()
 	local unit_table = GameRules.UnitKV[name]
-	local isHeroBuilding = unit_table.isHeroBuilding
+	if unit_table ~= nil then
+		isHeroBuilding = unit_table.isHeroBuilding
+	else
+		isHeroBuilding = 0
+	end
 
 	if isHeroBuilding ~= nil and isHeroBuilding == 1 then
 		bayustd:giveUnitDataDrivenModifier(npc, npc, "modifier_hero_building", -1)
@@ -330,29 +334,7 @@ function bayustd:OnItemPurchased( keys )
 	local baseStr = hero:GetBaseStrength()
 	local baseAgi = hero:GetBaseAgility()
 	
-	if itemName == "item_tome_of_intelligence" then
-		hero:ModifyIntellect(1)
-	elseif itemName == "item_tome_of_strength" then
-		hero:ModifyStrength(1)
-	elseif itemName == "item_tome_of_agility" then
-		hero:ModifyAgility(1)
-	elseif itemName == "item_tome_of_experience" then
-		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
-		print("LEVEL XP: " .. lvlxp)
-		hero:AddExperience(lvlxp, false, false)
-		--hero:HeroLevelUp(true)
-	else
-		return
-	end
-	
-    for i=0,5 do
-		local item = hero:GetItemInSlot(i)
-		if item ~= nil and (item:GetName() == "item_tome_of_intelligence" or item:GetName() == "item_tome_of_strength" or item:GetName() == "item_tome_of_agility" or item:GetName() == "item_tome_of_experience") then
-			hero:RemoveItem(item)
-			break
-		end
-    end
-
+	--print(PlayerResource:GetNumItemsPurchased(plyID))
 end
 
 
@@ -412,7 +394,8 @@ function bayustd:OnEntityKilled( keys )
 		end
 		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
 		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
-		PlayerResource:SetGold(pID, lostGold, true)
+		local goldBounty = PlayerResource:GetUnreliableGold(pID) + lostGold
+		PlayerResource:SetGold(pID, goldBounty, false)
 		player.isDead = 0
 		local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
 		player.ghost = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
@@ -451,20 +434,23 @@ function bayustd:OnEntityKilled( keys )
 		end
 		if name == "npc_dota_wave10" then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				if PlayerResource:HasSelectedHero(nPlayerID) then					
-					PlayerResource:SetGold(nPlayerID, 2500, true)
+				if PlayerResource:HasSelectedHero(nPlayerID) then
+					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 2500				
+					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 				end
 			end
 		elseif name == "npc_dota_wave20" then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				if PlayerResource:HasSelectedHero(nPlayerID) then					
-					PlayerResource:SetGold(nPlayerID, 4500, true)
+				if PlayerResource:HasSelectedHero(nPlayerID) then
+					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 4500
+					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 				end
 			end
 		elseif name == "npc_dota_wave30" then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				if PlayerResource:HasSelectedHero(nPlayerID) then					
-					PlayerResource:SetGold(nPlayerID, 6500, true)
+				if PlayerResource:HasSelectedHero(nPlayerID) then
+					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 6500
+					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 				end
 			end
 		end
@@ -504,7 +490,8 @@ function bayustd:OnEntityKilled( keys )
 					nPlayer.lumber = nPlayer.lumber + 100
 					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = nPlayer.lumber })
 					
-					PlayerResource:SetGold(nPlayerID, 100, true)
+					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 100
+					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 				end
 			end
 			wave = wave + 1
@@ -724,14 +711,14 @@ function bayustd:OnGraveyardThink()
 		
 		--local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
 		--local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		local gold = CreateUnitByName("npc_dota_gold", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
-		local lumber = CreateUnitByName("npc_dota_lumber", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
+		--local gold = CreateUnitByName("npc_dota_gold", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
+		--local lumber = CreateUnitByName("npc_dota_lumber", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
 		
 		--TODO: Set gold and lumber as an item 
-		--local gold = CreateItem("item_graveyard_gold", nil, nil)
-		--local lumber = CreateItem("item_graveyard_lumber", nil, nil)
-		--CreateItemOnPositionSync(point_lumber, lumber)
-		--CreateItemOnPositionSync(point_lumber, gold)
+		local gold = CreateItem("item_gold", nil, nil)
+		local lumber = CreateItem("item_lumber", nil, nil)
+		CreateItemOnPositionSync(self:RandomGraveyardPosition(), lumber)
+		CreateItemOnPositionSync(self:RandomGraveyardPosition(), gold)
 		return 35
 	end
 	return 10

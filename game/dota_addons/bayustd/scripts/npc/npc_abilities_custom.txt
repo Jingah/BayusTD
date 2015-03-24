@@ -2548,6 +2548,20 @@
 			}
 		}
 		
+		"OnUpgrade"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_rot_aura"
+				"Target" 		"CASTER" 
+			}
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_rot_aura"
+				"Target" 		"CASTER" 
+			}
+		}
+		
 		"Modifiers"
 		{
 			"modifier_rot_aura"
@@ -3276,7 +3290,6 @@
 			}
 			"ApplyModifier"
 			{
-				//"Target"		"POINT"
 				"ModifierName"	"modifier_thunder_storm"
 				"Target"
 				{
