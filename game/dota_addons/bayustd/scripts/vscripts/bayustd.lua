@@ -54,7 +54,7 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
-BAYUSTD_VERSION = "1.1.6"
+BAYUSTD_VERSION = "Beta Version"
 DEBUG = false
 
 OutOfWorldVector = Vector(9000,9000,-100)
@@ -800,7 +800,7 @@ function bayustd:SpawnCreeps()
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		if PlayerResource:HasSelectedHero(nPlayerID) then					
 			local player = PlayerResource:GetPlayer(nPlayerID)
-			PrintTable( player.buildingEntities )
+			--PrintTable( player.buildingEntities )
 			for i, v in ipairs(player.buildingEntities) do
 				if IsValidEntity(v) then
 					if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking

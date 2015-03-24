@@ -4051,6 +4051,7 @@
 		"AttackRate"				"1.8"
 		"AttackRange"				"500"
 		"AttackAcquisitionRange"	"500"
+		"ProjectileModel"			"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_base_attack.vpcf"
 		"ProjectileSpeed"			"900"
 		
 		// Bounty
@@ -4157,7 +4158,7 @@
 		
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"100"
+		"StatusHealth"				"1000"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"0"
 		"StatusManaRegen"			"0"
