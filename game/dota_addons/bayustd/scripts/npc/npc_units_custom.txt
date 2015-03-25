@@ -4141,6 +4141,7 @@
 		"AttackRate"				"1.8"
 		"AttackRange"				"500"
 		"AttackAcquisitionRange"	"500"
+		"ProjectileModel"			"particles/base_attacks/ranged_siege_good_explosion.vpcf"
 		"ProjectileSpeed"			"900"
 		
 		// Bounty

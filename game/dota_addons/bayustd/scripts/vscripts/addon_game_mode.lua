@@ -20,8 +20,6 @@ require('abilities')
 function Precache( context )
 	--Loading general stuff
 	PrecacheUnitByNameSync("npc_dota_ghost", context)
-	PrecacheUnitByNameSync("npc_dota_gold", context)
-	PrecacheUnitByNameSync("npc_dota_lumber", context)
 	PrecacheUnitByNameSync("npc_dota_fountain", context)
 	--Loading Builders
     PrecacheUnitByNameSync("npc_dota_builder1", context)
@@ -79,28 +77,9 @@ function Precache( context )
 	for i = 1, 20, 1 do
 		PrecacheUnitByNameSync("npc_dota_wave" .. i, context)
 	end
-	--[[PrecacheUnitByNameSync("npc_dota_wave1", context)
-	PrecacheUnitByNameSync("npc_dota_wave2", context)
-	PrecacheUnitByNameSync("npc_dota_wave3", context)
-	PrecacheUnitByNameSync("npc_dota_wave4", context)
-	PrecacheUnitByNameSync("npc_dota_wave5", context)
-	PrecacheUnitByNameSync("npc_dota_wave6", context)
-	PrecacheUnitByNameSync("npc_dota_wave7", context)
-	PrecacheUnitByNameSync("npc_dota_wave8", context)
-	PrecacheUnitByNameSync("npc_dota_wave9", context)
-	PrecacheUnitByNameSync("npc_dota_wave10", context)
-	PrecacheUnitByNameSync("npc_dota_wave11", context)
-	PrecacheUnitByNameSync("npc_dota_wave12", context)
-	PrecacheUnitByNameSync("npc_dota_wave13", context)
-	PrecacheUnitByNameSync("npc_dota_wave14", context)
-	PrecacheUnitByNameSync("npc_dota_wave15", context)
-	PrecacheUnitByNameSync("npc_dota_wave16", context)
-	PrecacheUnitByNameSync("npc_dota_wave17", context)
-	PrecacheUnitByNameSync("npc_dota_wave18", context)
-	PrecacheUnitByNameSync("npc_dota_wave19", context)
-	PrecacheUnitByNameSync("npc_dota_wave20", context)--]]
 	--Loading Buildinghelper stuff
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
+	--Loading extra stuff
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_juggernaut", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_nyx_assassin", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_viper", context)

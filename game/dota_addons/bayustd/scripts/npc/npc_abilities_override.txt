@@ -429,49 +429,6 @@
 			}
 		}
 	}
-	"omniknight_purification"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"MaxLevel"						"9"
-		"AbilityTextureName"			"omniknight_purification"
-		"LevelsBetweenUpgrades"    		"1"
-		"RequiredLevel"         		"0"
-		
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
-		}
-		
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"650"
-		"AbilityCastPoint"				"0.2"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"1.0"
-		
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"50 60 70 80 90 100 110 120 130"
-		
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"heal"					"105 210 315 420 525 630 735 840 945"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"radius"				"0"
-			}
-		}
-	}
 
 	//Removing items from the shop
 	"item_blink"			"REMOVE"

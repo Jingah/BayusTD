@@ -898,7 +898,7 @@
 	"neutral_bash"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"slardar_bash"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 		"AbilitySpecial"
@@ -1954,16 +1954,16 @@
 		
 		"Modifiers"
 		{
-			"affix_heal_aura"
+			"affix_endurance_aura"
 			{
 				"Passive"				"1"
 				"IsHidden"				"1"
-				"Aura"        			"modifier_heal_aura"
+				"Aura"        			"modifier_endurance_aura"
         		"Aura_Radius" 			"900"
         		"Aura_Teams"  			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         		"Aura_Types" 			"DOTA_UNIT_TARGET_ALL"
 			}
-			"modifier_heal_aura"
+			"modifier_endurance_aura"
 			{
 				"IsBuff"				"1"
 				"EffectName"			"particles/units/heroes/hero_troll_warlord/troll_warlord_battletrance_buff_b.vpcf"
@@ -1977,6 +1977,76 @@
 			}
 		}
 	}
+	"morph_purification"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+		"MaxLevel"						"9"
+		"LevelsBetweenUpgrades"    		"1"
+		"RequiredLevel"         		"0"
+		"AbilityTextureName"			"omniknight_purification"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"650"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50 60 70 80 90 100 110 120 130"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"105 210 315 420 525 630 735 840 945"
+			}
+		}
+
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
+			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
+			"particle"	"particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf"
+
+		}
+
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Hero_Omniknight.Purification"
+				"Target"		"TARGET"
+			}
+			
+			"FireEffect"
+			{
+				"Target"			"TARGET"
+				"EffectName"		"particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf"
+				"EffectAttachType"	"follow_origin"
+			}
+
+			"Heal"
+			{
+				"Target" 		"TARGET"
+				"HealAmount"	"%heal"
+			}
+		}
+	}
+	
 	"gods_shield"
 	{
 		"BaseClass" 				"ability_datadriven"
@@ -2381,7 +2451,7 @@
 		{
 			"modifier_bladestorm"
 			{	
-				"OverrideAnimation"     	"ACT_DOTA_OVERRIDE_ABILITY_1"
+				"OverrideAnimation"     	"ACT_DOTA_OVERRIDE_ABILITY_2"
 				"States"
 				{
 					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
@@ -2407,9 +2477,9 @@
 				}
 				
 				"ThinkInterval"  "%bladestorm_damage_tick"
+				"OverrideAnimation" "ACT_DOTA_FLAIL"
 				"OnIntervalThink"
 				{
-					"OverrideAnimation" "ACT_DOTA_FLAIL"
 					"ActOnTargets"
 					{
 						"Target"

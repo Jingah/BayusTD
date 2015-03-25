@@ -71,7 +71,7 @@ end
 XP_PER_LEVEL_TABLE = {}
 XP_PER_LEVEL_TABLE[1] = 0
 for i=2,MAX_LEVEL do
-	XP_PER_LEVEL_TABLE[i] = i * (i-1) * 500
+	XP_PER_LEVEL_TABLE[i] = i * (i-1) * 500 /2
 end
 
 -- Generated from template
@@ -163,7 +163,6 @@ function bayustd:OnPlayerPickHero(keys)
 	hero:SetGold(500, false)
 	
 	player.lumber = 300
-	--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
     FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
 	
 	player.buildings = {}
@@ -298,18 +297,6 @@ end
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local hero = player:GetAssignedHero()
 	local itemname = keys.itemname
-	
-	
-	--Currently not possible with units other than heroes
-	if itemname == "item_graveyard_gold" then
-		PlayerResource:SetGold(keys.PlayerID, 10, true)
-		player:RemoveItem(itemEntity)
-	elseif itemname == "npc_dota_lumber" then
-		hero.lumber = hero.lumber + 10
-		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. hero.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = keys.PlayerID, lumber = hero.lumber })
-		player:RemoveItem(itemEntity)
-	end
 end]]
 
 -- An item was purchased by a player
@@ -340,11 +327,8 @@ end
 
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
-	
-	--DeepPrintTable(keys)
-
 	local newState = GameRules:State_Get()
-	print("[BAYUSTD] GameRules State Changed to " .. newState)
+	
 	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION  then
 		bayustd:OnAllPlayersLoaded()
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -357,9 +341,6 @@ wave = 1
 
 -- An entity died
 function bayustd:OnEntityKilled( keys )
-	--print( '[bayustd] OnEntityKilled Called' )
-	--PrintTable( keys )
-
 	-- The Unit that was Killed
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	-- The Killing entity
@@ -437,6 +418,8 @@ function bayustd:OnEntityKilled( keys )
 				if PlayerResource:HasSelectedHero(nPlayerID) then
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 2500				
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
+					PlayerResource:IncrementKills(pID, playerKills + 1)
+					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		elseif name == "npc_dota_wave20" then
@@ -444,6 +427,8 @@ function bayustd:OnEntityKilled( keys )
 				if PlayerResource:HasSelectedHero(nPlayerID) then
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 4500
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
+					PlayerResource:IncrementKills(pID, playerKills + 1)
+					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		elseif name == "npc_dota_wave30" then
@@ -451,19 +436,17 @@ function bayustd:OnEntityKilled( keys )
 				if PlayerResource:HasSelectedHero(nPlayerID) then
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 6500
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
+					PlayerResource:IncrementKills(pID, playerKills + 1)
+					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		end
-			
-		PlayerResource:IncrementKills(pID, playerKills + 1)
-		self.nRadiantKills = self.nRadiantKills + 1
 		
 		creepsCount = creepsCount - 1
 	
 		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 			print("all creeps teleproted")
 			for d = 1, bayustd:getRemovedCreeps(), 1 do
-				--local point = ent:GetAbsOrigin() + RandomVector(RandomFloat(1, 1400))
 				if bayustd:getWave() % 10 ~= 0 then
 					CreateUnitByName(name, bayustd:RandomSpawnPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
 				else
@@ -584,13 +567,6 @@ function bayustd:Initbayustd()
 		end
 	end, 'player say', 0)
 	
-	-- Register Console Commands
-    Convars:RegisterCommand('test_endgame', function()
-        GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-        GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
-        GameRules:Defeated()
-    end, 'Ends the game.', FCVAR_CHEAT)
-	
 	Convars:RegisterCommand( "ability_values_entity", function(name, entityIndex)
 		local cmdPlayer = Convars:GetCommandClient()
 		local pID = cmdPlayer:GetPlayerID()
@@ -706,19 +682,12 @@ end
 -- Spawn gold and lumber on the graveyard (every 10 sec)
 function bayustd:OnGraveyardThink()
 	if GameRules.DEAD_PLAYER_COUNT > 0 then
-		pos_gold = RandomInt(1, 2)
-		pos_lumber = RandomInt(3, 4)
-		
-		--local point_gold = Entities:FindByName( nil, "graveyard_pos" .. pos_gold):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		--local point_lumber = Entities:FindByName( nil, "graveyard_pos" .. pos_lumber):GetAbsOrigin() + RandomVector(RandomFloat(1, 800))
-		--local gold = CreateUnitByName("npc_dota_gold", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
-		--local lumber = CreateUnitByName("npc_dota_lumber", self:RandomGraveyardPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
-		
-		--TODO: Set gold and lumber as an item 
 		local gold = CreateItem("item_gold", nil, nil)
 		local lumber = CreateItem("item_lumber", nil, nil)
+		
 		CreateItemOnPositionSync(self:RandomGraveyardPosition(), lumber)
 		CreateItemOnPositionSync(self:RandomGraveyardPosition(), gold)
+		
 		return 35
 	end
 	return 10
@@ -836,18 +805,14 @@ function CheckAbilityRequirements( unit, player )
 			-- Check the table of requirements in the KV file
 			if requirements[disabled_ability_name] then
 				local requirement_count = #requirements[disabled_ability_name]
-				--print(disabled_ability_name.. "has "..requirement_count.." Requirements")
 						
 				-- Go through each requirement line and check if the player has that building on its list
 				for k,v in pairs(requirements[disabled_ability_name]) do
-				--	print("Building Name","Need","Have")
-					--print(k,v,buildings[k])
 
 					-- Look for the building and update counter
 					if buildings[k] and buildings[k] > 0 then
 						--print("Found at least one "..k)
 					else
-						--print("Failed one of the requirements for "..disabled_ability_name..", no "..k.." found")
 						requirement_failed = true
 						break
 					end
@@ -858,7 +823,6 @@ function CheckAbilityRequirements( unit, player )
 					local ability_len = string.len(disabled_ability_name)
 					local ability_name = string.sub(disabled_ability_name, 1 , ability_len - len)
 
-					--print("Requirement is met, swapping "..disabled_ability_name.." for "..ability_name)
 					unit:AddAbility(ability_name)
 					unit:SwapAbilities(disabled_ability_name, ability_name, false, true)
 					unit:RemoveAbility(disabled_ability_name)
@@ -880,18 +844,13 @@ function CheckAbilityRequirements( unit, player )
 			-- Check the table of requirements in the KV file
 			if requirements[disabled_item_name] then
 				local requirement_count = #requirements[disabled_item_name]
-				--print(disabled_item_name.. "has "..requirement_count.." Requirements")
 						
 				-- Go through each requirement line and check if the player has that building on its list
 				for k,v in pairs(requirements[disabled_item_name]) do
-					--print("Building Name","Need","Have")
-					--print(k,v,buildings[k])
-
 					-- Look for the building and update counter
 					if buildings[k] and buildings[k] > 0 then
 						--print("Found at least one "..k)
 					else
-						--print("Failed one of the requirements for "..disabled_item_name..", no "..k.." found")
 						requirement_failed = true
 						break
 					end
@@ -902,7 +861,6 @@ function CheckAbilityRequirements( unit, player )
 					local item_len = string.len(disabled_item_name)
 					local item_name = string.sub(disabled_item_name, 1 , item_len - len)
 
-					--print("Requirement is met, swapping "..disabled_item_name.." for "..item_name)
 					unit:RemoveItem(item)
 					local newItem = CreateItem(item_name, player, player)
 					unit:AddItem(newItem)
@@ -949,15 +907,15 @@ function bayustd:PlayerSay(keys)
 	
 	-- Player commands
 	if string.find(keys.text, "^-air") then
-		GameRules:SendCustomMessage("Air rounds: 3, 6, 9, 12, 15, 18", 0, 0)
+		GameRules:SendCustomMessage("Air rounds: <font color='#eedd44'>3, 6, 9, 12, 15, 18</font>", 0, 0)
 	end	
 	
 	if string.find(keys.text, "^-magic") then
-		GameRules:SendCustomMessage("Magic Immune rounds: 7, 10, 13, 18. 19, 20", 0, 0)
+		GameRules:SendCustomMessage("Magic Immune rounds: <font color='#eedd44'>7, 10, 13, 18. 19, 20</font>", 0, 0)
 	end	
 	
 	if string.find(keys.text, "^-boss") then
-		GameRules:SendCustomMessage("Boss rounds: 10, 20", 0, 0)
+		GameRules:SendCustomMessage("Boss rounds: <font color='#eedd44'>10, 20</font>", 0, 0)
 	end	
 end
 
