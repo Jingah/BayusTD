@@ -367,11 +367,9 @@ function bayustd:OnEntityKilled( keys )
 	if killedUnit:IsRealHero() then
 		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
 		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
-			local messageinfo = { message = "YOU SUCKED", duration = 5}
+			local messageinfo = { message = "YOU FAILED", duration = 5}
 			FireGameEvent("show_center_message",messageinfo)
-			mode:SetHUDVisible(1, false)  -- Remove lumber HUD
-			bayustd:PrintEndgameMessage()
-			Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_GOODGUYS) end)
+			bayustd:Endgame(false)
 			return
 		end
 		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
@@ -393,8 +391,7 @@ function bayustd:OnEntityKilled( keys )
 		GameRules:SendCustomMessage("<br>BEHOLD HEROES!!<br>You defeated your town.",0,0)
 		local messageinfo = { message = "YOU DEFEATED", duration = 5}
 		FireGameEvent("show_center_message",messageinfo)
-		bayustd:PrintEndgameMessage()
-		Timers:CreateTimer(15, function() GameRules:MakeTeamLose( DOTA_TEAM_BADGUYS) end)
+		bayustd:Endgame(true)
 		return
 	end
 	
@@ -991,11 +988,15 @@ function bayustd:setRemovedCreeps(val)
 	countRemovedCreeps = val
 end
 
-function bayustd:PrintEndgameMessage()
-	Timers:CreateTimer(5, function() GameRules:SendCustomMessage("<font color='#DBA901'><br>Game will end in 10 seconds</font>",0,0) end)
-	Timers:CreateTimer(10, function() GameRules:SendCustomMessage("<font color='#DBA901'>Please leave your feedback at our workshop page</font>",0,0) end)
-
-	Timers:CreateTimer(12, function() GameRules:SendCustomMessage("<font color='#DBA901'>3</font>",0,0) end)
-	Timers:CreateTimer(13, function() GameRules:SendCustomMessage("<font color='#DBA901'>2</font>",0,0) end)
-	Timers:CreateTimer(14, function() GameRules:SendCustomMessage("<font color='#DBA901'>1...</font>",0,0) end)
+function bayustd:Endgame(goodguys)
+	GameRules:SendCustomMessage("<font color='#DBA901'>Please leave your feedback at our workshop page</font>",0,0)
+	if goodguys then
+		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+		GameRules:MakeTeamLose(DOTA_TEAM_BADGUYS)
+        GameRules:Defeated()
+	else
+		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+		GameRules:MakeTeamLose(DOTA_TEAM_GOODGUYS)
+        GameRules:Defeated()
+	end
 end
