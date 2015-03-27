@@ -1152,7 +1152,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"chance"				"20"
+				"chance"				"35"
 			}
 		}
 		
@@ -1896,7 +1896,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"crit_bonus"			"100 150 190 225 275 350 400 500 575"
+				"crit_dmg"			"150 200 225 275 325 375 450 500 575"
 			}
 			"02"
 			{
@@ -1939,7 +1939,7 @@
 				
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_dmg"
 				}
 				"OnAttackLanded"
 				{
@@ -3574,12 +3574,6 @@
 		"AoERadius"						"%radius"
 
 		"AbilityManaCost"				"95 95 95 110 110 110 125 125 125"
-
-		"precache"
-		{
-			//"particle" 	"particles/items_fx/chain_lightning.vpcf"
-			//"soundfile" "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
-		}
 		
 		"AbilitySpecial"
 		{
