@@ -321,6 +321,46 @@
 		}
 	}
 	
+	//===============================================
+	// Shop boots
+	//===============================================
+    "item_shop_boots"
+	{
+		"ID"                            "1050"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_boots"
+		"ItemCost"                      "300"
+		"ItemQuality"					"common"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"50"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
 	//Start shop items
 	//===============================================
 	// Tome of Intelligence
@@ -357,7 +397,6 @@
 				"Target"				"CASTER"
 			}
 		}
-
 	}
 	//===============================================
 	// Tome of Strength
@@ -443,7 +482,7 @@
 		"ID"                            "1054"
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_hand_of_midas"
-		"ItemCost"                      "475"
+		"ItemCost"                      "500"
 		"ItemQuality"					"consumable"
 		"ItemStackable"					"1"
 		"ItemKillable"					"1"

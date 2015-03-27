@@ -1162,10 +1162,14 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
-				"StatusEffectPriority"	"1"
 			
-				"OnAttackLanded"
-				{
+				"OnAttackStart"
+			    {
+			        "RemoveModifier"
+			        {
+			            "ModifierName" 	"modifier_apply_crit"
+			            "Target" 		"CASTER"
+			        }
 					"Random"
 					{
 						"Chance"	"%chance"
@@ -1183,20 +1187,28 @@
 			"modifier_apply_crit"
 			{
 				"IsHidden"	"1"
-				"Passive"	"1"
-				"StatusEffectPriority"	"1"
 				
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
 				}
+				
+				 "OnAttackLanded"
+			    {
+			        "RemoveModifier"
+			        {
+			            "ModifierName"  "modifier_apply_crit"
+			            "Target"   		"CASTER"    
+			        }
+			    }
 			}
 		}
 	}
 	"neutral_magic_immune"
 	{
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE	| DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"    		"modifier_magicimmune"
 
 		"Modifiers"
 		{
@@ -1510,6 +1522,11 @@
 				"var_type"			"FIELD_INTEGER"
 				"duration"			"120"
 			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"counts"			"1 2 3 4 5 6 7 8 9"
+			}
 		}
 		
 		"OnSpellStart"
@@ -1570,7 +1587,6 @@
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"					"9"
 		"AbilityTextureName"   		"crystal_maiden_brilliance_aura"
-		"AbilityCastPoint"			"0"
 
 		"AbilitySpecial"
 		{
@@ -1579,17 +1595,23 @@
 				"var_type"			"FIELD_FLOAT"
 				"bonus_mana_regen"	"1.0 2.1 3.2 4.3 5.4 6.5 7.6 8.7 9.8"
 			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_mana_reg"	"1.1"
+			}
 		}
+		
 		"Modifiers"
 		{
 			"modifier_mana_regen"
 			{
-				"IsBuff"				"1"
 				"Passive"				"1"
+				"IsHidden"				"1"
 				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"				"%bonus_mana_regen"
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"				"%bonus_mana_reg"
 				}
 				"EffectName"                    "particles/generic_gameplay/radiant_fountain_regen.vpcf"
 			}
@@ -1652,10 +1674,15 @@
 				"var_type"			"FIELD_INTEGER"
 				"lvl9_count"		"0 0 0 0 0 0 0 0 9"
 			}
-			"04"
+			"10"
 			{
 				"var_type"			"FIELD_INTEGER"
 				"duration"			"40"
+			}
+			"11"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"counts"			"1 2 3 4 5 6 7 8 9"
 			}
 		}
 		
@@ -1869,7 +1896,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"crit_bonus"			"200 250 290 325 400 450 500 600 725"
+				"crit_bonus"			"100 150 190 225 275 350 400 500 575"
 			}
 			"02"
 			{
@@ -1884,11 +1911,14 @@
 			{
 				"IsHidden"	"1"
 				"Passive"	"1"
-				"StatusEffectPriority"	"1"
-				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 			
-				"OnAttackLanded"
+				"OnAttackStart"
 				{
+					"RemoveModifier"
+					{
+						"Target" 			"CASTER"
+						"ModifierName"		"modifier_apply_crit"
+					}
 					"Random"
 					{
 						"Chance"	"%chance"
@@ -1906,9 +1936,6 @@
 			"modifier_apply_crit"
 			{
 				"IsHidden"	"1"
-				"Passive"	"1"
-				"StatusEffectPriority"	"1"
-				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
 				
 				"Properties"
 				{
@@ -2571,7 +2598,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"LevelsBetweenUpgrades"    		"0"
+		"LevelsBetweenUpgrades"    		"2"
 		"RequiredLevel"         		"1"
 		"MaxLevel"						"9"
 		"AbilityTextureName"			"pudge_rot"
@@ -3180,6 +3207,233 @@
 				}
 			}
 		}
+	}
+	
+	"lina_rain_of_fire"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"lina_rain_of_fire"
+		"MaxLevel" 						"9"
+		"LevelsBetweenUpgrades"    		"3"
+		"RequiredLevel"         		"1"
+
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityCastAnimation"			"ACT_DOTA_VICTORY"
+
+		"AbilityCastRange"				"800 850 900 950 1000 1050 1100 1150 1200"
+		"AbilityCastPoint"				"0.6"		
+		"AbilityCooldown"				"120"
+		"AbilityManaCost"				"135 162 194 233 279 335 403 483 580"
+
+		"AOERadius"     				"%radius"
+		"AbilityChannelTime"			"2.6"
+		
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+			"particle"	"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+			"particle"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
+			"particle"	"particles/units/heroes/hero_invoker/invoker_sun_strike_team.vpcf"
+			"particle"	"particles/units/heroes/hero_invoker/invoker_sun_strike.vpcf"
+			"particle"	"particles/units/heroes/hero_warlock/warlock_rain_of_chaos_explosion.vpcf"
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"200 250 300 350 400 450 500 550 600"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"wave_damage"			"12 20 28 45 66 80 100 200 300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"wave_interval"			"0.5"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"burn_damage"			"5 10 15 20 25 30 35 40 45"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_interval"			"0.7"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"7.0"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_lina/rain_of_fire.lua"
+				"Function"		"RainOfFireStart"
+				"Target"		"POINT"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_rain_of_fire_channelling"
+				"Target" 		"CASTER"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"	"Hero_Jakiro.DualBreath"
+				"Target"		"CASTER"
+			}
+		}
+
+		"OnChannelFinish"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_lina/rain_of_fire.lua"
+				"Function"		"RainOfFireEnd"
+			} 
+
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_rain_of_fire_channelling"
+				"Target" 		"CASTER"
+			}
+				
+		}
+		
+		"Modifiers"
+		{
+			"modifier_rain_of_fire_channelling"
+			{
+				"IsHidden"			"1"
+				"ThinkInterval"		"0.5"
+				"OnIntervalThink"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_channeling"
+						"Target" 		"CASTER"
+						"Duration"		"0.4"
+					}
+				}
+			}
+
+			"modifier_channeling"
+			{
+				"IsHidden"				"1"
+				"OverrideAnimation"     "ACT_DOTA_SPAWN"
+			}
+
+			"modifier_rain_of_fire_thinker"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_NO_TEAM_MOVE_TO"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_TEAM_SELECT"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_COMMAND_RESTRICTED"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_ATTACK_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_MAGIC_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"		   "MODIFIER_STATE_VALUE_ENABLED"
+				}
+				"ThinkInterval"  "%wave_interval"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"
+						{
+							"Center"  	"TARGET"
+							"Radius" 	"%radius"
+							"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						}
+											
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%wave_damage"
+					}
+							
+					"ApplyModifier"
+					{
+						"Target"
+						{
+							"Center"	"TARGET"
+							"Radius"	"%radius"
+							"Teams"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						}
+						"ModifierName"	"modifier_rain_of_fire_burn"
+					}
+
+					"FireSound"
+					{
+						"EffectName"		"Hero_Jakiro.LiquidFire"
+						"Target"			"TARGET"
+					}
+
+					"AttachEffect"
+					{
+						"Target" 			"TARGET"
+						"EffectName"		"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_ground.vpcf"
+						"EffectAttachType" 	"follow_origin"
+					}
+					"AttachEffect"
+					{
+						"Target" 			"TARGET"
+						"EffectName"		"particles/units/heroes/hero_warlock/warlock_rain_of_chaos_explosion.vpcf"
+						"EffectAttachType" 	"follow_origin"
+					}
+
+					"AttachEffect"
+					{
+						"Target" 			"TARGET"
+						"EffectName"		"particles/units/heroes/hero_invoker/invoker_sun_strike.vpcf"
+						"EffectAttachType" 	"follow_origin"
+					}
+				}
+				
+			}
+
+			"modifier_rain_of_fire_burn"
+			{
+				"IsHidden"	"0"
+				"IsDebuff"	"1"
+				"Duration"	"%burn_duration"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"		"TARGET"
+						"EffectName"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+				}																																											
+
+				"ThinkInterval"  "%burn_interval"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%burn_damage"
+					}				
+				}	
+			}
+		}	
 	}
 	
 	"scheme_invis"

@@ -16,7 +16,7 @@
 
     "attributes"
     {
-         "item"	  	"item_staff_of_reg"
+        "item"	  	"item_shop_boots"
     }
 
     "weapons_armor"
@@ -32,6 +32,7 @@
     "misc"
     {
         "item"	  	"item_coat_of_the_ironclad"
+		"item"	  	"item_staff_of_reg"
     }   
 
     // Level 1 - Green Recipes

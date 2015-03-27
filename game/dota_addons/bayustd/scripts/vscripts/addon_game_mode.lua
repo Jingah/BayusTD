@@ -74,6 +74,7 @@ function Precache( context )
 	--Loading Creep waves
 	PrecacheUnitByNameSync("npc_boss1_add", context)
 	PrecacheUnitByNameSync("npc_boss2_add", context)
+	--PrecacheUnitByNameSync("dummy_unit_vulnerable", context)
 	for i = 1, 20, 1 do
 		PrecacheUnitByNameSync("npc_dota_wave" .. i, context)
 	end

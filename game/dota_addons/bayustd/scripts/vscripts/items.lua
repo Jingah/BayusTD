@@ -18,7 +18,7 @@ function tomeUsed( event )
 		hero:ModifyAgility(1)
 	elseif name == "item_tome_of_experience" then
 		if hero:GetLevel() == 100 then
-			PlayerResource:SetGold(playerID, PlayerResource:GetGold(playerID) + 475, true)
+			PlayerResource:SetGold(playerID, PlayerResource:GetGold(playerID) + 500, true)
 			FireGameEvent( 'custom_error_show', { player_ID = playerID, _error = "You are already level 100" } )
 			return
 		end

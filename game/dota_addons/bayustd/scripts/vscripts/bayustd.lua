@@ -221,6 +221,8 @@ function bayustd:CaptureBayusTD()
 		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
 		
 		mode:SetHUDVisible(9, false)  -- Disable courier hud. Is replaced by lumber count
+		mode:SetHUDVisible(12, false)	-- Disable recommended items
+		--mode:SetHUDVisible(0, false)	-- Disable time of day
 
 		self:OnFirstPlayerLoaded()
 	end
@@ -363,7 +365,6 @@ function bayustd:OnEntityKilled( keys )
 	end
 	
 	if killedUnit:IsRealHero() then
-		self.nDireKills = self.nDireKills + 1
 		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
 		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
 			local messageinfo = { message = "YOU SUCKED", duration = 5}
@@ -419,7 +420,6 @@ function bayustd:OnEntityKilled( keys )
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 2500				
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 					PlayerResource:IncrementKills(pID, playerKills + 1)
-					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		elseif name == "npc_dota_wave20" then
@@ -428,7 +428,6 @@ function bayustd:OnEntityKilled( keys )
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 4500
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 					PlayerResource:IncrementKills(pID, playerKills + 1)
-					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		elseif name == "npc_dota_wave30" then
@@ -437,12 +436,12 @@ function bayustd:OnEntityKilled( keys )
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 6500
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 					PlayerResource:IncrementKills(pID, playerKills + 1)
-					self.nRadiantKills = self.nRadiantKills + 1
 				end
 			end
 		end
 		
 		creepsCount = creepsCount - 1
+		self:topBarUpdate(-1, false)
 	
 		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 			print("all creeps teleproted")
@@ -493,9 +492,6 @@ function bayustd:OnEntityKilled( keys )
 			 )
 			end
 	end
-
-	GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_BADGUYS, self.nDireKills )
-    GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_GOODGUYS, self.nRadiantKills )
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -640,15 +636,17 @@ function bayustd:Initbayustd()
 	  	end
 	end, "Change AbilityValues", 0 )
 	
-	
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, 1 ) 
-	GameRules:GetGameModeEntity():SetThink( "OnGraveyardThink", self, 60)
+	GameRules:GetGameModeEntity():SetThink("OnGraveyardThink", self, 60)
+	GameRules:GetGameModeEntity():SetThink("SetPermanentDaytime", self)
 
 	-- Full units file to get the custom values
   	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 	GameRules.Requirements = LoadKeyValues("scripts/kv/tech_tree.kv")
+	GameRules.Roundinfo = LoadKeyValues("scripts/kv/round_info.kv")
 	GameRules.ItemKV = LoadKeyValues("scripts/npc/npc_items_custom.txt")
 	GameRules.AbilityKV = LoadKeyValues("scripts/npc/npc_abilities_custom.txt")
+	
+	GameRules.item = CreateItem( "item_apply_modifiers", nil, nil)
 
 	-- Initialized tables for tracking state
 	self.vUserIds = {}
@@ -679,33 +677,32 @@ function bayustd:Initbayustd()
 	print('[BAYUSTD] Done loading bayusTD gamemode!\n\n')
 end
 
+-- Disables night
+function bayustd:SetPermanentDaytime()
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		GameRules:SetTimeOfDay( 0.3 )
+	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then		    		
+        -- Delete the thinker
+        return
+	end
+	return 10
+end
+
 -- Spawn gold and lumber on the graveyard (every 10 sec)
 function bayustd:OnGraveyardThink()
 	if GameRules.DEAD_PLAYER_COUNT > 0 then
-		local gold = CreateItem("item_gold", nil, nil)
-		local lumber = CreateItem("item_lumber", nil, nil)
+		gold = CreateItem("item_gold", nil, nil)
+		lumber = CreateItem("item_lumber", nil, nil)
 		
 		CreateItemOnPositionSync(self:RandomGraveyardPosition(), lumber)
 		CreateItemOnPositionSync(self:RandomGraveyardPosition(), gold)
-		
 		return 35
 	end
 	return 10
 end
 
--- Evaluate the state of the game
-function bayustd:OnThink()
-	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		--print( "Template addon script is running." )
-	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
-		return nil
-	end
-	return 1
-end
-
 function bayustd:giveUnitDataDrivenModifier(source, target, modifier, dur)
-    local item = CreateItem( "item_apply_modifiers", source, source)
-    item:ApplyDataDrivenModifier( source, target, modifier, {duration=dur} )
+    GameRules.item:ApplyDataDrivenModifier( source, target, modifier, {duration=dur} )
 end
 
 ---------------------------------------------------------------------------
@@ -719,32 +716,45 @@ end
 -- Spawn Creepwaves
 ---------------------------------------------------------------------------
 function bayustd:SpawnCreeps()
+	self:topBarUpdate(1, true)
+	local waveName = "npc_dota_wave" .. wave
+	local info = GameRules.Roundinfo
+	if info[waveName] then
+		--PrintTable(info[waveName])
+		for k,v in pairs(info[waveName]) do
+			if k and v then
+				GameRules:SendCustomMessage("<font color='#ff0000'>" .. k ..":</font> " .. v, 0, 0)
+			end
+		end
+	end
 	print( "Spawning creeps ..." )
 	if wave % 10 ~= 0 then
 		for i = 0, 7, 1 do
 			local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
 			local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
-				for d = 1, 10, 1 do
-					local unit = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
-					creepsCount = creepsCount + 1
-					Timers:CreateTimer(1.0, function()
-						unit:SetInitialGoalEntity(moveLocation)
-						--ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION, Position = moveLocation, Queue = false})
-						return
-					end
-					)
+			for d = 1, 10, 1 do
+				local unit = CreateUnitByName(waveName, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
+				creepsCount = creepsCount + 1
+				Timers:CreateTimer(1.0, function()
+					unit:SetInitialGoalEntity(moveLocation)
+					--ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION, Position = moveLocation, Queue = false})
+					return
 				end
+				)
+			end
 		end
+		self:topBarUpdate(80, false)
 	else
 		local moveLocation = Entities:FindByName( nil, "path_corner_0")
 		local spawnLocation = Entities:FindByName( nil, "creep_spawner0"):GetAbsOrigin()
-		local unit = CreateUnitByName("npc_dota_wave" .. wave, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
+		local unit = CreateUnitByName(waveName, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
 		creepsCount = creepsCount + 1
 		Timers:CreateTimer(1.0, function()
 			unit:SetInitialGoalEntity(moveLocation)
 			return
 		end
 		)
+		self:topBarUpdate(1, false)
 	end
 	local messageinfo = {
 		message = "Round " .. wave .. " coming",
@@ -862,7 +872,7 @@ function CheckAbilityRequirements( unit, player )
 					local item_name = string.sub(disabled_item_name, 1 , item_len - len)
 
 					unit:RemoveItem(item)
-					local newItem = CreateItem(item_name, player, player)
+					newItem = CreateItem(item_name, player, player)
 					unit:AddItem(newItem)
 					FireGameEvent( 'ability_values_force_check', { player_ID = pID })
 				end				
@@ -916,7 +926,7 @@ function bayustd:PlayerSay(keys)
 	
 	if string.find(keys.text, "^-boss") then
 		GameRules:SendCustomMessage("Boss rounds: <font color='#eedd44'>10, 20</font>", 0, 0)
-	end	
+	end
 end
 
 -- Return a random position inside the graveyard zone
@@ -949,6 +959,17 @@ end
 -- Needed for trigger, so we disable modifiers for our heroes
 ---------------------------------------------------------------------------
 countRemovedCreeps = 0
+
+-- Update the top bar values
+function bayustd:topBarUpdate(kills, goodguys)
+	if goodguys then
+		self.nRadiantKills = self.nRadiantKills + kills
+		GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_GOODGUYS, self.nRadiantKills)
+	else
+		self.nDireKills = self.nDireKills + kills
+		GameRules:GetGameModeEntity():SetTopBarTeamValue( DOTA_TEAM_BADGUYS, self.nDireKills)
+	end
+end
 
 function bayustd:getWave()
 	return wave

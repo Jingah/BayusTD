@@ -93,6 +93,19 @@
 		"AttackDesire"				"1.5"		// How much bots want to attack them vs other non-hero things
 	}
 	
+	"dummy_unit_vulnerable"
+	{
+		"BaseClass"					"npc_dota_creature"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"VisionDaytimeRange"		"0"	
+		"VisionNighttimeRange"		"0"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+		"TeamName"					"DOTA_TEAM_GOODGUYS"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
+		"AbilityLayout"				"4"
+		"Ability1"					"dummy_passive_vulnerable"
+	}
+	
 	//=================================================================================
 	// Fountain
 	//=================================================================================
@@ -3031,8 +3044,8 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
-		"RingRadius"				"220"
-		"CollisionSize"				"144"
+		"RingRadius"				"100"
+		"CollisionSize"				"100"
 		
 		// Movement
 		//----------------------------------------------------------------
@@ -4485,6 +4498,11 @@
 				{
 					"Name"			"boss1_summon_adds"
 				}
+				"Ability5"
+				{
+					"Name"				"neutral_bonus_atk_speed"
+					"Heal"				"1"
+				}
 			}
 			
 			"EquippedItems"
@@ -4507,6 +4525,14 @@
 		"BaseClass"					"npc_dota_creature"
 		"ModelScale"				"0.5"
 		"Level"						"4"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_magic_immune"
+		"Ability2"					"neutral_bash"
+		"Ability3"					""
+		"Ability4"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -4627,8 +4653,10 @@
 		
 		// Team
 		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		
 		// Creature Data
 		//----------------------------------------------------------------
@@ -4718,8 +4746,10 @@
 		
 		// Team
 		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_NEUTRALS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_HERO"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
 		
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------

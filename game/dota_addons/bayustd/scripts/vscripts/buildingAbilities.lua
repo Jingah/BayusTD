@@ -37,15 +37,16 @@ function UpgradeBuilding( keys )
 	local player = PlayerResource:GetPlayer(pID)
 	local pos = caster:GetAbsOrigin()
 	local hero = PlayerResource:GetSelectedHeroEntity(pID)
+	local squares = caster.squaresOccupied
 	
+	--caster:RemoveBuilding(true)
+	caster:RemoveSelf()
 	
-	caster:RemoveBuilding(true)
-	
-	--caster:RemoveSelf()
 	unit = CreateUnitByName(keys.Building, pos, false, hero, nil, hero:GetTeamNumber())
 	unit:SetOwner(hero)
 	unit:SetControllableByPlayer(pID, true)
 	unit:SetAbsOrigin(pos)
+	unit.squaresOccupied = squares
 	
 	player.lumber = player.lumber - keys.LumberCost
 	--print("Lumber Spend. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)

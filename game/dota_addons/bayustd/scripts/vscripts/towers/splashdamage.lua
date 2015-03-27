@@ -12,7 +12,7 @@ function SplashDamage(keys)
 				victim = targets[i],
 				attacker = caster,
 				damage = keydamage,
-				damage_type = DAMAGE_TYPE_COMPOSITE,
+				damage_type = DAMAGE_TYPE_PHYSICAL,
 			}
 			ApplyDamage(damageTable)
 		end
