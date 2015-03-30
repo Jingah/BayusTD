@@ -106,6 +106,7 @@ It can be used to initialize state that isn't initializeable in Initbayustd() bu
 function bayustd:OnFirstPlayerLoaded()
 	print("[BAYUSTD] First Player has loaded")
 	CreateUnitByName("npc_dota_fountain", Vector(-6784,4352,128), false, nil, nil, DOTA_TEAM_GOODGUYS)
+	AppendToLogFile("log/bayustd.txt", "First player loaded\n")
 end
 
 --[[
@@ -263,6 +264,8 @@ function bayustd:OnAbilityUsed(keys)
 
 	local player = EntIndexToHScript(keys.PlayerID)
 	local abilityname = keys.abilityname
+	
+	AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(keys.PlayerID) .. " used an ability: " .. abilityname .. "\n")
 
 	-- Cancel the ghost if the player casts another active ability.
 	-- Start of BH Snippet:
@@ -280,13 +283,14 @@ end
 
 -- Cleanup a player when they leave
 function bayustd:OnDisconnect(keys)
-	--print('[bayustd] Player Disconnected ' .. tostring(keys.userid))
+	print('[bayustd] Player Disconnected ' .. tostring(keys.userid))
 	--PrintTable(keys)
 
 	local name = keys.name
 	local networkid = keys.networkid
 	local reason = keys.reason
 	local userid = keys.userid
+	AppendToLogFile("log/bayustd.txt", "Playerid " .. userid .. " disconnected. Reason: " .. reason .. "\n")
 end
 
 -- An item was picked up off the ground
@@ -319,9 +323,8 @@ function bayustd:OnItemPurchased( keys )
 	local itemcost = keys.itemcost
 	
 	local hero = player:GetAssignedHero()
-	local baseInt = hero:GetBaseIntellect()
-	local baseStr = hero:GetBaseStrength()
-	local baseAgi = hero:GetBaseAgility()
+	
+	AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(plyID) .. " purchased a new Item: " .. itemName .. " for " .. itemcost .. " gold\n")
 	
 	--print(PlayerResource:GetNumItemsPurchased(plyID))
 end
@@ -401,6 +404,8 @@ function bayustd:OnEntityKilled( keys )
 		local bountyLumber = unit_table.BountyLumber
 		local playerKills = PlayerResource:GetKills(pID)
 		
+		AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " killed a unit: " .. name .. ". His hero has now " .. hero:GetLastHits() .. " lasthits.\n")
+		
 		if bountyLumber > 0 then
 			player.lumber = player.lumber + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
@@ -445,8 +450,6 @@ function bayustd:OnEntityKilled( keys )
 			for d = 1, bayustd:getRemovedCreeps(), 1 do
 				if bayustd:getWave() % 10 ~= 0 then
 					CreateUnitByName(name, bayustd:RandomSpawnPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
-				else
-					CreateUnitByName(name, Entities:FindByName( nil, "point_teleport_spot_boss" ), true, nil, nil, DOTA_TEAM_NEUTRALS)
 				end
 			end
 			GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)
@@ -473,6 +476,7 @@ function bayustd:OnEntityKilled( keys )
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
 				end
 			end
+			AppendToLogFile("log/bayustd.txt", "Wave " .. wave .. " finished\n")
 			wave = wave + 1
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
@@ -519,6 +523,9 @@ function bayustd:Initbayustd()
 	GameRules.PLAYERS_PICKED = 0
 	GameRules.TOTAL_PLAYERS = 0
 	GameRules.DEAD_PLAYER_COUNT = 0
+	
+	InitLogFile("log/bayustd.txt", "")
+	AppendToLogFile("log/bayustd.txt", "BayusTD starting with " .. DOTA_MAX_TEAM_PLAYERS .. " Players ...\n")
 
 
 	---------------------------------------------------------------------------
@@ -713,6 +720,7 @@ end
 -- Spawn Creepwaves
 ---------------------------------------------------------------------------
 function bayustd:SpawnCreeps()
+	AppendToLogFile("log/bayustd.txt", "Starting new round, creeps spawning ...\n")
 	self:topBarUpdate(1, true)
 	local waveName = "npc_dota_wave" .. wave
 	local info = GameRules.Roundinfo
@@ -910,6 +918,32 @@ function bayustd:PlayerSay(keys)
 		print("Adding level to playerID " .. plyID)
 		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
 		hero:AddExperience(lvlxp, false, false)
+	end
+	
+	if DEBUG and string.find(keys.text, "^-next") then
+		wave = wave + 1
+		bayustd:setRemovedCreeps(0)
+		local a = 3
+		Timers:CreateTimer(function()
+			GameRules:SendCustomMessage("Round " .. wave .. " starts in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
+			a = a - 1
+			if a == 0 then
+				bayustd:SpawnCreeps()
+				return
+			end
+			return 1
+		 end
+		 )
+	end
+	
+	if DEBUG and string.find(keys.text, "^-kill") then
+		local targets = FindUnitsInRadius(hero:GetTeam(), hero:GetAbsOrigin(), nil, 20000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FIND_CLOSEST, false)
+
+		for i = 1, #targets do
+			if targets[i] ~= target then --avoid dealing twice the damage
+				target:RemoveSelf()
+			end
+		end
 	end
 	
 	-- Player commands

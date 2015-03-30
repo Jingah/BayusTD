@@ -15,6 +15,7 @@ require('popups')
 require('FlashUtil')
 require('buildinghelper')
 require('abilities')
+require('lib.loadhelper')
 
 
 function Precache( context )
@@ -97,4 +98,5 @@ end
 function Activate()
 	GameRules.bayustd = bayustd()
 	GameRules.bayustd:Initbayustd()
+	loadhelper.init()
 end

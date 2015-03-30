@@ -4332,6 +4332,7 @@
 		"AttackRate"				"1.8"
 		"AttackRange"				"500"
 		"AttackAcquisitionRange"	"500"
+		"ProjectileModel"			"particles/base_attacks/ranged_siege_good_explosion.vpcf" //TODO
 		"ProjectileSpeed"			"800"		// Speed of projectile.
 		
 		// Bounty
@@ -4675,17 +4676,14 @@
 	}
 	
 	//=================================================================================
-	// Wave: 12 Batrider -AIR-
+	// Wave: 12 Phoenix -AIR-
 	//=================================================================================
 	"npc_dota_wave12"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/batrider/batrider.vmdl"
-		"SoundSet"					"Hero_Batrider"			
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_batrider.vsndevts"
-		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_batrider.vsndevts"
+		"Model"						"models/heroes/phoenix/phoenix_bird.vmdl"
 		"ModelScale"				"0.8"
 		"Level"						"6"
 		"HasInventory"				"1"
@@ -4712,6 +4710,7 @@
 		"AttackRate"				"1.35"
 		"AttackRange"				"100"
 		"AttackAcquisitionRange"	"500"
+		"ProjectileModel"			"particles/units/heroes/hero_phoenix/phoenix_base_attack.vpcf"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -4754,15 +4753,7 @@
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
 		"Creature"
-		{
-			"AttachWearables"
-			{
-				"Wearable1"	{ "ItemDef" "375" } 
-				"Wearable2"	{ "ItemDef"	"376" } 
-				"Wearable3" { "ItemDef"	"377" }
-				"Wearable4" { "ItemDef"	"378" }
-			}
-			
+		{			
 			"EquippedItems"
 			{
 				"Phase"
@@ -4773,17 +4764,15 @@
 		}
 	}
 	//=================================================================================
-	// Wave: 13 Weaver
+	// Wave: 13 Spider
 	//=================================================================================
 	"npc_dota_wave13"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/weaver/weaver.vmdl"
-		"ModelScale"				"1.0"
-		"SoundSet"                  "Hero_Weaver"					
-		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_weaver.vsndevts"
+		"Model"						"models/items/broodmother/spiderling/perceptive_spiderling/perceptive_spiderling.vmdl"
+		"ModelScale"				"1.5"
 		"Level"						"5"
 		"HasInventory"				"1"
 		
@@ -4809,6 +4798,7 @@
 		"AttackRate"				"1.8"
 		"AttackRange"				"600"
 		"AttackAcquisitionRange"	"600"
+		"ProjectileModel"			"particles/units/heroes/hero_weaver/weaver_base_attack.vpcf"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -4849,15 +4839,7 @@
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
 		"Creature"
-		{			
-			"AttachWearables"
-			{
-				"Wearable1"	{ "ItemDef" "277" } 
-				"Wearable2"	{ "ItemDef"	"278" } 
-				"Wearable3" { "ItemDef"	"279" }
-				"Wearable4" { "ItemDef"	"280" }
-			}
-			
+		{
 			"EquippedItems"
 			{
 				"Phase"
@@ -5477,8 +5459,8 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
 		"Ability1"					"neutral_magic_immune"
-		"Ability2"					"neutral_crit"
 		"Ability3"					"boss2_bloodlust"
+		"Ability2"					"neutral_crit"
 		"Ability4"					"boss2_summon_adds"
 		"Ability5"					""
 		"Ability6"					""
