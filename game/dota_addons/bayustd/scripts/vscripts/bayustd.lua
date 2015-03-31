@@ -385,6 +385,7 @@ function bayustd:OnEntityKilled( keys )
 		player.ghost:SetOwner(hero)
 		player.ghost:SetControllableByPlayer(pID, true)
 		bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
+		AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 	end
 	
 	if killedUnit:GetUnitName() == "npc_dota_wave20" then
@@ -413,9 +414,6 @@ function bayustd:OnEntityKilled( keys )
 			PopupLumber(killedUnit, bountyLumber)
 		end
 		
-		if name == "npc_dota_lumber" or name == "npc_dota_gold" then
-			return
-		end
 		if name == "npc_dota_wave10" then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:HasSelectedHero(nPlayerID) then
@@ -432,7 +430,7 @@ function bayustd:OnEntityKilled( keys )
 					PlayerResource:IncrementKills(pID, playerKills + 1)
 				end
 			end
-		elseif name == "npc_dota_wave30" then
+		elseif name == "npc_dota_wave30" then -- not implemented yet
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:HasSelectedHero(nPlayerID) then
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 6500
@@ -465,8 +463,10 @@ function bayustd:OnEntityKilled( keys )
 							nPlayer:GetAssignedHero():RespawnHero(false, false, false)
 							nPlayer.isDead = nil
 							GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT - 1
+							AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " respawned.\n")
+						else
+							nPlayer.isDead = nPlayer.isDead + 1
 						end
-						nPlayer.isDead = nPlayer.isDead + 1
 					end
 					
 					nPlayer.lumber = nPlayer.lumber + 100
@@ -720,7 +720,7 @@ end
 -- Spawn Creepwaves
 ---------------------------------------------------------------------------
 function bayustd:SpawnCreeps()
-	AppendToLogFile("log/bayustd.txt", "Starting new round, creeps spawning ...\n")
+	AppendToLogFile("log/bayustd.txt", "Starting round " .. wave .. ", creeps spawning ...\n")
 	self:topBarUpdate(1, true)
 	local waveName = "npc_dota_wave" .. wave
 	local info = GameRules.Roundinfo
@@ -918,32 +918,6 @@ function bayustd:PlayerSay(keys)
 		print("Adding level to playerID " .. plyID)
 		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
 		hero:AddExperience(lvlxp, false, false)
-	end
-	
-	if DEBUG and string.find(keys.text, "^-next") then
-		wave = wave + 1
-		bayustd:setRemovedCreeps(0)
-		local a = 3
-		Timers:CreateTimer(function()
-			GameRules:SendCustomMessage("Round " .. wave .. " starts in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
-			a = a - 1
-			if a == 0 then
-				bayustd:SpawnCreeps()
-				return
-			end
-			return 1
-		 end
-		 )
-	end
-	
-	if DEBUG and string.find(keys.text, "^-kill") then
-		local targets = FindUnitsInRadius(hero:GetTeam(), hero:GetAbsOrigin(), nil, 20000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FIND_CLOSEST, false)
-
-		for i = 1, #targets do
-			if targets[i] ~= target then --avoid dealing twice the damage
-				target:RemoveSelf()
-			end
-		end
 	end
 	
 	-- Player commands
