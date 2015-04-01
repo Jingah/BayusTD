@@ -6,7 +6,7 @@ function OnStartTouch(trigger)
 	local name = unit:GetUnitName()
 	
 	if bayustd:getWave() % 10 == 0 then
-		hp = Entity:GetHealth()
+		hp = unit:GetHealth()
 	end
 	
 	unit:RemoveSelf()

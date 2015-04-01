@@ -116,6 +116,7 @@ It can be used to initialize non-hero player state or adjust the hero selection 
 function bayustd:OnAllPlayersLoaded()
 	print("[BAYUSTD] All Players have loaded into the game")
 	-- Reassign all the players to the Radiant Team
+	AppendToLogFile("log/bayustd.txt", "All Players loaded (" .. GameRules.TOTAL_PLAYERS .. " Players)\n")
 	for nPlayerID = 0, DOTA_MAX_PLAYERS-1 do
 		if PlayerResource:IsValidPlayer(nPlayerID) and not PlayerResource:IsBroadcaster(nPlayerID) then
 			if PlayerResource:GetTeam(nPlayerID) ~= DOTA_TEAM_GOODGUYS then
@@ -525,7 +526,7 @@ function bayustd:Initbayustd()
 	GameRules.DEAD_PLAYER_COUNT = 0
 	
 	InitLogFile("log/bayustd.txt", "")
-	AppendToLogFile("log/bayustd.txt", "BayusTD starting with " .. DOTA_MAX_TEAM_PLAYERS .. " Players ...\n")
+	AppendToLogFile("log/bayustd.txt", "BayusTD starting ...\n")
 
 
 	---------------------------------------------------------------------------
@@ -918,6 +919,11 @@ function bayustd:PlayerSay(keys)
 		print("Adding level to playerID " .. plyID)
 		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
 		hero:AddExperience(lvlxp, false, false)
+	end
+	
+	if DEBUG and string.find(keys.text, "^-wave") then
+		wave = wave + 1
+		GameRules:SendCustomMessage("Wave is now on wave " .. wave, 0, 0)
 	end
 	
 	-- Player commands
