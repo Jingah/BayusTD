@@ -286,7 +286,7 @@ function BuildingHelper:AddBuilding(keys)
 	hAbility:EndCooldown()
 	-- same thing with the gold cost.
 	if playersHero ~= nil then
-		playersHero:SetGold(playersHero:GetGold()+goldCost, false)
+		--playersHero:SetGold(playersHero:GetGold()+goldCost, false)
 	end
 
 	--setup the dummy for model ghost
@@ -756,7 +756,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	function unit:RemoveBuilding(bForceKill)
 		BuildingHelper:OpenSquares(unit.squaresOccupied, "vector")
 		if bForceKill then
-			unit:ForceKill(true)
+			unit:RemoveSelf()
 		end
 	end
 
@@ -769,7 +769,7 @@ function BuildingHelper:InitializeBuildingEntity(keys)
 	-- remove gold from playersHero.
 	local goldCost = buildingTable.goldCost
 	if playersHero ~= nil then
-		playersHero:SetGold(playersHero:GetGold()-goldCost, false)
+		--playersHero:SetGold(playersHero:GetGold()-goldCost, false)
 	end
 	buildingTable["abil"]:StartCooldown(cooldown)
 

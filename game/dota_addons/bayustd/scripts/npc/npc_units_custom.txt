@@ -724,8 +724,8 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"240"
-		"AttackDamageMax"			"246"
+		"AttackDamageMin"			"80"
+		"AttackDamageMax"			"120"
 		"AttackRate"				"1.8"
 		"AttackRange"				"900"
 		"AttackAcquisitionRange"	"900"
@@ -739,7 +739,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"190"		//Gained Lumber when selling tower
+		"SellBounty"				"142"		//Gained Lumber when selling tower
 		"LumberCost"				"190"
 		
 		// Bounds
@@ -819,7 +819,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"210"		//Gained Lumber when selling tower
+		"SellBounty"				"157"		//Gained Lumber when selling tower
 		"LumberCost"				"210"
 		
 		// Bounds
@@ -899,8 +899,8 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"475"		//Gained Lumber when selling tower
-		"LumberCost"					"475"
+		"SellBounty"				"356"		//Gained Lumber when selling tower
+		"LumberCost"				"475"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -980,8 +980,8 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"825"		//Gained Lumber when selling tower
-		"LumberCost"					"825"
+		"SellBounty"				"618"		//Gained Lumber when selling tower
+		"LumberCost"				"825"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1073,8 +1073,8 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1200"		//Gained Lumber when selling tower
-		"LumberCost"					"1200"
+		"SellBounty"				"900"		//Gained Lumber when selling tower
+		"LumberCost"				"1200"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1154,8 +1154,8 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1300"		//Gained Lumber when selling tower
-		"LumberCost"					"1300"
+		"SellBounty"				"975"		//Gained Lumber when selling tower
+		"LumberCost"				"1300"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1247,8 +1247,8 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"4750"		//Gained Lumber when selling tower
-		"LumberCost"					"4750"
+		"SellBounty"				"3562"		//Gained Lumber when selling tower
+		"LumberCost"				"4750"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -1327,7 +1327,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5050"		//Gained Lumber when selling tower
+		"SellBounty"				"3787"		//Gained Lumber when selling tower
 		"LumberCost"					"5050"
 		
 		// Bounds
@@ -1407,7 +1407,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5600"		//Gained Lumber when selling tower
+		"SellBounty"				"4200"		//Gained Lumber when selling tower
 		"LumberCost"					"5600"
 		
 		// Bounds
@@ -1487,7 +1487,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5700"		//Gained Lumber when selling tower
+		"SellBounty"				"4275"		//Gained Lumber when selling tower
 		"LumberCost"					"5700"
 		
 		// Bounds
@@ -1541,7 +1541,7 @@
 		"Ability1"					"unholy_warlock_permanent_immolation" // Core of the unit building system
 		"Ability2"					""
 		"Ability3"					""
-		"Ability4"					"sell_builing"
+		"Ability4"					"sell_builing_ultimate"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -1648,7 +1648,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"4450"		//Gained Lumber when selling tower
+		"SellBounty"				"3337"		//Gained Lumber when selling tower
 		"LumberCost"					"4450"
 		
 		// Bounds
@@ -1729,7 +1729,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5450"		//Gained Lumber when selling tower
+		"SellBounty"				"4087"		//Gained Lumber when selling tower
 		"LumberCost"				"5450"
 		
 		// Bounds
@@ -1810,7 +1810,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5200"		//Gained Lumber when selling tower
+		"SellBounty"				"3900"		//Gained Lumber when selling tower
 		"LumberCost"					"5200"
 		
 		// Bounds
@@ -1891,7 +1891,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"4600"		//Gained Lumber when selling tower
+		"SellBounty"				"3450"		//Gained Lumber when selling tower
 		"LumberCost"					"4600"
 		
 		// Bounds
@@ -1946,7 +1946,7 @@
 		"Ability1"					"" // Core of the unit building system
 		"Ability2"					""
 		"Ability3"					""
-		"Ability4"					"sell_builing"
+		"Ability4"					"sell_builing_ultimate"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -2053,7 +2053,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"140"		//Gained Lumber when selling tower
+		"SellBounty"				"100"		//Gained Lumber when selling tower
 		"LumberCost"					"140"
 		
 		// Bounds
@@ -2148,7 +2148,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"265"		//Gained Lumber when selling tower
+		"SellBounty"				"198"		//Gained Lumber when selling tower
 		"LumberCost"					"265"
 		
 		// Bounds
@@ -2229,7 +2229,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"625"		//Gained Lumber when selling tower
+		"SellBounty"				"468"		//Gained Lumber when selling tower
 		"LumberCost"					"625"
 		
 		// Bounds
@@ -2309,7 +2309,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"800"		//Gained Lumber when selling tower
+		"SellBounty"				"600"		//Gained Lumber when selling tower
 		"LumberCost"					"800"
 		
 		// Bounds
@@ -2391,7 +2391,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"SellBounty"				"862"		//Gained Lumber when selling tower
 		"LumberCost"				"1150"
 		
 		// Bounds
@@ -2484,7 +2484,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1200"		//Gained Lumber when selling tower
+		"SellBounty"				"900"		//Gained Lumber when selling tower
 		"LumberCost"				"1200"
 		
 		// Bounds
@@ -2568,7 +2568,7 @@
 		"GoldCost"					"0"
 		"LumberCost"				"4500"
 		"BuildTime"					"10"
-		"SellBounty"				"4500"		//Gained Lumber when selling tower
+		"SellBounty"				"3375"		//Gained Lumber when selling tower
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2648,7 +2648,7 @@
 		"LumberCost"				"5150"
 		"FoodCost"					"0"	//and 5 after theres more than 1 built
 		"BuildTime"					"10"
-		"SellBounty"				"5150"		//Gained Lumber when selling tower
+		"SellBounty"				"3862"		//Gained Lumber when selling tower
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -2730,7 +2730,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"75"		//Gained Lumber when selling tower
+		"SellBounty"				"55"		//Gained Lumber when selling tower
 		"LumberCost"				"75"
 		
 		// Bounds
@@ -2807,7 +2807,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5450"		//Gained Lumber when selling tower
+		"SellBounty"				"4087"		//Gained Lumber when selling tower
 		"LumberCost"					"5450"
 		
 		// Bounds
@@ -2884,7 +2884,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"825"		//Gained Lumber when selling tower
+		"SellBounty"				"618"		//Gained Lumber when selling tower
 		"LumberCost"				"825"
 		
 		// Bounds
@@ -2961,7 +2961,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"410"		//Gained Lumber when selling tower
+		"SellBounty"				"307"		//Gained Lumber when selling tower
 		"LumberCost"				"410"
 		
 		// Bounds
@@ -3038,7 +3038,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"SellBounty"				"862"		//Gained Lumber when selling tower
 		"LumberCost"				"1150"
 		
 		// Bounds
@@ -3115,7 +3115,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"125"		//Gained Lumber when selling tower
+		"SellBounty"				"93"		//Gained Lumber when selling tower
 		"LumberCost"				"125"
 		
 		// Bounds
@@ -3169,7 +3169,7 @@
 		"Ability1"					"" // Core of the unit building system
 		"Ability2"					""
 		"Ability3"					""
-		"Ability4"					"sell_builing"
+		"Ability4"					"sell_builing_ultimate"
 		
 		
 		// Attack
@@ -3267,7 +3267,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"5700"		//Gained Lumber when selling tower
+		"SellBounty"				"4275"		//Gained Lumber when selling tower
 		"LumberCost"					"5700"
 		
 		// Bounds
@@ -3343,7 +3343,7 @@
 		
 		// Building Cost Stats
 		//----------------------------------------------------------------
-		"SellBounty"				"1150"		//Gained Lumber when selling tower
+		"SellBounty"				"862"		//Gained Lumber when selling tower
 		"LumberCost"				"1150"
 		
 		// Bounds
@@ -3376,256 +3376,7 @@
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
 		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
 	}
-	//=================================================================================
-	// Building: Racks Melee
-	// For Builder: 3
-	//=================================================================================
-	"npc_tower_racks"
-	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"					"npc_dota_building"
-		"Model"						"models/buildings/building_racks_melee_reference.vmdl"
-		"ModelScale"				"1"
-		"Level"						"1"
-		"HealthBarOffset"			"140"
-		"HasInventory"				"1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"" // Core of the unit building system
-		"Ability2"					"sell_builing"
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
-		
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"5"
-		"MagicalResistance"			"0"
-		
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"21"
-		"AttackDamageMax"			"29"
-		"ProjectileModel"			"particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_shadowraze.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"900"		// Speed of projectile.
-		
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyGoldMin"				"0.0"
-		"BountyGoldMax"				"0.0"
-		
-		// Building Cost Stats
-		//----------------------------------------------------------------
-		"GoldCost"					"10"
-		"LumberCost"				"20"
-		"FoodCost"					"0"	//and 5 after theres more than 1 built
-		"BuildTime"					"7"
-		"SellBounty"				"10"		//Gained Lumber when selling tower
-		
-		// Bounds
-		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
-		"RingRadius"				"220"
-		"CollisionSize"				"144"
-		
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
-		"MovementSpeed"				"0"
-		
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"1200"
-		"StatusHealthRegen"			"0"
-		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
-		
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_GOODGUYS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
-		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
-	}
 	
-	//=================================================================================
-	// Building: Dragon (Year beast event)
-	// For Builder 2
-	//=================================================================================
-	"npc_tower_dragon"
-	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"					"npc_dota_building"
-		"Model"						"models/props_structures/tower_dragon_blk_dest_lvl2.vmdl"
-		"ModelScale"				"1"
-		"Level"						"1"
-		"HealthBarOffset"			"140"
-		"HasInventory"				"1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"sell_builing" // Core of the unit building system
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
-		
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"5"
-		"MagicalResistance"			"0"
-		
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"10"
-		"AttackDamageMax"			"11"
-		"AttackRate"				"0.1"		// Speed of attack.
-		"ProjectileModel"			"particles/econ/items/techies/techies_arcana/techies_suicide_fireworks_a_trail.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"2000"		// Speed of projectile.
-		
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyGoldMin"				"0.0"
-		"BountyGoldMax"				"0.0"
-		
-		// Building Cost Stats
-		//----------------------------------------------------------------
-		"GoldCost"					"10"
-		"LumberCost"				"20"
-		"FoodCost"					"0"	//and 5 after theres more than 1 built
-		"BuildTime"					"7"
-		"SellBounty"				"7"		//Gained Lumber when selling tower
-		
-		// Bounds
-		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
-		"RingRadius"				"220"
-		"CollisionSize"				"144"
-		
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
-		"MovementSpeed"				"0"
-		
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"1200"
-		"StatusHealthRegen"			"0"
-		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
-		
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_GOODGUYS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
-		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
-	}
-	
-	//=================================================================================
-	// Building: Wooden sentry tower 
-	// For Builder 1
-	//=================================================================================
-	"npc_tower_wooden"
-	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"					"npc_dota_building"
-		"Model"						"models/props_structures/wooden_sentry_tower001.vmdl"
-		"ModelScale"				"1"
-		"Level"						"1"
-		"HealthBarOffset"			"140"
-		"HasInventory"				"1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"sell_builing" // Core of the unit building system
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
-		
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"5"
-		"MagicalResistance"			"0"
-		
-		// Attack
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"16"
-		"AttackDamageMax"			"20"
-		"AttackRate"				"0.7"		// Speed of attack.
-		"ProjectileModel"			"particles/units/heroes/hero_mirana/mirana_spell_arrow.vpcf" // Particle system model for projectile.
-		"ProjectileSpeed"			"1250"		// Speed of projectile.
-		
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyGoldMin"				"0.0"
-		"BountyGoldMax"				"0.0"
-		
-		// Building Cost Stats
-		//----------------------------------------------------------------
-		"GoldCost"					"10"
-		"LumberCost"				"20"
-		"FoodCost"					"0"	//and 5 after theres more than 1 built
-		"BuildTime"					"7"
-		"SellBounty"				"7"		//Gained Lumber when selling tower
-		
-		// Bounds
-		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_BARRACKS"
-		"RingRadius"				"220"
-		"CollisionSize"				"144"
-		
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"	// Needed to cast Point abilities
-		"MovementSpeed"				"0"
-		
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"1200"
-		"StatusHealthRegen"			"0"
-		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
-		
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_GOODGUYS"
-		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
-		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_STRUCTURE"
-		"UnitRelationShipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
-	}
 	
 	//=================================================================================
 	// Wave: 1 - Dragonspawn 
@@ -5663,6 +5414,182 @@
 				"Wearable3" { "ItemDef"	"328" }
 				"Wearable4" { "ItemDef"	"329" }
 				"Wearable5" { "ItemDef"	"330" }
+			}
+		}
+	}
+	
+	//=================================================================================
+	// Wave: 21 Crystal-Arachnathid
+	//=================================================================================
+	"npc_dota_wave21"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+		"ModelScale"				"1.2"
+		"Level"						"8"
+		"HasInventory"				"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_mana_burn"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"21"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"90"
+		"AttackDamageMax"			"120"
+		"AttackRate"				"0.4"
+		"AttackRange"				"100"
+		"AttackAcquisitionRange"	"250"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"46"
+		"BountyGoldMin"				"44"
+		"BountyGoldMax"				"44"
+		"BountyLumber"				"24"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"9000"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1400"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
+			}
+		}
+	}
+	
+	//=================================================================================
+	// Wave: 22 Kobold
+	//=================================================================================
+	"npc_dota_wave22"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl"
+		"ModelScale"				"1.6"
+		"Level"						"8"
+		"HasInventory"				"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"neutral_poison_sting"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"22"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"240"
+		"AttackDamageMax"			"300"
+		"AttackRate"				"0.9"
+		"AttackRange"				"500"
+		"AttackAcquisitionRange"	"750"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"47"
+		"BountyGoldMin"				"45"
+		"BountyGoldMax"				"45"
+		"BountyLumber"				"25"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"10000"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1400"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+			
+			"EquippedItems"
+			{
+				"Phase"
+				{
+					"Item"					"item_phase_300"
+				}
 			}
 		}
 	}

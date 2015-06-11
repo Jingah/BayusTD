@@ -22,8 +22,8 @@
     }
     "5"
     {
-        "File" "StatsCollection"
-        "Depth" "1"
+        "File" 		"StatsCollection"
+        "Depth"		"1"
     }
 	"6"
 	{
@@ -35,6 +35,11 @@
         "File"      "loadhelper"
         "Depth"     "253"
     }
+	"8"
+	{
+		"File"		"PipNumbers"
+		"Depth"		"18"
+	}
 }
 
 // =============================================

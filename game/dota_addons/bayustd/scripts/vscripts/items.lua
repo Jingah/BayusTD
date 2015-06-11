@@ -22,8 +22,8 @@ function tomeUsed( event )
 			FireGameEvent( 'custom_error_show', { player_ID = playerID, _error = "You are already level 100" } )
 			return
 		end
-		local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
-		hero:AddExperience(lvlxp, false, false)
+		--local lvlxp = XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - XP_PER_LEVEL_TABLE[hero:GetLevel()]
+		hero:AddExperience(500, false, false)
 	end
 end
 

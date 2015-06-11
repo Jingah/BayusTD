@@ -159,6 +159,8 @@ function bayustd:OnPlayerPickHero(keys)
 	local playerID = hero:GetPlayerID()
 	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
 	
+	FireGameEvent( 'send_hero_ent', { player_ID = playerID, _ent = PlayerResource:GetSelectedHeroEntity(playerID):GetEntityIndex() } )
+	
 	ShowGenericPopup( "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
 	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
@@ -258,6 +260,15 @@ function bayustd:OnConnectFull(keys)
 	end
 end
 
+-- A player leveled up an ability
+function bayustd:OnPlayerLearnedAbility( keys)
+	--print ('[BAYUSTD] OnPlayerLearnedAbility')
+	--PrintTable(keys)
+
+	local player = EntIndexToHScript(keys.player)
+	local abilityname = keys.abilityname
+end
+
 -- An ability was used by a player
 function bayustd:OnAbilityUsed(keys)
 	--print('[BAYUSTD] AbilityUsed')
@@ -326,8 +337,6 @@ function bayustd:OnItemPurchased( keys )
 	local hero = player:GetAssignedHero()
 	
 	AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(plyID) .. " purchased a new Item: " .. itemName .. " for " .. itemcost .. " gold\n")
-	
-	--print(PlayerResource:GetNumItemsPurchased(plyID))
 end
 
 
@@ -369,24 +378,31 @@ function bayustd:OnEntityKilled( keys )
 	end
 	
 	if killedUnit:IsRealHero() then
-		GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
-		if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
-			local messageinfo = { message = "YOU FAILED", duration = 5}
-			FireGameEvent("show_center_message",messageinfo)
-			bayustd:Endgame(false)
-			return
+		if(killedUnit:IsReincarnating()) then
+			Timers:CreateTimer(3.0, function()
+				killedUnit:RespawnHero(false, false, false)
+			end
+			)
+		else
+			GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT + 1
+			if GameRules.DEAD_PLAYER_COUNT == GameRules.TOTAL_PLAYERS then
+				local messageinfo = { message = "YOU FAILED", duration = 5}
+				FireGameEvent("show_center_message",messageinfo)
+				bayustd:Endgame(false)
+				return
+			end
+			GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
+			local lostGold = PlayerResource:GetGoldLostToDeath(pID)
+			local goldBounty = PlayerResource:GetUnreliableGold(pID) + lostGold
+			PlayerResource:SetGold(pID, goldBounty, false)
+			player.isDead = 0
+			local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
+			player.ghost = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+			player.ghost:SetOwner(hero)
+			player.ghost:SetControllableByPlayer(pID, true)
+			bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
+			AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 		end
-		GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
-		local lostGold = PlayerResource:GetGoldLostToDeath(pID)
-		local goldBounty = PlayerResource:GetUnreliableGold(pID) + lostGold
-		PlayerResource:SetGold(pID, goldBounty, false)
-		player.isDead = 0
-		local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
-		player.ghost = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
-		player.ghost:SetOwner(hero)
-		player.ghost:SetControllableByPlayer(pID, true)
-		bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
-		AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 	end
 	
 	if killedUnit:GetUnitName() == "npc_dota_wave20" then
@@ -534,6 +550,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent( "game_rules_state_change", Dynamic_Wrap( bayustd, 'OnGameRulesStateChange' ), self )
 	ListenToGameEvent('player_disconnect', Dynamic_Wrap(bayustd, 'OnDisconnect'), self)
 	ListenToGameEvent('dota_player_pick_hero', Dynamic_Wrap(bayustd, 'OnPlayerPickHero'), self)
+	ListenToGameEvent('dota_player_learned_ability', Dynamic_Wrap(bayustd, 'OnPlayerLearnedAbility'), self)
 	ListenToGameEvent('dota_player_used_ability', Dynamic_Wrap(bayustd, 'OnAbilityUsed'), self)
 	ListenToGameEvent('npc_spawned', Dynamic_Wrap(bayustd, 'OnNPCSpawned'), self)
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
@@ -922,7 +939,10 @@ function bayustd:PlayerSay(keys)
 	end
 	
 	if DEBUG and string.find(keys.text, "^-wave") then
-		wave = wave + 1
+		print("\"" .. keys.text .. "\"")
+		local number = string.sub (keys.text, 7)
+		local newWave = tonumber(number)
+		wave = newWave
 		GameRules:SendCustomMessage("Wave is now on wave " .. wave, 0, 0)
 	end
 	

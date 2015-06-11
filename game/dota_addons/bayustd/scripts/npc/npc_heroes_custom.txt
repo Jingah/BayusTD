@@ -390,11 +390,11 @@
 
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
 		"AttributeBaseStrength"		"19"										// Base strength
-		"AttributeStrengthGain"		"4"										// Strength bonus per level.
+		"AttributeStrengthGain"		"3"										// Strength bonus per level.
 		"AttributeBaseIntelligence"	"15"										// Base intelligence
-		"AttributeIntelligenceGain"	"4"										// Intelligence bonus per level.
+		"AttributeIntelligenceGain"	"2"										// Intelligence bonus per level.
 		"AttributeBaseAgility"		"16"										// Base agility
-		"AttributeAgilityGain"		"4"										// Agility bonus per level.
+		"AttributeAgilityGain"		"2"										// Agility bonus per level.
 
 		//"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		//"RingRadius"				"70"

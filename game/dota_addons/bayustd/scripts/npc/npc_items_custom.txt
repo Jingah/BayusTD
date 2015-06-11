@@ -482,7 +482,7 @@
 		"ID"                            "1054"
 		"BaseClass"                     "item_datadriven"
 		"AbilityTextureName"            "item_hand_of_midas"
-		"ItemCost"                      "500"
+		"ItemCost"                      "300"
 		"ItemQuality"					"consumable"
 		"ItemStackable"					"1"
 		"ItemKillable"					"1"
