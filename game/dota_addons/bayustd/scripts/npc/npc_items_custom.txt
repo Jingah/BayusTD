@@ -1,0 +1,2368 @@
+"DOTAAbilities"
+{	
+	"item_apply_modifiers"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"                            "1124"  // unique ID number for this item.  Do not change this once 
+		"BaseClass"                     "item_datadriven"
+		"ItemBaseLevel"                 "1"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"              "9999"
+		"AbilityCastPoint"        		"0.0"    
+
+			"Modifiers"
+		   {
+				  "modifier_protect_builder"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_disable_builder"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_enable_building"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_DISABLED"
+					  }
+				 }
+				 "modifier_disable_building"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+					  }
+				 }
+				 "modifier_hero_building"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_INVULNERABLE" "MODIFIER_STATE_VALUE_ENABLED"
+							 "MODIFIER_STATE_NO_HEALTH_BAR" "MODIFIER_STATE_VALUE_ENABLED"
+					 }
+				 }
+				 "modifier_air_rounds"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+					 }
+				 }
+				 "modifier_non_air_rounds"
+				 {
+					 "Passive"               "1"
+					 "IsHidden"              "1"
+					 "States"
+					 {
+							 "MODIFIER_STATE_DISARMED" "MODIFIER_STATE_VALUE_DISABLED"
+					 }
+				 }
+			}   
+	}
+	
+	//===============================================
+	// Graveyard gold
+	//===============================================
+	 "item_gold"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1020"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemStackable"					"1"
+		"ItemKillable"					"0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"Model" 						"models/props_gameplay/gold_bag.vmdl"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"graveyardGold"
+			}
+			"FireSound"
+			{
+				"EffectName"			"DOTA_Item.Hand_Of_Midas"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	
+	//===============================================
+	// Graveyard lumber
+	//===============================================
+	"item_lumber"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1021"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"BaseClass"						"item_datadriven"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemStackable"					"1"
+		"ItemKillable"					"0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"Model" 						"models/props_gameplay/tango.vmdl"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"graveyardLumber"
+			}
+			"FireSound"
+			{
+				"EffectName"			"DOTA_Item.Tango.Activate"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	
+	//===============================================
+	// Boots 270 ms
+	//===============================================
+    "item_phase_270"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"270"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 300 ms
+	//===============================================
+    "item_phase_300"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"300"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 320 ms
+	//===============================================
+    "item_phase_320"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"320"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Boots 350 ms
+	//===============================================
+    "item_phase_350"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"350"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// Boots 400 ms
+	//===============================================
+    "item_phase_400"
+	{
+		"ID"                            "1099"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_neutral_boots"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"400"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// Shop boots
+	//===============================================
+    "item_shop_boots"
+	{
+		"ID"                            "1050"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_boots"
+		"ItemCost"                      "300"
+		"ItemQuality"					"common"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"50"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	
+	//Start shop items
+	//===============================================
+	// Tome of Intelligence
+	//===============================================
+    "item_tome_of_intelligence"
+	{
+		"ID"                            "1051"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_necronomicon"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"ItemCost"                      "150"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"tomeUsed"
+			}
+			"FireSound"
+			{
+				"EffectName"			"DOTA_Item.Refresher.Activate"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	//===============================================
+	// Tome of Strength
+	//===============================================
+	 "item_tome_of_strength"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"1052"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_necronomicon_2"
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"tomeUsed"
+			}
+			"FireSound"
+			{
+				"EffectName"			"DOTA_Item.Refresher.Activate"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	//===============================================
+	// Tome of Agility
+	//===============================================
+    "item_tome_of_agility"
+	{
+		"ID"                            "1053"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_necronomicon_3"
+		"ItemCost"                      "250"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"tomeUsed"
+			}
+			"FireSound"
+			{
+				"EffectName"			"DOTA_Item.Refresher.Activate"
+				"Target"				"CASTER"
+			}
+		}
+	}
+	//===============================================
+	// Tome of Experience
+	//===============================================
+    "item_tome_of_experience"
+	{
+		"ID"                            "1054"
+		"BaseClass"                     "item_datadriven"
+		"AbilityTextureName"            "item_hand_of_midas"
+		"ItemCost"                      "300"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemKillable"					"1"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+		
+		"ItemCastOnPickup"				"1"
+		
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"tomeUsed"
+			}
+		}
+	}
+	//===============================================
+	// Sword of slaying
+	//===============================================
+    "item_sword_of_slaying"
+	{
+		"ID"                            "1055"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_sange"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_damage" 			"76"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dodge_chance"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"15"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"			"50"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_damage"
+				}
+			}
+			"modifier_evasion"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes" 			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_EVASION_CONSTANT"  			"%dodge_chance"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+			
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Axe of Maiming
+	//===============================================
+    "item_axe_of_maiming"
+	{
+		"ID"                            "1056"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_reaver"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_damage" 			"94"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stats_bonus"			"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"lifesteal"				"12.5"
+			}
+		}
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_life_stealer/life_stealer_feast.vpcf"
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_damage"
+				}
+			}
+			"modifier_stats"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_lifesteal"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+				"OnAttackLanded"
+				{
+					"Lifesteal"
+					{	
+						"Target" 				"ATTACKER"
+						"LifestealPercent"		"%lifesteal"
+					}
+					"FireEffect"
+					{
+						"EffectName"			"particles/units/heroes/hero_life_stealer/life_stealer_feast.vpcf"
+						"EffectAttachType"		"attach_hitloc"
+						"Target"				"TARGET"
+					}
+				}
+			}
+		}
+	}
+	//===============================================
+	// Coat of the Ironclad
+	//===============================================
+    "item_coat_of_the_ironclad"
+	{
+		"ID"                            "1057"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_hood_of_defiance"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_armor" 			"81"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stats_bonus"			"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movementspeed"			"60"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" 	    "%bonus_armor"
+				}
+			}
+			"modifier_stats"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_speed"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE"	"%movementspeed"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Maul of Thunderous Power
+	//===============================================
+    "item_maul_of_thun_p"
+	{
+		"ID"                            "1058"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_basher"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"94"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bash_chance"			"15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bash_dmg"				"25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_duration"			"2"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_bash"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%bash_chance"
+						"OnSuccess"
+						{
+							"Stun"
+							{
+								"Target"	"TARGET"
+								"Duration"	"%stun_duration"
+							}
+							"Damage"
+							{
+								"Target"	"TARGET"
+								"Damage"	"%bash_dmg"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//===============================================
+	// Staff of regeneration
+	//===============================================
+    "item_staff_of_reg"
+	{
+		"ID"                            "1059"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ultimate_scepter"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"Aura_Flags" 					"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"stats_bonus" 			"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"mana_regen"			"3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aura_radius"			"600"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atkspeed_slow"			"-25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atkspeed_slow_dur"		"10"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_stats_bonus"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"  			"%stats_bonus"
+					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"  			"%stats_bonus"
+				}
+			}
+			"modifier_atkspeed"
+			{
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName" 			"modifier_atkspeed_slow"
+						"Target"	   			"TARGET"
+					}
+				}
+			}
+			"modifier_atkspeed_slow"
+			{
+				"IsDebuff" 				"1"
+				"IsPurgable"			"1"
+				"Duration"				"%atkspeed_slow_dur"
+				"Teams"					"DOTA_UNIT_TARGET_TEAM_NEUTRALS"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	 "%atkspeed_slow"
+				}
+			}
+			"affix_aura_mana_regen"
+			{
+				"Passive"				"1"
+				"IsHidden"				"1"
+				"Aura"        			"modifier_mana_regen"
+        		"Aura_Radius" 			"%aura_radius"
+        		"Aura_Teams"  			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        		"Aura_Types" 			"DOTA_UNIT_TARGET_ALL"
+			}
+			"modifier_mana_regen"
+			{
+				"IsBuff"				"1"
+				"EffectName"			"particles/items_fx/healing_clarity.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"				"%mana_regen"
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// Arrow of Pure Evil
+	//===============================================
+    "item_arrow_of_pure_evil"
+	{
+		"ID"                            "1060"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_claymore"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"				"200"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"true_strike_modifier"
+			{
+				"IsHidden"				"1"
+				"Passive"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"States"
+				{
+					"MODIFIER_STATE_CANNOT_MISS"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"IsBuff"	"1"
+				"EffectName"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+				"OnAttackLanded"
+				{
+					"FireSound"
+					{
+						"EffectName"		"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"			"TARGET"
+					}
+					"RemoveModifier"
+					{
+						"ModifierName"		"modifier_apply_crit"
+						"Target"			"ATTACKER"
+					}
+				}
+			}
+		}
+	}
+	
+	//===============================================
+	// The Agile Blade
+	//===============================================
+    "item_agile_blade"
+	{
+		"ID"                            "1061"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_ethereal_blade"
+		"ItemCost"                      "7500"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"76"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"agi_inc"				"26"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"atk_speed"				"100"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_atk_speed"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" 	    "%atk_speed"
+				}
+			}
+			"modifier_agility"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS" 	    "%agi_inc"
+				}
+			}
+		}
+	}
+	//===============================================
+	// Mana potion
+	//===============================================
+    "item_mana_potion"
+	{
+		"ID"                            "1062"
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_greater_clarity"
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_FLOAT"
+				"mana_amount" 			"300"
+			}
+		}
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/items.lua"
+				"Function"				"mana_potion"
+			}
+			"FireSound"
+			{
+				"Target" 		"UNIT"
+				"EffectName" 	"DOTA_Item.Clarity.Activate"
+			}
+		}
+	}
+	//===============================================
+	// Heal potion
+	//===============================================
+    "item_heal_potion"
+	{
+		"ID"                            "1063"
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_salve"
+		"ItemKillable"                  "1"
+		"ItemSellable"                  "1"
+		"ItemDroppable"                 "1"
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"100"
+		"AbilityCastPoint"				"0.0"
+
+		
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"200"
+		"ItemQuality"					"consumable"
+		"ItemStackable"					"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE_STACKING"
+		"ItemPermanent"					"0"
+		"ItemInitialCharges"			"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_FLOAT"
+				"heal_amount" 			"500"
+			}
+		}
+		"OnSpellStart"
+		{
+			"SpendCharge"
+			{}
+			"Heal"
+			{
+				"HealAmount"			"%heal_amount"
+				"Target"				"CASTER"
+			}
+			"FireSound"
+			{
+				"Target" 		"UNIT"
+				"EffectName" 	"DOTA_Item.HealingSalve.Activate"
+			}
+		}
+	}
+	
+	//===============================================
+	// Enchanted Spear
+	//===============================================
+    "item_ench_spear"
+	{
+		"ID"                            "1064"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_javelin"
+		"ItemCost"                      "10000"
+		"ItemQuality"					"rare"
+		"ItemStackable"					"0"
+		"ItemKillable"					"1"
+		"ItemSellable"                  "1"
+		"ItemPurchasable"				"1"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" 				"FIELD_INTEGER"
+				"bonus_dmg" 			"162"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_chance"			"50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"			"300"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_bonus_dmg"
+			{
+				"Passive"               "1"
+				"IsHidden"				"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE" 	    "%bonus_dmg"
+				}
+			}
+			"modifier_crit"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+				"StatusEffectPriority"	"1"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"	"%crit_chance"
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target" 			"CASTER"
+								"ModifierName"		"modifier_apply_crit"
+							}
+						}
+					}
+				}
+			}
+			"modifier_apply_crit"
+			{
+				"IsHidden"	"1"
+				"IsBuff"	"1"
+				"EffectName"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+				"EffectAttachType"		"follow_origin"
+				"Attributes"			"MODIFIER_ATTRIBUTE_MULTIPLE"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}
+				"OnAttackLanded"
+				{
+					"FireSound"
+					{
+						"EffectName"		"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"			"TARGET"
+					}
+					"RemoveModifier"
+					{
+						"ModifierName"		"modifier_apply_crit"
+						"Target"			"ATTACKER"
+					}
+				}
+			}
+		}
+	}
+	//End shop items
+	//Start builder items (extra buildings)
+	//Buildings for Builder 1
+	"item_build_haunted_house_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_haunted_house_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_haunted_house"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_haunted_house"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_haunted_house"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_haunted_house"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_crypt_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_crypt_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_crypt"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_crypt"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_crypt"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_crypt"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_altar_of_the_darkness_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_altar_of_the_darkness_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_altar_of_the_darkness"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_altar_of_the_darkness"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_altar_of_the_darkness"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_altar_of_the_darkness"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_temple_of_the_damned_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_temple_of_the_damned_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_temple_of_the_damned"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_temple_of_the_damned"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_temple_of_the_damned"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_temple_of_the_damned"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_unholy_warlock_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_unholy_warlock_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_unholy_warlock"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_unholy_warlock"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_unholy_warlock"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.0"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_unholy_warlock"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	//Buildings for Builder 2
+	"item_build_holy_root_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_holy_root_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_holy_root"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_holy_root"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_holy_root"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_holy_root"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_fury_maiden_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_fury_maiden_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_fury_maiden"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_fury_maiden"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_fury_maiden"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_fury_maiden"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_obliterator_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_obliterator_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_obliterator"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_obliterator"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_obliterator"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"1"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_obliterator"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_ent_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_ent_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_ent"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_ent"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_ent"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_ent"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_lord_of_the_woods_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_lord_of_the_woods_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_lord_of_the_woods"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_lord_of_the_woods"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_lord_of_the_woods"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_lord_of_the_woods"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	//Buildings for Builder 3
+	"item_build_voodoo_spirit_disabled"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_spirit_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_voodoo_spirit"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+
+	}
+	
+	"item_build_voodoo_spirit"
+	{
+		"ID"                            "1065"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_spirit"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_voodoo_spirit"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	
+	"item_build_power_tower_disabled"
+	{
+		"ID"                            "1066"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_power_tower_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_power_tower"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	
+	"item_build_power_tower"
+	{
+		"ID"                            "1066"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_power_tower"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_power_tower"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	
+	"item_build_voodoo_overseer_disabled"
+	{
+		"ID"                            "1067"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_overseer_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_voodoo_overseer"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_voodoo_overseer"
+	{
+		"ID"                            "1067"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_voodoo_overseer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1"
+		"PlayerCanControl"				"1"
+		"AttackType"					"0"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_voodoo_overseer"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_blade_explorer_disabled"
+	{
+		"ID"                            "1068"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_explorer_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_blade_explorer"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_blade_explorer"
+	{
+		"ID"                            "1068"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_explorer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"0.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_blade_explorer"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	"item_build_blade_bouncer_disabled"
+	{
+		"ID"                            "1069"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_bouncer_disabled"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		"ItemPermanent"					"1"
+		"UnitName"						"npc_tower_blade_bouncer"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"0"
+	}
+	"item_build_blade_bouncer"
+	{
+		"ID"                            "1069"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+		"AbilityTextureName"			"item_build_blade_bouncer"
+		"ItemStackable"					"0"
+		"ItemKillable"					"0"
+		"ItemSellable"                  "0"
+		"ItemPurchasable"				"0"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemPermanent"					"1"
+		
+		// BuildingHelper info
+		"Building"						"1"
+		"BuildingSize"					"3"
+		"BuildTime"						"4.0"
+		"AbilityCastRange"				"200"
+		"UpdateHealth"					"1"
+		"Scale"							"1"
+		"MaxScale"						"1.5"
+		"PlayerCanControl"				"1"
+		"AttackType"					"2"	//0 - ground only, 1 - air only, 2 - both
+
+		"AbilityCooldown"				"0"
+		"AbilityGoldCost"				"0"
+		
+		// Note: if unit uses a npc_dota_hero baseclass, you must use the npc_dota_hero name.
+		"UnitName"						"npc_tower_blade_bouncer"	//blade bouncer
+		// End of BuildingHelper info
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"MaxLevel"						"1"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"abilities.lua"
+				"Function"				"build"
+			}
+		}
+	}
+	//Builder 4 towers
+	//End builder items
+}
