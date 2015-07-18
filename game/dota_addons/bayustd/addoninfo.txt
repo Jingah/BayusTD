@@ -1,3 +1,9 @@
 "AddonInfo"
 {
+	"maps"      "bayustd"
+	"IsPlayable"  "1"
+	"bayustd"
+	{
+			"MaxPlayers"                    "10"
+	}
 }

@@ -131,6 +131,11 @@ function bayustd:OnNPCSpawned(keys)
 	--print("[bayustd] NPC Spawned")
 	--PrintTable(keys)
 	local npc = EntIndexToHScript(keys.entindex)
+	if npc:GetUnitName() == "npc_boss2_add" then
+		npc:SetRenderColor(0,255,0)
+	elseif npc:GetUnitName() == "npc_boss2_buffer" then
+		npc:SetRenderColor(0,0,255)
+	end
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
 		return
@@ -358,6 +363,10 @@ function bayustd:OnEntityKilled( keys )
 	-- The Unit that was Killed
 	local killedUnit = EntIndexToHScript( keys.entindex_killed )
 	-- The Killing entity
+	
+	if killedUnit:IsSummoned() then
+		return
+	end
 	
 	local killerEntity = nil
 	

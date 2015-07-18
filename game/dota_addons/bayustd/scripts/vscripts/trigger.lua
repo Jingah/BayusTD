@@ -20,6 +20,7 @@ function OnStartTouch(trigger)
 			else
 				local boss = CreateUnitByName(name, Entities:FindByName( nil, "point_teleport_spot_boss" ):GetAbsOrigin(), true, nil, nil, DOTA_TEAM_NEUTRALS)
 				boss:SetHealth(hp)
+				bayustd:giveUnitDataDrivenModifier(boss, boss, "modifier_phased", -1)
 			end
 		end
 		GameRules:SendCustomMessage("<font color='#FF0000'>" .. bayustd:getRemovedCreeps() .. "</font> creeps entered the town!", 0, 0)

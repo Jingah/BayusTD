@@ -4303,9 +4303,9 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyGoldMin"				""
-		"BountyGoldMax"				""
-		"BountyLumber"				""
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+		"BountyLumber"				"0"
 		
 		// Movement
 		//----------------------------------------------------------------
@@ -4613,6 +4613,7 @@
 		"ModelScale"				"1.4"
 		"Level"						"6"
 		"HasInventory"				"1"
+		"ConsideredHero"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4654,8 +4655,8 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"2950"
 		"StatusHealthRegen"			"0.5"
-		"StatusMana"				"200"
-		"StatusManaRegen"			"1"
+		"StatusMana"				"2000"
+		"StatusManaRegen"			"10"
 		
 		// Bounds
 		//----------------------------------------------------------------
@@ -4672,17 +4673,20 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_SOFT"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
 		"Creature"
 		{
+			"DefaultState"			"Invade"
 			"States"	
 			{
 				"Invade"
 				{
 					"Name"				"Invade"
-					"Aggression"		"100.0" //cast offensive spells whenever
+					"Aggression"		"0.0" //cast offensive spells whenever
 					"Avoidance"			"0.0" //dont flee
 					"Support"			"100.0" //start buffing
 				}
@@ -4694,7 +4698,7 @@
 				{
 					"Name"				"neutral_heal"
 					"Heal"				"1"
-					
+					"UseAtHealthPercent"  "100"
 				}
 			}
 			"EquippedItems"
@@ -4811,6 +4815,7 @@
 		"ModelScale"				"1.2"
 		"Level"						"7"
 		"HasInventory"				"1"
+		"ConsideredHero"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4870,6 +4875,8 @@
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_NEUTRALS"
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
 		
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
@@ -4928,7 +4935,7 @@
 		
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"17"
+		"ArmorPhysical"				"27"
 		"MagicalResistance"			"0"
 		
 		// Attack
@@ -5004,6 +5011,7 @@
 		"ModelScale"				"1.6"
 		"Level"						"8"
 		"HasInventory"				"1"
+		"ConsideredHero"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5204,15 +5212,15 @@
 		"ModelScale" 				"1.7"
 		"ConsideredHero"			"1"
 		"CanBeDominated"			"0"
-		"HasInventory"				"1"
+		"IsSummoned"				"0"
 
 		// Abilities
 		//----------------------------------------------------------------
-		"AbilityLayout"				"6"
+		"AbilityLayout"				"4"
 		"Ability1"					"neutral_magic_immune"
-		"Ability3"					"boss2_bloodlust"
 		"Ability2"					"neutral_crit"
-		"Ability4"					"boss2_summon_adds"
+		"Ability3"					"boss2_summon_adds"
+		"Ability4"					"boss2_summon_buffer"
 		"Ability5"					""
 		"Ability6"					""
 		
@@ -5229,7 +5237,7 @@
 		"AttackDamageMax"			"765"
 		"AttackRate"				"0.3"
 		"AttackRange"				"100"
-		"AttackAcquisitionRange"	"500"
+		"AttackAcquisitionRange"	"1400"
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -5267,14 +5275,13 @@
 		"TeamName"					"DOTA_TEAM_NEUTRALS"							// Team name.
 		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_HERO"
 		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_HERO"
-		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_HERO"
 
 		
 		// Creature Data
 		//----------------------------------------------------------------------------------------------------------------------
 		"Creature"
 		{
-		
 			"States"	
 			{
 				"Invade"
@@ -5288,30 +5295,22 @@
 			
 			"AttachWearables"
 			{
-				"Wearable1"	{ "ItemDef" "326" }
-				"Wearable2"	{ "ItemDef"	"327" }
-				"Wearable3" { "ItemDef"	"328" }
-				"Wearable4" { "ItemDef"	"329" }
-				"Wearable5" { "ItemDef"	"330" }
+				"Wearable1"	{ "ItemDef" "6800" }
+				"Wearable2"	{ "ItemDef"	"6801" }
+				"Wearable3" { "ItemDef"	"6802" }
+				"Wearable4" { "ItemDef"	"6803" }
+				"Wearable5" { "ItemDef"	"6804" }
 			}
 			
 			"OffensiveAbilities"
 			{
-				"Ability4"                             
+				"Ability3"                             
 				{
 					"Name"			"boss2_summon_adds"
 				}
-				"Ability3"                             
+				"Ability4"                             
 				{
-					"Name"			"boss2_bloodlust"
-				}
-			}
-			
-			"EquippedItems"
-			{
-				"Phase"
-				{
-					"Item"					"item_phase_400"
+					"Name"			"boss2_summon_buffer"
 				}
 			}
 		}
@@ -5329,17 +5328,16 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
 		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_magnataur.vsndevts"
 		"Level"						"5"
-		"ModelScale" 				"0.4"
+		"ModelScale" 				"0.5"
+		"IsSummoned"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"AbilityLayout"				"6"
+		"AbilityLayout"				"4"
 		"Ability1"					"neutral_magic_immune"
-		"Ability2"					""
+		"Ability2"					"neutral_crit"
 		"Ability3"					""
 		"Ability4"					""
-		"Ability5"					""
-		"Ability6"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -5358,9 +5356,9 @@
 		
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyGoldMin"				""
-		"BountyGoldMax"				""
-		"BountyLumber"				""
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+		"BountyLumber"				"0"
 		
 		// Movement
 		//----------------------------------------------------------------
@@ -5370,7 +5368,7 @@
 		
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"900"
+		"StatusHealth"				"3500"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"0"
 		"StatusManaRegen"			"0"
@@ -5404,6 +5402,124 @@
 					"Aggression"		"100.0" //cast offensive spells whenever
 					"Avoidance"			"0.0" //dont flee
 					"Support"			"50.0" //start buffing
+				}
+			}
+			
+			"AttachWearables"
+			{
+				"Wearable1"	{ "ItemDef" "326" }
+				"Wearable2"	{ "ItemDef"	"327" }
+				"Wearable3" { "ItemDef"	"328" }
+				"Wearable4" { "ItemDef"	"329" }
+				"Wearable5" { "ItemDef"	"330" }
+			}
+		}
+	}
+	
+	//=================================================================================
+	// Boss 2 Buffer
+	//=================================================================================
+	"npc_boss2_buffer"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/magnataur/magnataur.vmdl"	// placeholder
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"Hero_Magnataur"			
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
+		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_magnataur.vsndevts"
+		"Level"						"5"
+		"ModelScale" 				"0.6"
+		"CanBeDominated"			"0"
+		"IsSummoned"				"1"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"boss2_bloodlust"
+		"Ability2"					"boss2_heal"
+		"Ability3"					""
+		"Ability4"					""
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"35"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackDamageMin"			"26"
+		"AttackDamageMax"			"30"
+		"AttackRate"				"1.5"
+		"AttackRange"				"100"
+		"AttackAcquisitionRange"	"500"
+		
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+		"BountyLumber"				"0"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"	// Needed to cast Point abilities
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"16000"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"6000"
+		"StatusManaRegen"			"5"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"RingRadius"				"30"
+		"CollisionSize"				"8"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1400"
+		"VisionNighttimeRange"		"800"
+		
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Creature Data
+		//----------------------------------------------------------------------------------------------------------------------
+		"Creature"
+		{
+			"DefaultState"       "Invade"
+			"States"	
+			{
+				"Invade"
+				{
+					"Name"				"Invade"
+					"Aggression"		"0.0" //cast offensive spells whenever
+					"Avoidance"			"0.0" //dont flee
+					"Support"			"100.0" //start buffing
+				}
+			}
+			
+			"DefensiveAbilities"
+			{
+				"Ability1"
+				{
+					"Name"				"boss2_bloodlust"
+					"Buff"				"1"
+				}
+				"Ability2"
+				{
+					"Name"				"boss2_heal"
+					"Heal"				"1"
 				}
 			}
 			

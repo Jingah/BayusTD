@@ -1070,8 +1070,8 @@
 		"BaseClass" 					"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+		"AbilityTextureName"    		"neutral_heal"
 		"AbilityCooldown" 				"10"
 		"AbilityManacost" 				"75"
 
@@ -1085,7 +1085,7 @@
 		{
 			"Heal"
 			{
-				"HealAmount" 			"100"
+				"HealAmount" 			"250"
 				"Target" 				"TARGET"
 			}
 			"FireEffect"
@@ -1105,7 +1105,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityTextureName"    		"blue_dragonspawn_overseer_evasion"
 
 		"AbilitySpecial"
 		{
@@ -1132,7 +1132,7 @@
 	"neutral_frost_attack"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"neutral_frost"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 		"OnAttackLanded"
@@ -1199,7 +1199,7 @@
 	"neutral_burn_attack"
   	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"huskar_burning_spear"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 		"OnAttackLanded"
@@ -1252,7 +1252,7 @@
 	"neutral_crit"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"axe_battle_hunger"
+		"AbilityTextureName"			"alpha_wolf_critical_strike"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 		"AbilitySpecial"
@@ -1341,10 +1341,11 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+		"AbilityTextureName"    		"neutral_armor"
 		"AbilityCooldown" 				"20"
 		"AbilityManacost" 				"50"
+		"AbilityCastRange"				"1000"
 
 		"precache"
 		{
@@ -1362,7 +1363,7 @@
 			"02"
 			{
 				"var_type" 				"FIELD_INTEGER"
-				"armor_bonus" 			"-5"
+				"armor_bonus" 			"-15"
 			}
 			"03"
 			{
@@ -1415,7 +1416,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"    		"axe_battle_hunger"
+		"AbilityTextureName"    		"neutral_true_strike"
 
 		"Modifiers"
 		{
@@ -1431,16 +1432,20 @@
 		}       
 	}
 	"boss2_bloodlust"
-	{
-		"BaseClass"						"ogre_magi_bloodlust"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"    		"axe_battle_hunger"
+	{	
+		"MaxLevel"						"1"
+		"BaseClass" 					"ogre_magi_bloodlust"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityCooldown" 				"8"
-		"AbilityManacost" 				"250"
+		"AbilityCastPoint"				"0.3"
+		"AbilityManacost" 				"100"
+		"AbilityCastRange"				"1000"
 
 		"precache"
 		{
-			"particle_folder"				"particles/units/heroes/hero_ogre_magi"
+			"particle_folder"			"particles/units/heroes/hero_ogre_magi"
 		}
 		
 		// Special
@@ -1472,12 +1477,63 @@
 			}
 		}
 	}
+	"boss2_heal"
+	{
+		"MaxLevel"						"1"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+		"AbilityTextureName"    		"neutral_heal"
+		"AbilityCooldown" 				"7"
+		"AbilityManacost" 				"45"
+
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_chen.vsndevts"
+			"particle"			"particles/units/heroes/hero_chen/chen_hand_of_god.vpcf"
+		}
+		
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center" "CASTER"
+					"Radius" "GLOBAL"
+					"Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Types" "DOTA_UNIT_TARGET_ALL"
+				}
+	
+				"Action"
+				{
+					"Heal"
+					{
+						"HealAmount" 			"3500"
+						"Target" 				"TARGET"
+					}
+					"FireEffect"
+					{
+						"Target" 				"TARGET"
+						"EffectName"     	    "particles/units/heroes/hero_chen/chen_hand_of_god.vpcf"
+						"EffectAttachType"		"attach_hitloc"
+					}
+					"FireSound"
+					{
+						"EffectName"			"Hero_Chen.HandOfGodHealHero"
+						"Target"				"TARGET"
+					}
+				}			
+			}
+		}
+	}
 	"boss1_summon_adds"
 	{
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityTextureName"   		"boss1_add"
 		"AbilityCooldown" 			"45"
 		"AbilityManacost" 			"75"
 		"AbilityCastPoint"			"0.3"
@@ -1516,7 +1572,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityTextureName"   		"boss2_add"
 		"AbilityCooldown" 			"30"
 		"AbilityManacost" 			"75"
 		"AbilityCastPoint"			"0.3"
@@ -1536,11 +1592,56 @@
 			{
 				"UnitName"			"npc_boss2_add"
 				"UnitCount"			"6"
+				"SpawnRadius"		"200"
+				"Duration"			"%duration"
+				"Target"			"CASTER"
+				"OnSpawn"
+				{
+					"FireSound"
+					{
+						"EffectName" "Hero_Spectre.Haunt"
+						"Target"	 "CASTER"
+					}
+				}
+			}
+		}
+	}
+	"boss2_summon_buffer"
+	{
+		"BaseClass" 				"ability_datadriven"
+		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"MaxLevel"					"1"
+		"AbilityTextureName"   		"boss2_buffer"
+		"AbilityCooldown" 			"50"
+		"AbilityManacost" 			"75"
+		"AbilityCastPoint"			"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"60"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"			"npc_boss2_buffer"
+				"UnitCount"			"1"
 				"SpawnRadius"		"100"
 				"Duration"			"%duration"
 				"Target"			"CASTER"
 				"OnSpawn"
 				{
+					"ApplyModifier"
+					{
+						"ModifierName"  "modifier_phased"
+						"Target"        "TARGET"
+						"Duration"		"60"
+					}
 					"FireSound"
 					{
 						"EffectName" "Hero_Spectre.Haunt"
@@ -1555,7 +1656,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"axe_battle_hunger"
+		"AbilityTextureName"   		"troll_warlord_battle_trance"
 		"AbilityCooldown" 			"30"
 		"AbilityManacost" 			"100"
 		"AbilityCastPoint"			"0.3"
