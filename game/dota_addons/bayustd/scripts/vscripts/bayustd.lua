@@ -369,8 +369,12 @@ function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
 	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		GameRules.lumbersList = {}
+		GameRules.deadList = {}
+		GameRules.ghostsList = {}
 		for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 			table.insert(GameRules.lumbersList, 0)
+			table.insert(GameRules.deadList, 0)
+			table.insert(GameRules.ghostsList, 0)
 		end
 	end
 end
@@ -420,11 +424,11 @@ function bayustd:OnEntityKilled( keys )
 				return
 			end
 			GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
-			player.isDead = 0
+			GameRules.deadList[pID] = 1
 			local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
-			player.ghost = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
-			player.ghost:SetOwner(hero)
-			player.ghost:SetControllableByPlayer(pID, true)
+			GameRules.ghostsList[pID] = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+			GameRules.ghostsList[pID]:SetOwner(hero)
+			GameRules.ghostsList[pID]:SetControllableByPlayer(pID, true)
 			bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
 			AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 		end
@@ -453,7 +457,7 @@ function bayustd:OnEntityKilled( keys )
 			--player.lumber = player.lumber + bountyLumber
 			GameRules.lumbersList[pID] = GameRules.lumbersList[pID] + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID] })
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID]})
 			PopupLumber(killedUnit, bountyLumber)
 		end
 		
@@ -507,20 +511,17 @@ function bayustd:OnEntityKilled( keys )
 		if creepsCount == 0 then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:HasSelectedHero(nPlayerID) then
-					local nPlayer = PlayerResource:GetPlayer(nPlayerID)
-					if nPlayer.isDead ~= nil then
-						if nPlayer.isDead == 2 then
-							nPlayer.ghost:RemoveSelf()
-							nPlayer:GetAssignedHero():RespawnHero(false, false, false)
-							nPlayer.isDead = nil
+					if GameRules.deadList[nPlayerID] ~= 0 then
+						if GameRules.deadList[nPlayerID] == 3 then
+							GameRules.ghostsList[nPlayerID]:RemoveSelf()
+							GameRules.ghostsList[nPlayerID] = 0
+							PlayerResource:GetSelectedHeroEntity(nPlayerID):RespawnHero(false, false, false)
+							GameRules.deadList[nPlayerID] = 0
 							GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT - 1
-							AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " respawned.\n")
 						else
-							nPlayer.isDead = nPlayer.isDead + 1
+							GameRules.deadList[nPlayerID] = GameRules.deadList[nPlayerID] + 1
 						end
 					end
-					
-					--nPlayer.lumber = nPlayer.lumber + 100
 					GameRules.lumbersList[nPlayerID] = GameRules.lumbersList[nPlayerID] + 100
 					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID] })
 					
