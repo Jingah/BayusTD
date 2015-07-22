@@ -25,7 +25,8 @@ function build( keys )
 	local unit_table = UnitKV[building_name]
 	local lumber_cost = unit_table.LumberCost
 
-	if player.lumber < lumber_cost then
+	if GameRules.lumbersList[playerID] < lumber_cost then
+	--if player.lumber < lumber_cost then
 		FireGameEvent( 'custom_error_show', { player_ID = playerID, _error = "Need more Lumber" } )		
 		return
 	end
@@ -46,8 +47,9 @@ function build( keys )
 		-- FindClearSpace for the builder
 		FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
 		--Remove lumber from player
-		player.lumber = player.lumber - lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+		GameRules.lumbersList[playerID] = GameRules.lumbersList[playerID]  - lumber_cost
+		--player.lumber = player.lumber - lumber_cost
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID] })
 		-- start the building with 0 mana.
 		unit:SetMana(0)
 	end)

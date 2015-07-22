@@ -58,7 +58,6 @@ function MirrorImage( event )
 
 	-- Spawn illusions
 	for i=1, images_count do
-
 		local origin = casterOrigin + table.remove( vRandomSpawnPos, 1 )
 
 		-- handle_UnitOwner needs to be nil, else it will crash the game.

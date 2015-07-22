@@ -166,13 +166,14 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	FireGameEvent( 'send_hero_ent', { player_ID = playerID, _ent = PlayerResource:GetSelectedHeroEntity(playerID):GetEntityIndex() } )
 	
-	ShowGenericPopup( "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
+	ShowGenericPopupToPlayer(player, "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
 	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(500, false)
 	
-	player.lumber = 300
-    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+	--player.lumber = 300
+	GameRules.lumbersList[playerID] = 300
+    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID] })
 	
 	player.buildings = {}
 	player.builders = {}
@@ -203,6 +204,7 @@ function bayustd:OnEveryonePicked()
     GameRules:SendCustomMessage("Version: " .. BAYUSTD_VERSION, 0, 0)
     GameRules:SendCustomMessage("Please report bugs and leave feedback on our workshop page", 0, 0)
 	GameRules:SendCustomMessage("Creeps spawning in " .. PRE_GAME_TIME .. " seconds!" , 0, 0)
+	bayustd:startCountdownQuest(PRE_GAME_TIME)
 end
 
 mode = nil
@@ -320,8 +322,8 @@ function bayustd:OnPlayerReconnect(keys)
 	print("P" .. plyID .. " reconnected.")
 	local hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
 	player.disconnected = false
-	if player.lumber ~= nil then
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = player.lumber })
+	if GameRules.lumbersList[plyID] ~= nil then
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID] })
 	else
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = 0})
 	end
@@ -365,8 +367,11 @@ end
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
-	if newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		bayustd:SpawnCreeps()
+	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+		GameRules.lumbersList = {}
+		for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+			table.insert(GameRules.lumbersList, 0)
+		end
 	end
 end
 
@@ -445,9 +450,10 @@ function bayustd:OnEntityKilled( keys )
 		AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " killed a unit: " .. name .. ". His hero has now " .. hero:GetLastHits() .. " lasthits.\n")
 		
 		if bountyLumber > 0 then
-			player.lumber = player.lumber + bountyLumber
+			--player.lumber = player.lumber + bountyLumber
+			GameRules.lumbersList[pID] = GameRules.lumbersList[pID] + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID] })
 			PopupLumber(killedUnit, bountyLumber)
 		end
 		
@@ -514,8 +520,9 @@ function bayustd:OnEntityKilled( keys )
 						end
 					end
 					
-					nPlayer.lumber = nPlayer.lumber + 100
-					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = nPlayer.lumber })
+					--nPlayer.lumber = nPlayer.lumber + 100
+					GameRules.lumbersList[nPlayerID] = GameRules.lumbersList[nPlayerID] + 100
+					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID] })
 					
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 100
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
@@ -525,18 +532,8 @@ function bayustd:OnEntityKilled( keys )
 			wave = wave + 1
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
-			local a = 20
-			Timers:CreateTimer(function()
-				GameRules:SendCustomMessage("Round " .. wave .. " starts in <font color='#FF0000'>" .. a .. "</font> seconds!", 0, 0)
-				a = a - 1
-				if a == 0 then
-					bayustd:SpawnCreeps()
-					return
-				end
-				return 1
-			 end
-			 )
-			end
+			bayustd:startCountdownQuest(20)
+		end
 	end
 end
 
@@ -813,7 +810,7 @@ function bayustd:SpawnCreeps()
 		duration = 2
 	}
 	FireGameEvent("show_center_message", messageinfo)
-	bayustd:startQuest(creepsCount)
+	bayustd:startKillQuest(creepsCount)
 	
 	-- Air system workaround
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
@@ -846,7 +843,7 @@ function bayustd:SpawnCreeps()
 	return 1 -- Check again later in case more players spawn
 end
 
-function bayustd:startQuest(limit)
+function bayustd:startKillQuest(limit)
 	GameRules.killQuest = SpawnEntityFromTableSynchronous( "quest", { name = "Quest", title = "#QuestKill" } )
 	GameRules.subQuest = SpawnEntityFromTableSynchronous( "subquest_base", {
 		show_progress_bar = true,
@@ -863,6 +860,34 @@ function bayustd:startQuest(limit)
 	-- value on the bar
 	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, 0 )
 	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, GameRules.killQuest.KillLimit )
+end
+
+function bayustd:startCountdownQuest(totalTime)
+	entQuest = SpawnEntityFromTableSynchronous( "quest", { name = "QuestName", title = "#QuestTimer" } )
+	questTimeEnd = GameRules:GetGameTime() + totalTime --Time to Finish the quest
+
+	--bar system
+	entKillCountSubquest = SpawnEntityFromTableSynchronous( "subquest_base", {
+		show_progress_bar = true,
+		progress_bar_hue_shift = -119
+	} )
+	entQuest:AddSubquest( entKillCountSubquest )
+	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, totalTime ) --text on the quest timer at start
+	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, totalTime ) --text on the quest timer
+	entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, totalTime ) --value on the bar at start
+	entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, totalTime ) --value on the bar
+	
+  	Timers:CreateTimer(0.9, function()
+      	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, questTimeEnd - GameRules:GetGameTime() )
+      	entKillCountSubquest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, questTimeEnd - GameRules:GetGameTime() ) --update the bar with the time passed      	
+      	if (questTimeEnd - GameRules:GetGameTime())<=0 then
+      		EmitGlobalSound("Tutorial.Quest.complete_01") --on game_sounds_music_tutorial, check others
+      		entQuest:CompleteQuest()
+			bayustd:SpawnCreeps()
+			return
+      	end
+      	return 1    	
+    end)
 end
 
 -- Go through every ability and item and check if the requirements are met
@@ -977,8 +1002,9 @@ function bayustd:PlayerSay(keys)
 	
 	if DEBUG and string.find(keys.text, "^-lumber") then
 		print("Giving lumber to playerID " .. plyID)
-		ply.lumber = ply.lumber + 5000
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = ply.lumber })
+		--ply.lumber = ply.lumber + 5000
+		GameRules.lumbersList[plyID] = GameRules.lumbersList[plyID] + 50000
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID] })
 	end
 	
 	if DEBUG and string.find(keys.text, "^-lvl") then

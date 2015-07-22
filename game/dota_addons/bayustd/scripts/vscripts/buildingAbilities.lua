@@ -24,9 +24,10 @@ function SellBuilding( keys )
 	caster:RemoveBuilding(true)
 
 	if sellBounty ~= 0 then
-		player.lumber = player.lumber + sellBounty
+		--player.lumber = player.lumber + sellBounty
+		GameRules.lumbersList[pID] = GameRules.lumbersList[pID] + sellBounty
 		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID] })
 		PopupLumber(caster, sellBounty)
 	end
 end
@@ -48,7 +49,8 @@ function UpgradeBuilding( keys )
 	unit:SetAbsOrigin(pos)
 	unit.squaresOccupied = squares
 	
-	player.lumber = player.lumber - keys.LumberCost
+	--player.lumber = player.lumber - keys.LumberCost
+	GameRules.lumbersList[pID] = GameRules.lumbersList[pID] - keys.LumberCost
 	--print("Lumber Spend. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = player.lumber })
+	FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID] })
 end

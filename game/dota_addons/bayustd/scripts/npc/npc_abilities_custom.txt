@@ -2555,7 +2555,7 @@
 			"04"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"incoming_damage"			"200 200 200 190 180 150 120 100 80"
+				"incoming_damage"			"300 280 255 220 200 200 160 120 80"
 			}
 			"05"
 			{
