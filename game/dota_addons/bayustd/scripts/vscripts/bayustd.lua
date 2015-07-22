@@ -312,6 +312,21 @@ function bayustd:OnDisconnect(keys)
 	AppendToLogFile("log/bayustd.txt", "Playerid " .. userid .. " disconnected. Reason: " .. reason .. "\n")
 end
 
+-- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
+-- state as necessary
+function bayustd:OnPlayerReconnect(keys)
+	local plyID = keys.PlayerID
+	local player = PlayerResource:GetPlayer(plyID)
+	print("P" .. plyID .. " reconnected.")
+	local hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
+	player.disconnected = false
+	if player.lumber ~= nil then
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = player.lumber })
+	else
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = 0})
+	end
+end
+
 -- An item was picked up off the ground
 --[[function bayustd:OnItemPickedUp(keys)
 	print ( '[DOTACRAFT] OnItemPickedUp' )
@@ -463,6 +478,15 @@ function bayustd:OnEntityKilled( keys )
 		end
 		
 		creepsCount = creepsCount - 1
+		-- Fill the quest bar and substract one from the quest remaining text
+        GameRules.killQuest.UnitsKilled = GameRules.killQuest.UnitsKilled + 1
+        GameRules.killQuest:SetTextReplaceValue(QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, GameRules.killQuest.UnitsKilled)
+        GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, GameRules.killQuest.UnitsKilled )
+
+        -- Check if quest completed 
+        if GameRules.killQuest.UnitsKilled >= GameRules.killQuest.KillLimit then
+            GameRules.killQuest:CompleteQuest()
+        end
 	
 		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 			print("all creeps teleproted")
@@ -563,6 +587,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('player_connect_full', Dynamic_Wrap(bayustd, 'OnConnectFull'), self)
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
+	ListenToGameEvent("player_reconnected", Dynamic_Wrap(bayustd, 'OnPlayerReconnect'), self)
 	
 	Convars:RegisterCommand('player_say', function(...)
 		local arg = {...}
@@ -788,6 +813,7 @@ function bayustd:SpawnCreeps()
 		duration = 2
 	}
 	FireGameEvent("show_center_message", messageinfo)
+	bayustd:startQuest(creepsCount)
 	
 	-- Air system workaround
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
@@ -818,6 +844,25 @@ function bayustd:SpawnCreeps()
 		end
 	end
 	return 1 -- Check again later in case more players spawn
+end
+
+function bayustd:startQuest(limit)
+	GameRules.killQuest = SpawnEntityFromTableSynchronous( "quest", { name = "Quest", title = "#QuestKill" } )
+	GameRules.subQuest = SpawnEntityFromTableSynchronous( "subquest_base", {
+		show_progress_bar = true,
+		progress_bar_hue_shift = -119
+	})
+	GameRules.killQuest.UnitsKilled = 0
+	GameRules.killQuest.KillLimit = limit
+	GameRules.killQuest:AddSubquest( GameRules.subQuest )
+
+	-- text on the quest timer at start
+	GameRules.killQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, 0 )
+	GameRules.killQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, GameRules.killQuest.KillLimit )
+
+	-- value on the bar
+	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, 0 )
+	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, GameRules.killQuest.KillLimit )
 end
 
 -- Go through every ability and item and check if the requirements are met
