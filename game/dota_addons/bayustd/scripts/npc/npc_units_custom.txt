@@ -3400,8 +3400,8 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"6"
-		"AttackDamageMax"			"11"
+		"AttackDamageMin"			"12"
+		"AttackDamageMax"			"15"
 		"AttackRate"				"1.6"
 		"AttackRange"				"500"
 		"AttackAcquisitionRange"	"600"
@@ -3481,8 +3481,8 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"5"
-		"AttackDamageMax"			"10"
+		"AttackDamageMin"			"10"
+		"AttackDamageMax"			"17"
 		"AttackRate"				"1.35"
 		"AttackRange"				"100"
 		"AttackAcquisitionRange"	"500"
@@ -3650,7 +3650,7 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"12"
+		"AttackDamageMin"			"15"
 		"AttackDamageMax"			"16"
 		"AttackRate"				"1.35"
 		"AttackRange"				"100"
@@ -3730,7 +3730,7 @@
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"14"
+		"AttackDamageMin"			"15"
 		"AttackDamageMax"			"18"
 		"AttackRate"				"1.35"
 		"AttackRange"				"100"
@@ -4197,7 +4197,7 @@
 		
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"50000"
+		"StatusHealth"				"40000"
 		"StatusHealthRegen"			"5.0"
 		"StatusMana"				"1000"
 		"StatusManaRegen"			"1.1"
@@ -4277,12 +4277,13 @@
 		"BaseClass"					"npc_dota_creature"
 		"ModelScale"				"0.5"
 		"Level"						"4"
+		"IsSummoned"				"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"neutral_magic_immune"
-		"Ability2"					"neutral_bash"
+		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
 		

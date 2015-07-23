@@ -135,6 +135,8 @@ function bayustd:OnNPCSpawned(keys)
 		npc:SetRenderColor(0,255,0)
 	elseif npc:GetUnitName() == "npc_boss2_buffer" then
 		npc:SetRenderColor(0,0,255)
+	elseif npc:GetUnitName() == "npc_dota_ghost" then
+		bayustd:giveUnitDataDrivenModifier(npc, npc, "modifier_phased", -1)
 	end
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
@@ -428,12 +430,12 @@ function bayustd:OnEntityKilled( keys )
 				return
 			end
 			GameRules:SendCustomMessage("<font color='#58ACFA'>" .. PlayerResource:GetPlayerName(pID) .. "</font> just died. He will be punished by sending to the graveyard for 2 rounds. DON'T DIE!", 0, 0)
-			GameRules.deadList[pID] = 1
+			GameRules.deadList[pID+1] = 1
 			local point = Entities:FindByName( nil, "graveyard_pos0" ):GetAbsOrigin()
-			GameRules.ghostsList[pID] = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
-			GameRules.ghostsList[pID]:SetOwner(hero)
-			GameRules.ghostsList[pID]:SetControllableByPlayer(pID, true)
-			bayustd:giveUnitDataDrivenModifier(GameRules.ghostsList[pID], GameRules.ghostsList[pID], "modifier_protect_builder", -1)
+			GameRules.ghostsList[pID+1] = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+			GameRules.ghostsList[pID+1]:SetOwner(hero)
+			GameRules.ghostsList[pID+1]:SetControllableByPlayer(pID, true)
+			bayustd:giveUnitDataDrivenModifier(GameRules.ghostsList[pID+1], GameRules.ghostsList[pID+1], "modifier_protect_builder", -1)
 			AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 		end
 	end
@@ -515,15 +517,15 @@ function bayustd:OnEntityKilled( keys )
 		if creepsCount == 0 then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:IsValidPlayerID(nPlayerID) then
-					if GameRules.deadList[nPlayerID] ~= 0 then
-						if GameRules.deadList[nPlayerID] == 3 then
-							GameRules.ghostsList[nPlayerID]:RemoveSelf()
-							GameRules.ghostsList[nPlayerID] = 0
+					if GameRules.deadList[nPlayerID+1] ~= 0 then
+						if GameRules.deadList[nPlayerID+1] == 3 then
+							GameRules.ghostsList[nPlayerID+1]:RemoveSelf()
+							GameRules.ghostsList[nPlayerID+1] = 0
 							PlayerResource:GetSelectedHeroEntity(nPlayerID):RespawnHero(false, false, false)
-							GameRules.deadList[nPlayerID] = 0
+							GameRules.deadList[nPlayerID+1] = 0
 							GameRules.DEAD_PLAYER_COUNT = GameRules.DEAD_PLAYER_COUNT - 1
 						else
-							GameRules.deadList[nPlayerID] = GameRules.deadList[nPlayerID] + 1
+							GameRules.deadList[nPlayerID+1] = GameRules.deadList[nPlayerID+1] + 1
 						end
 					end
 					GameRules.lumbersList[nPlayerID+1] = GameRules.lumbersList[nPlayerID+1] + 100

@@ -13,7 +13,8 @@ function OnStartTouch(trigger)
 	bayustd:incrementRemovedCreeps()
 	
 	if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
-		print("all creeps teleproted")
+		print("all creeps teleproted: " .. bayustd:getRemovedCreeps())
+		print("Creeps left: " .. bayustd:getCreeps())
 		for d = 1, bayustd:getRemovedCreeps(), 1 do
 			if bayustd:getWave() % 10 ~= 0 then
 				CreateUnitByName(name, bayustd:RandomSpawnPosition(), true, nil, nil, DOTA_TEAM_NEUTRALS)
