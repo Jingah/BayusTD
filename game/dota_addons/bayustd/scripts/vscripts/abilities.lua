@@ -25,7 +25,7 @@ function build( keys )
 	local unit_table = UnitKV[building_name]
 	local lumber_cost = unit_table.LumberCost
 
-	if GameRules.lumbersList[playerID] < lumber_cost then
+	if GameRules.lumbersList[playerID+1] < lumber_cost then
 	--if player.lumber < lumber_cost then
 		FireGameEvent( 'custom_error_show', { player_ID = playerID, _error = "Need more Lumber" } )		
 		return
@@ -47,9 +47,9 @@ function build( keys )
 		-- FindClearSpace for the builder
 		FindClearSpaceForUnit(keys.caster, keys.caster:GetAbsOrigin(), true)
 		--Remove lumber from player
-		GameRules.lumbersList[playerID] = GameRules.lumbersList[playerID]  - lumber_cost
+		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1]  - lumber_cost
 		--player.lumber = player.lumber - lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID] })
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
 		-- start the building with 0 mana.
 		unit:SetMana(0)
 	end)
@@ -63,7 +63,7 @@ function build( keys )
 		unit:SetMana(unit:GetMaxMana())
 		
 		-- CUSTOM STUFF
-		table.insert(player.buildingEntities, unit)
+		table.insert(GameRules.buildingEntities[playerID+1], unit)
 		
 		if bayustd:getWave() % 3 == 0 then 	--air levels. Stop ground towers from attacking
 			if unit.attackType ~= 0 then
@@ -78,16 +78,14 @@ function build( keys )
 		end
 		
 		-- Add 1 to the player building tracking table for that name
-		if not player.buildings[building_name] then
-			player.buildings[building_name] = 1
+		if not GameRules.buildings[playerID+1][building_name] then
+			GameRules.buildings[playerID+1][building_name] = 1
 		else
-			player.buildings[building_name] = player.buildings[building_name] + 1
+			GameRules.buildings[playerID+1][building_name] = GameRules.buildings[playerID+1][building_name] + 1
 		end
 		
-		-- Update the abilities of the builders
-    	for k,builder in pairs(player.builders) do
-    		CheckAbilityRequirements( builder, player )
-    	end
+		-- Update the abilities of the builder
+    	CheckAbilityRequirements(GameRules.builders[playerID+1], player)
 		-- CUSTOM STUFF
 	end)
 

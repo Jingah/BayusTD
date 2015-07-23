@@ -172,12 +172,12 @@ function bayustd:OnPlayerPickHero(keys)
 	hero:SetGold(500, false)
 	
 	--player.lumber = 300
-	GameRules.lumbersList[playerID] = 300
-    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID] })
+	GameRules.lumbersList[playerID+1] = 300
+    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
 	
-	player.buildings = {}
-	player.builders = {}
-	player.buildingEntities = {}
+	--player.buildings = {}
+	--player.builders = {}
+	--player.buildingEntities = {}
 	
 	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
@@ -191,9 +191,8 @@ function bayustd:OnPlayerPickHero(keys)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
-	table.insert(player.builders, builder)
+	GameRules.builders[playerID+1] = builder
 	CheckAbilityRequirements( builder, player )
-	player.isDead = nil
 	
 end
 
@@ -321,9 +320,8 @@ function bayustd:OnPlayerReconnect(keys)
 	local player = PlayerResource:GetPlayer(plyID)
 	print("P" .. plyID .. " reconnected.")
 	local hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
-	player.disconnected = false
-	if GameRules.lumbersList[plyID] ~= nil then
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID] })
+	if GameRules.lumbersList[plyID+1] ~= nil then
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID+1] })
 	else
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = 0})
 	end
@@ -371,10 +369,16 @@ function bayustd:OnGameRulesStateChange(keys)
 		GameRules.lumbersList = {}
 		GameRules.deadList = {}
 		GameRules.ghostsList = {}
-		for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+		GameRules.buildings = {}
+		GameRules.builders = {}
+		GameRules.buildingEntities = {}
+		for nPlayerID = 0, 9 do
 			table.insert(GameRules.lumbersList, 0)
 			table.insert(GameRules.deadList, 0)
 			table.insert(GameRules.ghostsList, 0)
+			table.insert(GameRules.buildings, {})
+			table.insert(GameRules.builders, 0)
+			table.insert(GameRules.buildingEntities, {})
 		end
 	end
 end
@@ -429,7 +433,7 @@ function bayustd:OnEntityKilled( keys )
 			GameRules.ghostsList[pID] = CreateUnitByName("npc_dota_ghost", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 			GameRules.ghostsList[pID]:SetOwner(hero)
 			GameRules.ghostsList[pID]:SetControllableByPlayer(pID, true)
-			bayustd:giveUnitDataDrivenModifier(player.ghost, player.ghost, "modifier_protect_builder", -1)
+			bayustd:giveUnitDataDrivenModifier(GameRules.ghostsList[pID], GameRules.ghostsList[pID], "modifier_protect_builder", -1)
 			AppendToLogFile("log/bayustd.txt", "Player " .. PlayerResource:GetPlayerName(pID) .. " died.\n")
 		end
 	end
@@ -455,9 +459,9 @@ function bayustd:OnEntityKilled( keys )
 		
 		if bountyLumber > 0 then
 			--player.lumber = player.lumber + bountyLumber
-			GameRules.lumbersList[pID] = GameRules.lumbersList[pID] + bountyLumber
+			GameRules.lumbersList[pID+1] = GameRules.lumbersList[pID+1] + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID]})
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID+1]})
 			PopupLumber(killedUnit, bountyLumber)
 		end
 		
@@ -510,7 +514,7 @@ function bayustd:OnEntityKilled( keys )
 		
 		if creepsCount == 0 then
 			for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-				if PlayerResource:HasSelectedHero(nPlayerID) then
+				if PlayerResource:IsValidPlayerID(nPlayerID) then
 					if GameRules.deadList[nPlayerID] ~= 0 then
 						if GameRules.deadList[nPlayerID] == 3 then
 							GameRules.ghostsList[nPlayerID]:RemoveSelf()
@@ -522,8 +526,8 @@ function bayustd:OnEntityKilled( keys )
 							GameRules.deadList[nPlayerID] = GameRules.deadList[nPlayerID] + 1
 						end
 					end
-					GameRules.lumbersList[nPlayerID] = GameRules.lumbersList[nPlayerID] + 100
-					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID] })
+					GameRules.lumbersList[nPlayerID+1] = GameRules.lumbersList[nPlayerID+1] + 100
+					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID+1] })
 					
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 100
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
@@ -816,9 +820,9 @@ function bayustd:SpawnCreeps()
 	-- Air system workaround
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
 		if PlayerResource:HasSelectedHero(nPlayerID) then					
-			local player = PlayerResource:GetPlayer(nPlayerID)
+			--local player = PlayerResource:GetPlayer(nPlayerID)
 			--PrintTable( player.buildingEntities )
-			for i, v in ipairs(player.buildingEntities) do
+			for i, v in ipairs(GameRules.buildingEntities[nPlayerID+1]) do
 				if IsValidEntity(v) then
 					if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking
 						if v.attackType ~= 0 then
@@ -897,7 +901,8 @@ function CheckAbilityRequirements( unit, player )
 	local requirements = GameRules.Requirements
 	local hero = unit:GetOwner()
 	local pID = hero:GetPlayerID()
-	local buildings = player.buildings
+	--local buildings = player.buildings
+	local buildings = GameRules.buildings[pID+1]
 	local requirement_failed = false
 
 	-- The disabled abilities end with this affix
@@ -1004,8 +1009,8 @@ function bayustd:PlayerSay(keys)
 	if DEBUG and string.find(keys.text, "^-lumber") then
 		print("Giving lumber to playerID " .. plyID)
 		--ply.lumber = ply.lumber + 5000
-		GameRules.lumbersList[plyID] = GameRules.lumbersList[plyID] + 50000
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID] })
+		GameRules.lumbersList[plyID+1] = GameRules.lumbersList[plyID+1] + 50000
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID+1] })
 	end
 	
 	if DEBUG and string.find(keys.text, "^-lvl") then
