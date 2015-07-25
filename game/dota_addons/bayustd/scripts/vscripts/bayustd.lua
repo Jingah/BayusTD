@@ -195,7 +195,6 @@ function bayustd:OnPlayerPickHero(keys)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
 	GameRules.builders[playerID+1] = builder
 	CheckAbilityRequirements( builder, player )
-	
 end
 
 function bayustd:OnEveryonePicked()
@@ -464,7 +463,7 @@ function bayustd:OnEntityKilled( keys )
 			GameRules.lumbersList[pID+1] = GameRules.lumbersList[pID+1] + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
 			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID+1]})
-			PopupLumber(killedUnit, bountyLumber)
+			PopupLumber(player, killedUnit, bountyLumber)
 		end
 		
 		if name == "npc_dota_wave10" then

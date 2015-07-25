@@ -28,7 +28,7 @@ function SellBuilding( keys )
 		GameRules.lumbersList[pID+1] = GameRules.lumbersList[pID+1] + sellBounty
 		--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID+1] })
-		PopupLumber(caster, sellBounty)
+		PopupLumber(player, caster, sellBounty)
 	end
 end
 

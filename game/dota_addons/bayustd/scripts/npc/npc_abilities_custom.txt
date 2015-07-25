@@ -3876,7 +3876,6 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 
@@ -3918,8 +3917,8 @@
 					"Center" "CASTER"
 					"Radius" "GLOBAL"
 					"Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-					//"Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+					"Types"	"DOTA_UNIT_TARGET_ALL"
+					"Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 				}
 	
 				"Action"
@@ -3930,6 +3929,7 @@
 						{
 							"Center"	"TARGET"
 							"Types"		"DOTA_UNIT_TARGET_HERO"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 						}
 						"ModifierName"	"modifier_time_stop"
 						"Duration"		"%dur_hero"
@@ -3940,7 +3940,8 @@
 						"Target"
 						{
 							"Center"	"TARGET"
-							"Types"		"DOTA_UNIT_TARGET_BASIC"
+							"Types"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 						}
 						"ModifierName"	"modifier_time_stop"
 						"Duration"		"%dur"
