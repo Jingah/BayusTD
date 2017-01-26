@@ -202,7 +202,7 @@ function bayustd:OnEveryonePicked()
     GameRules:SendCustomMessage("Version: " .. BAYUSTD_VERSION, 0, 0)
     GameRules:SendCustomMessage("Please report bugs and leave feedback on our workshop page", 0, 0)
 	GameRules:SendCustomMessage("Creeps spawning in " .. PRE_GAME_TIME .. " seconds!" , 0, 0)
-	bayustd:startCountdownQuest(PRE_GAME_TIME)
+	bayustd:StartCountdownQuest(PRE_GAME_TIME)
 end
 
 mode = nil
@@ -496,15 +496,6 @@ function bayustd:OnEntityKilled( keys )
 		end
 		
 		creepsCount = creepsCount - 1
-		-- Fill the quest bar and substract one from the quest remaining text
-        GameRules.killQuest.UnitsKilled = GameRules.killQuest.UnitsKilled + 1
-        GameRules.killQuest:SetTextReplaceValue(QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, GameRules.killQuest.UnitsKilled)
-        GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, GameRules.killQuest.UnitsKilled )
-
-        -- Check if quest completed 
-        if GameRules.killQuest.UnitsKilled >= GameRules.killQuest.KillLimit then
-            GameRules.killQuest:CompleteQuest()
-        end
 	
 		if bayustd:getRemovedCreeps() == bayustd:getCreeps() then
 			print("all creeps teleproted")
@@ -542,10 +533,21 @@ function bayustd:OnEntityKilled( keys )
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
 			GameRules:SendCustomMessage("Creeps spawning in 20 seconds!" , 0, 0)
-			bayustd:startCountdownQuest(20)
+
+			bayustd:StartCountdownQuest(20)
 		end
 	end
 end
+
+function bayustd:StartCountdownQuest(totalTime) 
+	Timers:CreateTimer({
+    	endTime = totalTime,
+    	callback = function()
+			bayustd:SpawnCreeps()
+    	end
+ 	})
+end
+
 
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
@@ -595,34 +597,7 @@ function bayustd:Initbayustd()
 	ListenToGameEvent('entity_killed', Dynamic_Wrap(bayustd, 'OnEntityKilled'), self)
 	ListenToGameEvent('dota_item_purchased', Dynamic_Wrap(bayustd, 'OnItemPurchased'), self)
 	ListenToGameEvent("player_reconnected", Dynamic_Wrap(bayustd, 'OnPlayerReconnect'), self)
-	
-	Convars:RegisterCommand('player_say', function(...)
-		local arg = {...}
-		table.remove(arg,1)
-		local sayType = arg[1]
-		table.remove(arg,1)
-
-		local cmdPlayer = Convars:GetCommandClient()
-		keys = {}
-		keys.ply = cmdPlayer
-		keys.teamOnly = false
-		keys.text = table.concat(arg, " ")
-
-		if (sayType == 4) then
-			-- Student messages
-		elseif (sayType == 3) then
-			-- Coach messages
-		elseif (sayType == 2) then
-			-- Team only
-			keys.teamOnly = true
-			-- Call your player_say function here like
-			self:PlayerSay(keys)
-		else
-			-- All chat
-			-- Call your player_say function here like
-			self:PlayerSay(keys)
-		end
-	end, 'player say', 0)
+	ListenToGameEvent("player_chat", Dynamic_Wrap(bayustd, 'OnPlayerSay'), self)
 	
 	GameRules:GetGameModeEntity():SetThink("OnGraveyardThink", self, 60)
 	GameRules:GetGameModeEntity():SetThink("SetPermanentDaytime", self)
@@ -699,12 +674,12 @@ function bayustd:SpawnCreeps()
 	end
 	print( "Spawning creeps ..." )
 	if wave % 10 ~= 0 then
-		for i = 0, 0, 1 do
+		for i = 0, 6, 1 do
 			local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
 			local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
-			local units = 1
+			local units = 10
 			if(i == 0) then
-				units = 1
+				units = 20
 			end
 			for d = 1, units, 1 do
 				local unit = CreateUnitByName(waveName, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
@@ -728,8 +703,6 @@ function bayustd:SpawnCreeps()
 		end
 		)
 	end
-	print('DOING QUEST ')
-	bayustd:startKillQuest(creepsCount)
 	
 	-- Air system workaround
 	for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
@@ -760,54 +733,6 @@ function bayustd:SpawnCreeps()
 		end
 	end
 	return 1 -- Check again later in case more players spawn
-end
-
-function bayustd:startKillQuest(limit)
-	print('starting kill quest with ' .. limit)
-	GameRules.killQuest = SpawnEntityFromTableSynchronous( "quest", { name = "Quest", title = "#QuestKill" } )
-	GameRules.subQuest = SpawnEntityFromTableSynchronous( "subquest_base", {
-		show_progress_bar = true,
-		progress_bar_hue_shift = -119
-	})
-	GameRules.killQuest.UnitsKilled = 0
-	GameRules.killQuest.KillLimit = limit
-	GameRules.killQuest:AddSubquest( GameRules.subQuest )
-
-	-- text on the quest timer at start
-	GameRules.killQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, 0 )
-	GameRules.killQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, GameRules.killQuest.KillLimit )
-
-	-- value on the bar
-	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, 0 )
-	GameRules.subQuest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, GameRules.killQuest.KillLimit )
-end
-
-function bayustd:startCountdownQuest(totalTime)
-	entQuest = SpawnEntityFromTableSynchronous( "quest", { name = "QuestName", title = "#QuestTimer" } )
-	questTimeEnd = GameRules:GetGameTime() + totalTime --Time to Finish the quest
-
-	--bar system
-	entKillCountSubquest = SpawnEntityFromTableSynchronous( "subquest_base", {
-		show_progress_bar = true,
-		progress_bar_hue_shift = -119
-	} )
-	entQuest:AddSubquest( entKillCountSubquest )
-	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, totalTime ) --text on the quest timer at start
-	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, totalTime ) --text on the quest timer
-	entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, totalTime ) --value on the bar at start
-	entKillCountSubquest:SetTextReplaceValue( SUBQUEST_TEXT_REPLACE_VALUE_TARGET_VALUE, totalTime ) --value on the bar
-	
-  	Timers:CreateTimer(0.9, function()
-      	entQuest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, questTimeEnd - GameRules:GetGameTime() )
-      	entKillCountSubquest:SetTextReplaceValue( QUEST_TEXT_REPLACE_VALUE_CURRENT_VALUE, questTimeEnd - GameRules:GetGameTime() ) --update the bar with the time passed      	
-      	if (questTimeEnd - GameRules:GetGameTime())<=0 then
-      		EmitGlobalSound("Tutorial.Quest.complete_01") --on game_sounds_music_tutorial, check others
-      		entQuest:CompleteQuest()
-			bayustd:SpawnCreeps()
-			return
-      	end
-      	return 1    	
-    end)
 end
 
 -- Go through every ability and item and check if the requirements are met
@@ -900,17 +825,13 @@ function CheckAbilityRequirements( unit, player )
 end
 
 
-function bayustd:PlayerSay(keys)
-	--PrintTable(keys)
+function bayustd:OnPlayerSay(keys)
+	PrintTable(keys)
 
-	local ply = keys.ply
-	local plyID = ply:GetPlayerID()
+	local plyID = keys.playerid
+	local ply = PlayerResource:GetPlayer(plyID)
 	local hero = ply:GetAssignedHero()
 	local txt = keys.text
-
-	if keys.teamOnly then
-		-- This text was team-only
-	end
 
 	if txt == nil or txt == "" then
 		return
@@ -923,7 +844,6 @@ function bayustd:PlayerSay(keys)
 	
 	if DEBUG and string.find(keys.text, "^-lumber") then
 		print("Giving lumber to playerID " .. plyID)
-		--ply.lumber = ply.lumber + 5000
 		GameRules.lumbersList[plyID+1] = GameRules.lumbersList[plyID+1] + 50000
 		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID+1] })
 	end
