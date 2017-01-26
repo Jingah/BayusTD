@@ -187,7 +187,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(1, 3)
-	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder3", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -373,7 +373,7 @@ function bayustd:OnGameRulesStateChange(keys)
 		GameRules.buildingEntities = {}
 		for nPlayerID = 0, 9 do
 			if DEBUG then
-				table.insert(GameRules.lumbersList, 9000)
+				table.insert(GameRules.lumbersList, 90000)
 			else
 				table.insert(GameRules.lumbersList, STARTING_LUMBER)
 			end
@@ -541,6 +541,7 @@ function bayustd:OnEntityKilled( keys )
 			wave = wave + 1
 			print("All creeps are dead")
 			bayustd:setRemovedCreeps(0)
+			GameRules:SendCustomMessage("Creeps spawning in 20 seconds!" , 0, 0)
 			bayustd:startCountdownQuest(20)
 		end
 	end
@@ -698,12 +699,12 @@ function bayustd:SpawnCreeps()
 	end
 	print( "Spawning creeps ..." )
 	if wave % 10 ~= 0 then
-		for i = 0, 6, 1 do
+		for i = 0, 0, 1 do
 			local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
 			local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
-			local units = 10;
+			local units = 1
 			if(i == 0) then
-				units = 20
+				units = 1
 			end
 			for d = 1, units, 1 do
 				local unit = CreateUnitByName(waveName, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
@@ -727,11 +728,7 @@ function bayustd:SpawnCreeps()
 		end
 		)
 	end
-	local messageinfo = {
-		message = "Round " .. wave .. " coming",
-		duration = 2
-	}
-	FireGameEvent("show_center_message", messageinfo)
+	print('DOING QUEST ')
 	bayustd:startKillQuest(creepsCount)
 	
 	-- Air system workaround
@@ -742,7 +739,7 @@ function bayustd:SpawnCreeps()
 			for i, v in ipairs(GameRules.buildingEntities[nPlayerID+1]) do
 				if IsValidEntity(v) then
 					if wave % 3 == 0 then 	--air levels. Stop ground towers from attacking
-						if v.attackType ~= 0 then
+						if v.buildingTable.AttackType ~= 0 then
 							v:RemoveModifierByName("modifier_disable_building")
 							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
 						else
@@ -750,7 +747,7 @@ function bayustd:SpawnCreeps()
 							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_disable_building", -1)
 						end
 					else
-						if v.attackType ~= 1 then
+						if v.buildingTable.AttackType ~= 1 then
 							v:RemoveModifierByName("modifier_disable_building")
 							bayustd:giveUnitDataDrivenModifier(v, v, "modifier_enable_building", -1)
 						else
@@ -766,6 +763,7 @@ function bayustd:SpawnCreeps()
 end
 
 function bayustd:startKillQuest(limit)
+	print('starting kill quest with ' .. limit)
 	GameRules.killQuest = SpawnEntityFromTableSynchronous( "quest", { name = "Quest", title = "#QuestKill" } )
 	GameRules.subQuest = SpawnEntityFromTableSynchronous( "subquest_base", {
 		show_progress_bar = true,

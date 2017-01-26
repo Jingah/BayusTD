@@ -869,7 +869,7 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_building"
 		"Model"						"models/buildings/building_racks_melee_reference.vmdl"
-		"ModelScale"				"1.0"
+		"ModelScale"				"0.8"
 		"Level"						"1"
 		"HealthBarOffset"			"140"
 		
@@ -1229,7 +1229,7 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_building"
 		"Model"						"models/props_structures/tent_dk_small.vmdl"
-		"ModelScale"				"2.0"
+		"ModelScale"				"1.7"
 		"Level"						"1"
 		"HealthBarOffset"			"140"
 		
@@ -1758,7 +1758,7 @@
 		"AttackRate"				"3.0"
 		"AttackRange"				"900"
 		"AttackAcquisitionRange"	"900"
-		"ProjectileModel"			"particles/econ/items/keeper_of_the_light/kotl_weapon_arcane_staff/keeper_base_attack_arcane_staff_trail.vpcf"		// Particle system model for projectile.
+		"ProjectileModel"			"particles/units/heroes/hero_keeper_of_the_light/keeper_base_attack_border2.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1400"		// Speed of projectile.
 		
 		// Bounty
@@ -4156,7 +4156,7 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
 		"Model"						"models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
-		"ModelScale"				"0.7"
+		"ModelScale"				"0.9"
 		"Level"						"4"
 		"HasInventory"				"1"
 		
@@ -5538,7 +5538,7 @@
 		"AbilityLayout"				"4"
 		"Ability1"					"boss2_bloodlust"
 		"Ability2"					"boss2_heal"
-		"Ability3"					""
+		"Ability3"					"neutral_magic_immune"
 		"Ability4"					""
 		
 		// Armor

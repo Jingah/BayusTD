@@ -423,9 +423,9 @@
 		"SoundSet"					"0"	
 		"Ability1"					"lina_rain_of_fire" 
 		"Ability2"					"summon_laval_spawn" 
-		"Ability3"					"clinkz_searing_arrows" 
+		"Ability3"					"lina_searing_arrows" 
 		"Ability4"					"Warmth"
-		"Ability5"					"lina_dragon_slave"
+		"Ability5"					"lina_dragon_slave_custom"
 		"Ability6"					""
 
 		"ArmorPhysical"				"1"									// Physical protection.
