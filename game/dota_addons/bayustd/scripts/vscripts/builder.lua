@@ -36,8 +36,8 @@ function Build( event )
             SendErrorMessage(playerID, "#error_not_enough_gold")
             return false
         end]]--
-		
-		if player.lumber < lumber_cost then
+		print('Lumber: ' .. GameRules.lumbersList[playerID+1])
+		if GameRules.lumbersList[playerID+1] < lumber_cost then
 			BuildingHelper:print("Failed placement of " .. building_name .." - Not enough lumber!")
             SendErrorMessage(playerID, "You have not enough lumber")
             return false
@@ -49,8 +49,8 @@ function Build( event )
     -- Position for a building was confirmed and valid
     event:OnBuildingPosChosen(function(vPos)
         -- Spend resources
-		player.lumber = player.lumber - lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] - lumber_cost
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
 
         -- Play a sound
         EmitSoundOnClient("DOTA_Item.ObserverWard.Activate", PlayerResource:GetPlayer(playerID))
@@ -71,8 +71,8 @@ function Build( event )
 
         -- Refund resources for this cancelled work
         if work.refund then
-			player.lumber = player.lumber + lumber_cost
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+			GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + lumber_cost
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
         end
     end)
 
@@ -128,7 +128,7 @@ function Build( event )
         unit:SetAttackCapability(unit.original_attack)
 		
 		-- CUSTOM STUFF
-		table.insert(player.buildingEntities, unit)
+		table.insert(GameRules.buildingEntities[playerID+1], unit)
 		
 		if bayustd:getWave() % 3 == 0 then 	--air levels. Stop ground towers from attacking
 			if unit.attackType ~= 0 then
@@ -142,17 +142,14 @@ function Build( event )
 			end
 		end
 		
-		-- Add 1 to the player building tracking table for that name
-		if not player.buildings[building_name] then
-			player.buildings[building_name] = 1
-		else
-			player.buildings[building_name] = player.buildings[building_name] + 1
-		end
+		if not GameRules.buildings[playerID+1][building_name] then
+ 			GameRules.buildings[playerID+1][building_name] = 1
+ 		else
+ 			GameRules.buildings[playerID+1][building_name] = GameRules.buildings[playerID+1][building_name] + 1
+ 		end
 		
 		-- Update the abilities of the builders
-    	for k,builder in pairs(player.builders) do
-    		bayustd:CheckAbilityRequirements( builder, player )
-    	end
+    	CheckAbilityRequirements(GameRules.builders[playerID+1], player)
 		-- CUSTOM STUFF
 
     end)
@@ -179,8 +176,8 @@ function CancelBuilding( keys )
 
     -- Refund here
     if building.lumber_cost then
-		player.lumber = player.lumber + lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + lumber_cost
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
     end
 
     -- Eject builder
@@ -203,10 +200,18 @@ function SellBuilding( keys )
 	local unit_table = UnitKV[building_name]
 	local sell_bounty = unit_table.SellBounty
 	
+	for i, v in ipairs(GameRules.buildingEntities[pID+1]) do 
+ 		if v == caster then
+ 			print("Deleted building from table")
+ 			--table.remove(player.buildingEntities, i)
+ 		end
+ 		--PrintTable( player.buildingEntities )
+ 	end
+	
 	 -- Refund here
     if sell_bounty then
-		player.lumber = player.lumber + sell_bounty
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = player.lumber })
+		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + sell_bounty
+		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
     end
 	
 	unit:ForceKill(true) --This will call RemoveBuilding

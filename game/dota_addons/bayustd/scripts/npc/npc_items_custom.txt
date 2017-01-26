@@ -1370,10 +1370,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1399,8 +1397,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1467,8 +1465,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1506,10 +1504,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1535,8 +1531,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1574,10 +1570,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1603,8 +1597,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1642,10 +1636,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.0"
 		"PlayerCanControl"				"1"
@@ -1671,8 +1663,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1711,10 +1703,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1740,8 +1730,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1779,10 +1769,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1808,8 +1796,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1847,10 +1835,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1876,8 +1862,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1915,10 +1901,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -1944,8 +1928,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -1983,10 +1967,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -2012,8 +1994,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -2054,10 +2036,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -2083,8 +2063,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -2124,10 +2104,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -2153,8 +2131,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -2193,10 +2171,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1"
 		"PlayerCanControl"				"1"
@@ -2222,8 +2198,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -2261,10 +2237,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"0.5"
 		"PlayerCanControl"				"1"
@@ -2290,8 +2264,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}
@@ -2329,10 +2303,8 @@
 		
 		// BuildingHelper info
 		"Building"						"1"
-		"BuildingSize"					"3"
 		"BuildTime"						"4.0"
 		"AbilityCastRange"				"200"
-		"UpdateHealth"					"1"
 		"Scale"							"1"
 		"MaxScale"						"1.5"
 		"PlayerCanControl"				"1"
@@ -2358,8 +2330,8 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"abilities.lua"
-				"Function"				"build"
+				"ScriptFile"			"builder.lua"
+				"Function"				"Build"
 			}
 		}
 	}

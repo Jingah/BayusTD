@@ -54,8 +54,10 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 100                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+STARTING_LUMBER = 300
+
 BAYUSTD_VERSION = "Alpha Version"
-DEBUG = false
+DEBUG = true
 
 OutOfWorldVector = Vector(9000,9000,-100)
 
@@ -362,7 +364,7 @@ end
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
-	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		GameRules.lumbersList = {}
 		GameRules.deadList = {}
 		GameRules.ghostsList = {}
@@ -370,7 +372,12 @@ function bayustd:OnGameRulesStateChange(keys)
 		GameRules.builders = {}
 		GameRules.buildingEntities = {}
 		for nPlayerID = 0, 9 do
-			table.insert(GameRules.lumbersList, 0)
+			if DEBUG then
+				table.insert(GameRules.lumbersList, 9000)
+			else
+				table.insert(GameRules.lumbersList, STARTING_LUMBER)
+			end
+			FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID+1] })
 			table.insert(GameRules.deadList, 0)
 			table.insert(GameRules.ghostsList, 0)
 			table.insert(GameRules.buildings, {})
@@ -615,79 +622,6 @@ function bayustd:Initbayustd()
 			self:PlayerSay(keys)
 		end
 	end, 'player say', 0)
-	
-	Convars:RegisterCommand( "ability_values_entity", function(name, entityIndex)
-		local cmdPlayer = Convars:GetCommandClient()
-		local pID = cmdPlayer:GetPlayerID()
-
-		if cmdPlayer then
-			local unit = EntIndexToHScript(tonumber(entityIndex))
-	  		if unit:GetUnitName() == "npc_dota_builder1" or unit:GetUnitName() == "npc_dota_builder2" or unit:GetUnitName() == "npc_dota_builder3" or unit:GetUnitName() == "npc_dota_builder4" then
-		  		local abilityValues = {}
-				local itemValues = {}
-
-		  		-- Iterate over the abilities
-		  		for i=0,15 do
-		  			local ability = unit:GetAbilityByIndex(i)
-
-		  			-- If there's an ability in this slot and its not hidden, define the number to show
-		  			if ability and not string.find(tostring(ability:GetAbilityName()), "move_to_point") then						
-						local name = ability:GetAbilityName()
-						local building_name = GameRules.AbilityKV[name].UnitName
-						local unit_table = GameRules.UnitKV[building_name]
-						local lumberCost = unit_table.LumberCost
-						
-		  				if lumberCost then
-		  					table.insert(abilityValues,lumberCost)
-		  				else
-		  					table.insert(abilityValues,0)
-		  				end
-				  	end
-		  		end
-				-- Iterate over the items
-		  		for i=0,5 do
-		  			local item = unit:GetItemInSlot(i)
-
-		  			-- If there's an ability in this slot and its not hidden, define the number to show
-		  			if item then
-						local name = item:GetName()
-						local building_name = GameRules.ItemKV[name].UnitName
-						local unit_table = GameRules.UnitKV[building_name]
-						local lumberCost = unit_table.LumberCost
-						
-		  				if lumberCost then
-		  					table.insert(itemValues,lumberCost)
-		  				else
-		  					table.insert(itemValues,0)
-		  				end
-				  	end
-		  		end
-
-		  		--DeepPrintTable(abilityValues)
-
-		    	FireGameEvent( 'ability_values_send', { player_ID = pID, 
-		    										hue_1 = -10, val_1 = abilityValues[1], 
-		    										hue_2 = -10, val_2 = abilityValues[2], 
-		    										hue_3 = -10, val_3 = abilityValues[3], 
-		    										hue_4 = -10, val_4 = abilityValues[4], 
-		    										hue_5 = -10, val_5 = abilityValues[5],
-		    										hue_6 = -10, val_6 = abilityValues[6] } )
-													
-				FireGameEvent( 'ability_values_send_items', { player_ID = pID, 
-													hue_1 = -10, val_1 = itemValues[1], 
-		    										hue_2 = -10, val_2 = itemValues[2], 
-		    										hue_3 = -10, val_3 = itemValues[3], 
-		    										hue_4 = -10, val_4 = itemValues[4], 
-		    										hue_5 = -10, val_5 = itemValues[5],
-		    										hue_6 = -10, val_6 = itemValues[6] } )
-													
-		    else
-		    	-- Hide all the values if the unit is not supposed to show any.
-		    	FireGameEvent( 'ability_values_send', { player_ID = pID, val_1 = 0, val_2 = 0, val_3 = 0, val_4 = 0, val_5 = 0, val_6 = 0 } )
-				FireGameEvent( 'ability_values_send_items', { player_ID = pID, val_1 = 0, val_2 = 0, val_3 = 0, val_4 = 0, val_5 = 0, val_6 = 0 } )
-		    end
-	  	end
-	end, "Change AbilityValues", 0 )
 	
 	GameRules:GetGameModeEntity():SetThink("OnGraveyardThink", self, 60)
 	GameRules:GetGameModeEntity():SetThink("SetPermanentDaytime", self)
