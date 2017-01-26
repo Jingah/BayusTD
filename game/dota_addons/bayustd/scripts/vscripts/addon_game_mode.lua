@@ -1,9 +1,6 @@
 --[[
 	Author: Jingah
 	Date: 16.02.2015
-	
-	Credits to MNoya for Lumber UI
-	Credits to Myll & MNoya for BuildingHelper
 ]]
 
 require('bayustd')
@@ -13,9 +10,10 @@ require('timers')
 require('physics')
 require('popups')
 require('FlashUtil')
-require('buildinghelper')
 require('abilities')
 require('lib.loadhelper')
+require('lib/notifications')
+require("lib/buildinghelper")
 
 
 function Precache( context )
@@ -75,29 +73,11 @@ function Precache( context )
 	--Loading Creep waves
 	PrecacheUnitByNameSync("npc_boss1_add", context)
 	PrecacheUnitByNameSync("npc_boss2_add", context)
-	PrecacheUnitByNameSync("npc_boss2_buffer", context)
 	--PrecacheUnitByNameSync("dummy_unit_vulnerable", context)
-	PrecacheUnitByNameSync("npc_dota_wave1", context)
-	PrecacheUnitByNameSync("npc_dota_wave2", context)
-	PrecacheUnitByNameSync("npc_dota_wave3", context)
-	PrecacheUnitByNameSync("npc_dota_wave4", context)
-	PrecacheUnitByNameSync("npc_dota_wave5", context)
-	PrecacheUnitByNameSync("npc_dota_wave6", context)
-	PrecacheUnitByNameSync("npc_dota_wave7", context)
-	PrecacheUnitByNameSync("npc_dota_wave8", context)
-	PrecacheUnitByNameSync("npc_dota_wave9", context)
-	PrecacheUnitByNameSync("npc_dota_wave10", context)
-	PrecacheUnitByNameSync("npc_dota_wave11", context)
-	PrecacheUnitByNameSync("npc_dota_wave12", context)
-	PrecacheUnitByNameSync("npc_dota_wave13", context)
-	PrecacheUnitByNameSync("npc_dota_wave14", context)
-	PrecacheUnitByNameSync("npc_dota_wave15", context)
-	PrecacheUnitByNameSync("npc_dota_wave16", context)
-	PrecacheUnitByNameSync("npc_dota_wave17", context)
-	PrecacheUnitByNameSync("npc_dota_wave18", context)
-	PrecacheUnitByNameSync("npc_dota_wave19", context)
-	PrecacheUnitByNameSync("npc_dota_wave20", context)
-	--Loading Buildinghelper stuff
+	for i = 1, 20, 1 do
+		PrecacheUnitByNameSync("npc_dota_wave" .. i, context)
+	end
+	-- Building Helper
 	PrecacheResource("particle_folder", "particles/buildinghelper", context)
 	--Loading extra stuff
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_juggernaut", context)
