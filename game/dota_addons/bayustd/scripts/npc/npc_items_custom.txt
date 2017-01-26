@@ -173,6 +173,9 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_neutral_boots"
+
+		
+		"ItemPurchasable"				"0"
 		"AbilitySpecial"
 		{
 			"01"
@@ -204,6 +207,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_neutral_boots"
+		"ItemPurchasable"				"0"
 		"AbilitySpecial"
 		{
 			"01"
@@ -235,6 +239,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_neutral_boots"
+		"ItemPurchasable"				"0"
 		"AbilitySpecial"
 		{
 			"01"
@@ -266,6 +271,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_neutral_boots"
+		"ItemPurchasable"				"0"
 		"AbilitySpecial"
 		{
 			"01"
@@ -298,6 +304,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass"						"item_datadriven"
 		"AbilityTextureName"			"item_neutral_boots"
+		"ItemPurchasable"				"0"
 		"AbilitySpecial"
 		{
 			"01"

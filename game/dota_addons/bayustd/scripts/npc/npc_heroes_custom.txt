@@ -161,7 +161,7 @@
 	"npc_dota_hero_morphling_bayus"
 	{
 		
-		"override_hero"			"npc_dota_hero_morphling"
+		"override_hero"			"npc_dota_hero_winter_wyvern"
 		
 		"AbilityLayout" 		"6"
 		"Ability1"				"morph_purification" 
