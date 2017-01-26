@@ -410,7 +410,7 @@ function SendBuildCommand( params )
 {
     if (invalid)
     {
-        CreateErrorMessage({message:"#error_invalid_build_position"})
+        CreateErrorMessage({message:"Invalid building position"})
         return true
     }
 
