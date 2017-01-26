@@ -166,20 +166,16 @@ function bayustd:OnPlayerPickHero(keys)
 	local playerID = hero:GetPlayerID()
 	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
 	
-	FireGameEvent( 'send_hero_ent', { player_ID = playerID, _ent = PlayerResource:GetSelectedHeroEntity(playerID):GetEntityIndex() } )
-	
 	ShowGenericPopupToPlayer(player, "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
 	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(500, false)
 	
 	--player.lumber = 300
-	GameRules.lumbersList[playerID+1] = 300
-    FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
 	
-	--player.buildings = {}
-	--player.builders = {}
-	--player.buildingEntities = {}
+	player.buildings = {}
+	player.builders = {}
+	player.buildingEntities = {}
 	
 	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
@@ -712,25 +708,7 @@ function bayustd:Initbayustd()
 	self.vBroadcasters = {}
 
 	self.nRadiantKills = 0
-	self.nDireKills = 0
-	
-  	-- Building Helper by Myll
-  	BuildingHelper:Init(8192) -- nHalfMapLength
-	-- Prevent Builder from building on lanes
-	BuildingHelper:BlockRectangularArea(Vector(-704,-6784,0), Vector(448,3008,192))
-	BuildingHelper:BlockRectangularArea(Vector(-8192,-8192,128), Vector(8192,-6784,192))
-	BuildingHelper:BlockRectangularArea(Vector(-7360,-6784,128), Vector(-6720,-64,192))
-	BuildingHelper:BlockRectangularArea(Vector(-6720,-960,128), Vector(7104,-64,192))
-	BuildingHelper:BlockRectangularArea(Vector(6464,-6784,128), Vector(7104,-960,192))
-	BuildingHelper:BlockRectangularArea(Vector(1856,-3264,128), Vector(6464,-2624,192))
-	BuildingHelper:BlockRectangularArea(Vector(4160,-6784,128), Vector(4800,-3264,192))
-	BuildingHelper:BlockRectangularArea(Vector(1856,-6784,128), Vector(2496,-3264,192))
-	BuildingHelper:BlockRectangularArea(Vector(-6720,-3264,128), Vector(-2112,-2624,192))
-	BuildingHelper:BlockRectangularArea(Vector(-5056,-6784,128), Vector(-4416,-3264,192))
-	BuildingHelper:BlockRectangularArea(Vector(-2752,-6784,128), Vector(-2112,-3264,192))
-	BuildingHelper:BlockRectangularArea(Vector(-1216,1088,0), Vector(1088,1856,192))
-	
-	
+	self.nDireKills = 0	
 	print('[BAYUSTD] Done loading bayusTD gamemode!\n\n')
 end
 
@@ -786,10 +764,14 @@ function bayustd:SpawnCreeps()
 	end
 	print( "Spawning creeps ..." )
 	if wave % 10 ~= 0 then
-		for i = 0, 7, 1 do
+		for i = 0, 6, 1 do
 			local moveLocation = Entities:FindByName( nil, "path_corner_" .. i)
 			local spawnLocation = Entities:FindByName( nil, "creep_spawner" .. i):GetAbsOrigin()
-			for d = 1, 10, 1 do
+			local units = 10;
+			if(i == 0) then
+				units = 20
+			end
+			for d = 1, units, 1 do
 				local unit = CreateUnitByName(waveName, spawnLocation, true, nil, nil, DOTA_TEAM_NEUTRALS)
 				creepsCount = creepsCount + 1
 				Timers:CreateTimer(1.0, function()
