@@ -43,6 +43,6 @@ function graveyardLumber( event )
 	--.lumber = player.lumber + 15
 	GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + 15
 	--print("Lumber Gained. " .. PlayerResource:GetPlayerName(playerID) .. " is currently at " .. player.lumber)
-	FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
+    CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[playerID+1] })
 	PopupLumber(player, hero, 15)
 end

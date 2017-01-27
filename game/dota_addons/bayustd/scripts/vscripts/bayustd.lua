@@ -57,7 +57,7 @@ USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to lev
 STARTING_LUMBER = 300
 
 BAYUSTD_VERSION = "Alpha Version"
-DEBUG = true
+DEBUG = false
 
 OutOfWorldVector = Vector(9000,9000,-100)
 
@@ -166,18 +166,17 @@ function bayustd:OnPlayerPickHero(keys)
 	local hero = EntIndexToHScript(keys.heroindex)
 	local player = EntIndexToHScript(keys.player)
 	local playerID = hero:GetPlayerID()
+
+	if GameRules.builders[playerID+1] ~= 0 then
+		return
+	end
+
 	local point =  Entities:FindByName( nil, "builder_spawns" .. playerID):GetAbsOrigin()
 	
-	ShowGenericPopupToPlayer(player, "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
+	--ShowGenericPopupToPlayer(player, "#popup_title", "#popup_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
 	
 	-- This line for example will set the starting gold of every hero to 500 unreliable gold
 	hero:SetGold(500, false)
-	
-	--player.lumber = 300
-	
-	player.buildings = {}
-	player.builders = {}
-	player.buildingEntities = {}
 	
 	GameRules.PLAYERS_PICKED = GameRules.PLAYERS_PICKED + 1
 
@@ -187,7 +186,7 @@ function bayustd:OnPlayerPickHero(keys)
 	
 	--TODO: Ensure correct Builder
 	local number = RandomInt(1, 3)
-	local builder = CreateUnitByName("npc_dota_builder3", point, true, nil, nil, DOTA_TEAM_GOODGUYS)
+	local builder = CreateUnitByName("npc_dota_builder" .. number, point, true, nil, nil, DOTA_TEAM_GOODGUYS)
 	builder:SetOwner(hero)
 	builder:SetControllableByPlayer(playerID, true)
 	bayustd:giveUnitDataDrivenModifier(builder, builder, "modifier_protect_builder", -1)
@@ -223,6 +222,8 @@ function bayustd:CaptureBayusTD()
 		mode:SetCustomHeroMaxLevel ( MAX_LEVEL )
 		mode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
 		mode:SetLoseGoldOnDeath(false)
+		GameRules:SetStrategyTime(0)
+		GameRules:SetShowcaseTime(0)
 
 		--mode:SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
 		mode:SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )
@@ -230,10 +231,6 @@ function bayustd:CaptureBayusTD()
 		mode:SetFogOfWarDisabled(DISABLE_FOG_OF_WAR_ENTIRELY)
 		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
 		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
-		
-		mode:SetHUDVisible(9, false)  -- Disable courier hud. Is replaced by lumber count
-		mode:SetHUDVisible(12, false)	-- Disable recommended items
-		mode:SetHUDVisible(0, false)	-- Disable time of day
 
 		self:OnFirstPlayerLoaded()
 	end
@@ -320,9 +317,9 @@ function bayustd:OnPlayerReconnect(keys)
 	print("P" .. plyID .. " reconnected.")
 	local hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
 	if GameRules.lumbersList[plyID+1] ~= nil then
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID+1] })
+		CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[plyID+1] })
 	else
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = 0})
+		CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[plyID+1] })
 	end
 end
 
@@ -364,7 +361,7 @@ end
 -- The overall game state has changed
 function bayustd:OnGameRulesStateChange(keys)
 	local newState = GameRules:State_Get()
-	if newState == DOTA_GAMERULES_STATE_PRE_GAME then
+	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		GameRules.lumbersList = {}
 		GameRules.deadList = {}
 		GameRules.ghostsList = {}
@@ -377,13 +374,21 @@ function bayustd:OnGameRulesStateChange(keys)
 			else
 				table.insert(GameRules.lumbersList, STARTING_LUMBER)
 			end
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID+1] })
 			table.insert(GameRules.deadList, 0)
 			table.insert(GameRules.ghostsList, 0)
 			table.insert(GameRules.buildings, {})
 			table.insert(GameRules.builders, 0)
 			table.insert(GameRules.buildingEntities, {})
 		end
+	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
+		Timers:CreateTimer({
+	    	endTime = 2,
+	    	callback = function()
+	    		for nPlayerID = 0, 9 do
+					CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(nPlayerID), "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[nPlayerID+1] })
+				end
+	    	end
+	 	})
 	end
 end
 
@@ -465,7 +470,7 @@ function bayustd:OnEntityKilled( keys )
 			--player.lumber = player.lumber + bountyLumber
 			GameRules.lumbersList[pID+1] = GameRules.lumbersList[pID+1] + bountyLumber
 			--print("Lumber Gained. " .. hero:GetUnitName() .. " is currently at " .. player.lumber)
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = pID, lumber = GameRules.lumbersList[pID+1]})
+			CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[pID+1] })
 			PopupLumber(player, killedUnit, bountyLumber)
 		end
 		
@@ -522,7 +527,7 @@ function bayustd:OnEntityKilled( keys )
 						end
 					end
 					GameRules.lumbersList[nPlayerID+1] = GameRules.lumbersList[nPlayerID+1] + 100
-					FireGameEvent('cgm_player_lumber_changed', { player_ID = nPlayerID, lumber = GameRules.lumbersList[nPlayerID+1] })
+					CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(nPlayerID), "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[nPlayerID+1] })
 					
 					local goldBounty = PlayerResource:GetReliableGold(nPlayerID) + 100
 					PlayerResource:SetGold(nPlayerID, goldBounty, true)
@@ -845,7 +850,7 @@ function bayustd:OnPlayerSay(keys)
 	if DEBUG and string.find(keys.text, "^-lumber") then
 		print("Giving lumber to playerID " .. plyID)
 		GameRules.lumbersList[plyID+1] = GameRules.lumbersList[plyID+1] + 50000
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = plyID, lumber = GameRules.lumbersList[plyID+1] })
+		CustomGameEventManager:Send_ServerToPlayer(ply, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[plyID+1] })
 	end
 	
 	if DEBUG and string.find(keys.text, "^-lvl") then

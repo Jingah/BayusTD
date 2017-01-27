@@ -1,0 +1,6 @@
+"addon" 
+{
+	"addonname"										"Bayus TD"
+	"addon_game_name"								"Bayus TD"
+	"DOTA_GameMode_15"								"Bayus TD"
+}

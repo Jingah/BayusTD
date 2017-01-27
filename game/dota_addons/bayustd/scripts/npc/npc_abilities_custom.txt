@@ -2003,6 +2003,137 @@
 			}
 		}
 	}
+
+	"axe_bloodlust"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
+		"AbilityTextureName"			"ogre_magi_bloodlust"
+		"LevelsBetweenUpgrades"    		"3"
+		"RequiredLevel"         		"6"
+		"MaxLevel"						"3"
+		
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
+			"particle"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+			"soundfile"		"sounds/weapons/hero/ogre_magi/bloodlust_cast.vsnd"
+			"soundfile"		"sounds/weapons/hero/ogre_magi/bloodlust_target.vsnd"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.2"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"120"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"250 500 750"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"120"
+			}
+
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"model_scale"		"2.2"
+			}	
+
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movement_speed"		"33 66 100"
+			}
+
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"100 150 200"
+			}
+		}
+		
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_axe_bloodlust"
+				"Target"	"TARGET"
+			}
+			
+			"FireEffect"
+			{
+				"EffectName"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
+				"EffectAttachType"	"follow_origin"
+				"Target"			"TARGET"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"	"Hero_OgreMagi.Bloodlust.Cast"
+				"Target"		"CASTER"
+			}
+		}
+		
+		"Modifiers"
+		{		
+			"modifier_axe_bloodlust"
+			{
+				"Duration"	"%duration"
+				
+				"EffectName"		"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
+				
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_axe/bloodlust.lua"
+						"Function"		"ChangeModel"
+					}
+					
+					"FireSound"
+					{
+						"EffectName"	"Hero_OgreMagi.Bloodlust.Target"
+						"Target"		"TARGET"
+					}
+				}
+				
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_axe/bloodlust.lua"
+						"Function"		"RevertModel"
+					}
+				}
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%bonus_movement_speed"
+				}
+			}
+		}
+	}
+
 	"blood_ragers_training"
 	{
 		"MaxLevel"						"9"
@@ -3808,6 +3939,167 @@
 			}
 		}	
 	}
+
+	"drow_marksmanship"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"drow_ranger_marksmanship"
+		"MaxLevel"						"9"
+		"LevelsBetweenUpgrades"    		"3"
+		"RequiredLevel"         		"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"marksmanship_agility_bonus"	"10 20 30 40 50 60 70 80 90"
+			}
+		}
+		
+		// Data driven
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"							"particles/units/heroes/hero_drow/drow_marksmanship.vpcf"
+			"particle"							"particles/units/heroes/hero_drow/drow_marksmanship_start.vpcf"
+		}
+		
+		"Modifiers"
+		{			
+			"modifier_marksmanship_effect_datadriven"
+			{
+				"Passive"						"1"
+				"IsHidden"						"1"
+				"IsPurgable"					"0"
+				
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"				"CASTER"
+						"EffectName"			"particles/units/heroes/hero_drow/drow_marksmanship_start.vpcf"
+						"EffectAttachType"		"start_at_customorigin"
+						"ControlPointEntities"
+						{
+							"CASTER"			"attach_attack1"
+						}
+					}
+				
+					"AttachEffect"
+					{
+						"Target"				"CASTER"
+						"EffectName"			"particles/units/heroes/hero_drow/drow_marksmanship.vpcf"
+						"EffectAttachType"		"follow_origin"
+						"ControlPoints"
+						{
+							"02"				"150 150 150"
+						}
+					}
+				}
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"%marksmanship_agility_bonus"
+				}
+			}
+		}
+	}
+
+	"drow_poison_attack"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"viper_poison_attack"
+		"MaxLevel"						"3"
+		"LevelsBetweenUpgrades"    		"6"
+		"RequiredLevel"         		"6"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"		"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"1.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage"						"100 200 350"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_movement_speed"			"-50"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_speed"			"-20"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_drow_poison_attack"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_drow_poison_attack_debuff"
+						"Target"		"TARGET"
+					}
+				}
+			}
+
+			"modifier_drow_poison_attack_debuff"
+			{
+				"IsDebuff"	"1"
+
+				"EffectName"		"particles/units/heroes/hero_viper/viper_poison_debuff.vpcf"
+				"EffectAttachType"	"follow_origin"
+
+				"OnCreated"
+				{
+					"Damage"
+					{
+						"Target"	"TARGET"
+						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Damage"	"%damage"
+					}
+				}
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%bonus_movement_speed"
+				}
+			}
+		}
+	}
 	
 	"scheme_invis"
 	{
@@ -4356,12 +4648,12 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"Min_dmg"				"102"
+				"Min_dmg"				"300"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"Max_dmg"				"103"
+				"Max_dmg"				"400"
 			}
 		}
 		

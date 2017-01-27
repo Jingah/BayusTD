@@ -15,7 +15,7 @@
 		"Ability1"					"summon_serpent_ward" 
 		"Ability2"					"blood_ragers_training" 
 		"Ability3"					"blood_crit" 
-		"Ability4"					"ogre_magi_bloodlust"
+		"Ability4"					"axe_bloodlust"
 		"Ability5"					""
 		"Ability6"					"bladestorm"
 
@@ -112,12 +112,12 @@
 		"override_hero"			"npc_dota_hero_drow_ranger"
 		
 		"AbilityLayout" 		"6"
-		"Ability1"				"drow_ranger_marksmanship" 
+		"Ability1"				"drow_marksmanship" 
 		"Ability2"				"nyx_assassin_vendetta" 
 		"Ability3"				"blood_crit" 
 		"Ability4"				"antimage_mana_break"
 		"Ability5"				""
-		"Ability6"				"viper_poison_attack"
+		"Ability6"				"drow_poison_attack"
 
 		"ArmorPhysical"				"1"									// Physical protection.
 		"MagicalResistance"			"10"									// Magical protection (percentage).
@@ -143,7 +143,7 @@
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"									// Speed.
+		"MovementSpeed"				"400"									// Speed.
 		"MovementTurnRate"			"0.5"									// Turning rate.
 
 		"StatusHealth"				"100"									// Base health.
@@ -156,9 +156,9 @@
 	}
 	
 	//=================================================================================================================
-	// HERO: Morphling   -    Ranged Support
+	// HERO: Winter Wyvern   -    Ranged Support
 	//=================================================================================================================
-	"npc_dota_hero_morphling_bayus"
+	"npc_dota_hero_ww_bayus"
 	{
 		
 		"override_hero"			"npc_dota_hero_winter_wyvern"
@@ -166,7 +166,7 @@
 		"AbilityLayout" 		"6"
 		"Ability1"				"morph_purification" 
 		"Ability2"				"gods_shield" 
-		"Ability3"				"holy_warrior" 
+		"Ability3"				"" 
 		"Ability4"				"morph_evasion"
 		"Ability5"				""
 		"Ability6"				"skeleton_king_reincarnation"
@@ -367,7 +367,6 @@
 	{
 		
 		"override_hero"			"npc_dota_hero_zuus"
-		"Model"           		"models/items/warlock/golem/the_torchbearer/the_torchbearer.vmdl"     // Model.
 		"ModelScale"			"1.0"
 		
 		"AbilityLayout" 		"6"
@@ -400,7 +399,7 @@
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"									// Speed.
+		"MovementSpeed"				"400"									// Speed.
 		"MovementTurnRate"			"0.5"									// Turning rate.
 
 		"StatusHealth"				"100"									// Base health.
@@ -451,7 +450,7 @@
 		//"RingRadius"				"70"
 
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"300"									// Speed.
+		"MovementSpeed"				"400"									// Speed.
 		"MovementTurnRate"			"0.7"									// Turning rate.
 
 		"StatusHealth"				"100"									// Base health.

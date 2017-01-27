@@ -730,7 +730,7 @@
 		"AttackDamageMin"			"100"
 		"AttackDamageMax"			"120"
 		"AttackRate"				"1.8"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_rocks.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1500"		// Speed of projectile.
@@ -813,7 +813,7 @@
 		"AttackDamageMin"			"245"
 		"AttackDamageMax"			"260"
 		"AttackRate"				"1.2"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/neutral_fx/ghost_frost_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -896,7 +896,7 @@
 		"AttackDamageMin"			"475"
 		"AttackDamageMax"			"575"
 		"AttackRate"				"0.9"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/neutral_fx/ghost_frost_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"600"		// Speed of projectile.
@@ -980,7 +980,7 @@
 		"AttackDamageMin"			"580"
 		"AttackDamageMax"			"600"
 		"AttackRate"				"1"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1800"		// Speed of projectile.
@@ -1076,7 +1076,7 @@
 		"AttackDamageMin"			"1000"
 		"AttackDamageMax"			"1200"
 		"AttackRate"				"0.8"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_rattletrap/rattletrap_cog_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"800"		// Speed of projectile.
@@ -1160,7 +1160,7 @@
 		"AttackDamageMin"			"664"
 		"AttackDamageMax"			"820"
 		"AttackRate"				"0.8"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_necrolyte/necrolyte_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1000"		// Speed of projectile.
@@ -1256,7 +1256,7 @@
 		"AttackDamageMin"			"786"
 		"AttackDamageMax"			"790"
 		"AttackRate"				"0.05"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_puck/puck_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"900"		// Speed of projectile.
@@ -1339,7 +1339,7 @@
 		"AttackDamageMin"			"1200"
 		"AttackDamageMax"			"5200"
 		"AttackRate"				"0.2"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/base_attacks/ranged_tower_good_launch.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1250"		// Speed of projectile.
@@ -1422,7 +1422,7 @@
 		"AttackDamageMin"			"786"
 		"AttackDamageMax"			"790"
 		"AttackRate"				"0.05"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/base_attacks/ranged_tower_good_launch.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"3000"		// Speed of projectile.
@@ -1505,7 +1505,7 @@
 		"AttackDamageMin"			"1000"
 		"AttackDamageMax"			"1000"
 		"AttackRate"				"3.0"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1250"		// Speed of projectile.
@@ -1588,7 +1588,7 @@
 		"AttackDamageMin"			"2250"
 		"AttackDamageMax"			"2300"
 		"AttackRate"				"0.15"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_lina/lina_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"3000"		// Speed of projectile.
@@ -1672,7 +1672,7 @@
 		"AttackDamageMin"			"850"
 		"AttackDamageMax"			"880"
 		"AttackRate"				"0.45"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_rocks.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1250"		// Speed of projectile.
@@ -1756,7 +1756,7 @@
 		"AttackDamageMin"			"1"
 		"AttackDamageMax"			"10"
 		"AttackRate"				"3.0"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_keeper_of_the_light/keeper_base_attack_border2.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1400"		// Speed of projectile.
@@ -1840,7 +1840,7 @@
 		"AttackDamageMin"			"890"
 		"AttackDamageMax"			"900"
 		"AttackRate"				"0.1"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"2500"		// Speed of projectile.
@@ -1924,7 +1924,7 @@
 		"AttackDamageMin"			"899"
 		"AttackDamageMax"			"900"
 		"AttackRate"				"0.15"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_boar_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1300"		// Speed of projectile.
@@ -2092,7 +2092,7 @@
 		"AttackDamageMin"			"95"
 		"AttackDamageMax"			"110"
 		"AttackRate"				"0.2"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_windrunner/windrunner_base_attack.vpcf"
 		"ProjectileSpeed"			"1500"		// Speed of projectile.
@@ -2190,7 +2190,7 @@
 		"AttackDamageMin"			"139"
 		"AttackDamageMax"			"140"
 		"AttackRate"				"0.75"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_zuus/zuus_arc_lightning.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -2274,7 +2274,7 @@
 		"AttackDamageMin"			"275"
 		"AttackDamageMax"			"475"
 		"AttackRate"				"0.35"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_furion/furion_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1000"		// Speed of projectile.
@@ -2357,7 +2357,7 @@
 		"AttackDamageMin"			"1"
 		"AttackDamageMax"			"60"
 		"AttackRate"				"0.4"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_morphling/morphling_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -2442,7 +2442,7 @@
 		"AttackDamageMin"			"438"
 		"AttackDamageMax"			"440"
 		"AttackRate"				"0.5"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_beastmaster/beastmaster_primal_roar_rocks.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -2538,7 +2538,7 @@
 		"AttackDamageMin"			"498"
 		"AttackDamageMax"			"540"
 		"AttackRate"				"0.5"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_treant/treant_leech_seed_leaves.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -2622,7 +2622,7 @@
 		"AttackDamageMin"			"609"
 		"AttackDamageMax"			"610"
 		"AttackRate"				"0.1"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_dragon_knight/dragon_knight_elder_dragon_fire.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1250"		// Speed of projectile.
@@ -2704,7 +2704,7 @@
 		"AttackDamageMin"			"980"
 		"AttackDamageMax"			"1980"
 		"AttackRate"				"0.25"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_luna/luna_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1200"		// Speed of projectile.
@@ -2793,7 +2793,7 @@
 		"AttackDamageMin"			"18"
 		"AttackDamageMax"			"26"
 		"AttackRate"				"0.9"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_venomancer/venomancer_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1800"		// Speed of projectile.
@@ -2873,7 +2873,7 @@
 		"AttackDamageMin"			"1"
 		"AttackDamageMax"			"20"
 		"AttackRate"				"0.05"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"3000"		// Speed of projectile.
@@ -2953,7 +2953,7 @@
 		"AttackDamageMin"			"1"
 		"AttackDamageMax"			"1"
 		"AttackRate"				"0.15"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"1600"		// Speed of projectile.
@@ -3033,7 +3033,7 @@
 		"AttackDamageMin"			"1"
 		"AttackDamageMax"			"280"
 		"AttackRate"				"0.35"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"750"		// Speed of projectile.
@@ -3272,7 +3272,7 @@
 		"AttackDamageMin"			"0"
 		"AttackDamageMax"			"10000"
 		"AttackRate"				"0.1"
-		"AttackRange"				"900"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/econ/items/enigma/enigma_geodesic/enigma_base_attack_eidolon_geodesic.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"900"		// Speed of projectile.
@@ -3351,7 +3351,7 @@
 		"AttackDamageMin"			"100"
 		"AttackDamageMax"			"101"
 		"AttackRate"				"3.0"
-		"AttackRange"				"800"
+		"AttackRange"				"1200"
 		"AttackAcquisitionRange"	"900"
 		"ProjectileModel"			"particles/econ/items/enigma/enigma_geodesic/enigma_base_attack_eidolon_geodesic.vpcf"		// Particle system model for projectile.
 		"ProjectileSpeed"			"3000"		// Speed of projectile.
@@ -5309,7 +5309,7 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
 		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_magnataur.vsndevts"
 		"Level"						"15"
-		"ModelScale" 				"1.7"
+		"ModelScale" 				"2.3"
 		"ConsideredHero"			"1"
 		"CanBeDominated"			"0"
 		"IsSummoned"				"0"
@@ -5428,7 +5428,7 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
 		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_magnataur.vsndevts"
 		"Level"						"5"
-		"ModelScale" 				"0.5"
+		"ModelScale" 				"0.8"
 		"IsSummoned"				"1"
 		
 		// Abilities
@@ -5529,7 +5529,7 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_magnataur.vsndevts"
 		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_magnataur.vsndevts"
 		"Level"						"5"
-		"ModelScale" 				"0.6"
+		"ModelScale" 				"1.2"
 		"CanBeDominated"			"0"
 		"IsSummoned"				"1"
 		

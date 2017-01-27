@@ -50,7 +50,7 @@ function Build( event )
     event:OnBuildingPosChosen(function(vPos)
         -- Spend resources
 		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] - lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
+        CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[playerID+1] })
 
         -- Play a sound
         EmitSoundOnClient("DOTA_Item.ObserverWard.Activate", PlayerResource:GetPlayer(playerID))
@@ -72,7 +72,7 @@ function Build( event )
         -- Refund resources for this cancelled work
         if work.refund then
 			GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + lumber_cost
-			FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
+            CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[playerID+1] })
         end
     end)
 
@@ -177,7 +177,7 @@ function CancelBuilding( keys )
     -- Refund here
     if building.lumber_cost then
 		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + lumber_cost
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
+        CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[playerID+1] })
     end
 
     -- Eject builder
@@ -200,7 +200,7 @@ function SellBuilding( keys )
 	local unit_table = UnitKV[building_name]
 	local sell_bounty = unit_table.SellBounty
 	
-	for i, v in ipairs(GameRules.buildingEntities[pID+1]) do 
+	for i, v in ipairs(GameRules.buildingEntities[playerID+1]) do 
  		if v == caster then
  			print("Deleted building from table")
  			--table.remove(player.buildingEntities, i)
@@ -211,7 +211,7 @@ function SellBuilding( keys )
 	 -- Refund here
     if sell_bounty then
 		GameRules.lumbersList[playerID+1] = GameRules.lumbersList[playerID+1] + sell_bounty
-		FireGameEvent('cgm_player_lumber_changed', { player_ID = playerID, lumber = GameRules.lumbersList[playerID+1] })
+        CustomGameEventManager:Send_ServerToPlayer(player, "cgm_player_lumber_changed", { lumber = GameRules.lumbersList[playerID+1] })
     end
 	
 	unit:ForceKill(true) --This will call RemoveBuilding
