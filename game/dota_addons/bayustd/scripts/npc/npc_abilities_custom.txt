@@ -126,7 +126,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_graveyard"
+		"AbilityTextureName"			"towers/npc_tower_graveyard"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -165,7 +165,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_obisidian_destroyer"
+		"AbilityTextureName"			"towers/npc_tower_obisidian_destroyer"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -250,7 +250,7 @@
 	"build_necromancer_disabled"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_nercomancer"
+		"AbilityTextureName"			"towers/npc_tower_nercomancer"
 		"MaxLevel"						"0"
 		"UnitName"						"npc_tower_necromancer"
 	}
@@ -258,7 +258,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_nercomancer"
+		"AbilityTextureName"			"towers/npc_tower_nercomancer"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -299,7 +299,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_wind_archer"
+		"AbilityTextureName"			"towers/npc_tower_wind_archer"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -418,7 +418,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_the_morphling"
+		"AbilityTextureName"			"towers/npc_tower_the_morphling"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -456,7 +456,7 @@
 	"build_life_sapper_disabled"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_life_sapper"
+		"AbilityTextureName"			"towers/npc_tower_life_sapper"
 		"MaxLevel"						"0"
 		"UnitName"						"npc_tower_life_sapper"
 	}
@@ -464,7 +464,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_life_sapper"
+		"AbilityTextureName"			"towers/npc_tower_life_sapper"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -599,7 +599,7 @@
 	"build_voodoo_lounge_disabled"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_voodoo_lounge"
+		"AbilityTextureName"			"towers/npc_tower_voodoo_lounge"
 		"MaxLevel"						"0"
 		"UnitName"						"npc_tower_voodoo_lounge"
 	}
@@ -607,7 +607,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"npc_tower_voodoo_lounge"
+		"AbilityTextureName"			"towers/npc_tower_voodoo_lounge"
 		
 		// BuildingHelper info
 		"Building"						"1"
@@ -647,7 +647,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"human_guard_tower"
+		"AbilityTextureName"			"towers/human_guard_tower"
 		// BuildingHelper info
 		"Building"						"1"
 		"BuildTime"						"4.0"
@@ -834,7 +834,7 @@
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"return_resources"
+		"AbilityTextureName"			"towers/return_resources"
 		"AbilityCastPoint"				"0"
 		"MaxLevel" 						"1"	
 		
@@ -852,7 +852,7 @@
 	{
 		"BaseClass"             		"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityTextureName"			"return_resources"
+		"AbilityTextureName"			"towers/return_resources"
 		"AbilityCastPoint"				"0"
 		"MaxLevel" 						"1"	
 		
@@ -1086,7 +1086,7 @@
 	"neutral_frost_attack"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"neutral_frost"
+		"AbilityTextureName"			"neutrals/neutral_frost"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		
 		"OnAttackLanded"
@@ -1296,7 +1296,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
-		"AbilityTextureName"    		"neutral_armor"
+		"AbilityTextureName"    		"neutrals/neutral_armor"
 		"AbilityCooldown" 				"20"
 		"AbilityManacost" 				"50"
 		"AbilityCastRange"				"1000"
@@ -1370,7 +1370,7 @@
 	{
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"    		"neutral_true_strike"
+		"AbilityTextureName"    		"neutrals/neutral_true_strike"
 
 		"Modifiers"
 		{
@@ -1438,7 +1438,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
-		"AbilityTextureName"    		"neutral_heal"
+		"AbilityTextureName"    		"neutrals/neutral_heal"
 		"AbilityCooldown" 				"7"
 		"AbilityManacost" 				"45"
 
@@ -1487,7 +1487,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"boss1_add"
+		"AbilityTextureName"   		"neutrals/boss1_add"
 		"AbilityCooldown" 			"45"
 		"AbilityManacost" 			"75"
 		"AbilityCastPoint"			"0.3"
@@ -1526,7 +1526,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"boss2_add"
+		"AbilityTextureName"   		"neutrals/boss2_add"
 		"AbilityCooldown" 			"30"
 		"AbilityManacost" 			"75"
 		"AbilityCastPoint"			"0.3"
@@ -1565,7 +1565,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"MaxLevel"					"1"
-		"AbilityTextureName"   		"boss2_buffer"
+		"AbilityTextureName"   		"neutrals/boss2_buffer"
 		"AbilityCooldown" 			"50"
 		"AbilityManacost" 			"75"
 		"AbilityCastPoint"			"0.3"
@@ -2262,7 +2262,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"					"9"
-		"AbilityTextureName"   		"endurance_aura"
+		"AbilityTextureName"   		"heroes/endurance_aura"
 		"AbilityCastPoint"			"0"
 		
 		"AbilitySpecial"
@@ -2857,7 +2857,7 @@
 		"BaseClass" 				"ability_datadriven"
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"					"9"
-		"AbilityTextureName"   		"pudge_unholy_strength"
+		"AbilityTextureName"   		"heroes/pudge_unholy_strength"
 		"LevelsBetweenUpgrades"    	"0"
 		"RequiredLevel"         	"1"
 		
@@ -3716,7 +3716,7 @@
 	"lina_rain_of_fire"
 	{
 		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"lina_rain_of_fire"
+		"AbilityTextureName"			"heroes/lina_rain_of_fire"
 		"MaxLevel" 						"9"
 		"LevelsBetweenUpgrades"    		"3"
 		"RequiredLevel"         		"1"
@@ -4107,7 +4107,7 @@
 		"AbilityBehavior" 			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
-		"AbilityTextureName"   		"scheme_invis"
+		"AbilityTextureName"   		"heroes/scheme_invis"
 		"MaxLevel" 						"9"
 		"LevelsBetweenUpgrades"    		"0"
 		"RequiredLevel"         		"1"
@@ -4318,7 +4318,7 @@
 	"scheme_time_stop"
 	{
 		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"scheme_time_stop"
+		"AbilityTextureName"			"heroes/scheme_time_stop"
 		"MaxLevel" 						"3"
 		"LevelsBetweenUpgrades"    		"6"
 		"RequiredLevel"         		"8"
@@ -4820,7 +4820,7 @@
 	{
 		"MaxLevel"						"1"
 		"BaseClass"						"ability_datadriven"
-		"AbilityTextureName"			"holdout_voodoo"
+		"AbilityTextureName"			"neutrals/holdout_voodoo"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 
 		"precache"
@@ -5071,7 +5071,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
 		"BaseClass" 					"ability_datadriven"
-		"AbilityTextureName"			"frost_attack"
+		"AbilityTextureName"			"neutrals/frost_attack"
 		"MaxLevel"                      "1"
 		
 		"AbilitySpecial"
